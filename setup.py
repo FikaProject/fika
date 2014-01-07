@@ -12,7 +12,22 @@ requires = [
     'transaction',
     'pyramid_tm',
     'ZODB3',
-    'waitress',
+    'repoze.folder',
+    'colander',
+    'deform',
+    'deform_bootstrap',
+    'pyramid_deform',
+    'fanstatic',
+    'js.deform',
+    'js.bootstrap',
+    'js.deform_bootstrap',
+    'js.jquery',
+    'js.jqueryui',
+    'js.jquery_timepicker_addon',
+    'js.jquery_form',
+    'js.jquery_maskedinput',
+    'js.jquery_maskmoney',
+    'js.tinymce',
     ]
 
 setup(name='fika',
@@ -38,5 +53,7 @@ setup(name='fika',
       entry_points="""\
       [paste.app_factory]
       main = fika:main
+      [fanstatic.libraries]
+      fika = fika.fanstatic:lib_fika
       """,
       )
