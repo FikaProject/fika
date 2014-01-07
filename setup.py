@@ -11,13 +11,12 @@ requires = [
     'pyramid_zodbconn',
     'transaction',
     'pyramid_tm',
-    'pyramid_debugtoolbar',
     'ZODB3',
     'waitress',
     ]
 
 setup(name='fika',
-      version='0.0',
+      version='0.1dev',
       description='fika',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
