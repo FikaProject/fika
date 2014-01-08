@@ -34,5 +34,5 @@ class ICourseModule(IBaseFolder):
 class IModuleSegment(IBaseFolder):
     """ Part of a course object. Could be a text, a video or similar. """
 
-    def render(self, request, view):
+    def render(request, view):
         """ Render this module segment. """
