@@ -35,6 +35,7 @@
     </div>
 
     <div class="container">
+      ${context}
 
       <div class="row">
 

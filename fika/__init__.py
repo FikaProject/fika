@@ -18,13 +18,21 @@ def root_factory(request):
     return appmaker(conn.root())
 
 def appmaker(zodb_root):
-    if not 'app_root' in zodb_root:
+    try:
+        return zodb_root['app_root']
+    except KeyError:
         from fika.models.site import SiteRoot
-        app_root = SiteRoot()
-        zodb_root['app_root'] = app_root
+        from fika.models.users import Users
+        from fika.models.courses import Courses
+        from fika.models.course_modules import CourseModules
+        site = SiteRoot()
+        site['users'] = Users()
+        site['courses'] = Courses()
+        site['course_modules'] = CourseModules()
+        zodb_root['app_root'] = site
         import transaction
         transaction.commit()
-    return zodb_root['app_root']
+        return zodb_root['app_root']
 
 def include_defaults(config):
     config.include('fika.views')
