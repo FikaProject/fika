@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from pyramid.decorator import reify
 from pyramid.renderers import get_renderer
 from pyramid.traversal import lineage
+from pyramid.traversal import find_root
 from betahaus.pyracont.interfaces import IContentFactory
 from betahaus.pyracont.interfaces import IBaseFolder
 from betahaus.pyracont.factories import createSchema
@@ -43,6 +44,10 @@ class BaseView(object):
     def main_macro(self):
         return get_renderer('fika:templates/master.pt').implementation().macros['main']
 
+    @reify
+    def root(self):
+        return find_root(self.context)
+
     def show_edit(self, context):
         if 'edit' in context.schemas:
             return True
@@ -74,6 +79,7 @@ class BaseEdit(BaseView):
                 obj = factory(**appstruct)
                 self.context[obj.uid] = obj
                 return HTTPFound(location = self.request.resource_url(obj))
+            return HTTPFound(location = self.request.resource_url(self.context))
         self.response['form'] = form.render()
         return self.response
 

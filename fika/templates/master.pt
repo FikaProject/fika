@@ -44,11 +44,7 @@
             </tal:iterate>
         </ol>
         
-      title: ${context.title}
-
-        Addable types:
-        ${view.addable_types}
-
+      <h1>${context.title}</h1>
 
     <div class="btn-group">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
