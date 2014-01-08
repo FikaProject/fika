@@ -1,3 +1,4 @@
+import colander
 import deform
 from js.deform import deform_basic
 from js.deform import auto_need
@@ -16,6 +17,7 @@ from pyramid.httpexceptions import HTTPForbidden
 from pyramid.httpexceptions import HTTPFound
 
 from fika.fanstatic import main_css
+from fika import FikaTSF as _
 
 
 class BaseView(object):
@@ -101,6 +103,22 @@ class BaseEdit(BaseView):
             return HTTPFound(location = self.request.resource_url(self.context))
         appstruct = self.context.get_field_appstruct(schema)
         self.response['form'] = form.render(appstruct = appstruct)
+        return self.response
+
+    @view_config(context = IBaseFolder, name = "delete", renderer = "fika:templates/form.pt")
+    def delete(self):
+        if self.context.__parent__ == None:
+            raise HTTPForbidden(u"Can't delete root")
+        schema = schema.bind(context = self.context, request = self.request, view = self)
+        form = deform.Form(schema, buttons = ('delete', 'cancel'))
+        auto_need(form)
+        if self.request.method == 'POST':
+            if 'delete' in self.request.POST:
+                parent = self.context.__parent__
+                del parent[self.context.__name__]
+                return HTTPFound(location = self.request.resource_url(parent))
+            return HTTPFound(location = self.request.resource_url(self.context))
+        self.response['form'] = form.render()
         return self.response
 
 

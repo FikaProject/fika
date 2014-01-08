@@ -48,7 +48,7 @@
 
     <div class="btn-group">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        <span i18n:translate="">Action</span> <span class="caret"></span>
+        <span i18n:translate="">Add</span> <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
         <tal:iterate repeat="type view.addable_types">
@@ -61,6 +61,10 @@
        href="${request.resource_url(context, 'edit')}"
        class="btn btn-default glyphicon-edit glyphicon"
        i18n:translate="">Edit</a>
+    <a tal:condition="view.show_edit(context) and context != view.root"
+       href="${request.resource_url(context, 'delete')}"
+       class="btn btn-default glyphicon-remove-circle glyphicon"
+       i18n:translate="">Delete</a>
 
         <metal:content define-slot="content">
         </metal:content>
