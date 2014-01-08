@@ -2,7 +2,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:define-macro="master">
+      metal:define-macro="main">
 
   <head>
     <meta charset="utf-8" />
@@ -37,12 +37,21 @@
     <div class="container">
       ${context}
 
+        Addable types:
+        ${view.addable_types}
+        
+        <tal:iterate repeat="type view.addable_types">
+            <a href="${request.resource_url(context, 'add', query = {'content_type': type})}">${type}</a>
+        </tal:iterate>
+
+        <metal:content define-slot="content">
+            
+        </metal:content>
+<!--
       <div class="row">
 
         <div class="col-md-6">
-            <div metal:define-slot="content">
               <h1>Hello world</h1>
-            </div>
         </div>
         <div class="col-md-6">
               <h1>Hello too</h1>
@@ -54,8 +63,8 @@
 
         </div>
 
-      </div><!-- row -->
-
+      </div>
+-->
     </div><!-- container -->
 
   </body>

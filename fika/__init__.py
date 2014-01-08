@@ -35,4 +35,5 @@ def appmaker(zodb_root):
         return zodb_root['app_root']
 
 def include_defaults(config):
+    config.include('fika.models')
     config.include('fika.views')
