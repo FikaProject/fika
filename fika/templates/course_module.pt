@@ -6,11 +6,13 @@
 <body>
 
 <div metal:fill-slot="content">
-    <div class="row">
-        <div class="col-md-12">
-            <tal:form replace="structure form">Form</tal:form>
+    ${context}
+    <tal:iterate repeat="obj module_segments">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
+            <div class="panel-body">Other info...</div>
         </div>
-    </div>
+    </tal:iterate>
 </div>
 
 </body>

@@ -1,5 +1,6 @@
 import deform
-from js.deform import deform as fanstatic_deform
+from js.deform import deform_basic
+from js.deform import auto_need
 from js.deform_bootstrap import deform_bootstrap_js
 from js.bootstrap import bootstrap
 from js.bootstrap import bootstrap_theme
@@ -20,7 +21,7 @@ class BaseView(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        fanstatic_deform.need()
+        deform_basic.need()
         deform_bootstrap_js.need()
         bootstrap.need()
         bootstrap_theme.need()
@@ -57,6 +58,7 @@ class BaseEdit(BaseView):
         schema = createSchema(factory._callable.schemas['add'])
         schema = schema.bind(context = self.context, request = self.request, view = self)
         form = deform.Form(schema, buttons = ('save', 'cancel'))
+        auto_need(form)
         if self.request.method == 'POST':
             if 'save' in self.request.POST:
                 controls = self.request.POST.items()
@@ -76,6 +78,7 @@ class BaseEdit(BaseView):
         schema = createSchema(self.context.schemas['edit'])
         schema = schema.bind(context = self.context, request = self.request, view = self)
         form = deform.Form(schema, buttons = ('save', 'cancel'))
+        auto_need(form)
         if self.request.method == 'POST':
             if 'save' in self.request.POST:
                 controls = self.request.POST.items()
