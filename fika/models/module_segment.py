@@ -1,9 +1,9 @@
-from repoze.folder import Folder
+from betahaus.pyracont import BaseFolder
 from zope.interface import implementer
 
 from .interfaces import IModuleSegment
 
 
 @implementer(IModuleSegment)
-class ModuleSegment(Folder):
+class ModuleSegment(BaseFolder):
     pass

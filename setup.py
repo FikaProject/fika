@@ -12,7 +12,7 @@ requires = [
     'transaction',
     'pyramid_tm',
     'ZODB3',
-    'repoze.folder',
+    'betahaus.pyracont',
     'colander',
     'deform',
     'deform_bootstrap',

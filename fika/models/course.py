@@ -1,9 +1,9 @@
-from repoze.folder import Folder
+from betahaus.pyracont import BaseFolder
 from zope.interface import implementer
 
 from .interfaces import ICourse
 
 
 @implementer(ICourse)
-class Course(Folder):
+class Course(BaseFolder):
     pass

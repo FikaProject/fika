@@ -1,34 +1,35 @@
 from zope.interface import Attribute
 from zope.interface import Interface
+from betahaus.pyracont.interfaces import IBaseFolder
 
 
-class ISiteRoot(Interface):
+class ISiteRoot(IBaseFolder):
     """ Root object for the application. """
 
 
-class IUsers(Interface):
+class IUsers(IBaseFolder):
     """ Single object present in the root. Contains IUsers. """
 
 
-class IUser(Interface):
+class IUser(IBaseFolder):
     """ User object. Only contains a userid and mapping to other authentication system. """
 
 
-class ICourses(Interface):
+class ICourses(IBaseFolder):
     """ Container for ICourse. """
 
 
-class ICourse(Interface):
+class ICourse(IBaseFolder):
     """ Contains references to course modules. """
 
 
-class ICourseModules(Interface):
+class ICourseModules(IBaseFolder):
     """ Container for ICourseModule. """
 
 
-class ICourseModule(Interface):
+class ICourseModule(IBaseFolder):
     """ Container for IModuleSegment. Part of a course, or a stand alone object that can be read up on or organised. """
 
 
-class IModuleSegment(Interface):
+class IModuleSegment(IBaseFolder):
     """ Part of a course object. Could be a text, a video or similar. """

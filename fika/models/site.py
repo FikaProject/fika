@@ -1,11 +1,11 @@
-from repoze.folder import Folder
+from betahaus.pyracont import BaseFolder
 from zope.interface import implementer
 
 from .interfaces import ISiteRoot
 
 
 @implementer(ISiteRoot)
-class SiteRoot(Folder):
+class SiteRoot(BaseFolder):
     """ Site root """
     title = u"Fika"
 
