@@ -6,6 +6,7 @@
 .mr.developer*
 .settings
 .coverage
+.pydevproject
 *.pyc
 *.egg-info
 Data.fs*
