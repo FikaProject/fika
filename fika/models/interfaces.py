@@ -18,6 +18,9 @@ class IUser(IBaseFolder):
 class ICourses(IBaseFolder):
     """ Container for ICourse. """
 
+    def module_used_in(uid):
+        """ Return all the course objects that uses this modules uid. """
+
 
 class ICourse(IBaseFolder):
     """ Contains references to course modules. """
