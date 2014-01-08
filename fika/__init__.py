@@ -1,5 +1,8 @@
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
+from pyramid.i18n import TranslationStringFactory
+
+FikaTSF = TranslationStringFactory('fika')
 
 
 def main(global_config, **settings):

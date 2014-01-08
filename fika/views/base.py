@@ -7,6 +7,7 @@ from js.bootstrap import bootstrap_theme
 from pyramid.view import view_config
 from pyramid.decorator import reify
 from pyramid.renderers import get_renderer
+from pyramid.traversal import lineage
 from betahaus.pyracont.interfaces import IContentFactory
 from betahaus.pyracont.interfaces import IBaseFolder
 from betahaus.pyracont.factories import createSchema
@@ -45,6 +46,9 @@ class BaseView(object):
     def show_edit(self, context):
         if 'edit' in context.schemas:
             return True
+
+    def breadcrumbs(self):
+        return reversed(list(lineage(self.context)))
 
 
 class BaseEdit(BaseView):

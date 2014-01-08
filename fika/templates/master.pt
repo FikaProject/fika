@@ -2,7 +2,8 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:define-macro="main">
+      metal:define-macro="main"
+      i18n:domain="fika">
 
   <head>
     <meta charset="utf-8" />
@@ -36,6 +37,13 @@
     </div>
 
     <div class="container">
+        
+        <ol class="breadcrumb">
+            <tal:iterate repeat="obj view.breadcrumbs()">
+                <li><a href="${request.resource_url(obj)}">${obj.title}</a></li>
+            </tal:iterate>
+        </ol>
+        
       title: ${context.title}
 
         Addable types:
