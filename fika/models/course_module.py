@@ -10,3 +10,5 @@ from .interfaces import ICourseModules
 @implementer(ICourseModule)
 class CourseModule(BaseFolder):
     allowed_contexts = (ICourseModules,)
+    schemas = {'add': 'CourseModuleSchema',
+               'edit': 'CourseModuleSchema'}

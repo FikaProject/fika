@@ -6,7 +6,13 @@
 <body>
 
 <div metal:fill-slot="content">
-    <tal:form replace="structure form">Form</tal:form>
+    <tal:iterate repeat="obj course_modules">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
+            <div class="panel-body">Metadata stuff... (fixme)</div>
+                
+        </div>
+    </tal:iterate>
 </div>
 
 </body>
