@@ -16,6 +16,7 @@ class CourseModulesView(BaseView):
     @view_config(context = ICourseModule, renderer = "fika:templates/course_module.pt")
     def course_module(self):
         self.response['module_segments'] = self.context.values()
+        self.response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
         return self.response
 
     @view_config(context = IModuleSegment, renderer = "fika:templates/form.pt")

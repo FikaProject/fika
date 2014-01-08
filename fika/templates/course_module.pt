@@ -13,6 +13,16 @@
             <div class="panel-body">${obj.get_field_value('description')}</div>
         </div>
     </tal:iterate>
+
+    used in:
+    <tal:iterate repeat="obj used_in_courses">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
+            <div class="panel-body">${obj.get_field_value('description')}</div>
+        </div>
+    </tal:iterate>
+
+
 </div>
 
 </body>
