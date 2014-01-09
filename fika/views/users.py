@@ -7,7 +7,6 @@ from betahaus.pyracont.factories import createSchema
 from fika.views.base import BaseView
 from fika.models.interfaces import IUser
 from fika.models.interfaces import IUsers
-from fika.schemas.common import deferred_login_password_validator
 
 
 class UsersView(BaseView):
@@ -24,7 +23,6 @@ class UsersView(BaseView):
     @view_config(context = IUser, name = "change_password", renderer = "fika:templates/form.pt")
     def change_password(self):
         schema = createSchema('ChangeUserPasswordSchema')
-        schema.validator = deferred_login_password_validator
         schema = schema.bind(context = self.context, request = self.request, view = self)
         form = deform.Form(schema, buttons = ('save', 'cancel'))
         auto_need(form)
