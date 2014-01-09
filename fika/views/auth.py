@@ -10,7 +10,7 @@ from betahaus.pyracont.factories import createSchema
 
 from .base import BaseView
 from fika.models.interfaces import ISiteRoot
-
+from fika.schemas.common import deferred_login_password_validator
 
 class AuthView(BaseView):
     
@@ -41,6 +41,7 @@ class AuthView(BaseView):
     @view_config(context = ISiteRoot, name = "login", renderer = "fika:templates/form.pt")
     def login(self):
         schema = createSchema('LoginSchema')
+        schema.validator = deferred_login_password_validator
         schema = schema.bind(context = self.context, request = self.request, view = self)
         form = deform.Form(schema, buttons = ('login', 'cancel'))
         auto_need(form)
