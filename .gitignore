@@ -10,8 +10,7 @@
 *.pyc
 *.egg-info
 Data.fs*
-etc/salt.txt
-etc/login_providers.ini
+.salt.txt
 bin
 include
 lib

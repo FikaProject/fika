@@ -1,3 +1,5 @@
+from hashlib import md5
+
 import colander
 import deform
 from js.deform import deform_basic
@@ -10,6 +12,7 @@ from pyramid.decorator import reify
 from pyramid.renderers import get_renderer
 from pyramid.traversal import lineage
 from pyramid.traversal import find_root
+from pyramid.security import authenticated_userid
 from betahaus.pyracont.interfaces import IContentFactory
 from betahaus.pyracont.interfaces import IBaseFolder
 from betahaus.pyracont.factories import createSchema
@@ -49,6 +52,22 @@ class BaseView(object):
     @reify
     def root(self):
         return find_root(self.context)
+
+    @reify
+    def userid(self):
+        return authenticated_userid(self.request)
+
+    @reify
+    def profile(self):
+        return self.root['users'].get(self.userid, None)
+
+    def gravatar_link(self, size = 20):
+        if not self.userid:
+            return u''
+        email = self.profile.default_email()
+        if email:
+            return """<img src="https://secure.gravatar.com/avatar/%(hash)s?s=%(size)s" height="%(size)s" width="%(size)s" alt="" />""" % {'hash': md5(email), 'size': size}
+        return u''
 
     def show_edit(self, context):
         if 'edit' in context.schemas:
@@ -109,6 +128,7 @@ class BaseEdit(BaseView):
     def delete(self):
         if self.context.__parent__ == None:
             raise HTTPForbidden(u"Can't delete root")
+        schema = colander.Schema()
         schema = schema.bind(context = self.context, request = self.request, view = self)
         form = deform.Form(schema, buttons = ('delete', 'cancel'))
         auto_need(form)
