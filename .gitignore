@@ -15,6 +15,7 @@ etc/login_providers.ini
 bin
 include
 lib
+local
 eggs
 develop-eggs
 parts
