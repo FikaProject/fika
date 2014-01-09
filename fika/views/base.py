@@ -66,7 +66,8 @@ class BaseView(object):
             return u''
         email = self.profile.default_email()
         if email:
-            return """<img src="https://secure.gravatar.com/avatar/%(hash)s?s=%(size)s" height="%(size)s" width="%(size)s" alt="" />""" % {'hash': md5(email), 'size': size}
+            email_hash = md5(email.strip().lower()).hexdigest()
+            return """<img src="https://secure.gravatar.com/avatar/%(hash)s?s=%(size)s" height="%(size)s" width="%(size)s" alt="" />""" % {'hash': email_hash, 'size': size}
         return u''
 
     def show_edit(self, context):
