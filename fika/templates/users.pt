@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="view.main_macro"
+      i18n:domain="fika">
+<body>
+
+<div metal:fill-slot="content">
+    <tal:iterate repeat="obj users">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title and obj.title or obj.__name__}</a></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        Emails
+                        <ul>
+                            <tal:iterate repeat="email obj.get_field_value('emails', ())">
+                                <li>${email}</li>
+                            </tal:iterate>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        Validated emails
+                        <ul>
+                            <tal:iterate repeat="email obj.get_field_value('validated_emails', ())">
+                                <li>${email}</li>
+                            </tal:iterate>
+                        </ul>                        
+                    </div>                    
+                </div>
+
+            </div>
+                
+        </div>
+    </tal:iterate>
+</div>
+
+</body>
+</html>
