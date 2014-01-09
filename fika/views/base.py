@@ -13,6 +13,7 @@ from pyramid.renderers import get_renderer
 from pyramid.traversal import lineage
 from pyramid.traversal import find_root
 from pyramid.security import authenticated_userid
+from pyramid.security import forget
 from betahaus.pyracont.interfaces import IContentFactory
 from betahaus.pyracont.interfaces import IBaseFolder
 from betahaus.pyracont.factories import createSchema
@@ -59,10 +60,14 @@ class BaseView(object):
 
     @reify
     def profile(self):
-        return self.root['users'].get(self.userid, None)
+        profile = self.root['users'].get(self.userid, None)
+        if self.userid and not profile:
+            headers = forget(self.request)
+            self.request.response.headerlist.extend(headers)
+        return profile
 
     def gravatar_link(self, size = 20):
-        if not self.userid:
+        if not self.profile:
             return u''
         email = self.profile.default_email()
         if email:
