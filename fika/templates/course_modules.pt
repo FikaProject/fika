@@ -10,8 +10,17 @@
     <tal:iterate repeat="obj course_modules">
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
-            <div class="panel-body">Metadata stuff... (fixme)</div>
-                
+            <div class="panel-body">
+            	Created: ${obj.created} <br />
+            	Modified: ${obj.modified} <br />
+            	<br />
+            	${obj._num_objects.value} segments:
+            	<ul>
+            	<tal:iterate repeat="segment obj.values()">
+            		<li>${segment.title} (${segment.__class__.__name__})</li>
+            	</tal:iterate>
+            	</ul>
+            	</div>
         </div>
     </tal:iterate>
 </div>

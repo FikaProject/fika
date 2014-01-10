@@ -10,7 +10,13 @@
     <tal:iterate repeat="obj course_modules">
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
-            <div class="panel-body">${obj.get_field_value('description')}</div>
+            <div class="panel-body">
+            	<ul>
+            	<tal:iterate repeat="segment obj.values()">
+            		<li><a href="${request.resource_url(segment)}">${segment.title}</a> (${segment.__class__.__name__})</li>
+            	</tal:iterate>
+            	</ul>
+            </div>
         </div>
     </tal:iterate>
 </div>
