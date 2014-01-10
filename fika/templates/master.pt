@@ -65,7 +65,7 @@
         
       <h1>${context.title}</h1>
 
-    <div class="btn-group">
+    <div class="btn-group" tal:condition="len(view.addable_types) > 0">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
         <span i18n:translate="">Add</span> <span class="caret"></span>
       </button>
