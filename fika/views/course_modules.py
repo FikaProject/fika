@@ -11,6 +11,7 @@ class CourseModulesView(BaseView):
     @view_config(context = ICourseModules, renderer = "fika:templates/course_modules.pt")
     def course_modules(self):
         self.response['course_modules'] = self.context.values()
+        self.response['courses'] = self.root['courses']
         return self.response
 
     @view_config(context = ICourseModule, renderer = "fika:templates/course_module.pt")

@@ -17,9 +17,15 @@
             	${obj._num_objects.value} segments:
             	<ul>
             	<tal:iterate repeat="segment obj.values()">
-            		<li>${segment.title} (${segment.__class__.__name__})</li>
+            		<li><a href="${request.resource_url(segment)}">${segment.title}</a> (${segment.__class__.__name__})</li>
             	</tal:iterate>
             	</ul>
+            	Used in:
+			    <ul>
+			    <tal:iterate repeat="course courses.module_used_in(obj.uid)">
+			       <li><a href="${request.resource_url(course)}">${course.title}</a></li>
+			    </tal:iterate>
+			    </ul>
             	</div>
         </div>
     </tal:iterate>
