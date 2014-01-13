@@ -4,6 +4,7 @@ from fika.views.base import BaseView
 from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourseModules
 from fika.models.interfaces import IModuleSegment
+from fika.models.module_segment import YoutubeSegment
 
 
 class CourseModulesView(BaseView):
@@ -21,6 +22,11 @@ class CourseModulesView(BaseView):
         return self.response
 
     @view_config(context = IModuleSegment, renderer = "fika:templates/form.pt")
+    def module_segment(self):
+        self.response['form'] = self.context.render(self.request, self)
+        return self.response
+    
+    @view_config(context = YoutubeSegment, renderer = "fika:templates/youtube_segment.pt")
     def module_segment(self):
         self.response['form'] = self.context.render(self.request, self)
         return self.response
