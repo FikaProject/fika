@@ -40,11 +40,3 @@ class YoutubeSegment(ModuleSegment):
     schemas = {'add': 'YoutubeSegmentSchema',
                'edit': 'YoutubeSegmentSchema',
                'view': 'YoutubeSegmentSchema'}
-    
-    def render(self, request, view):
-        schema = createSchema(self.schemas['view'])
-        schema = schema.bind(context = self, request = request, view = view)
-        form = deform.Form(schema, buttons = ())
-        appstruct = self.get_field_appstruct(schema)
-        html = form.render(appstruct = appstruct, readonly = True)
-        return {'html':html, 'youtube_link':appstruct['youtube_link']}
