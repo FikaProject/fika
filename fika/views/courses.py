@@ -13,8 +13,6 @@ class CourseView(BaseView):
         results = []
         for name in self.context.get_field_value('course_modules', ()):
             results.append(course_modules[name])
-        results.reverse()
-        #results.sort(cmp=None, key=None, reverse=False)
         self.response['course_modules'] = results
         return self.response
 
