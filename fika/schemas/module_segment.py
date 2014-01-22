@@ -13,6 +13,10 @@ class ModuleSegment(colander.Schema):
 class TextSegmentSchema(ModuleSegment):
     body = colander.SchemaNode(colander.String(),
                                widget = deform.widget.RichTextWidget())
+    
+@schema_factory('ImageSegmentSchema')
+class ImageSegmentSchema(ModuleSegment):
+    url = colander.SchemaNode(colander.String(),)
 
 @schema_factory('YoutubeSegmentSchema')
 class YoutubeSegmentSchema(ModuleSegment):

@@ -28,6 +28,12 @@ class TextSegment(ModuleSegment):
     schemas = {'add': 'TextSegmentSchema',
                'edit': 'TextSegmentSchema',
                'view': 'TextSegmentSchema'}
+    
+@content_factory('ImageSegment')
+class ImageSegment(ModuleSegment):
+    schemas = {'add': 'ImageSegmentSchema',
+               'edit': 'ImageSegmentSchema',
+               'view': 'ImageSegmentSchema'}
 
 @content_factory('YoutubeSegment')
 class YoutubeSegment(ModuleSegment):
