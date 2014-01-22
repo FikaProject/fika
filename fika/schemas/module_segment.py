@@ -7,6 +7,7 @@ from fika.schemas.youtube_node import Youtube
 class ModuleSegment(colander.Schema):
     title = colander.SchemaNode(colander.String())
     description = colander.SchemaNode(colander.String())
+    order = colander.SchemaNode(colander.String(),)
 
 
 @schema_factory('TextSegmentSchema')

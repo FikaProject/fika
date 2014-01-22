@@ -12,8 +12,8 @@
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
             <div class="panel-body">
             	<ul>
-            	<tal:iterate repeat="segment obj.values()">
-            		<li><a href="${request.resource_url(segment)}">${segment.title}</a> (${segment.__class__.__name__})
+            	<tal:iterate repeat="segment sorted(obj.values(), key=lambda segment: segment.get_field_value('order', ()))">
+            		<li>${segment.get_field_value('order', ())} <a href="${request.resource_url(segment)}">${segment.title}</a> (${segment.__class__.__name__})
             		
             		<tal:form condition="segment.__class__.__name__ != 'YoutubeSegment'" replace="structure segment.render(request, segment)"></tal:form>
             		
@@ -26,7 +26,6 @@
             		</tal:p>
             		
             		</li>
-            		
             	</tal:iterate>
             	</ul>
             </div>

@@ -9,7 +9,7 @@
 <div metal:fill-slot="content">
     <div class="row">
         <div class="col-md-12">
-            <tal:form replace="structure form['html']">Form</tal:form>
+            <tal:form replace="structure form">Form</tal:form>
             <iframe width="560" height="315" src="//www.youtube.com/embed/${context.get_field_value('youtube_link', ())}" frameborder="0" allowfullscreen></iframe>
             <div>${context.get_field_value('description', ())}</div>
         </div>
