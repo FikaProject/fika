@@ -150,6 +150,8 @@ class BaseEdit(BaseView):
 
 class DummyView(BaseView):
 
-    @view_config(context = object, renderer = 'fika:templates/master.pt')
+    @view_config(context = object, renderer = 'fika:templates/home.pt')
     def view(self):
+        self.response['users'] = self.root['users']
+        self.response['courses'] = self.root['courses']
         return self.response

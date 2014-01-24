@@ -18,6 +18,7 @@ class UsersView(BaseView):
 
     @view_config(context = IUser, renderer = "fika:templates/user.pt")
     def user(self):
+        self.response['courses'] = self.root['courses']
         return self.response
 
     @view_config(context = IUser, name = "change_password", renderer = "fika:templates/form.pt")

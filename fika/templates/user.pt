@@ -13,6 +13,13 @@
 		    <tal:iterate repeat="obj context.get_field_value('emails', ())">
 		     	${obj}<br />
 			</tal:iterate>
+			
+			Doing courses:
+			<ul>
+			<tal:iterate repeat="course context.get_field_value('courses', ())">
+		     	<li>${courses[course].title}</li>
+			</tal:iterate>
+			</ul>
 		</div>
 	</div>
 </div>

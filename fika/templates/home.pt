@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="view.main_macro"
+      i18n:domain="fika">
+<body>
+
+<div metal:fill-slot="content">
+    <div class="row">
+        <div class="col-md-12">
+        	<div tal:condition="view.userid">
+        	User: ${view.userid}<br/>
+        	${users.get(view.userid, None)}<br/>
+        	
+        	
+        	<tal:iterate repeat="obj users.get(view.userid, None).get_field_value('emails', ())">
+		     	${obj}<br />
+			</tal:iterate>
+			
+			<h1>Your courses</h1>
+        	<ul>
+        	<tal:iterate repeat="courseuid users.get(view.userid, None).get_field_value('courses', ())">
+		     	<li><a href="${request.resource_url(courses[courseuid])}">${courses[courseuid].title}</a></li>
+			</tal:iterate>
+			</ul>
+			</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
