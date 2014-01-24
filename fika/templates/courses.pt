@@ -11,6 +11,7 @@
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
             <div class="panel-body">
+            	${obj.get_field_value('description', ())}
             	<ul>
 	            <tal:iterate repeat="course_module obj.get_field_value('course_modules', ())">
 			        <li><a href="${request.resource_url(course_modules[course_module])}">${course_modules[course_module].title}</a></li>

@@ -7,7 +7,14 @@
 <body>
 
 <div metal:fill-slot="content">
-    User: ${context.__name__}
+	<div class="panel panel-default">
+		<div class="panel-heading">User: ${context.__name__}</div>
+	    <div class="panel-body">
+		    <tal:iterate repeat="obj context.get_field_value('emails', ())">
+		     	${obj}<br />
+			</tal:iterate>
+		</div>
+	</div>
 </div>
 
 </body>

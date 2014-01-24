@@ -22,4 +22,5 @@ class CourseModules(colander.SequenceSchema):
 @schema_factory('CourseSchema')
 class CourseSchema(colander.Schema):
     title = colander.SchemaNode(colander.String(),)
+    description = colander.SchemaNode(colander.String())
     course_modules = CourseModules()
