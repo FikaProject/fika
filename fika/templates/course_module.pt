@@ -7,7 +7,7 @@
 <body>
 
 <div metal:fill-slot="content">
-    <tal:iterate repeat="obj module_segments">
+    <tal:iterate repeat="obj sorted(module_segments, key=lambda segment: segment.get_field_value('order', ()))">
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
             <div class="panel-body">${obj.get_field_value('description')}</div>
