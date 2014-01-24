@@ -7,6 +7,12 @@
 <body>
 
 <div metal:fill-slot="content">
+	<a tal:condition="view.userid and context.uid not in users.get(view.userid, None).get_field_value('courses', ())"
+       href="${request.resource_url(context, 'join')}"
+       class="btn btn-default glyphicon glyphicon-bookmark"
+       i18n:translate="">Join</a>
+    <div tal:condition="view.userid and context.uid in users.get(view.userid, None).get_field_value('courses', ())">You are doing this course.</div>
+	
     <tal:iterate repeat="obj course_modules">
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
