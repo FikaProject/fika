@@ -19,18 +19,9 @@
             <div class="panel-body">
             	<ul>
             	<tal:iterate repeat="segment sorted(obj.values(), key=lambda segment: segment.get_field_value('order', ()))">
-            		<li>${segment.get_field_value('order', ())} <a href="${request.resource_url(segment)}">${segment.title}</a> (${segment.__class__.__name__})
-            		
-            		<tal:form condition="segment.__class__.__name__ != 'YoutubeSegment'" replace="structure segment.render(request, segment)"></tal:form>
-            		
-            		<tal:p condition="segment.__class__.__name__ == 'ImageSegment'">
-            			<br /><image width="560" height="315" src="${segment.get_field_value('url', ())}" />
-            		</tal:p>
-            		
-            		<tal:p condition="segment.__class__.__name__ == 'YoutubeSegment'">
-            			<br /><iframe width="560" height="315" src="//www.youtube.com/embed/${segment.get_field_value('youtube_link', ())}" frameborder="0" allowfullscreen></iframe>
-            		</tal:p>
-            		
+            		<li>
+            			${segment.get_field_value('order', ())} <a href="${request.resource_url(segment)}">${segment.title}</a> (${segment.__class__.__name__})
+            			<tal:form  replace="structure segment.render(request, segment)"></tal:form>
             		</li>
             	</tal:iterate>
             	</ul>
