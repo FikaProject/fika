@@ -17,7 +17,7 @@
 			Doing courses:
 			<ul>
 			<tal:iterate repeat="course context.get_field_value('courses', ())">
-		     	<li>${courses[course].title}</li>
+		     	<li>${courses[course].title} <a href="${request.resource_url(context, 'leave', query={'course':course})}">Leave course</a></li>
 			</tal:iterate>
 			</ul>
 		</div>

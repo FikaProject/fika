@@ -4,6 +4,9 @@ from pyramid.httpexceptions import HTTPFound
 from fika.views.base import BaseView
 from fika.models.interfaces import ICourse
 from fika.models.interfaces import ICourses
+from fika.models.interfaces import IUser
+
+from betahaus.pyracont.interfaces import IBaseFolder
 
 
 class CourseView(BaseView):
@@ -27,6 +30,11 @@ class CourseView(BaseView):
     @view_config(context = ICourse, name = "join", renderer = "fika:templates/course.pt")
     def join(self):
         user = self.root['users'][self.userid]
-        
         user.set_field_value('courses', user.get_field_value('courses', ()).__add__([self.context.uid]))
+        return HTTPFound(location = self.request.resource_url(self.context))
+    
+    @view_config(context = ICourse, name = "leave", renderer = "fika:templates/course.pt")
+    def leave(self):
+        user = self.root['users'][self.userid]
+        user.get_field_value('courses', ()).remove(self.context.uid)
         return HTTPFound(location = self.request.resource_url(self.context))

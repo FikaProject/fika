@@ -39,3 +39,10 @@ class UsersView(BaseView):
             return HTTPFound(location = self.request.resource_url(self.context))
         self.response['form'] = form.render()
         return self.response
+    
+    @view_config(context = IUser, name = "leave", renderer = "fika:templates/course.pt")
+    def leave(self):
+        user = self.root['users'][self.userid]
+        course = self.request.GET.get('course')
+        user.get_field_value('courses', ()).remove(course)
+        return HTTPFound(location = self.request.resource_url(user))
