@@ -14,10 +14,13 @@
 		     	${obj}<br />
 			</tal:iterate>
 			
-			Doing courses:
+			Currently enrolled in:
 			<ul>
 			<tal:iterate repeat="course context.get_field_value('courses', ())">
-		     	<li>${courses[course].title} <a href="${request.resource_url(context, 'leave', query={'course':course})}">Leave course</a></li>
+		     	<li><a href="${request.resource_url(courses[course])}">${courses[course].title}</a>&nbsp;&nbsp;<a 
+       href="${request.resource_url(context, 'leave', query={'course':course})}"
+       class="btn btn-default glyphicon-minus-sign glyphicon"
+       i18n:translate="">Leave</a> </li>
 			</tal:iterate>
 			</ul>
 		</div>
