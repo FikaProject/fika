@@ -7,10 +7,20 @@
 <body>
 
 <div metal:fill-slot="content">
-    <tal:iterate repeat="obj sorted(module_segments, key=lambda segment: segment.get_field_value('order', ()))">
+    <tal:iterate repeat="obj sorted(context.values(), key=lambda segment: segment.get_field_value('order', ()))">
         <div class="panel panel-default">
-            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
-            <div class="panel-body">${obj.get_field_value('description')}</div>
+            <div class="panel-heading">
+            	${obj.get_field_value('order', ())}
+            	
+            	
+            	
+            	<a href="${request.resource_url(obj)}">${obj.title}</a>
+	            <a tal:condition="not:repeat.obj.start" href="${request.resource_url(context, 'sortup', query={'segment':obj.uid} )}">&uarr;</a>
+				<a tal:condition="not:repeat.obj.end" href="${request.resource_url(context, 'sortdown', query={'segment':obj.uid} )}">&darr;</a>
+			</div>
+            <div class="panel-body">
+            	${obj.get_field_value('description')}
+        	</div>
         </div>
     </tal:iterate>
 
