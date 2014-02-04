@@ -23,15 +23,29 @@
         	</div>
         </div>
     </tal:iterate>
+    glyphicon glyphicon-plus
+    <a tal:condition="view.show_edit(context)"
+       href="${request.resource_url(context, 'edit')}"
+       class="btn btn-default glyphicon-edit glyphicon"
+       i18n:translate="">Edit</a>
+       
+    <div class="btn-group" tal:condition="len(view.addable_types) > 0">
+      <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
+        <span i18n:translate="">Add</span> <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <tal:iterate repeat="type view.addable_types">
+            <li><a href="${request.resource_url(context, 'add', query = {'content_type': type})}">${type}</a></li>
+        </tal:iterate>
+      </ul>
+    </div>
 
-    used in:
+    Used in courses:
+    <ul>
     <tal:iterate repeat="obj used_in_courses">
-        <div class="panel panel-default">
-            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
-            <div class="panel-body">${obj.get_field_value('description')}</div>
-        </div>
+        <li><a href="${request.resource_url(obj)}" alt="${obj.get_field_value('description')}" title="${obj.get_field_value('description')}">${obj.title}</a></li>
     </tal:iterate>
-
+	</ul>
 
 </div>
 
