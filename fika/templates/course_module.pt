@@ -12,9 +12,7 @@
             <div class="panel-heading">
             	${obj.get_field_value('order', ())}
             	
-            	
-            	
-            	<a href="${request.resource_url(obj)}">${obj.title}</a>
+            	<a href="${request.resource_url(obj)}">${obj.title}</a> (${obj.__class__.__name__})
 	            <a tal:condition="not:repeat.obj.start" href="${request.resource_url(context, 'sortup', query={'segment':obj.uid} )}">&uarr;</a>
 				<a tal:condition="not:repeat.obj.end" href="${request.resource_url(context, 'sortdown', query={'segment':obj.uid} )}">&darr;</a>
 			</div>
@@ -23,11 +21,6 @@
         	</div>
         </div>
     </tal:iterate>
-    glyphicon glyphicon-plus
-    <a tal:condition="view.show_edit(context)"
-       href="${request.resource_url(context, 'edit')}"
-       class="btn btn-default glyphicon-edit glyphicon"
-       i18n:translate="">Edit</a>
        
     <div class="btn-group" tal:condition="len(view.addable_types) > 0">
       <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
@@ -40,13 +33,16 @@
       </ul>
     </div>
 
-    Used in courses:
-    <ul>
-    <tal:iterate repeat="obj used_in_courses">
-        <li><a href="${request.resource_url(obj)}" alt="${obj.get_field_value('description')}" title="${obj.get_field_value('description')}">${obj.title}</a></li>
-    </tal:iterate>
-	</ul>
-
+	<div>
+	    Used in courses:
+	    <ul>
+		    <tal:iterate repeat="obj used_in_courses">
+		        <li><a href="${request.resource_url(obj)}" alt="${obj.get_field_value('description')}" title="${obj.get_field_value('description')}">${obj.title}</a></li>
+		    </tal:iterate>
+		</ul>
+		Created: ${context.created} <br />
+        Modified: ${context.modified} <br />
+	</div>
 </div>
 
 </body>
