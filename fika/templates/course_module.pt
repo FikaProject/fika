@@ -10,11 +10,13 @@
     <tal:iterate repeat="obj sorted(context.values(), key=lambda segment: segment.get_field_value('order', ()))">
         <div class="panel panel-default">
             <div class="panel-heading">
-            	${obj.get_field_value('order', ())}
+            	<span tal:condition="request.view_name=='edit'">${obj.get_field_value('order', ())}</span>
             	
             	<a href="${request.resource_url(obj)}">${obj.title}</a> (${obj.__class__.__name__})
-	            <a tal:condition="not:repeat.obj.start" href="${request.resource_url(context, 'sortup', query={'segment':obj.uid} )}">&uarr;</a>
-				<a tal:condition="not:repeat.obj.end" href="${request.resource_url(context, 'sortdown', query={'segment':obj.uid} )}">&darr;</a>
+            	<span tal:condition="request.view_name=='edit'">
+		            <a tal:condition="not:repeat.obj.start" href="${request.resource_url(context, 'sortup', query={'segment':obj.uid} )}">&uarr;</a>
+					<a tal:condition="not:repeat.obj.end" href="${request.resource_url(context, 'sortdown', query={'segment':obj.uid} )}">&darr;</a>
+				</span>
 			</div>
             <div class="panel-body">
             	${obj.get_field_value('description')}
@@ -22,16 +24,20 @@
         </div>
     </tal:iterate>
        
-    <div class="btn-group" tal:condition="len(view.addable_types) > 0">
-      <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
-        <span i18n:translate="">Add</span> <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <tal:iterate repeat="type view.addable_types">
-            <li><a href="${request.resource_url(context, 'add', query = {'content_type': type})}">${type}</a></li>
-        </tal:iterate>
-      </ul>
-    </div>
+    <span tal:condition="request.view_name=='edit'">
+	    <div class="btn-group" tal:condition="len(view.addable_types) > 0">
+	      <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
+	        <span i18n:translate="">Add</span> <span class="caret"></span>
+	      </button>
+	      <ul class="dropdown-menu" role="menu">
+	        <tal:iterate repeat="type view.addable_types">
+	            <li><a href="${request.resource_url(context, 'add', query = {'content_type': type})}">${type}</a></li>
+	        </tal:iterate>
+	      </ul>
+	    </div>
+    </span>
+    
+    <tal:form condition="request.view_name=='edit'" replace="structure form">Form</tal:form>
 
 	<div>
 	    Used in courses:
@@ -43,6 +49,8 @@
 		Created: ${context.created} <br />
         Modified: ${context.modified} <br />
 	</div>
+	
+	
 </div>
 
 </body>
