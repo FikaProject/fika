@@ -10,13 +10,15 @@
     <div class="row">
         <div class="col-md-12">
         	<div tal:condition="view.userid">
-        	User: ${view.userid}<br/>
-        	${users.get(view.userid, None)}<br/>
+        	Welcome user: ${view.userid}<br/>
         	
-        	
+        	<tal:iterate repeat="obj users.get(view.userid, None).get_field_value('validated_emails', ())">
+		     	<strong>${obj}</strong><br />
+			</tal:iterate>
         	<tal:iterate repeat="obj users.get(view.userid, None).get_field_value('emails', ())">
 		     	${obj}<br />
 			</tal:iterate>
+			
 			
 			<h1>Your courses</h1>
         	<ul>
@@ -24,6 +26,10 @@
 		     	<li><a href="${request.resource_url(courses[courseuid])}">${courses[courseuid].title}</a></li>
 			</tal:iterate>
 			</ul>
+			</div>
+			
+			<div tal:condition="not:view.userid">
+				Welcome to Fika. Please <a href="/login">log in</a> to see your courses.
 			</div>
         </div>
     </div>
