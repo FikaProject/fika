@@ -53,24 +53,17 @@ class CourseModulesView(BaseView):
     
     def recalculate_segment_order(self, course_module):
         segments = sorted(course_module.values(), key=lambda segment: int(segment.get_field_value('order', ())))
-        
         firstSegmentOrder = int(segments[0].get_field_value('order', ()))
-        
-        #import pdb; pdb.set_trace()
         
         #set the first segment on place 0, and move all the other segments the same amount
         for segment in segments:
             segment.set_field_value('order', int(segment.get_field_value('order', ())) -firstSegmentOrder)
         
-        
-        print ""
         prevOriginal = 0
         prev = 0
         #make sure the ordering of segments is without gaps
         for segment in segments:
             current = int(segment.get_field_value('order', ()))
-            #import pdb; pdb.set_trace()
-            print "current " + str(current) + " prevOriginal " + str(prevOriginal) + " prev " + str(prev)
             if current == prevOriginal:
                 current = prev
             else:
@@ -78,7 +71,6 @@ class CourseModulesView(BaseView):
                     current = prev + 1
             prevOriginal = segment.get_field_value('order', ())
             prev = current
-            print "new "+str(current)
             segment.set_field_value('order', current)
     
 
