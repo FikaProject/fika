@@ -23,4 +23,4 @@ class CourseModules(colander.SequenceSchema):
 class CourseSchema(colander.Schema):
     title = colander.SchemaNode(colander.String(),)
     description = colander.SchemaNode(colander.String())
-    course_modules = CourseModules()
+    course_modules = CourseModules(widget=deform.widget.SequenceWidget(orderable=True))
