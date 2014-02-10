@@ -6,24 +6,37 @@
       i18n:domain="fika">
 <body>
 
+<metal:head fill-slot="head">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#module-segments').sortable();
+		});
+	</script>
+</metal:head>
+
 <div metal:fill-slot="content">
+	<form method="post">
+	
+	<div tal:condition="request.view_name=='edit'">
+	<input type="text" name="title" value="${context.title}"></input>
+	<button name="save" type="submit" value="save"><span i18n:translate="">Save</span></button>
+	<button name="cancel" type="submit" value="cancel"><span i18n:translate="">Cancel</span></button>
+	</div>
+	
+	<div tal:omit-tag="request.view_name!='edit'" id="module-segments">	
     <tal:iterate repeat="obj sorted(context.values(), key=lambda segment: segment.get_field_value('order', ()))">
         <div class="panel panel-default">
             <div class="panel-heading">
-            	<span tal:condition="request.view_name=='edit'">${obj.get_field_value('order', ())}</span>
-            	
+            	<input type="hidden" name="module-segments" value="${obj.uid}" />
             	<a href="${request.resource_url(obj)}">${obj.title}</a> (${obj.__class__.__name__})
-            	<span tal:condition="request.view_name=='edit'">
-		            <a tal:condition="not:repeat.obj.start" href="${request.resource_url(context, 'sortup', query={'segment':obj.uid} )}">&uarr;</a>
-					<a tal:condition="not:repeat.obj.end" href="${request.resource_url(context, 'sortdown', query={'segment':obj.uid} )}">&darr;</a>
-				</span>
 			</div>
             <div class="panel-body">
             	${obj.get_field_value('description')}
         	</div>
         </div>
     </tal:iterate>
-       
+   </div>
+    
     <span tal:condition="request.view_name=='edit'">
 	    <div class="btn-group" tal:condition="len(view.addable_types) > 0">
 	      <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
@@ -37,7 +50,9 @@
 	    </div>
     </span>
     
-    <tal:form condition="request.view_name=='edit'" replace="structure form">Form</tal:form>
+    <!--<tal:form condition="request.view_name=='edit'" replace="structure form">Form</tal:form>-->
+	
+
 
 	<div>
 	    Used in courses:
@@ -50,8 +65,8 @@
         Modified: ${context.modified} <br />
 	</div>
 	
-	
 </div>
+
 
 </body>
 </html>
