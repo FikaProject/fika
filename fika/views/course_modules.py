@@ -33,7 +33,7 @@ class CourseModulesView(BaseView):
     def edit(self):
         schema = createSchema(self.context.schemas['edit'])
         schema = schema.bind(context = self.context, request = self.request, view = self)
-        form = deform.Form(schema, buttons = ('save', 'cancel'))
+        form = deform.Form(schema, buttons = ('save', 'cancel'), action="#")
         auto_need(form)
         if self.request.method == 'POST':
             if 'save' in self.request.POST:

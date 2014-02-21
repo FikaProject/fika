@@ -93,7 +93,7 @@ class BaseEdit(BaseView):
             return HTTPForbidden("No factory with that name")
         schema = createSchema(factory._callable.schemas['add'])
         schema = schema.bind(context = self.context, request = self.request, view = self)
-        form = deform.Form(schema, buttons = ('save', 'cancel'))
+        form = deform.Form(schema, buttons = ('save', 'cancel'), action="#")
         auto_need(form)
         if self.request.method == 'POST':
             if 'save' in self.request.POST:
@@ -114,7 +114,7 @@ class BaseEdit(BaseView):
     def edit(self):
         schema = createSchema(self.context.schemas['edit'])
         schema = schema.bind(context = self.context, request = self.request, view = self)
-        form = deform.Form(schema, buttons = ('save', 'cancel'))
+        form = deform.Form(schema, buttons = ('save', 'cancel'), action="#")
         auto_need(form)
         if self.request.method == 'POST':
             if 'save' in self.request.POST:
@@ -136,7 +136,7 @@ class BaseEdit(BaseView):
             raise HTTPForbidden(u"Can't delete root")
         schema = colander.Schema()
         schema = schema.bind(context = self.context, request = self.request, view = self)
-        form = deform.Form(schema, buttons = ('delete', 'cancel'))
+        form = deform.Form(schema, buttons = ('delete', 'cancel'), action="#")
         auto_need(form)
         if self.request.method == 'POST':
             if 'delete' in self.request.POST:

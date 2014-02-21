@@ -12,12 +12,14 @@
 		<meta name="description" content="Description" />
 		
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js" type="text/javascript"></script>
+		
+
 		<metal:head define-slot="head"></metal:head>
 	</head>
 
-  <body class="view-${request.view_name or 'default'}">
+  <body class="view-${request.view_name or 'default'}" data-ng-app="">
 
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">

@@ -18,7 +18,7 @@ class ModuleSegment(BaseFolder):
     def render(self, request, view):
         schema = createSchema(self.schemas['view'])
         schema = schema.bind(context = self, request = request, view = view)
-        form = deform.Form(schema, buttons = ())
+        form = deform.Form(schema, buttons = (), action="derp")
         appstruct = self.get_field_appstruct(schema)
         return form.render(appstruct = appstruct, readonly = True)
         

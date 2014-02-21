@@ -18,7 +18,7 @@ class AuthView(BaseView):
     def register(self):
         schema = createSchema('RegisterUserSchema')
         schema = schema.bind(context = self.context, request = self.request, view = self)
-        form = deform.Form(schema, buttons = ('register', 'cancel'))
+        form = deform.Form(schema, buttons = ('register', 'cancel'), action="#")
         auto_need(form)
         if self.request.method == 'POST':
             if 'register' in self.request.POST:
@@ -43,7 +43,7 @@ class AuthView(BaseView):
         schema = createSchema('LoginSchema')
         schema.validator = deferred_login_password_validator
         schema = schema.bind(context = self.context, request = self.request, view = self)
-        form = deform.Form(schema, buttons = ('login', 'cancel'))
+        form = deform.Form(schema, buttons = ('login', 'cancel'), action="#")
         auto_need(form)
         if self.request.method == 'POST':
             if 'login' in self.request.POST:
