@@ -2,6 +2,7 @@ import colander
 import deform
 
 from js.deform import auto_need
+from js.jqueryui import jqueryui
 
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
@@ -31,6 +32,7 @@ class CourseModulesView(BaseView):
     
     @view_config(context = ICourseModule, name = "edit", renderer = "fika:templates/course_module.pt")
     def edit(self):
+        jqueryui.need()
         schema = createSchema(self.context.schemas['edit'])
         schema = schema.bind(context = self.context, request = self.request, view = self)
         form = deform.Form(schema, buttons = ('save', 'cancel'), action="#")
