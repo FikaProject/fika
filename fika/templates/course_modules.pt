@@ -16,7 +16,7 @@
             	<br />
             	${obj._num_objects.value} segments:
             	<ul>
-            	<tal:iterate repeat="segment sorted(obj.values(), key=lambda segment: segment.get_field_value('order', ()))">
+            	<tal:iterate repeat="segment obj.values()">
             		<li><a href="${request.resource_url(segment)}">${segment.title}</a> (${segment.__class__.__name__})</li>
             	</tal:iterate>
             	</ul>

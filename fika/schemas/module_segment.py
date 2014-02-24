@@ -6,18 +6,20 @@ from fika.schemas.youtube_node import Youtube
 
 class ModuleSegment(colander.Schema):
     title = colander.SchemaNode(colander.String())
-    description = colander.SchemaNode(colander.String())
-    order = colander.SchemaNode(colander.Integer(),)
+    description = colander.SchemaNode(colander.String(),
+                                      missing = u"")
 
 
 @schema_factory('TextSegmentSchema')
 class TextSegmentSchema(ModuleSegment):
     body = colander.SchemaNode(colander.String(),
                                widget = deform.widget.RichTextWidget())
-    
+
+
 @schema_factory('ImageSegmentSchema')
 class ImageSegmentSchema(ModuleSegment):
     url = colander.SchemaNode(colander.String(),)
+
 
 @schema_factory('YoutubeSegmentSchema')
 class YoutubeSegmentSchema(ModuleSegment):

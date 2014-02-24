@@ -24,7 +24,7 @@
 	</div>
 	
 	<div tal:omit-tag="request.view_name!='edit'" id="module-segments">	
-    <tal:iterate repeat="obj sorted(context.values(), key=lambda segment: segment.get_field_value('order', ()))">
+    <tal:iterate repeat="obj context.values()">
         <div class="panel panel-default">
             <div class="panel-heading">
             	<input type="hidden" name="module-segments" value="${obj.uid}" />
