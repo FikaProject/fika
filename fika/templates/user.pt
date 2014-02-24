@@ -7,24 +7,30 @@
 <body>
 
 <div metal:fill-slot="content">
-	<div class="panel panel-default">
-		<div class="panel-heading">User: ${context.__name__}</div>
-	    <div class="panel-body">
-		    <tal:iterate repeat="obj context.get_field_value('emails', ())">
-		     	${obj}<br />
-			</tal:iterate>
-			
-			Currently enrolled in:
-			<ul>
-			<tal:iterate repeat="course context.get_field_value('courses', ())">
-		     	<li><a href="${request.resource_url(courses[course])}">${courses[course].title}</a>&nbsp;&nbsp;<a 
-       href="${request.resource_url(context, 'leave', query={'course':course})}"
-       class="btn btn-default glyphicon-minus-sign glyphicon"
-       i18n:translate="">Leave</a> </li>
-			</tal:iterate>
-			</ul>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">User: ${context.__name__}</div>
+                <div class="panel-body">
+                    <tal:iterate repeat="obj context.get_field_value('emails', ())">
+                         ${obj}<br />
+                    </tal:iterate>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Courses</div>
+                <div class="panel-body">
+                    <ul>
+                        <li tal:repeat="course context.enrolled_courses()">
+                            <a href="${request.resource_url(course)}">${course.title}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

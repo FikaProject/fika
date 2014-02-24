@@ -8,12 +8,12 @@
 
 <div metal:fill-slot="content">
 
-	<a tal:condition="view.userid and context.uid not in users.get(view.userid, None).get_field_value('courses', ())"
+	<a tal:condition="not view.profile.in_course(context)"
        href="${request.resource_url(context, 'join')}"
        class="btn btn-default glyphicon glyphicon-bookmark"
        i18n:translate="">Join</a>
-    <div tal:condition="view.userid and context.uid in users.get(view.userid, None).get_field_value('courses', ())">You are enrolled in this course.&nbsp;&nbsp;<a 
-       href="${request.resource_url(context, 'leave',query={'course':context.uid})}"
+    <div tal:condition="view.profile.in_course(context)">You are enrolled in this course.&nbsp;&nbsp;<a 
+       href="${request.resource_url(context, 'leave')}"
        class="btn btn-default glyphicon-minus-sign glyphicon"
        i18n:translate="">Leave</a></div>
 	

@@ -29,14 +29,12 @@ class CourseView(BaseView):
     
     @view_config(context = ICourse, name = "join", renderer = "fika:templates/course.pt")
     def join(self):
-        user = self.root['users'][self.userid]
-        user.set_field_value('courses', user.get_field_value('courses', ()).__add__([self.context.uid]))
+        self.profile.join_course(self.context)
         return HTTPFound(location = self.request.resource_url(self.context))
 
     @view_config(context = ICourse, name = "leave", renderer = "fika:templates/course.pt")
     def leave(self):
-        user = self.root['users'][self.userid]
-        user.get_field_value('courses', ()).remove(self.context.uid)
+        self.profile.leave_course(self.context)
         return HTTPFound(location = self.request.resource_url(self.context)) 
     
     # @view_config(context = IBaseFolder, name = "leave", renderer = "fika:templates/course.pt")
