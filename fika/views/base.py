@@ -7,6 +7,7 @@ from js.deform import auto_need
 from js.deform_bootstrap import deform_bootstrap_js
 from js.bootstrap import bootstrap
 from js.bootstrap import bootstrap_theme
+from js.jqueryui import jqueryui
 from pyramid.view import view_config
 from pyramid.decorator import reify
 from pyramid.renderers import get_renderer
@@ -34,6 +35,7 @@ class BaseView(object):
         bootstrap.need()
         bootstrap_theme.need()
         main_css.need()
+        jqueryui.need()
         self.response = {'view': self}
 
     @property
