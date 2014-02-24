@@ -11,26 +11,10 @@ class EmailsSchema(colander.SequenceSchema):
                                 validator = colander.Email())
 
 
-    
-@colander.deferred
-def course_widget(node, kw):
-    view = kw['view']
-    root = view.root
-    values = []
-    for (name, obj) in root['courses'].items():
-        values.append((name, obj.title))
-    return deform.widget.SelectWidget(values = values)
-
-class CoursesSchema(colander.SequenceSchema):
-    course = colander.SchemaNode(colander.String(), widget = course_widget)
-
-
 @schema_factory('UserSchema')
 class UserSchema(colander.Schema):
     emails = EmailsSchema(validator = NoDuplicates())
     validated_emails = EmailsSchema()
-    courses = CoursesSchema(validator = NoDuplicates())
-    
 
 
 @schema_factory('RegisterUserSchema')
