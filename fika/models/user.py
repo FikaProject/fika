@@ -1,21 +1,23 @@
-from betahaus.pyracont import BaseFolder
 from betahaus.pyracont.decorators import content_factory
 from zope.interface import implementer
 from pyramid.traversal import find_root
 from BTrees.OOBTree import OOBTree
 
+from .base import FikaBaseFolder
 from .interfaces import IUser
 from .interfaces import IUsers
 from .interfaces import ICourse
+from fika import FikaTSF as _
 
 
 @content_factory('User')
 @implementer(IUser)
-class User(BaseFolder):
+class User(FikaBaseFolder):
     allowed_contexts = (IUsers,)
     custom_fields = {'password': 'PasswordField'}
     schemas = {'add': 'UserSchema',
-               'edit': 'UserSchema'}
+               'edit': 'UserSchema',
+               'delete': 'DeleteSchema'}
 
     def __init__(self, data=None, **kwargs):
         super(User, self).__init__(data=None, **kwargs)

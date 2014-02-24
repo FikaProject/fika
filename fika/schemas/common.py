@@ -1,5 +1,6 @@
 import colander
 from pyramid.traversal import find_root
+from betahaus.pyracont.decorators import schema_factory
 
 from fika import FikaTSF as _
 
@@ -40,3 +41,8 @@ class LoginPasswordValidator(object):
         if not pw_field.check_input(password):
             exc['password'] = _(u"Wrong password. Remember that passwords are case sensitive.")
             raise exc
+
+
+@schema_factory()
+class DeleteSchema(colander.Schema):
+    pass

@@ -15,7 +15,7 @@
 </metal:head>
 
 <div metal:fill-slot="content">
-   
+
 	<form tal:condition="request.view_name=='edit'" tal:replace="structure form">Form here</form>
 
 	<div tal:omit-tag="request.view_name!='edit'" id="module-segments">	

@@ -8,6 +8,8 @@
 
 <div metal:fill-slot="content">
     <tal:iterate repeat="obj course_modules">
+        <div tal:replace="structure view.render_action_bar(obj)">Actions</div>
+
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
             <div class="panel-body">

@@ -1,12 +1,12 @@
-from betahaus.pyracont import BaseFolder
 from zope.interface import implementer
 
 from .interfaces import ICourses
+from .base import FikaBaseFolder
 from fika import FikaTSF as _
 
 
 @implementer(ICourses)
-class Courses(BaseFolder):
+class Courses(FikaBaseFolder):
     title = display_name = _(u"Courses")
 
     def module_used_in(self, uid):

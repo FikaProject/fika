@@ -7,6 +7,7 @@
 <body>
 
 <div metal:fill-slot="content">
+
     <tal:iterate repeat="obj courses">
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>

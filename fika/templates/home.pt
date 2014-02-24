@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
         	<div tal:condition="view.userid">
-        	Welcome user: ${view.userid}<br/>
+        	Welcome user: ${view.profile.title}<br/>
         	
         	<tal:iterate repeat="obj users.get(view.userid, None).get_field_value('validated_emails', ())">
 		     	<strong>${obj}</strong><br />

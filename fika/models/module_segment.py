@@ -1,17 +1,17 @@
 import colander
 import deform
-from betahaus.pyracont import BaseFolder
 from betahaus.pyracont.factories import createSchema
 from betahaus.pyracont.decorators import content_factory
 from zope.interface import implementer
 
+from .base import FikaBaseFolder
 from .interfaces import IModuleSegment
 from .interfaces import ICourseModule
 from .interfaces import ICourse
 
 
 @implementer(IModuleSegment)
-class ModuleSegment(BaseFolder):
+class ModuleSegment(FikaBaseFolder):
     allowed_contexts = (ICourseModule,)
     schemas = {}
 
@@ -48,4 +48,5 @@ class YoutubeSegment(ModuleSegment):
                'view': 'YoutubeSegmentSchema'}
     
     def render(self, request, view):
+        #FIXME: Refactor into template with settings
         return u'<div class="segment"><iframe width="560" height="315" src="//www.youtube.com/embed/' + self.get_field_value('youtube_link', ()) + u'" frameborder="0" allowfullscreen></iframe><div>' + self.get_field_value('description', ()) + u'</div></div>'

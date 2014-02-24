@@ -16,9 +16,11 @@
        href="${request.resource_url(context, 'leave')}"
        class="btn btn-default glyphicon-minus-sign glyphicon"
        i18n:translate="">Leave</a></div>
-	
+
     <tal:iterate repeat="obj course_modules">
         <div class="panel panel-default">
+            <div tal:replace="structure view.render_action_bar(obj)">Actions</div>
+
             <div class="panel-heading">
                 <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">${obj.title}</a></h4>
             </div>

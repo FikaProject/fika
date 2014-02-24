@@ -66,8 +66,9 @@
         </ol>
 
         ${view.roles_in_context}
+    <div tal:replace="structure view.render_action_bar(context)">Actions</div>
 
-      <h1>${context.title}</h1>
+    <h1>${context.title}</h1>
 
     <div class="btn-group" tal:condition="len(view.addable_types) > 0">
       <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
@@ -79,15 +80,6 @@
         </tal:iterate>
       </ul>
     </div>
-
-    <a tal:condition="view.show_edit(context)"
-       href="${request.resource_url(context, 'edit')}"
-       class="btn btn-default glyphicon-edit glyphicon"
-       i18n:translate="">Edit</a>
-    <a tal:condition="view.show_edit(context) and context != view.root"
-       href="${request.resource_url(context, 'delete')}"
-       class="btn btn-default glyphicon-remove-circle glyphicon"
-       i18n:translate="">Delete</a>
 
         <metal:content define-slot="content">
         </metal:content>

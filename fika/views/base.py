@@ -18,6 +18,7 @@ from pyramid.renderers import render
 from betahaus.pyracont.interfaces import IContentFactory
 from betahaus.pyracont.interfaces import IBaseFolder
 from betahaus.pyracont.factories import createSchema
+from betahaus.viewcomponent import render_view_group
 from pyramid.httpexceptions import HTTPForbidden
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import effective_principals
@@ -91,6 +92,13 @@ class BaseView(object):
 
     def breadcrumbs(self):
         return reversed(list(lineage(self.context)))
+
+    def render_action_bar(self, context):
+        response = {}
+        response.update(self.response)
+        response['context'] = context
+        response['actions'] = render_view_group(context, self.request, 'actions')
+        return render("fika:templates/action_bar.pt", response, request = self.request)
 
     def render_segment(self, segment):
         assert IModuleSegment.providedBy(segment)

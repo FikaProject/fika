@@ -13,6 +13,7 @@ requires = [
     'pyramid_tm',
     'ZODB3',
     'betahaus.pyracont',
+    'betahaus.viewcomponent',
     'colander',
     'deform',
     'deform_bootstrap',
