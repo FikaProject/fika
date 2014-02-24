@@ -45,3 +45,48 @@ class IModuleSegment(IBaseFolder):
 
     def render(request, view):
         """ Render this module segment. """
+
+
+
+class ISecurity(Interface):
+    """ Mixin for all content that should handle groups.
+        Principal in this terminology is a userid or a group id.
+    """
+    
+    def get_groups(principal):
+        """ Return groups for a principal in this context.
+            The special group "role:Owner" is never inherited.
+        """
+
+    def check_groups(groups):
+        """ Check dependencies and group names. """
+
+    def add_groups(principal, groups, event = True):
+        """ Add groups for a principal in this context.
+            If event is True, an IObjectUpdatedEvent will be sent.
+        """
+
+    def del_groups(principal, groups, event = True):
+        """ Delete groups for a principal in this context.
+            If event is True, an IObjectUpdatedEvent will be sent.
+        """
+
+    def set_groups(principal, groups, event = True):
+        """ Set groups for a principal in this context. (This clears any previous setting)
+            If event is True, an IObjectUpdatedEvent will be sent.
+        """
+
+    def get_security():
+        """ Return the current security settings.
+        """
+    
+    def set_security(value):
+        """ Set current security settings according to value, that is a list of dicts with keys
+            userid and groups.
+            Warning! This method will also clear any settings for users not present in value!
+            This method will send an IObjectUpdatedEvent.
+        """
+
+    def list_all_groups():
+        """ Returns a set of all groups in this context. """
+

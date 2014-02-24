@@ -10,7 +10,9 @@ FikaTSF = TranslationStringFactory('fika')
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
+    from fika.models.security_mixin import groupfinder
     authn_policy = AuthTktAuthenticationPolicy(secret = read_salt(settings),
+                                               callback = groupfinder,
                                                hashalg = 'sha512')
     authz_policy = ACLAuthorizationPolicy()
     config = Configurator(root_factory = root_factory,

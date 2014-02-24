@@ -20,11 +20,13 @@ from betahaus.pyracont.interfaces import IBaseFolder
 from betahaus.pyracont.factories import createSchema
 from pyramid.httpexceptions import HTTPForbidden
 from pyramid.httpexceptions import HTTPFound
+from pyramid.security import effective_principals
 
 from fika.fanstatic import main_css
 from fika.fanstatic import common_js
 from fika.models.interfaces import IModuleSegment
 from fika import FikaTSF as _
+from fika import security
 
 
 class BaseView(object):
@@ -69,6 +71,10 @@ class BaseView(object):
             headers = forget(self.request)
             self.request.response.headerlist.extend(headers)
         return profile
+
+    @property
+    def roles_in_context(self):
+        return effective_principals(self.request)
 
     def gravatar_link(self, size = 20):
         if not self.profile:
@@ -121,7 +127,8 @@ class BaseEdit(BaseView):
         self.response['form'] = form.render()
         return self.response
 
-    @view_config(context = IBaseFolder, name = "edit", renderer = "fika:templates/form.pt")
+    @view_config(context = IBaseFolder, name = "edit", renderer = "fika:templates/form.pt",
+                 permission = security.EDIT)
     def edit(self):
         schema = createSchema(self.context.schemas['edit'])
         schema = schema.bind(context = self.context, request = self.request, view = self)
@@ -141,7 +148,8 @@ class BaseEdit(BaseView):
         self.response['form'] = form.render(appstruct = appstruct)
         return self.response
 
-    @view_config(context = IBaseFolder, name = "delete", renderer = "fika:templates/form.pt")
+    @view_config(context = IBaseFolder, name = "delete", renderer = "fika:templates/form.pt",
+                 permission = security.DELETE)
     def delete(self):
         if self.context.__parent__ == None:
             raise HTTPForbidden(u"Can't delete root")

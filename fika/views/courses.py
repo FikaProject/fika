@@ -1,14 +1,17 @@
 from pyramid.view import view_config
+from pyramid.view import view_defaults
 from pyramid.httpexceptions import HTTPFound
+from betahaus.pyracont.interfaces import IBaseFolder
 
 from fika.views.base import BaseView
 from fika.models.interfaces import ICourse
 from fika.models.interfaces import ICourses
 from fika.models.interfaces import IUser
+from fika import security
 
-from betahaus.pyracont.interfaces import IBaseFolder
 
 
+@view_defaults(permission = security.VIEW)
 class CourseView(BaseView):
 
     @view_config(context = ICourse, renderer = "fika:templates/course.pt")

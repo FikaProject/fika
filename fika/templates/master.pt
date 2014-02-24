@@ -64,7 +64,9 @@
                 <li><a href="${request.resource_url(obj)}">${obj.title and obj.title or obj.__name__}</a></li>
             </tal:iterate>
         </ol>
-        
+
+        ${view.roles_in_context}
+
       <h1>${context.title}</h1>
 
     <div class="btn-group" tal:condition="len(view.addable_types) > 0">
