@@ -21,6 +21,10 @@ class User(BaseFolder):
         super(User, self).__init__(data=None, **kwargs)
         self.__courses__ = OOBTree()
 
+    @property
+    def title(self):
+        return self.get_field_value('name', _(u"(Anonymous)"))
+
     def default_email(self):
         try:
             return self.get_field_value('validated_emails', ())[0]

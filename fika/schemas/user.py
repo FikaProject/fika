@@ -13,8 +13,11 @@ class EmailsSchema(colander.SequenceSchema):
 
 @schema_factory('UserSchema')
 class UserSchema(colander.Schema):
+    name = colander.SchemaNode(colander.String(),
+                               title = _(u"Your name"),
+                               missing = u"")
     emails = EmailsSchema(validator = NoDuplicates())
-    validated_emails = EmailsSchema()
+    validated_emails = EmailsSchema(validator = NoDuplicates())
 
 
 @schema_factory('RegisterUserSchema')

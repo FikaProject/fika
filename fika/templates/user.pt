@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
-                <div class="panel-heading">User: ${context.__name__}</div>
+                <div class="panel-heading">${context.title}</div>
                 <div class="panel-body">
                     <tal:iterate repeat="obj context.get_field_value('emails', ())">
                          ${obj}<br />
