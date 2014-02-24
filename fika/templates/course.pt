@@ -19,16 +19,19 @@
 	
     <tal:iterate repeat="obj course_modules">
         <div class="panel panel-default">
-            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
+            <div class="panel-heading">
+                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">${obj.title}</a></h4>
+            </div>
+            
             <div class="panel-body">
-            	<ul>
-            	<tal:iterate repeat="segment obj.values()">
-            		<li>
-            			<a href="${request.resource_url(segment)}">${segment.title}</a> (${segment.__class__.__name__})
-            			<tal:form  replace="structure segment.render(request, segment)" ></tal:form>
-            		</li>
-            	</tal:iterate>
-            	</ul>
+                <div class="course_module description">
+                    ${obj.get_field_value('description')}
+                </div>
+                <div id="collapse-${obj.uid}" class="panel-collapse collapse">
+                    <tal:iterate repeat="segment obj.values()">
+                        <tal:segment replace="structure view.render_segment(segment)">Course Module segment</tal:segment>
+                    </tal:iterate>
+                </div>
             </div>
         </div>
     </tal:iterate>

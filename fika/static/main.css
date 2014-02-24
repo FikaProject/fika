@@ -11,3 +11,11 @@ div.segment
 {
 	width: 500px;
 }
+
+.description {
+    font-weight: bold;
+}
+
+.collapse {
+    
+}

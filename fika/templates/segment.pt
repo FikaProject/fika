@@ -1,0 +1,27 @@
+<tal:main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="fika">
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-${context.uid}">
+               <span class="glyphicon glyphicon-chevron-down">${context.title}</span>
+            </a>
+        </h4>
+    </div>
+    <div class="panel-body">
+        <div class="course_segment description">
+            ${context.get_field_value('description')}
+        </div>
+        <div id="collapse-${context.uid}" class="panel-collapse collapse">
+            <tal:form  replace="structure context.render(request, view)" ></tal:form>
+        </div>
+        
+    </div>
+</div>
+
+</tal:main>

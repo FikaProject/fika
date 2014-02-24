@@ -5,7 +5,6 @@ import deform
 from js.deform import deform_basic
 from js.deform import auto_need
 from js.deform_bootstrap import deform_bootstrap_js
-from js.bootstrap import bootstrap
 from js.bootstrap import bootstrap_theme
 from js.jqueryui import jqueryui
 from pyramid.view import view_config
@@ -15,6 +14,7 @@ from pyramid.traversal import lineage
 from pyramid.traversal import find_root
 from pyramid.security import authenticated_userid
 from pyramid.security import forget
+from pyramid.renderers import render
 from betahaus.pyracont.interfaces import IContentFactory
 from betahaus.pyracont.interfaces import IBaseFolder
 from betahaus.pyracont.factories import createSchema
@@ -22,6 +22,8 @@ from pyramid.httpexceptions import HTTPForbidden
 from pyramid.httpexceptions import HTTPFound
 
 from fika.fanstatic import main_css
+from fika.fanstatic import common_js
+from fika.models.interfaces import IModuleSegment
 from fika import FikaTSF as _
 
 
@@ -32,10 +34,10 @@ class BaseView(object):
         self.request = request
         deform_basic.need()
         deform_bootstrap_js.need()
-        bootstrap.need()
         bootstrap_theme.need()
         main_css.need()
         jqueryui.need()
+        common_js.need()
         self.response = {'view': self}
 
     @property
@@ -83,6 +85,13 @@ class BaseView(object):
 
     def breadcrumbs(self):
         return reversed(list(lineage(self.context)))
+
+    def render_segment(self, segment):
+        assert IModuleSegment.providedBy(segment)
+        response = {}
+        response.update(self.response)
+        response['context'] = segment
+        return render("fika:templates/segment.pt", response, request = self.request)
 
 
 class BaseEdit(BaseView):

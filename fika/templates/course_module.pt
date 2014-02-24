@@ -15,25 +15,12 @@
 </metal:head>
 
 <div metal:fill-slot="content">
-	<form method="post">
-	
-	<div tal:condition="request.view_name=='edit'">
-	<input type="text" name="title" value="${context.title}"></input>
-	<button name="save" type="submit" value="save"><span i18n:translate="">Save</span></button>
-	<button name="cancel" type="submit" value="cancel"><span i18n:translate="">Cancel</span></button>
-	</div>
-	
+   
+	<form tal:condition="request.view_name=='edit'" tal:replace="structure form">Form here</form>
+
 	<div tal:omit-tag="request.view_name!='edit'" id="module-segments">	
     <tal:iterate repeat="obj context.values()">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-            	<input type="hidden" name="module-segments" value="${obj.uid}" />
-            	<a href="${request.resource_url(obj)}">${obj.title}</a> (${obj.__class__.__name__})
-			</div>
-            <div class="panel-body">
-            	${obj.get_field_value('description')}
-        	</div>
-        </div>
+        <tal:segment replace="structure view.render_segment(obj)">Course Module segment</tal:segment>
     </tal:iterate>
    </div>
     
@@ -49,10 +36,6 @@
 	      </ul>
 	    </div>
     </span>
-    
-    <!--<tal:form condition="request.view_name=='edit'" replace="structure form">Form</tal:form>-->
-	
-
 
 	<div>
 	    Used in courses:
