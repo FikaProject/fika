@@ -22,7 +22,11 @@
             <div tal:replace="structure view.render_action_bar(obj)">Actions</div>
 
             <div class="panel-heading">
-                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">${obj.title}</a></h4>
+                <h4 class="panel-title">
+                	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">
+                		<span class="glyphicon glyphicon-chevron-down">${obj.title}</span>
+                	</a>
+            	</h4>
             </div>
             
             <div class="panel-body">

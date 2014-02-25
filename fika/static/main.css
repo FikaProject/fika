@@ -19,3 +19,8 @@ div.segment
 .collapse {
     
 }
+
+.collapser{
+	display:block;
+	width:100%;
+}
