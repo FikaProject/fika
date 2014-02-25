@@ -22,8 +22,8 @@
 			
 			<h1>Your courses</h1>
         	<ul>
-        	<tal:iterate repeat="courseuid users.get(view.userid, None).get_field_value('courses', ())">
-		     	<li><a href="${request.resource_url(courses[courseuid])}">${courses[courseuid].title}</a></li>
+    		<tal:iterate repeat="course view.profile.enrolled_courses()">
+		     	<li><a href="${request.resource_url(course)}">${course.title}</a></li>
 			</tal:iterate>
 			</ul>
 			</div>
