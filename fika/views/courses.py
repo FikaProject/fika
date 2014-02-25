@@ -16,12 +16,25 @@ class CourseView(BaseView):
 
     @view_config(context = ICourse, renderer = "fika:templates/course.pt")
     def course(self):
+        pages = self.context.cm_pages()
+
+        def _next(page):
+            next = page + 1
+            return page < len(pages) - 1 and "?p=%s" % next or ""
+
+        def _previous(page):
+            previos = page - 1
+            return page > 0 and "?p=%s" % previos or ""
+            
         course_modules = self.root['course_modules']
-        results = []
-        for name in self.context.get_field_value('course_modules', ()):
-            results.append(course_modules[name])
-        self.response['course_modules'] = results
-        self.response['users'] = self.root['users']
+        page = int(self.request.GET.get('p', 0))
+        self.response['page'] = page
+        self.response['pages'] = pages
+        cm_uid = pages.get(page)
+        self.response['course_module'] = course_modules.get(cm_uid, None)
+        self.response['next'] = _next
+        self.response['previous'] = _previous
+        self.response['course_modules'] = course_modules
         return self.response
 
     @view_config(context = ICourses, renderer = "fika:templates/courses.pt")

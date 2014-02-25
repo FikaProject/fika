@@ -13,3 +13,9 @@ class Course(FikaBaseFolder):
     schemas = {'add': 'CourseSchema',
                'edit': 'CourseSchema',
                'delete': 'DeleteSchema'}
+
+    def cm_pages(self):
+        pages = {0: ''}
+        for uid in self.get_field_value('course_modules', ()):
+            pages[len(pages)] = uid
+        return pages

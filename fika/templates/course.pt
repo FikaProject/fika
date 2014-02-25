@@ -5,7 +5,9 @@
       metal:use-macro="view.main_macro"
       i18n:domain="fika">
 <body>
-<div class="jumbotron" metal:fill-slot="heading">
+<metal:heading  fill-slot="heading">
+
+<div tal:condition="not course_module" class="jumbotron">
   <h1>${context.title}</h1>
   <div tal:content="structure context.get_field_value('description')">Description</div>
   <p><a class="btn btn-primary btn-lg glyphicon glyphicon-bookmark" role="button">
@@ -13,40 +15,44 @@
   </a></p>
 </div>
 
+<div tal:condition="course_module" class="page-header">
+  <h1>${context.title}</h1>
+</div>
+
+</metal:heading>
+
 <div metal:fill-slot="content">
 
-	<a tal:condition="not view.profile.in_course(context)"
-       href="${request.resource_url(context, 'join')}"
-       class="btn btn-default glyphicon glyphicon-bookmark"
-       i18n:translate="">Join</a>
-    <div tal:condition="view.profile.in_course(context)">You are enrolled in this course.&nbsp;&nbsp;<a 
-       href="${request.resource_url(context, 'leave')}"
-       class="btn btn-default glyphicon-minus-sign glyphicon"
-       i18n:translate="">Leave</a></div>
+    <div tal:condition="not course_module">
+        <ul>
+            <tal:iterate repeat="(num, uid) pages.items()">
+                <li tal:condition="num>0">
+                    <a href="${'?p=%s' % num}" tal:content="course_modules[uid].title|'NotFound: %s' % uid">Title</a>
+                </li>
+            </tal:iterate>
+        </ul>
+    </div>
 
-    <tal:iterate repeat="obj course_modules">
-        <div class="panel panel-default">
-
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">
-                		<span class="glyphicon glyphicon-chevron-down"> ${obj.title}</span> <span class="badge">${len(obj.values())}</span>
-                	</a>
-            	</h4>
-            </div>
-            
-            <div class="panel-body">
-                <div class="course_module description">
-                    ${obj.get_field_value('description')}
-                </div>
-                <div id="collapse-${obj.uid}" class="panel-collapse collapse">
-                    <tal:iterate repeat="segment obj.values()">
-                        <tal:segment replace="structure view.render_segment(segment)">Course Module segment</tal:segment>
-                    </tal:iterate>
-                </div>
-            </div>
+    <div tal:condition="course_module">
+        <h2>${course_module.title}</h2>
+    
+        <div class="course_module description">
+            ${course_module.get_field_value('description')}
         </div>
-    </tal:iterate>
+        <tal:iterate repeat="segment course_module.values()">
+            <tal:segment replace="structure view.render_segment(segment)">Course Module segment</tal:segment>
+        </tal:iterate>
+    
+    </div>
+
+    <ul class="pagination pagination-lg">
+        <li><a href="${previous(page)}">&laquo;</a></li>
+        <tal:iterate repeat="(num, uid) pages.items()">
+                <li tal:attributes="class num == page and 'active' or ''"><a href="?p=${num}" title="${course_modules[uid].title|''}">${num}</a></li>
+        </tal:iterate>
+        <li><a href="${next(page)}">&raquo;</a></li>
+    </ul>
+
 </div>
 
 </body>
