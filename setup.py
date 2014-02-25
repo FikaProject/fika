@@ -9,8 +9,9 @@ CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 requires = [
     'pyramid',
     'pyramid_zodbconn',
-    'transaction',
+    'pyramid_beaker',
     'pyramid_tm',
+    'pyramid_mailer',
     'ZODB3',
     'betahaus.pyracont',
     'betahaus.viewcomponent',
