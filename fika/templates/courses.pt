@@ -10,14 +10,22 @@
 
     <tal:iterate repeat="obj courses">
         <div class="panel panel-default">
-            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
+            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a>
+            	<span style="float:right;vertical-align:center">
+	            	<a tal:condition="not view.profile.in_course(obj)"
+				  		href="${request.resource_url(obj, 'join')}"
+				  		class="btn btn-primary glyphicon glyphicon-bookmark" role="button">
+				      <span i18n:translate="">Enroll</span>
+				  	</a>
+				  	<a tal:condition="view.profile.in_course(obj)"
+				  		href="${request.resource_url(obj, 'leave')}"
+				  		class="btn btn-primary glyphicon glyphicon-ban-circle" role="button">
+				      <span i18n:translate="">Leave</span>
+				  	</a>
+			  	</span>
+            </div>
             <div class="panel-body">
             	${obj.get_field_value('description', ())}
-            	<ul>
-	            <tal:iterate repeat="course_module obj.get_field_value('course_modules', ())">
-			        <li><a href="${request.resource_url(course_modules[course_module])}">${course_modules[course_module].title}</a></li>
-			    </tal:iterate>	
-            	</ul>
         	</div>
         </div>
     </tal:iterate>
