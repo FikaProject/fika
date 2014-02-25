@@ -34,11 +34,9 @@ class User(FikaBaseFolder):
     def title(self):
         return self.get_field_value('name', _(u"(Anonymous)"))
 
-    def default_email(self):
-        try:
-            return self.get_field_value('validated_emails', ())[0]
-        except IndexError:
-            return u''
+    @property
+    def email(self):
+        return self.get_field_value('email', '')
 
     def in_course(self, course):
         assert ICourse.providedBy(course)

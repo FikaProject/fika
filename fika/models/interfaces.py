@@ -16,9 +16,8 @@ class IUsers(IBaseFolder):
 
 class IUser(IBaseFolder):
     """ User object. Only contains a userid and mapping to other authentication system. """
-
-    def default_email():
-        """ Return users default email. """
+    title = Attribute("Name of the user")
+    email = Attribute("Email address")
 
 
 class ICourses(IBaseFolder):

@@ -85,7 +85,7 @@ class BaseView(object):
     def gravatar_link(self, size = 20):
         if not self.profile:
             return u''
-        email = self.profile.default_email()
+        email = self.profile.email
         if email:
             email_hash = md5(email.strip().lower()).hexdigest()
             return """<img src="https://secure.gravatar.com/avatar/%(hash)s?s=%(size)s" height="%(size)s" width="%(size)s" alt="" />""" % {'hash': email_hash, 'size': size}

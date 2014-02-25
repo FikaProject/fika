@@ -6,18 +6,13 @@ from fika import FikaTSF as _
 from .common import NoDuplicates
 
 
-class EmailsSchema(colander.SequenceSchema):
-    email = colander.SchemaNode(colander.String(),
-                                validator = colander.Email())
-
-
 @schema_factory('UserSchema')
 class UserSchema(colander.Schema):
     name = colander.SchemaNode(colander.String(),
                                title = _(u"Your name"),
                                missing = u"")
-    emails = EmailsSchema(validator = NoDuplicates())
-    validated_emails = EmailsSchema(validator = NoDuplicates())
+    email = colander.SchemaNode(colander.String(),
+                                validator = colander.Email())
 
 
 @schema_factory('RegisterUserSchema')

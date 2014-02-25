@@ -12,9 +12,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">${context.title}</div>
                 <div class="panel-body">
-                    <tal:iterate repeat="obj context.get_field_value('emails', ())">
-                         ${obj}<br />
-                    </tal:iterate>
+                    ${context.email}
                 </div>
             </div>
         </div>
