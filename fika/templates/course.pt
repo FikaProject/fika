@@ -19,7 +19,6 @@
 
     <tal:iterate repeat="obj course_modules">
         <div class="panel panel-default">
-            <div tal:replace="structure view.render_action_bar(obj)">Actions</div>
 
             <div class="panel-heading">
                 <h4 class="panel-title">
