@@ -1,5 +1,6 @@
 from betahaus.viewcomponent import view_action
 
+from fika.models.interfaces import ICourseModule
 from fika import security
 from fika import FikaTSF as _
 
@@ -10,6 +11,8 @@ from fika import FikaTSF as _
              icon = 'edit', view_name = 'edit', schema_required = 'edit')
 @view_action('actions', 'delete', permission = security.DELETE, title=_(u"Delete"),
              icon = 'remove-circle', view_name = 'delete', schema_required = 'delete')
+@view_action('actions', 'order', permission = security.EDIT, title=_(u"Order"),
+             icon = 'sort-by-attributes', view_name = 'order', interface = ICourseModule)
 def generic_action_menu(context, request, va, **kw):
     if 'schema_required' in va.kwargs and context.schemas.get(va.kwargs['schema_required'], None) is None:
         return

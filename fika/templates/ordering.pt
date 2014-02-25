@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="view.main_macro"
+      i18n:domain="fika">
+<body>
+
+<metal:head fill-slot="head">
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#sortable').sortable();
+        });
+    </script>
+</metal:head>
+
+<div metal:fill-slot="content">
+
+Orderable stuff that Niels will implement goes here... :)
+    
+</div>
+
+
+</body>
+</html>

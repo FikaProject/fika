@@ -210,3 +210,11 @@ class DummyView(BaseView):
         self.response['users'] = self.root['users']
         self.response['courses'] = self.root['courses']
         return self.response
+
+
+class OrderView(BaseView):
+    
+    @view_config(name = 'order', context = IBaseContent, permission = security.EDIT, renderer = "templates/ordering.pt")
+    def ordering(self):
+        #FIXME not done! This view needs to write the keys within this context to context.order
+        return self.response
