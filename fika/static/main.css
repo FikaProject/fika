@@ -23,3 +23,7 @@ div.segment
 .collapser{
 	display:block;
 }
+
+.panel-title a{
+	text-decoration:none;
+}
