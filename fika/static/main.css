@@ -27,3 +27,8 @@ div.segment
 .panel-title a{
 	text-decoration:none;
 }
+
+iframe.youtube {
+	width:560px;
+	height:315px;
+}
