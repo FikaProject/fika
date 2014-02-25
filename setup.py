@@ -7,13 +7,13 @@ README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 
 requires = [
-    'pyramid',
+    'pyramid<=1.4.5',
     'pyramid_zodbconn',
     'pyramid_beaker',
     'pyramid_tm',
     'pyramid_mailer',
     'ZODB3',
-    'betahaus.pyracont',
+    'betahaus.pyracont<=0.2b',
     'betahaus.viewcomponent',
     'colander',
     'deform',
