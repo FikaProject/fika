@@ -16,11 +16,12 @@ def course_module_widget(node, kw):
 class CourseModules(colander.SequenceSchema):
     course_module = colander.SchemaNode(colander.String(),
                                         widget = course_module_widget)
-    
 
 
 @schema_factory('CourseSchema')
 class CourseSchema(colander.Schema):
     title = colander.SchemaNode(colander.String(),)
-    description = colander.SchemaNode(colander.String())
+    description = colander.SchemaNode(colander.String(),
+                                      widget = deform.widget.RichTextWidget(),
+                                      missing = u"")
     course_modules = CourseModules(widget=deform.widget.SequenceWidget(orderable=True))
