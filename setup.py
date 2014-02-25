@@ -21,6 +21,8 @@ requires = [
     'pyramid_deform',
     'repoze.folder',
     'fanstatic',
+    'lingua',
+    'Babel',
     'js.deform',
     'js.bootstrap',
     'js.deform_bootstrap',
@@ -60,4 +62,8 @@ setup(name='fika',
       [fanstatic.libraries]
       fika = fika.fanstatic:lib_fika
       """,
+      message_extractors = { '.': [
+              ('**.py',   'lingua_python', None ),
+              ('**.pt',   'lingua_xml', None ),
+              ]},
       )

@@ -29,6 +29,7 @@ def main(global_config, **settings):
     config.include('js.deform_bootstrap')
     config.scan('betahaus.pyracont.fields.password')
     config.include('fika')
+    config.add_translation_dirs('fika:locale/')
     config.hook_zca()
     return config.make_wsgi_app()
 
