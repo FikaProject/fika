@@ -66,6 +66,9 @@
         </ol>
 
         ${view.roles_in_context}
+
+    <div tal:replace="structure view.flash_messages.render()">Flash messages, if any</div>
+
     <div tal:replace="structure view.render_action_bar(context)">Actions</div>
 
     <h1>${context.title}</h1>

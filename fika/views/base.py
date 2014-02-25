@@ -26,6 +26,7 @@ from pyramid.security import effective_principals
 from fika.fanstatic import main_css
 from fika.fanstatic import common_js
 from fika.models.interfaces import IModuleSegment
+from fika.models.flash_messages import get_flash_messages
 from fika import FikaTSF as _
 from fika import security
 
@@ -72,6 +73,10 @@ class BaseView(object):
             headers = forget(self.request)
             self.request.response.headerlist.extend(headers)
         return profile
+
+    @reify
+    def flash_messages(self):
+        return get_flash_messages(self.request)
 
     @property
     def roles_in_context(self):

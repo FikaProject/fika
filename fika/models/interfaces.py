@@ -90,3 +90,8 @@ class ISecurity(Interface):
     def list_all_groups():
         """ Returns a set of all groups in this context. """
 
+
+class IFlashMessages(Interface):
+    """ Handle adding and retrieving flash messages. """
+    
+    
