@@ -25,11 +25,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Fika</a>
+          <a class="navbar-brand" href="/">${view.main_title}</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/" i18n:translate="">Home</a></li>
             <li><a href="/courses">Courses</a></li>
             <li><a href="/course_modules">Course Modules</a></li>
             <li><a href="/users">Users</a></li>

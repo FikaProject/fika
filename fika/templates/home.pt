@@ -4,7 +4,14 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="view.main_macro"
       i18n:domain="fika">
+      
+<title metal:fill-slot="page-title">${view.main_title}</title>
+
 <body>
+
+<h1 metal:fill-slot="heading">
+	${view.main_title}
+</h1>
 
 <div metal:fill-slot="content">
     <div class="row">

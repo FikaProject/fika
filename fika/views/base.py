@@ -42,6 +42,7 @@ class BaseView(object):
         jqueryui.need()
         common_js.need()
         self.response = {'view': self}
+        self.main_title = request.registry.settings.get('fika.main_title', u'Fika')
 
     @property
     def addable_types(self):
