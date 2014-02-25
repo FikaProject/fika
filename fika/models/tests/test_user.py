@@ -41,25 +41,26 @@ class SetOwnerTests(TestCase):
         from fika.models.user import setOwner
         return setOwner
     
-#     def test_added(self):
-#         self.config.include('fika.models.security_mixin')
-#         from fika.models.user import User
-#         user = User()
-#         root = testing.DummyResource()
-#         root['user'] = user
-#         self._fut(user, None)
-#         from fika.models.security_mixin import groupfinder
-#         request = testing.DummyRequest()
-#         request.context = user
-#         self.assertIn('role:Owner', groupfinder('user', request))
-    
-#     def test_integration(self):
-#         self.config.include('fika')
-#         from fika.models.user import User
-#         user = User()
-#         root = testing.DummyResource()
-#         root['user'] = user
-#         from fika.models.security_mixin import groupfinder
-#         request = testing.DummyRequest()
-#         request.context = user
-#         self.assertIn('role:Owner', groupfinder('user', request))
+    def test_added(self):
+        self.config.include('fika.models.security_mixin')
+        from fika.models.user import User
+        user = User()
+        root = testing.DummyResource()
+        root['user'] = user
+        self._fut(user, None)
+        from fika.models.security_mixin import groupfinder
+        request = testing.DummyRequest()
+        request.context = user
+        self.assertIn('role:Owner', groupfinder('user', request))
+
+    def test_integration(self):
+        self.config.include('fika')
+        from fika.models.user import User
+        from fika.models.site import SiteRoot
+        user = User()
+        root = SiteRoot()
+        root['user'] = user
+        from fika.models.security_mixin import groupfinder
+        request = testing.DummyRequest()
+        request.context = user
+        self.assertIn('role:Owner', groupfinder('user', request))
