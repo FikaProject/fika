@@ -24,7 +24,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                 	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">
-                		<span class="glyphicon glyphicon-chevron-down"> ${obj.title}</span>
+                		<span class="glyphicon glyphicon-chevron-down"> ${obj.title}</span> <span class="badge">${len(obj.values())}</span>
                 	</a>
             	</h4>
             </div>
