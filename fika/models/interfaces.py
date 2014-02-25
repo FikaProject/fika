@@ -46,6 +46,16 @@ class IModuleSegment(IBaseFolder):
     def render(request, view):
         """ Render this module segment. """
 
+class ITextSegment(IModuleSegment):
+    """ Part of a course object. Contains text. """
+    
+class IImageSegment(IModuleSegment):
+    """ Part of a course object. Contains an image. """
+    
+class IYoutubeSegment(IModuleSegment):
+    """ Part of a course object. Contains a youtube link. """
+    
+
 
 
 class ISecurity(Interface):
