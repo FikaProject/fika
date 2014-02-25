@@ -9,16 +9,16 @@
         <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
         <h4 class="panel-title">
             <a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${context.uid}">
-               <span class="glyphicon glyphicon-chevron-down"> <span class="glyphicon glyphicon-${context.icon}"></span> ${context.title}</span>
+               <span class="glyphicon glyphicon-chevron glyphicon-chevron-down"></span>&nbsp;<span class="glyphicon glyphicon-${context.icon}"></span> ${context.title}
                
             </a>
         </h4>
     </div>
     <div class="panel-body">
-        <div class="course_segment description">
-            ${context.get_field_value('description')}
-        </div>
         <div id="collapse-${context.uid}" class="panel-collapse collapse">
+        	<div class="course_segment description">
+            	${context.get_field_value('description')}
+        	</div>
             <tal:form  replace="structure context.render(request, view)" ></tal:form>
         </div>
         
