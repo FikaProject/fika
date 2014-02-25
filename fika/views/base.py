@@ -1,9 +1,7 @@
 from hashlib import md5
 
-import colander
 import deform
 from js.deform import deform_basic
-from js.deform import auto_need
 from js.deform_bootstrap import deform_bootstrap_js
 from js.bootstrap import bootstrap_theme
 from js.jqueryui import jqueryui
@@ -14,14 +12,15 @@ from pyramid.traversal import lineage
 from pyramid.traversal import find_root
 from pyramid.security import authenticated_userid
 from pyramid.security import forget
+from pyramid.security import effective_principals
+from pyramid.httpexceptions import HTTPForbidden
+from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render
+from pyramid_deform import FormView
 from betahaus.pyracont.interfaces import IContentFactory
 from betahaus.pyracont.interfaces import IBaseFolder
 from betahaus.pyracont.factories import createSchema
 from betahaus.viewcomponent import render_view_group
-from pyramid.httpexceptions import HTTPForbidden
-from pyramid.httpexceptions import HTTPFound
-from pyramid.security import effective_principals
 
 from fika.fanstatic import main_css
 from fika.fanstatic import common_js
@@ -113,71 +112,94 @@ class BaseView(object):
         return render("fika:templates/segment.pt", response, request = self.request)
 
 
-class BaseEdit(BaseView):
+class BaseForm(BaseView, FormView):
+    default_success = _(u"Done")
+    default_cancel = _(u"Canceled")
 
-    @view_config(context = IBaseFolder, name = "add", renderer = "fika:templates/form.pt")
-    def add(self):
+    button_delete = deform.Button('delete', title = _(u"Delete"), css_class = 'btn btn-danger')
+    button_cancel = deform.Button('cancel', title = _(u"Cancel"), css_class = 'btn btn-default')
+    button_save = deform.Button('save', title = _(u"Save"), css_class = 'btn btn-primary')
+    button_add = deform.Button('add', title = _(u"Add"), css_class = 'btn btn-primary')
+
+    def get_bind_data(self):
+        return {'context': self.context, 'request': self.request, 'view': self}
+
+    def appstruct(self):
+        if self.schema:
+            return self.context.get_field_appstruct(self.schema)
+
+    def cancel(self, *args):
+        self.flash_messages.add(self.default_cancel)
+        return HTTPFound(location = self.request.resource_url(self.context))
+    cancel_success = cancel_failure = cancel
+
+
+@view_config(context = IBaseFolder, name = "edit", renderer = "fika:templates/form.pt", permission = security.EDIT)
+class DefaultEdit(BaseForm):
+
+    @property
+    def buttons(self):
+        return (self.button_save, self.button_cancel,)
+
+    @reify
+    def schema(self):
+        return createSchema(self.context.schemas['edit'])
+
+    def save_success(self, appstruct):
+        self.flash_messages.add(self.default_success, type="success")
+        self.context.set_field_appstruct(appstruct)
+        return HTTPFound(location = self.request.resource_url(self.context))
+
+
+@view_config(context = IBaseFolder, name = "add", renderer = "fika:templates/form.pt")
+class DefaultAdd(BaseForm):
+
+    @property
+    def buttons(self):
+        return (self.button_add, self.button_cancel,)
+
+    def __call__(self):
+        factory = self.factory
+        #FIXME: Check add permission here...
+        return super(DefaultAdd, self).__call__()
+
+    @reify
+    def factory(self):
         content_type = self.request.GET.get('content_type', '')
         factory = self.request.registry.queryUtility(IContentFactory, name = content_type)
         if not factory:
-            return HTTPForbidden("No factory with that name")
-        schema = createSchema(factory._callable.schemas['add'])
-        schema = schema.bind(context = self.context, request = self.request, view = self)
-        form = deform.Form(schema, buttons = ('save', 'cancel'), action="#")
-        auto_need(form)
-        if self.request.method == 'POST':
-            if 'save' in self.request.POST:
-                controls = self.request.POST.items()
-                try:
-                    appstruct = form.validate(controls)
-                except deform.ValidationFailure, e:
-                    self.response['form'] = e.render()
-                    return self.response
-                obj = factory(**appstruct)
-                self.context[obj.uid] = obj
-                return HTTPFound(location = self.request.resource_url(obj))
-            return HTTPFound(location = self.request.resource_url(self.context))
-        self.response['form'] = form.render()
-        return self.response
+            raise HTTPForbidden("No factory with that name")
+        return factory
 
-    @view_config(context = IBaseFolder, name = "edit", renderer = "fika:templates/form.pt",
-                 permission = security.EDIT)
-    def edit(self):
-        schema = createSchema(self.context.schemas['edit'])
-        schema = schema.bind(context = self.context, request = self.request, view = self)
-        form = deform.Form(schema, buttons = ('save', 'cancel'), action="#")
-        auto_need(form)
-        if self.request.method == 'POST':
-            if 'save' in self.request.POST:
-                controls = self.request.POST.items()
-                try:
-                    appstruct = form.validate(controls)
-                except deform.ValidationFailure, e:
-                    self.response['form'] = e.render()
-                    return self.response
-                self.context.set_field_appstruct(appstruct)
-            return HTTPFound(location = self.request.resource_url(self.context))
-        appstruct = self.context.get_field_appstruct(schema)
-        self.response['form'] = form.render(appstruct = appstruct)
-        return self.response
+    @reify
+    def schema(self):
+        return createSchema(self.factory._callable.schemas['add'])
 
-    @view_config(context = IBaseFolder, name = "delete", renderer = "fika:templates/form.pt",
-                 permission = security.DELETE)
-    def delete(self):
-        if self.context.__parent__ == None:
-            raise HTTPForbidden(u"Can't delete root")
-        schema = colander.Schema()
-        schema = schema.bind(context = self.context, request = self.request, view = self)
-        form = deform.Form(schema, buttons = ('delete', 'cancel'), action="#")
-        auto_need(form)
-        if self.request.method == 'POST':
-            if 'delete' in self.request.POST:
-                parent = self.context.__parent__
-                del parent[self.context.__name__]
-                return HTTPFound(location = self.request.resource_url(parent))
-            return HTTPFound(location = self.request.resource_url(self.context))
-        self.response['form'] = form.render()
-        return self.response
+    def add_success(self, appstruct):
+        self.flash_messages.add(self.default_success, type="success")
+        obj = self.factory(**appstruct)
+        self.context[obj.uid] = obj
+        return HTTPFound(location = self.request.resource_url(obj))
+
+
+@view_config(context = IBaseFolder, name = "delete", renderer = "fika:templates/form.pt",
+             permission = security.DELETE)
+class DefaultDelete(BaseForm):
+
+    @property
+    def buttons(self):
+        return (self.button_delete, self.button_cancel,)
+
+    @reify
+    def schema(self):
+        if 'delete' in self.context.schemas:
+            return createSchema(self.context.schemas['delete'])
+
+    def delete_success(self, appstruct):
+        parent = self.context.__parent__
+        del parent[self.context.__name__]
+        self.flash_messages.add(self.default_success, type="success")
+        return HTTPFound(location = self.request.resource_url(parent))
 
 
 class DummyView(BaseView):
