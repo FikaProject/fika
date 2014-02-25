@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="view.main_macro"
+      i18n:domain="fika">
+<body>
+<h1 metal:fill-slot="heading">Search results</h1>
+<div metal:fill-slot="content">
+    <tal:iterate repeat="obj courses">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
+            <div class="panel-body">
+            	${obj.get_field_value('description', "")}
+            	<ul>
+	            <tal:iterate repeat="course_module obj.get_field_value('course_modules', ())">
+			        <li><a href="${request.resource_url(course_modules[course_module])}">${course_modules[course_module].title}</a></li>
+			    </tal:iterate>	
+            	</ul>
+        	</div>
+        </div>
+    </tal:iterate>
+</div>
+
+</body>
+</html>
