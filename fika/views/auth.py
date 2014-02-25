@@ -28,7 +28,6 @@ class AuthView(BaseView):
                 except deform.ValidationFailure, e:
                     self.response['form'] = e.render()
                     return self.response
-                appstruct['emails'] = [appstruct['email'],]
                 obj = createContent('User', **appstruct)
                 self.context['users'][obj.uid] = obj
                 headers = remember(self.request, obj.uid)
