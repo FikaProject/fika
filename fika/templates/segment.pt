@@ -8,7 +8,7 @@
     <div class="panel-heading">
         <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
         <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-${context.uid}">
+            <a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${context.uid}">
                <span class="glyphicon glyphicon-chevron-down">${context.title}</span>
             </a>
         </h4>
