@@ -29,6 +29,7 @@ MANAGE_SERVER = 'Manage server'
 
 DEFAULT_ACL = [(Allow, ROLE_ADMIN, ALL_PERMISSIONS),
                (Allow, Authenticated, (VIEW,)),
+               (Allow, ROLE_OWNER, EDIT),
                DENY_ALL]
 
 
