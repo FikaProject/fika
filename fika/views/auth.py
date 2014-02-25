@@ -53,7 +53,7 @@ class AuthView(BaseView):
                     self.response['form'] = e.render()
                     return self.response
                 #Validation is handled by the schema
-                user = self.root['users'].get_user_by_email(appstruct['email'], validated = True)
+                user = self.root['users'].get_user_by_email(appstruct['email'])
                 headers = remember(self.request, user.uid)
                 return HTTPFound(location = self.request.resource_url(user),
                                  headers = headers)

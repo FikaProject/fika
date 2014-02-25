@@ -9,11 +9,7 @@ from fika import FikaTSF as _
 class Users(BaseFolder):
     title = display_name = _(u"Users")
 
-    def get_user_by_email(self, email, validated = True):
+    def get_user_by_email(self, email):
         for obj in self.values():
-            if email in obj.get_field_value('validated_emails', ()):
+            if email in obj.email:
                 return obj
-        if not validated:
-            for obj in self.values():
-                if email in obj.get_field_value('emails', ()):
-                    return obj

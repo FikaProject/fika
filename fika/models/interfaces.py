@@ -10,7 +10,7 @@ class ISiteRoot(IBaseFolder):
 class IUsers(IBaseFolder):
     """ Single object present in the root. Contains IUsers. """
 
-    def get_user_by_email(email, validated = True):
+    def get_user_by_email(email):
         """ Fetch a user object through an email address. If validated is true, only check validated email addresses.
         """
 

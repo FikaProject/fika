@@ -13,18 +13,13 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6">
-                        Emails
-                        <ul>
-                            <tal:iterate repeat="email obj.get_field_value('emails', ())">
-                                <li>${email}</li>
-                            </tal:iterate>
-                        </ul>
+                        ${obj.email}
                     </div>
                     <div class="col-md-6">
-                        Validated emails
+                        Courses
                         <ul>
-                            <tal:iterate repeat="email obj.get_field_value('validated_emails', ())">
-                                <li>${email}</li>
+                            <tal:iterate repeat="course obj.enrolled_courses()">
+                                <li><a href="${request.resource_url(course)}">${course.title}</a></li>
                             </tal:iterate>
                         </ul>                        
                     </div>                    
