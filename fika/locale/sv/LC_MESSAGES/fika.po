@@ -1,0 +1,131 @@
+# Swedish translations for PROJECT.
+# Copyright (C) 2014 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2014-02-25 12:14+0100\n"
+"PO-Revision-Date: 2014-02-25 12:23+0100\n"
+"Last-Translator: Robin Harms Oredsson <robin@betahaus.net>\n"
+"Language-Team: sv <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: fika/security.py:20
+msgid "Administrator"
+msgstr ""
+
+#: fika/security.py:21
+msgid "Content manager"
+msgstr ""
+
+#: fika/models/course_modules.py:10
+msgid "Course modules"
+msgstr ""
+
+#: fika/models/courses.py:10
+msgid "Courses"
+msgstr ""
+
+#: fika/models/user.py:35
+msgid "(Anonymous)"
+msgstr ""
+
+#: fika/models/users.py:10
+msgid "Users"
+msgstr ""
+
+#: fika/schemas/common.py:16
+msgid "Must only contain unique values"
+msgstr ""
+
+#: fika/schemas/common.py:37
+msgid "Invalid email"
+msgstr ""
+
+#: fika/schemas/common.py:42
+msgid "Wrong password. Remember that passwords are case sensitive."
+msgstr ""
+
+#: fika/schemas/permissions.py:19
+msgid "UserID"
+msgstr ""
+
+#: fika/schemas/permissions.py:24
+msgid "Groups"
+msgstr "Grupper"
+
+#: fika/schemas/permissions.py:31
+msgid "Roles for user"
+msgstr ""
+
+#: fika/schemas/permissions.py:35
+msgid "Permissions"
+msgstr ""
+
+#. Default: Set permission for each UserID that should have rights in this
+#. meeting.
+#. If you remove a UserID, their permissions will be cleared.
+#: fika/schemas/permissions.py:36
+msgid "permissions_schema_main_description"
+msgstr ""
+
+#: fika/schemas/permissions.py:39
+msgid "Role settings for users"
+msgstr ""
+
+#: fika/schemas/user.py:12
+msgid "Your name"
+msgstr "Ditt namn"
+
+#: fika/templates/course.pt:11
+msgid "Join"
+msgstr ""
+
+#: fika/templates/course.pt:15
+msgid "Leave"
+msgstr ""
+
+#: fika/templates/course_module.pt:30 fika/templates/master.pt:78
+#: fika/views/base.py:122
+msgid "Add"
+msgstr "Lägg till"
+
+#: fika/templates/master.pt:32
+msgid "Home"
+msgstr "Hem"
+
+#: fika/views/base.py:116
+msgid "Done"
+msgstr "Klart"
+
+#: fika/views/base.py:117
+msgid "Canceled"
+msgstr "Avbrutet"
+
+#: fika/views/base.py:119 fika/views/components/actions.py:11
+msgid "Delete"
+msgstr "Radera"
+
+#: fika/views/base.py:120
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: fika/views/base.py:121
+msgid "Save"
+msgstr "Spara"
+
+#: fika/views/components/actions.py:7
+msgid "View"
+msgstr "Visa"
+
+#: fika/views/components/actions.py:9
+msgid "Edit"
+msgstr "Redigera"
