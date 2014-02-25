@@ -28,8 +28,7 @@ def main(global_config, **settings):
     config.include('js.deform')
     config.include('js.deform_bootstrap')
     config.scan('betahaus.pyracont.fields.password')
-    config.include(include_defaults)
-    config.scan()
+    config.include('fika')
     config.hook_zca()
     return config.make_wsgi_app()
 
@@ -81,6 +80,7 @@ def read_salt(settings):
         return salt
 
 
-def include_defaults(config):
+def includeme(config):
     config.include('fika.models')
+    config.include('fika.schemas')
     config.include('fika.views')

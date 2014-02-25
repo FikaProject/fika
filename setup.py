@@ -19,6 +19,7 @@ requires = [
     'deform',
     'deform_bootstrap',
     'pyramid_deform',
+    'repoze.folder',
     'fanstatic',
     'js.deform',
     'js.bootstrap',

@@ -1,4 +1,4 @@
 
 
 def includeme(config):
-    config.scan()
+    config.scan('fika.views')
