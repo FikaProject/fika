@@ -13,3 +13,11 @@ class CourseModule(FikaBaseFolder):
     schemas = {'add': 'CourseModuleSchema',
                'edit': 'CourseModuleSchema',
                'delete': 'DeleteSchema'}
+    custom_accessors = {'order':'get_order'}
+    custom_mutators = {'order':'set_order'}
+
+    def get_order(self, **kwargs):
+        return tuple(self.order)
+    
+    def set_order(self, value, **kwargs):
+        self.order = value

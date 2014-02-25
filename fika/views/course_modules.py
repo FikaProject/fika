@@ -40,12 +40,6 @@ class CourseModulesView(BaseView):
         if self.request.method == 'POST':
             if 'save' in self.request.POST:
                 controls = self.request.POST.items()
-                order = 0
-                for (k, v) in controls:
-                    if k == 'module-segments':
-                        segment = self.context.get(v)
-                        segment.set_field_value('order', order)
-                        order += 1
                 try:
                     appstruct = form.validate(controls)
                 except deform.ValidationFailure, e:
