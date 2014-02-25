@@ -15,7 +15,7 @@ class UserSchema(colander.Schema):
                                 validator = colander.Email())
 
 
-@schema_factory('RegisterUserSchema')
+@schema_factory('RegisterSchema')
 class RegisterUserSchema(colander.Schema):
     email = colander.SchemaNode(colander.String(),
                                 validator = colander.Email())
