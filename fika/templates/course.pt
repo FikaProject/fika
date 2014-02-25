@@ -5,6 +5,13 @@
       metal:use-macro="view.main_macro"
       i18n:domain="fika">
 <body>
+<div class="jumbotron" metal:fill-slot="heading">
+  <h1>${context.title}</h1>
+  <div tal:content="structure context.get_field_value('description')">Description</div>
+  <p><a class="btn btn-primary btn-lg glyphicon glyphicon-bookmark" role="button">
+      <span>Enroll</span>
+  </a></p>
+</div>
 
 <div metal:fill-slot="content">
 
@@ -19,7 +26,6 @@
 
     <tal:iterate repeat="obj course_modules">
         <div class="panel panel-default">
-            <div tal:replace="structure view.render_action_bar(obj)">Actions</div>
 
             <div class="panel-heading">
                 <h4 class="panel-title">

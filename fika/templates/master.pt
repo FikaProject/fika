@@ -78,7 +78,7 @@
 
     <div tal:replace="structure view.render_action_bar(context)">Actions</div>
 
-    <h1>${context.title}</h1>
+    <h1 metal:define-slot="heading">${context.title}</h1>
 
     <div class="btn-group" tal:condition="len(view.addable_types) > 0">
       <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
