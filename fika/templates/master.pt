@@ -47,7 +47,7 @@
               <li class="dropdown" tal:condition="view.userid">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img tal:replace="structure view.gravatar_link()" />
-                        Profile
+                        ${view.profile.title}
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
