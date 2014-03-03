@@ -1,6 +1,6 @@
-# Swedish translations for PROJECT.
+# Swedish translations for Fika.
 # Copyright (C) 2014 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
+# This file is distributed under the same license as the Fika project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 #
 msgid ""
@@ -28,11 +28,11 @@ msgstr ""
 
 #: fika/models/course_modules.py:10
 msgid "Course modules"
-msgstr ""
+msgstr "Kurs moduler"
 
 #: fika/models/courses.py:10
 msgid "Courses"
-msgstr ""
+msgstr "Kurser"
 
 #: fika/models/user.py:35
 msgid "(Anonymous)"
@@ -40,7 +40,7 @@ msgstr ""
 
 #: fika/models/users.py:10
 msgid "Users"
-msgstr ""
+msgstr "Användare"
 
 #: fika/schemas/common.py:16
 msgid "Must only contain unique values"
@@ -48,7 +48,7 @@ msgstr ""
 
 #: fika/schemas/common.py:37
 msgid "Invalid email"
-msgstr ""
+msgstr "Ogiltig e-post"
 
 #: fika/schemas/common.py:42
 msgid "Wrong password. Remember that passwords are case sensitive."
@@ -56,7 +56,7 @@ msgstr ""
 
 #: fika/schemas/permissions.py:19
 msgid "UserID"
-msgstr ""
+msgstr "Användare ID"
 
 #: fika/schemas/permissions.py:24
 msgid "Groups"
@@ -64,11 +64,11 @@ msgstr "Grupper"
 
 #: fika/schemas/permissions.py:31
 msgid "Roles for user"
-msgstr ""
+msgstr "Roller för användare"
 
 #: fika/schemas/permissions.py:35
 msgid "Permissions"
-msgstr ""
+msgstr "Behörigheter"
 
 #. Default: Set permission for each UserID that should have rights in this
 #. meeting.

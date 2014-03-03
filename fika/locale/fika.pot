@@ -59,7 +59,7 @@ msgstr ""
 
 #: fika/schemas/permissions.py:24
 msgid "Groups"
-msgstr ""
+msgstr "Grupper"
 
 #: fika/schemas/permissions.py:31
 msgid "Roles for user"
