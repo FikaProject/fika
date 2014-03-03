@@ -17,15 +17,8 @@
     <div class="row">
         <div class="col-md-12">
         	<div tal:condition="view.userid">
-        	Welcome user: ${view.profile.title}<br/>
+        	Welcome ${view.profile.title}!<br/>
         	
-        	<tal:iterate repeat="obj users.get(view.userid, None).get_field_value('validated_emails', ())">
-		     	<strong>${obj}</strong><br />
-			</tal:iterate>
-        	<tal:iterate repeat="obj users.get(view.userid, None).get_field_value('emails', ())">
-		     	${obj}<br />
-			</tal:iterate>
-			
 			
 			<h1>Your courses</h1>
         	<ul>
