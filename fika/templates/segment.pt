@@ -20,6 +20,11 @@
             	${context.get_field_value('description')}
         	</div>
             <tal:form  replace="structure context.render(request, view)" ></tal:form>
+	        <a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${context.uid}">
+                <button type="button" class="btn btn-default">
+                	<span class="glyphicon glyphicon-chevron glyphicon-chevron-up"></span> Collapse
+            	</button>
+            </a>
         </div>
         
     </div>
