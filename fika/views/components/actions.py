@@ -4,9 +4,9 @@ from fika.models.interfaces import ICourseModule
 from fika import security
 from fika import FikaTSF as _
 
-
-@view_action('actions', 'view', permission = security.VIEW, title=_(u"View"),
-             icon = 'eye', view_name = '')
+# permission set to edit on view action, so that the view button does not show up unless you have the other permissions as well.
+@view_action('actions', 'view', permission = security.EDIT, title=_(u"View"),
+             icon = 'eye', view_name = '') 
 @view_action('actions', 'edit', permission = security.EDIT, title=_(u"Edit"),
              icon = 'edit', view_name = 'edit', schema_required = 'edit')
 @view_action('actions', 'delete', permission = security.DELETE, title=_(u"Delete"),
