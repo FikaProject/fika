@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2014-02-25 12:14+0100\n"
-"PO-Revision-Date: 2014-02-25 12:23+0100\n"
+"PO-Revision-Date: 2014-03-04 10:10+0100\n"
 "Last-Translator: Robin Harms Oredsson <robin@betahaus.net>\n"
 "Language-Team: sv <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: fika/security.py:20
 msgid "Administrator"
-msgstr ""
+msgstr "Administratör"
 
 #: fika/security.py:21
 msgid "Content manager"

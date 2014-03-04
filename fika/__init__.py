@@ -24,6 +24,7 @@ def main(global_config, **settings):
     config.include('pyramid_beaker')
     config.include('pyramid_zodbconn')
     config.include('pyramid_tm')
+    config.include('pyramid_deform')
     config.include('deform_bootstrap')
     config.include('js.deform')
     config.include('js.deform_bootstrap')
