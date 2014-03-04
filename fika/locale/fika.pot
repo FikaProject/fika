@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fika 0.1dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-02-25 12:14+0100\n"
+"POT-Creation-Date: 2014-03-04 10:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,10 @@ msgstr ""
 
 #: fika/models/courses.py:10
 msgid "Courses"
+msgstr ""
+
+#: fika/models/site.py:11
+msgid "Home"
 msgstr ""
 
 #: fika/models/user.py:35
@@ -59,7 +63,7 @@ msgstr ""
 
 #: fika/schemas/permissions.py:24
 msgid "Groups"
-msgstr "Grupper"
+msgstr ""
 
 #: fika/schemas/permissions.py:31
 msgid "Roles for user"
@@ -83,48 +87,68 @@ msgstr ""
 msgid "Your name"
 msgstr ""
 
-#: fika/templates/course.pt:11
-msgid "Join"
+#: fika/templates/course.pt:17 fika/templates/courses.pt:18
+msgid "Enroll"
 msgstr ""
 
-#: fika/templates/course.pt:15
+#: fika/templates/course.pt:22 fika/templates/courses.pt:23
 msgid "Leave"
 msgstr ""
 
-#: fika/templates/course_module.pt:30 fika/templates/master.pt:78
-#: fika/views/base.py:122
+#: fika/templates/course_module.pt:30 fika/templates/master.pt:85
+#: fika/views/base.py:123
 msgid "Add"
 msgstr ""
 
-#: fika/templates/master.pt:32
-msgid "Home"
+#: fika/templates/master.pt:41
+msgid "Search"
 msgstr ""
 
-#: fika/views/base.py:116
-msgid "Done"
+#: fika/views/auth.py:22
+msgid "Login"
+msgstr ""
+
+#: fika/views/auth.py:31
+msgid "Welcome!"
+msgstr ""
+
+#: fika/views/auth.py:42
+msgid "Register"
+msgstr ""
+
+#: fika/views/auth.py:49
+msgid "Welcome, you're now registered!"
 msgstr ""
 
 #: fika/views/base.py:117
+msgid "Done"
+msgstr ""
+
+#: fika/views/base.py:118
 msgid "Canceled"
 msgstr ""
 
-#: fika/views/base.py:119 fika/views/components/actions.py:11
+#: fika/views/base.py:120 fika/views/components/actions.py:12
 msgid "Delete"
 msgstr ""
 
-#: fika/views/base.py:120
+#: fika/views/base.py:121
 msgid "Cancel"
 msgstr ""
 
-#: fika/views/base.py:121
+#: fika/views/base.py:122
 msgid "Save"
 msgstr ""
 
-#: fika/views/components/actions.py:7
+#: fika/views/components/actions.py:8
 msgid "View"
 msgstr ""
 
-#: fika/views/components/actions.py:9
+#: fika/views/components/actions.py:10
 msgid "Edit"
+msgstr ""
+
+#: fika/views/components/actions.py:14
+msgid "Order"
 msgstr ""
 

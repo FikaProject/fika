@@ -7,16 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-02-25 12:14+0100\n"
+"POT-Creation-Date: 2014-03-04 10:22+0100\n"
 "PO-Revision-Date: 2014-03-04 10:10+0100\n"
 "Last-Translator: Robin Harms Oredsson <robin@betahaus.net>\n"
 "Language-Team: sv <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
-"X-Generator: Poedit 1.5.7\n"
 
 #: fika/security.py:20
 msgid "Administrator"
@@ -33,6 +32,10 @@ msgstr "Kurs moduler"
 #: fika/models/courses.py:10
 msgid "Courses"
 msgstr "Kurser"
+
+#: fika/models/site.py:11
+msgid "Home"
+msgstr "Hem"
 
 #: fika/models/user.py:35
 msgid "(Anonymous)"
@@ -85,47 +88,71 @@ msgstr ""
 msgid "Your name"
 msgstr "Ditt namn"
 
-#: fika/templates/course.pt:11
-msgid "Join"
+#: fika/templates/course.pt:17 fika/templates/courses.pt:18
+msgid "Enroll"
 msgstr ""
 
-#: fika/templates/course.pt:15
+#: fika/templates/course.pt:22 fika/templates/courses.pt:23
 msgid "Leave"
 msgstr ""
 
-#: fika/templates/course_module.pt:30 fika/templates/master.pt:78
-#: fika/views/base.py:122
+#: fika/templates/course_module.pt:30 fika/templates/master.pt:85
+#: fika/views/base.py:123
 msgid "Add"
 msgstr "Lägg till"
 
-#: fika/templates/master.pt:32
-msgid "Home"
-msgstr "Hem"
+#: fika/templates/master.pt:41
+msgid "Search"
+msgstr ""
 
-#: fika/views/base.py:116
+#: fika/views/auth.py:22
+msgid "Login"
+msgstr ""
+
+#: fika/views/auth.py:31
+msgid "Welcome!"
+msgstr ""
+
+#: fika/views/auth.py:42
+msgid "Register"
+msgstr ""
+
+#: fika/views/auth.py:49
+msgid "Welcome, you're now registered!"
+msgstr ""
+
+#: fika/views/base.py:117
 msgid "Done"
 msgstr "Klart"
 
-#: fika/views/base.py:117
+#: fika/views/base.py:118
 msgid "Canceled"
 msgstr "Avbrutet"
 
-#: fika/views/base.py:119 fika/views/components/actions.py:11
+#: fika/views/base.py:120 fika/views/components/actions.py:12
 msgid "Delete"
 msgstr "Radera"
 
-#: fika/views/base.py:120
+#: fika/views/base.py:121
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: fika/views/base.py:121
+#: fika/views/base.py:122
 msgid "Save"
 msgstr "Spara"
 
-#: fika/views/components/actions.py:7
+#: fika/views/components/actions.py:8
 msgid "View"
 msgstr "Visa"
 
-#: fika/views/components/actions.py:9
+#: fika/views/components/actions.py:10
 msgid "Edit"
 msgstr "Redigera"
+
+#: fika/views/components/actions.py:14
+msgid "Order"
+msgstr ""
+
+#~ msgid "Join"
+#~ msgstr ""
+
