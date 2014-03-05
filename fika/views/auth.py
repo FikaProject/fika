@@ -1,5 +1,5 @@
 import deform
-from pyramid.view import view_config
+from pyramid.view import view_config, forbidden_view_config
 from pyramid.security import remember
 from pyramid.security import forget
 from pyramid.decorator import reify
@@ -12,10 +12,13 @@ from fika.models.interfaces import ISiteRoot
 from fika.schemas.common import deferred_login_password_validator
 from fika import FikaTSF as _
 
+@forbidden_view_config(renderer='fika:templates/form.pt')
+def forbidden(self):
+    return HTTPFound(location = "/login")
 
 @view_config(context = ISiteRoot, name = "login", renderer = "fika:templates/form.pt")
 class LoginForm(BaseForm):
-
+    
     @property
     def buttons(self):
         #FIXME: Forgot password here!

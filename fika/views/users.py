@@ -1,14 +1,16 @@
 import deform
 from js.deform import auto_need
 from pyramid.view import view_config
+from pyramid.view import view_defaults
 from pyramid.httpexceptions import HTTPFound
 from betahaus.pyracont.factories import createSchema
 
+from fika import security
 from fika.views.base import BaseView
 from fika.models.interfaces import IUser
 from fika.models.interfaces import IUsers
 
-
+@view_defaults(permission = security.VIEW)
 class UsersView(BaseView):
 
     @view_config(context = IUsers, renderer = "fika:templates/users.pt")
