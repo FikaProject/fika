@@ -33,6 +33,7 @@
 <div metal:fill-slot="content">
 
     <div tal:condition="not course_module">
+    	<span i18n:translate="">In this course:</span>
         <ul>
             <tal:iterate repeat="(num, uid) pages.items()">
                 <li tal:condition="num>0">
@@ -41,6 +42,14 @@
             </tal:iterate>
         </ul>
     </div>
+
+	<ul class="pagination pagination-lg">
+        <li><a href="${previous(page)}">&laquo;</a></li>
+        <tal:iterate repeat="(num, uid) pages.items()">
+                <li tal:attributes="class num == page and 'active' or ''"><a href="?p=${num}" title="${course_modules[uid].title|''}">${num}</a></li>
+        </tal:iterate>
+        <li><a href="${next(page)}">&raquo;</a></li>
+    </ul>
 
     <div tal:condition="course_module">
         <h2>${course_module.title}</h2>
@@ -53,14 +62,6 @@
         </tal:iterate>
     
     </div>
-
-    <ul class="pagination pagination-lg">
-        <li><a href="${previous(page)}">&laquo;</a></li>
-        <tal:iterate repeat="(num, uid) pages.items()">
-                <li tal:attributes="class num == page and 'active' or ''"><a href="?p=${num}" title="${course_modules[uid].title|''}">${num}</a></li>
-        </tal:iterate>
-        <li><a href="${next(page)}">&raquo;</a></li>
-    </ul>
 
 </div>
 
