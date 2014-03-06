@@ -4,4 +4,9 @@ $( document ).ready(function(event) {
         target.toggleClass('glyphicon-chevron-up');
         target.toggleClass('glyphicon-chevron-down');
     });
+    
+    setTimeout( function() {
+    	$('.fika-auto-destruct').css({'display':'none'});
+    	}, 3000 );
 });
+
