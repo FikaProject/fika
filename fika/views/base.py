@@ -214,7 +214,7 @@ class DummyView(BaseView):
 
 class OrderView(BaseView):
     
-    @view_config(name = 'order', context = IBaseFolder, permission = security.EDIT, renderer = "templates/ordering.pt")
+    @view_config(name = 'order', context = IBaseFolder, permission = security.EDIT, renderer = "fika:templates/ordering.pt")
     def ordering(self):
         #FIXME not done! This view needs to write the keys within this context to context.order
         return self.response

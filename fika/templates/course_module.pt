@@ -17,8 +17,9 @@
 <div metal:fill-slot="content">
 
 	<form tal:condition="request.view_name=='edit'" tal:replace="structure form">Form here</form>
+	<form tal:condition="request.view_name=='order'" tal:replace="structure form">Form here</form>
 
-	<div tal:omit-tag="request.view_name!='edit'" id="module-segments">	
+	<div tal:omit-tag="request.view_name!='order'" id="module-segments">	
     <tal:iterate repeat="obj context.values()">
         <tal:segment replace="structure view.render_segment(obj)">Course Module segment</tal:segment>
     </tal:iterate>

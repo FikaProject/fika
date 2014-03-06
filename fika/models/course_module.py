@@ -12,6 +12,7 @@ class CourseModule(FikaBaseFolder):
     allowed_contexts = (ICourseModules,)
     schemas = {'add': 'CourseModuleSchema',
                'edit': 'CourseModuleSchema',
+               'order': 'OrderCourseModuleSchema',
                'delete': 'DeleteSchema'}
     custom_accessors = {'order':'get_order'}
     custom_mutators = {'order':'set_order'}

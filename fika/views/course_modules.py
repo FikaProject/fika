@@ -57,6 +57,19 @@ class CourseModulesView(BaseView):
         self.response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
         return self.response
     
+    @view_config(context = ICourseModule, name = 'order', permission = security.EDIT, renderer = "fika:templates/course_module.pt")
+    def ordering(self):
+        #FIXME not done! This view needs to write the keys within this context to context.order
+        self.response['module_segments'] = self.context.values()
+        self.response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
+        #import pdb;pdb.set_trace()
+        schema = createSchema(self.context.schemas['order'])
+        schema = schema.bind(context = self.context, request = self.request, view = self)
+        form = deform.Form(schema, buttons = ('save', 'cancel'), action="#")
+        appstruct = self.context.get_field_appstruct(schema)
+        self.response['form'] = form.render(appstruct = appstruct)
+        return self.response
+    
     @view_config(context = IModuleSegment, renderer = "fika:templates/form.pt")
     def module_segment(self):
         self.response['form'] = self.context.render(self.request, self)
