@@ -12,6 +12,15 @@ div.segment
 	width: 100%;
 }
 
+@media (min-width: 768px)
+{
+.image-segment
+{
+	max-width: 500px;
+}
+}
+
+
 .description {
     font-weight: bold;
 }
