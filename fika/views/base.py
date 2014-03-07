@@ -24,7 +24,7 @@ from betahaus.viewcomponent import render_view_group
 
 from fika.fanstatic import main_css
 from fika.fanstatic import common_js
-from fika.models.interfaces import IModuleSegment
+from fika.models.interfaces import IMediaObject
 from fika.models.flash_messages import get_flash_messages
 from fika import FikaTSF as _
 from fika import security
@@ -105,12 +105,12 @@ class BaseView(object):
         response['actions'] = render_view_group(context, self.request, 'actions')
         return render("fika:templates/action_bar.pt", response, request = self.request)
 
-    def render_segment(self, segment):
-        assert IModuleSegment.providedBy(segment)
+    def render_media_object(self, mediaObject):
+        assert IMediaObject.providedBy(mediaObject)
         response = {}
         response.update(self.response)
-        response['context'] = segment
-        return render("fika:templates/segment.pt", response, request = self.request)
+        response['context'] = mediaObject
+        return render("fika:templates/media_object.pt", response, request = self.request)
 
 
 class BaseForm(BaseView, FormView):

@@ -1,0 +1,21 @@
+<tal:main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="fika">
+
+
+<!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
+<h4 class="panel-title">
+    <span class="glyphicon glyphicon-${context.icon}"></span> ${context.title}
+</h4>
+
+
+<div class="course_segment description">
+	${context.get_field_value('description')}
+</div>
+	
+<tal:form  replace="structure context.render(request, view)" ></tal:form>
+
+        
+</tal:main>

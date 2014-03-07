@@ -40,19 +40,23 @@ class ICourseModule(IBaseFolder):
 
 
 class IModuleSegment(IBaseFolder):
-    """ Part of a course object. Could be a text, a video or similar. """
+    """ Part of a module object. """
+
+        
+class IMediaObject(IBaseFolder):
+    """ Part of a segment object. Could be a text, a video or similar. """
 
     def render(request, view):
-        """ Render this module segment. """
+        """ Render this media object. """
 
-class ITextSegment(IModuleSegment):
-    """ Part of a course object. Contains text. """
+class ITextMediaObject(IMediaObject):
+    """ Part of a segment object. Contains text. """
     
-class IImageSegment(IModuleSegment):
-    """ Part of a course object. Contains an image. """
+class IImageMediaObject(IMediaObject):
+    """ Part of a segment object. Contains an image. """
     
-class IYoutubeSegment(IModuleSegment):
-    """ Part of a course object. Contains a youtube link. """
+class IYoutubeMediaObject(IMediaObject):
+    """ Part of a segment object. Contains a youtube link. """
     
 
 

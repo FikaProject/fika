@@ -15,7 +15,7 @@ from fika.views.base import BaseView
 from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourseModules
 from fika.models.interfaces import IModuleSegment
-from fika.models.module_segment import YoutubeSegment, ImageSegment
+from fika.models.media_object import YoutubeMediaObject, ImageMediaObject
 
 @view_defaults(permission = security.VIEW)
 class CourseModulesView(BaseView):
@@ -70,7 +70,8 @@ class CourseModulesView(BaseView):
         self.response['form'] = form.render(appstruct = appstruct)
         return self.response
     
-    @view_config(context = IModuleSegment, renderer = "fika:templates/form.pt")
+    @view_config(context = IModuleSegment, renderer = "fika:templates/segment.pt")
     def module_segment(self):
-        self.response['form'] = self.context.render(self.request, self)
+        
+        #self.response['form'] = self.contextrender(self.request, self)
         return self.response

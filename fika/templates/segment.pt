@@ -1,33 +1,69 @@
-<tal:main xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="view.main_macro"
       i18n:domain="fika">
+<body>
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
-        <h4 class="panel-title">
-            <a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${context.uid}">
-               <span class="glyphicon glyphicon-chevron glyphicon-chevron-down"></span>&nbsp;<span class="glyphicon glyphicon-${context.icon}"></span> ${context.title}
-               
-            </a>
-        </h4>
-    </div>
-    <div class="panel-body">
-        <div id="collapse-${context.uid}" class="panel-collapse collapse">
+<div metal:fill-slot="content">
+	
+	<div class="panel panel-default">
+	    <div class="panel-heading">
+	        <h4 class="panel-title">
+	        	${context.title}
+	        </h4>
+	    </div>
+	    <div class="panel-body">
+	        
         	<div class="course_segment description">
             	${context.get_field_value('description')}
         	</div>
-            <tal:form  replace="structure context.render(request, view)" ></tal:form>
-	        <a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${context.uid}">
-                <button type="button" class="btn btn-default">
-                	<span class="glyphicon glyphicon-chevron glyphicon-chevron-up"></span> Collapse
-            	</button>
-            </a>
-        </div>
-        
-    </div>
+            
+            <div class="btn-group">
+	            <tal:iterate repeat="media_object context.values()">
+	            	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}" style="display:inline;">
+	            		<button type="button" class="btn btn-default">
+	            			<span class="glyphicon glyphicon-${media_object.icon}"></span>
+	        			</button>
+					</a>
+			    </tal:iterate>
+            </div>
+            
+            <div class="btn-group" tal:condition="len(view.addable_types) > 0" >
+		      <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
+		        <span i18n:translate="">Add</span> <span class="caret"></span>
+		      </button>
+		      <ul class="dropdown-menu" role="menu">
+		        <tal:iterate repeat="type view.addable_types">
+		            <li><a href="${request.resource_url(context, 'add', query = {'content_type': type})}">${type}</a></li>
+		        </tal:iterate>
+		      </ul>
+		    </div>
+            
+            <tal:iterate repeat="media_object context.values()">
+	            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+	            	<div class="btn-group">
+					  <a href="${request.resource_url(media_object, 'edit')}"><button type="button" class="btn btn-default">Edit</button></a>
+					  <a href="${request.resource_url(media_object, 'delete')}"><button type="button" class="btn btn-default">Delete</button></a>
+					</div>
+
+		        	<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
+		        	
+		        	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}">
+		                <button type="button" class="btn btn-default">
+		                	<span class="glyphicon glyphicon-chevron glyphicon-chevron-up"></span> Collapse
+		            	</button>
+		            </a>
+		        </div>
+		    </tal:iterate>
+            
+            
+	    </div>
+	</div>
+
 </div>
 
-</tal:main>
+
+</body>
+</html>
