@@ -209,6 +209,7 @@ class DummyView(BaseView):
     def view(self):
         self.response['users'] = self.root['users']
         self.response['courses'] = self.root['courses']
+        self.response['course_modules'] = self.root['course_modules']
         return self.response
 
 

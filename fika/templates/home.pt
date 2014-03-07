@@ -22,7 +22,14 @@
 			<h1>Your courses</h1>
         	<ul>
     		<tal:iterate repeat="course view.profile.enrolled_courses()">
-		     	<li><a href="${request.resource_url(course)}">${course.title}</a></li>
+		     	<li><a href="${request.resource_url(course)}">${course.title}</a>
+			     	<tal:iterate repeat="page course.cm_pages()">
+			     		<span tal:condition="page != 0">
+				     		<span tal:condition="course.cm_pages().get(page) in view.profile.completed_course_modules | nothing" class="glyphicon glyphicon-ok-sign"></span>
+							<span tal:condition="not:course.cm_pages().get(page) in view.profile.completed_course_modules | nothing" class="glyphicon glyphicon-minus"></span>
+						</span>
+			     	</tal:iterate>
+		     	</li>
 			</tal:iterate>
 			</ul>
 			</div>
