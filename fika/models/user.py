@@ -3,6 +3,7 @@ from zope.interface import implementer
 from pyramid.traversal import find_root
 from pyramid.events import subscriber
 from BTrees.OOBTree import OOBTree
+from BTrees.OOBTree import OOSet
 
 from .base import FikaBaseFolder
 from .interfaces import IUser
@@ -25,6 +26,7 @@ class User(FikaBaseFolder):
     def __init__(self, data=None, **kwargs):
         super(User, self).__init__(data=None, **kwargs)
         self.__courses__ = OOBTree()
+        self.completed_course_modules = OOSet()
 
     @property
     def userid(self):
@@ -48,6 +50,7 @@ class User(FikaBaseFolder):
 
     def leave_course(self, course):
         assert ICourse.providedBy(course)
+        #FIXME: We propbably want to keep course info though?
         del self.__courses__[course.uid]
 
     def enrolled_courses(self):

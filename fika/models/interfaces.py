@@ -18,6 +18,7 @@ class IUser(IBaseFolder):
     """ User object. Only contains a userid and mapping to other authentication system. """
     title = Attribute("Name of the user")
     email = Attribute("Email address")
+    completed_course_modules = Attribute("An OOSet of course module IDs that this user have marked as completed.")
 
 
 class ICourses(IBaseFolder):
