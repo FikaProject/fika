@@ -34,7 +34,8 @@ class MediaObject(FikaBaseFolder):
 class TextMediaObject(MediaObject):
     schemas = {'add': 'TextMediaObjectSchema',
                'edit': 'TextMediaObjectSchema',
-               'view': 'TextMediaObjectSchema'}
+               'view': 'TextMediaObjectSchema',
+               'delete': 'DeleteSchema'}
     content_type = u"TextMediaObject"
     icon = u"font"
     
@@ -47,7 +48,8 @@ class TextMediaObject(MediaObject):
 class ImageMediaObject(MediaObject):
     schemas = {'add': 'ImageMediaObjectSchema',
                'edit': 'ImageMediaObjectSchema',
-               'view': 'ImageMediaObjectSchema'}
+               'view': 'ImageMediaObjectSchema',
+               'delete': 'DeleteSchema'}
     content_type = u"ImageMediaObject"
     icon = u"picture"
     
@@ -59,7 +61,8 @@ class ImageMediaObject(MediaObject):
 class YoutubeMediaObject(MediaObject):
     schemas = {'add': 'YoutubeMediaObjectSchema',
                'edit': 'YoutubeMediaObjectSchema',
-               'view': 'YoutubeMediaObjectSchema'}
+               'view': 'YoutubeMediaObjectSchema',
+               'delete': 'DeleteSchema'}
     content_type = u"YoutubeMediaObject"
     icon = u"film"
     

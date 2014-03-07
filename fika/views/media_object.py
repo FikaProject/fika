@@ -17,10 +17,9 @@ from fika.models.interfaces import IModuleSegment
 from fika.models.media_object import YoutubeMediaObject, ImageMediaObject
 
 @view_defaults(permission = security.VIEW)
-class ModuleSegment(BaseView):
-   
-    @view_config(context = IModuleSegment, renderer = "fika:templates/segment.pt")
-    def module_segment(self):
-        
-        #self.response['form'] = self.contextrender(self.request, self)
+class MediaObject(BaseView):
+
+    @view_config(context = IMediaObject, renderer = "fika:templates/form.pt")
+    def media_object(self):
+        self.response['form'] = self.context.render(self.request, self)
         return self.response
