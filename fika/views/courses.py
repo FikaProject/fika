@@ -1,14 +1,16 @@
 from pyramid.view import view_config
 from pyramid.view import view_defaults
+from pyramid.renderers import render
+from pyramid.response import Response
 from pyramid.httpexceptions import HTTPFound
 from betahaus.pyracont.interfaces import IBaseFolder
 
 from fika.views.base import BaseView
 from fika.models.interfaces import ICourse
+from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourses
 from fika.models.interfaces import IUser
 from fika import security
-
 
 
 @view_defaults(permission = security.VIEW)
@@ -35,7 +37,22 @@ class CourseView(BaseView):
         self.response['next'] = _next
         self.response['previous'] = _previous
         self.response['course_modules'] = course_modules
+        self.response['in_course'] = self.profile.in_course(self.context)
+        self.response['course_module_toggle'] = self._render_course_module_toggle
         return self.response
+
+    def _render_course_module_toggle(self, context):
+        response = {'context': context,
+                    'module_done': context.uid in self.profile.completed_course_modules}
+        return render("fika:templates/course_module_toggle.pt", response, request = self.request)
+
+    @view_config(name = "_set_course_module_status", context = ICourseModule)
+    def course_module_status(self):
+        if int(self.request.GET.get('status')):
+            self.profile.completed_course_modules.add(self.context.uid)
+        elif self.context.uid in self.profile.completed_course_modules:
+            self.profile.completed_course_modules.remove(self.context.uid)
+        return Response(self._render_course_module_toggle(self.context))
 
     @view_config(context = ICourses, renderer = "fika:templates/courses.pt")
     def courses(self):
@@ -52,11 +69,3 @@ class CourseView(BaseView):
     def leave(self):
         self.profile.leave_course(self.context)
         return HTTPFound(location = self.request.resource_url(self.context)) 
-    
-    # @view_config(context = IBaseFolder, name = "leave", renderer = "fika:templates/course.pt")
-    # def leave(self):
-    #     user = self.root['users'][self.userid]
-    #     course = self.request.GET.get('course')
-    #     user.get_field_value('courses', ()).remove(course)
-    #     return HTTPFound(location = self.request.url)
-    
