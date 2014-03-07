@@ -69,9 +69,3 @@ class CourseModulesView(BaseView):
         appstruct = self.context.get_field_appstruct(schema)
         self.response['form'] = form.render(appstruct = appstruct)
         return self.response
-    
-    @view_config(context = IModuleSegment, renderer = "fika:templates/segment.pt")
-    def module_segment(self):
-        
-        #self.response['form'] = self.contextrender(self.request, self)
-        return self.response

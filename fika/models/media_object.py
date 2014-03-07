@@ -65,4 +65,4 @@ class YoutubeMediaObject(MediaObject):
     
     def render(self, request, view):
         #FIXME: Refactor into template with settings
-        return u'<div class="mediaobject"><div class="auto-resizable-iframe"><div><iframe class="youtube" src="//www.youtube.com/embed/' + self.get_field_value('youtube_link', ()) + u'" frameborder="0" allowfullscreen></iframe><div>' + self.get_field_value('description', ()) + u'</div></div></div></div>'
+        return u'<div class="mediaobject"><div class="auto-resizable-iframe"><div><iframe class="youtube" src="//www.youtube.com/embed/' + self.get_field_value('youtube_link', ()) + u'" frameborder="0" allowfullscreen></iframe></div></div><div>' + self.get_field_value('description', ()) + u'</div></div>'
