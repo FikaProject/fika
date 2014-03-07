@@ -20,9 +20,41 @@
 	<form tal:condition="request.view_name=='order'" tal:replace="structure form">Form here</form>
 
 	<div tal:omit-tag="request.view_name!='order'" id="module-segments">	
-    <tal:iterate repeat="obj context.values()">
-        <tal:segment replace="structure view.render_segment(obj)">Course Module segment</tal:segment>
-    </tal:iterate>
+    
+    <tal:iterate repeat="segment context.values()">
+        	<div class="panel panel-default">
+			    <div class="panel-heading">
+			        <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
+			        <a href="${request.resource_url(segment,'edit')}">
+			        <h4 class="panel-title">
+			               ${segment.title}
+			        </h4>
+			        </a>
+			    </div>
+			    <div class="panel-body">
+		        	<div class="course_segment description">
+		            	${segment.get_field_value('description')}
+		        	</div>
+		            
+		            <div class="btn-group">
+			            <tal:iterate repeat="media_object segment.values()">
+			            	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}" style="display:inline;">
+			            		<button type="button" class="btn btn-default">
+			            			<span class="glyphicon glyphicon-${media_object.icon}"></span>
+		            			</button>
+							</a>
+					    </tal:iterate>
+		            </div>
+		            
+		            <tal:iterate repeat="media_object segment.values()">
+			            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+				        	<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
+				        </div>
+				    </tal:iterate>
+			    </div>
+			</div>
+        </tal:iterate>
+    
    </div>
     
     <span tal:condition="request.view_name=='edit'">

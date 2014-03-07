@@ -54,7 +54,41 @@
             ${course_module.get_field_value('description')}
         </div>
         <tal:iterate repeat="segment course_module.values()">
-            <tal:segment replace="structure view.render_segment(segment)">Course Module segment</tal:segment>
+        	<div class="panel panel-default">
+			    <div class="panel-heading">
+			        <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
+			        <h4 class="panel-title">
+			               ${segment.title}
+			        </h4>
+			    </div>
+			    <div class="panel-body">
+		        	<div class="course_segment description">
+		            	${segment.get_field_value('description')}
+		        	</div>
+		            
+		            <div class="btn-group">
+		            <tal:iterate repeat="media_object segment.values()">
+		            	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}" style="display:inline;">
+		            		<button type="button" class="btn btn-default">
+		            			<span class="glyphicon glyphicon-${media_object.icon}"></span>
+	            			</button>
+						</a>
+				    </tal:iterate>
+		            </div>
+		            
+		            <tal:iterate repeat="media_object segment.values()">
+			            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+				        	<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
+				        	
+				        	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}">
+				                <button type="button" class="btn btn-default">
+				                	<span class="glyphicon glyphicon-chevron glyphicon-chevron-up"></span> Collapse
+				            	</button>
+				            </a>
+				        </div>
+				    </tal:iterate>
+			    </div>
+			</div>
         </tal:iterate>
 
         <span condition="in_course" tal:content="structure course_module_toggle(course_module)">
