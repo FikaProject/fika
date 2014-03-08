@@ -33,7 +33,7 @@ class ChangeUserPasswordSchema(colander.Schema):
 
 @schema_factory('LoginSchema')
 class LoginSchema(colander.Schema):
-    email = colander.SchemaNode(colander.String(),
-                                validator = colander.Email())
+    #Don't add an email validator here. The address for the initial admin user isn't valid :)
+    email = colander.SchemaNode(colander.String(),)
     password = colander.SchemaNode(colander.String(),
                                    widget = deform.widget.PasswordWidget())
