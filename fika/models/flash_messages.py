@@ -20,8 +20,15 @@ class FlashMessages(object):
     def __init__(self, request):
         self.request = request
 
-    def add(self, msg, type='info', dismissable = True):
-        flash = {'msg':msg, 'type':type, 'dismissable': dismissable}
+    def add(self, msg, type='info', dismissable = True, auto_destruct = True):
+        css_classes = ['alert']
+        css_classes.append('alert-%s' % type)
+        if dismissable:
+            css_classes.append('alert-dismissable')
+        if auto_destruct:
+            css_classes.append('fika-auto-destruct')
+        css_classes = " ".join(css_classes)
+        flash = {'msg':msg, 'dismissable': dismissable, 'css_classes': css_classes}
         self.request.session.flash(flash)
 
     def get_messages(self):

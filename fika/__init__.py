@@ -72,7 +72,7 @@ def populate_database():
         msg = _(u"site_populated_info",
                 default = u"Since this is the first time you're using Fika, the site has been populated "
                     u"with a default user. You may login with <b>admin@localhst</b> and password <b>admin</b>. ")
-        fm.add(msg)
+        fm.add(msg, auto_destruct = False)
     return site
 
 def read_salt(settings):
