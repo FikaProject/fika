@@ -25,7 +25,7 @@
         	<div class="panel panel-default">
 			    <div class="panel-heading">
 			        <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
-			        <a href="${request.resource_url(segment,'edit')}">
+			        <a href="${request.resource_url(segment)}">
 			        <h4 class="panel-title">
 			               ${segment.title}
 			        </h4>
