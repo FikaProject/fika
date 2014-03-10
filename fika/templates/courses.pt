@@ -11,7 +11,7 @@
     <tal:iterate repeat="obj courses">
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a>
-            	<span style="float:right;vertical-align:center">
+            	<span class="fika-enroll-button-right">
 	            	<a tal:condition="not view.profile.in_course(obj)"
 				  		href="${request.resource_url(obj, 'join')}"
 				  		class="btn btn-primary glyphicon glyphicon-bookmark" role="button">

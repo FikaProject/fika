@@ -67,6 +67,11 @@ div.segment
 	width:100%;	
 }
 
+.fika-enroll-button-right
+{
+	float:right;
+	margin-top:-5px;
+}
 
 
 .dotless
