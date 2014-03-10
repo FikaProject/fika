@@ -67,7 +67,7 @@
 		            
 		            <div class="btn-group">
 		            <tal:iterate repeat="media_object segment.values()">
-		            	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}" style="display:inline;">
+		            	<a class="collapser fika-media-button" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}">
 		            		<button type="button" class="btn btn-default">
 		            			<span class="glyphicon glyphicon-${media_object.icon}"></span>
 	            			</button>

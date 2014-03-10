@@ -33,6 +33,11 @@ div.segment
 	display:block;
 }
 
+.fika-media-button
+{
+	display:inline;
+}
+
 .panel-title a{
 	text-decoration:none;
 }
