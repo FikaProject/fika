@@ -47,6 +47,12 @@ div.segment
 	text-decoration:none;
 }
 
+.fika-media-panel
+{
+	border: 0px;
+	box-shadow:none;
+}
+
 .mediaobject
 {
 	padding-top:10px;

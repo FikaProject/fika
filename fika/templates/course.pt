@@ -53,9 +53,8 @@
     </div>
 
     <div tal:condition="course_module">
-        
         <tal:iterate repeat="segment course_module.values()">
-        	<div class="panel panel-default">
+        	<div class="panel panel-default" >
 				<div class="panel-body">
 			        <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
 			        <h4 class="panel-title">
@@ -66,26 +65,24 @@
 		        	</div>
 		            
 		            <div class="btn-group">
-		            <tal:iterate repeat="media_object segment.values()">
-		            	<a class="collapser fika-media-button" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}">
-		            		<button type="button" class="btn btn-default">
-		            			<span class="glyphicon glyphicon-${media_object.icon}"></span>
-	            			</button>
-						</a>
-				    </tal:iterate>
+			            <tal:iterate repeat="media_object segment.values()">
+			            	<a class="collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${segment.uid}" href="#collapse-${media_object.uid}">
+			            		<button type="button" class="btn btn-default">
+			            			<span class="glyphicon glyphicon-${media_object.icon}"></span>
+		            			</button>
+							</a>
+					    </tal:iterate>
 		            </div>
 		            
-		            <tal:iterate repeat="media_object segment.values()">
-			            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-				        	<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
-				        	
-				        	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}">
-				                <button type="button" class="btn btn-default">
-				                	<span class="glyphicon glyphicon-chevron glyphicon-chevron-up"></span> Collapse
-				            	</button>
-				            </a>
-				        </div>
-				    </tal:iterate>
+		            <div class="panel-group" id="accordion-${segment.uid}">
+			            <tal:iterate repeat="media_object segment.values()">
+			            	<div class="panel fika-media-panel">
+					            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+					        		<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
+						        </div>
+					        </div>
+					    </tal:iterate>
+				    </div>
 			    </div>
 		    </div>
         </tal:iterate>
@@ -104,6 +101,46 @@
         </tal:iterate>
         <li><a href="${next(page)}">&raquo;</a></li>
     </ul>
+
+	<div class="panel-group" id="accordion">
+		<h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Collapsible Group Item #1
+        </a>
+      </h4>
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </h4>
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          Collapsible Group Item #3
+        </a>
+      </h4>
+  <div class="panel panel-default">
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </div>
 

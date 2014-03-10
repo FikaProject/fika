@@ -23,22 +23,21 @@
     
     <tal:iterate repeat="segment context.values()">
         	<div class="panel panel-default">
-			    <div class="panel-heading">
+        		<div class="panel-body">
 			        <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
 			        <a href="${request.resource_url(segment)}">
-			        <h4 class="panel-title">
-			               ${segment.title}
-			        </h4>
+				        <h4 class="panel-title">
+				               ${segment.title}
+				        </h4>
 			        </a>
-			    </div>
-			    <div class="panel-body">
+			    
 		        	<div class="course_segment description">
 		            	${segment.get_field_value('description')}
 		        	</div>
 		            
 		            <div class="btn-group">
 			            <tal:iterate repeat="media_object segment.values()">
-			            	<a class="collapser fika-media-button" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}">
+			            	<a class="collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${segment.uid}" href="#collapse-${media_object.uid}">
 			            		<button type="button" class="btn btn-default">
 			            			<span class="glyphicon glyphicon-${media_object.icon}"></span>
 		            			</button>
@@ -46,11 +45,15 @@
 					    </tal:iterate>
 		            </div>
 		            
-		            <tal:iterate repeat="media_object segment.values()">
-			            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-				        	<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
-				        </div>
-				    </tal:iterate>
+		            <div class="panel-group" id="accordion-${segment.uid}">
+			            <tal:iterate repeat="media_object segment.values()">
+			            	<div class="panel fika-media-panel">
+					            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+						        	<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
+						        </div>
+					        </div>
+					    </tal:iterate>
+				    </div>
 			    </div>
 			</div>
         </tal:iterate>
