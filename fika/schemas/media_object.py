@@ -26,3 +26,20 @@ class YoutubeMediaObjectSchema(MediaObject):
     #youtube_link = colander.SchemaNode(colander.String(),)
     youtube_link = colander.SchemaNode(Youtube(),widget=deform.widget.TextInputWidget(size=60))
     
+    
+@schema_factory('VimeoMediaObjectSchema')
+class VimeoMediaObjectSchema(MediaObject):
+    vimeo_link = colander.SchemaNode(colander.String(),)
+    #youtube_link = colander.SchemaNode(Youtube(),widget=deform.widget.TextInputWidget(size=60))
+
+@schema_factory('VideoMediaObjectSchema')
+class VideoMediaObjectSchema(MediaObject):
+    video_link = colander.SchemaNode(colander.String(),)
+
+
+@schema_factory('AudioMediaObjectSchema')
+class AudioMediaObjectSchema(MediaObject):
+    audio_link = colander.SchemaNode(colander.String(),)
+
+    
+    

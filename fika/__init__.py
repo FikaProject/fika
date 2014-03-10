@@ -59,7 +59,7 @@ def populate_database():
     from pyramid.threadlocal import get_current_request
     site = SiteRoot()
     site['users'] = Users()
-    admin = User(password = 'admin', email = 'admin@localhost')
+    admin = User(password = 'admin', email = 'admin@fika.com')
     site['users'][admin.uid] = admin
     sec = get_security(site)
     sec.add_groups(admin.userid, [ROLE_ADMIN])

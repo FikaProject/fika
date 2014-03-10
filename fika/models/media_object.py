@@ -9,6 +9,9 @@ from .interfaces import IMediaObject
 from .interfaces import ITextMediaObject
 from .interfaces import IImageMediaObject
 from .interfaces import IYoutubeMediaObject
+from .interfaces import IVideoMediaObject
+from .interfaces import IVimeoMediaObject
+from .interfaces import IAudioMediaObject
 from .interfaces import IModuleSegment
 from .interfaces import ICourseModule
 from .interfaces import ICourse
@@ -69,3 +72,49 @@ class YoutubeMediaObject(MediaObject):
     def render(self, request, view):
         #FIXME: Refactor into template with settings
         return u'<div class="mediaobject"><div class="auto-resizable-iframe"><div><iframe class="youtube" src="//www.youtube.com/embed/' + self.get_field_value('youtube_link', ()) + u'" frameborder="0" allowfullscreen></iframe></div></div><div>' + self.get_field_value('description', ()) + u'</div></div>'
+
+@content_factory('VimeoMediaObject')
+@implementer(IVimeoMediaObject)
+class VimeoMediaObject(MediaObject):
+    schemas = {'add': 'VimeoMediaObjectSchema',
+               'edit': 'VimeoMediaObjectSchema',
+               'view': 'VimeoMediaObjectSchema',
+               'delete': 'DeleteSchema'}
+    content_type = u"VimeoMediaObjectSchema"
+    icon = u"film"
+    
+    def render(self, request, view):
+        #FIXME: Refactor into template with settings
+        return u'<div class="mediaobject"><div class="auto-resizable-iframe"><div><iframe class="youtube" src="//player.vimeo.com/video/' + self.get_field_value('vimeo_link', ()) + u'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div><div>' + self.get_field_value('description', ()) + u'</div></div>'
+
+
+@content_factory('VideoMediaObject')
+@implementer(IVideoMediaObject)
+class VideoMediaObject(MediaObject):
+    schemas = {'add': 'VideoMediaObjectSchema',
+               'edit': 'VideoMediaObjectSchema',
+               'view': 'VideoMediaObjectSchema',
+               'delete': 'DeleteSchema'}
+    content_type = u"VideoMediaObject"
+    icon = u"film"
+    
+    def render(self, request, view):
+        #FIXME: Refactor into template with settings
+        return u'<div class="mediaobject"><video controls preload><source src="'+ self.get_field_value('video_link', ()) +'"  type="video/mp4; codecs=avc1.42E01E,mp4a.40.2"></video>' + self.get_field_value('description', ()) + u'</div>'
+
+
+@content_factory('AudioMediaObject')
+@implementer(IAudioMediaObject)
+class AudioMediaObject(MediaObject):
+    schemas = {'add': 'AudioMediaObjectSchema',
+               'edit': 'AudioMediaObjectSchema',
+               'view': 'AudioMediaObjectSchema',
+               'delete': 'DeleteSchema'}
+    content_type = u"AudioMediaObject"
+    icon = u"headphones"
+    
+    def render(self, request, view):
+        #FIXME: Refactor into template with settings
+        return u'<div class="mediaobject"><audio controls src="'+ self.get_field_value('audio_link', ()) +'"></audio>' + self.get_field_value('description', ()) + u'</div>'
+
+

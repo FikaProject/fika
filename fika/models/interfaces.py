@@ -59,6 +59,15 @@ class IImageMediaObject(IMediaObject):
 class IYoutubeMediaObject(IMediaObject):
     """ Part of a segment object. Contains a youtube link. """
     
+class IVimeoMediaObject(IMediaObject):
+    """ Part of a segment object. Contains a vimeo link. """
+    
+class IVideoMediaObject(IMediaObject):
+    """ Part of a segment object. Contains a video link. """
+  
+class IAudioMediaObject(IMediaObject):
+    """ Part of a segment object. Contains a audio link. """
+   
 
 
 
