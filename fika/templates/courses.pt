@@ -25,7 +25,7 @@
 			  	</span>
             </div>
             <div class="panel-body">
-            	${obj.get_field_value('description', ())}
+            	<span tal:replace="structure obj.get_field_value('description', ())"></span>
         	</div>
         </div>
     </tal:iterate>

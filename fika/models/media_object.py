@@ -115,6 +115,6 @@ class AudioMediaObject(MediaObject):
     
     def render(self, request, view):
         #FIXME: Refactor into template with settings
-        return u'<div class="mediaobject"><audio controls src="'+ self.get_field_value('audio_link', ()) +'"></audio>' + self.get_field_value('description', ()) + u'</div>'
+        return u'<div class="mediaobject"><div><audio controls src="'+ self.get_field_value('audio_link', ()) +'"></audio></div>' + self.get_field_value('description', ()) + u'</div>'
 
 

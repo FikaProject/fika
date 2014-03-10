@@ -39,11 +39,13 @@
 
     <div tal:condition="not course_module">
     	<span i18n:translate="">In this course:</span>
-        <ul>
+        <ul class="dotless">
             <tal:iterate repeat="(num, uid) pages.items()">
                 <li tal:condition="num>0">
                     <span tal:condition="uid in view.profile.completed_course_modules"
                           class="glyphicon glyphicon-ok-sign"></span>
+                      <span tal:condition="not uid in view.profile.completed_course_modules"
+                          class="glyphicon glyphicon-unchecked"></span>
                     <a href="${'?p=%s' % num}" tal:content="course_modules[uid].title|'NotFound: %s' % uid">Title</a>
                 </li>
             </tal:iterate>

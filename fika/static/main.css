@@ -61,4 +61,11 @@ div.segment
 {
 	width:100%;	
 }
+
+
+
+.dotless
+{
+	list-style-type: none;
+	margin-left:-15px;
 }
