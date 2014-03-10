@@ -44,7 +44,9 @@ class TextMediaObject(MediaObject):
     
     
     def render(self, request, view):
-        return u'<div class="mediaobject">' + self.get_field_value('body', ()) + u'</div>'
+        return u'<div class="mediaobject">' \
+            + self.get_field_value('body', ()) \
+            + u'</div>'
     
 @content_factory('ImageMediaObject')
 @implementer(IImageMediaObject)
@@ -57,7 +59,11 @@ class ImageMediaObject(MediaObject):
     icon = u"picture"
     
     def render(self, request, view):
-        return u'<div class="mediaobject"><img class="image-mediaobject" src="' + self.get_field_value('url', ()) + u'" /><div>' + self.get_field_value('description', ()) + u'</div></div>'
+        return u'<div class="mediaobject"><img class="image-mediaobject" src="' \
+            + self.get_field_value('url', ()) \
+            + u'" /><div>' \
+            + self.get_field_value('description', ()) \
+            + u'</div></div>'
 
 @content_factory('YoutubeMediaObject')
 @implementer(IYoutubeMediaObject)
@@ -71,7 +77,11 @@ class YoutubeMediaObject(MediaObject):
     
     def render(self, request, view):
         #FIXME: Refactor into template with settings
-        return u'<div class="mediaobject"><div class="auto-resizable-iframe"><div><iframe class="youtube" src="//www.youtube.com/embed/' + self.get_field_value('youtube_link', ()) + u'" frameborder="0" allowfullscreen></iframe></div></div><div>' + self.get_field_value('description', ()) + u'</div></div>'
+        return u'<div class="mediaobject"><div class="auto-resizable-iframe"><div><iframe class="youtube" src="//www.youtube.com/embed/' \
+            + self.get_field_value('youtube_link', ()) \
+            + u'" frameborder="0" allowfullscreen></iframe></div></div><div>' \
+            + self.get_field_value('description', ()) \
+            + u'</div></div>'
 
 @content_factory('VimeoMediaObject')
 @implementer(IVimeoMediaObject)
@@ -85,7 +95,11 @@ class VimeoMediaObject(MediaObject):
     
     def render(self, request, view):
         #FIXME: Refactor into template with settings
-        return u'<div class="mediaobject"><div class="auto-resizable-iframe"><div><iframe class="youtube" src="//player.vimeo.com/video/' + self.get_field_value('vimeo_link', ()) + u'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div><div>' + self.get_field_value('description', ()) + u'</div></div>'
+        return u'<div class="mediaobject"><div class="auto-resizable-iframe"><div><iframe class="youtube" src="//player.vimeo.com/video/' \
+            + self.get_field_value('vimeo_link', ()) \
+            + u'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div><div>' \
+            + self.get_field_value('description', ()) \
+            + u'</div></div>'
 
 
 @content_factory('VideoMediaObject')
@@ -100,7 +114,11 @@ class VideoMediaObject(MediaObject):
     
     def render(self, request, view):
         #FIXME: Refactor into template with settings
-        return u'<div class="mediaobject"><video controls preload><source src="'+ self.get_field_value('video_link', ()) +'"  type="video/mp4; codecs=avc1.42E01E,mp4a.40.2"></video>' + self.get_field_value('description', ()) + u'</div>'
+        return u'<div class="mediaobject"><video controls preload><source src="' \
+            + self.get_field_value('video_link', ()) \
+            + '"  type="video/mp4; codecs=avc1.42E01E,mp4a.40.2"></video>' \
+            + self.get_field_value('description', ()) \
+            + u'</div>'
 
 
 @content_factory('AudioMediaObject')
@@ -115,6 +133,10 @@ class AudioMediaObject(MediaObject):
     
     def render(self, request, view):
         #FIXME: Refactor into template with settings
-        return u'<div class="mediaobject"><div><audio controls src="'+ self.get_field_value('audio_link', ()) +'"></audio></div>' + self.get_field_value('description', ()) + u'</div>'
+        return u'<div class="mediaobject"><div><audio controls src="' \
+            + self.get_field_value('audio_link', ()) \
+            +'"></audio></div>' \
+            + self.get_field_value('description', ()) \
+            + u'</div>'
 
 
