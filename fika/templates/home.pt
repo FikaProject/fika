@@ -19,7 +19,7 @@
         	<div tal:condition="view.userid">
         	Welcome ${view.profile.title}!<br/>
         	
-			<h1>Your courses</h1>
+			<h1>My courses</h1>
         	<ul>
     		<tal:iterate repeat="course view.profile.enrolled_courses()">
 		     	<li><a href="${request.resource_url(course)}">${course.title}</a>
