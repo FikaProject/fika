@@ -38,8 +38,18 @@ div.segment
 	display:inline;
 }
 
+.fika-media-button:hover
+{
+	text-decoration:none;
+}
+
 .panel-title a{
 	text-decoration:none;
+}
+
+.mediaobject
+{
+	padding-top:10px;
 }
 
 .auto-resizable-iframe {
