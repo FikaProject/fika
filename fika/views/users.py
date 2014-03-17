@@ -16,6 +16,7 @@ class UsersView(BaseView):
     @view_config(context = IUsers, renderer = "fika:templates/users.pt")
     def users(self):
         self.response['users'] = self.context.values()
+        #import pdb; pdb.set_trace()
         return self.response
 
     @view_config(context = IUser, renderer = "fika:templates/user.pt")
