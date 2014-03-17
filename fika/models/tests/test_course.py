@@ -25,3 +25,33 @@ class CourseTests(TestCase):
 
     def test_verify_class(self):
         self.failUnless(verifyObject(ICourse, self._cut()))
+
+
+
+class DeleteCourseTests(TestCase):
+    
+    def setUp(self):
+        self.config = testing.setUp()
+
+    def tearDown(self):
+        testing.tearDown()
+
+    @property
+    def _fut(self):
+        from fika.models.course import removeUsersFromCourse
+        return removeUsersFromCourse
+    
+    def test_added(self):
+        from fika.models.user import User
+        from fika.models.users import Users
+        from fika.models.course import Course
+        user = User()
+        course = Course()
+        user.join_course(course)
+        self.assertTrue(user.in_course(course))
+        root = testing.DummyResource()
+        root['users'] = Users()
+        root['users'][user.uid] = user
+        root['course'] = course
+        self._fut(course, None)
+        self.assertFalse(user.in_course(course))
