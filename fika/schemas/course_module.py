@@ -1,4 +1,5 @@
 import colander
+import deform
 from betahaus.pyracont.decorators import schema_factory
 
 
@@ -8,7 +9,16 @@ class CourseModuleSchema(colander.Schema):
     description = colander.SchemaNode(colander.String(),
                                       missing = u"")
     
+
+class Segment(colander.Schema):
+            segment = colander.SchemaNode(colander.String())
+            
+class Segments(colander.SequenceSchema):
+            segment = Segment()
+
 @schema_factory('OrderCourseModuleSchema')
 class OrderCourseModuleSchema(colander.Schema):
-    title = colander.SchemaNode(colander.String(),)
+    segments = Segments(
+                widget=deform.widget.SequenceWidget(orderable=True)
+            )
     
