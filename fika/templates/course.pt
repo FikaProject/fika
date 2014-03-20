@@ -64,13 +64,11 @@
 		            	${segment.get_field_value('description')}
 		        	</div>
 		            
-		            <div class="btn-group">
+		            <div class="btn-group btn-group-lg">
 			            <tal:iterate repeat="media_object segment.values()">
-			            	<a class="collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${segment.uid}" href="#collapse-${media_object.uid}">
-			            		<button type="button" class="btn btn-default">
-			            			<span class="glyphicon glyphicon-${media_object.icon}"></span>
-		            			</button>
-							</a>
+		            		<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${segment.uid}" href="#collapse-${media_object.uid}">
+		            				<span class="glyphicon glyphicon-${media_object.icon}"></span>
+	            			</button>
 					    </tal:iterate>
 		            </div>
 		            
