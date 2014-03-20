@@ -7,6 +7,8 @@ from fika.schemas.youtube_node import Youtube
 class MediaObject(colander.Schema):
     title = colander.SchemaNode(colander.String())
     description = colander.SchemaNode(colander.String(),
+                                      validator=colander.Length(max=140),
+                                      widget=deform.widget.TextAreaWidget(rows=8, cols=40),
                                       missing = u"")
 
 
