@@ -20,18 +20,16 @@
             	${context.get_field_value('description')}
         	</div>
             
-            <div class="btn-group">
+            <div class="btn-group btn-group-lg">
 	            <tal:iterate repeat="media_object context.values()">
-	            	<a class="collapser fika-media-button" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}">
-	            		<button type="button" class="btn btn-default">
-	            			<span class="glyphicon glyphicon-${media_object.icon}"></span>
-	        			</button>
-					</a>
+					<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${context.uid}" href="#collapse-${media_object.uid}">
+        				<span class="glyphicon glyphicon-${media_object.icon}"></span>
+        			</button>
 			    </tal:iterate>
             </div>
             
             <div class="btn-group" tal:condition="len(view.addable_types) > 0" >
-		      <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
+		      <button type="button" class="btn btn-default btn-lg dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
 		        <span i18n:translate="">Add</span> <span class="caret"></span>
 		      </button>
 		      <ul class="dropdown-menu" role="menu">
@@ -40,25 +38,21 @@
 		        </tal:iterate>
 		      </ul>
 		    </div>
-            
-            <tal:iterate repeat="media_object context.values()">
-	            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-	            	<div class="btn-group">
-					  <a href="${request.resource_url(media_object, 'edit')}"><button type="button" class="btn btn-default">Edit</button></a>
-					  <a href="${request.resource_url(media_object, 'delete')}"><button type="button" class="btn btn-default">Delete</button></a>
-					</div>
-
-		        	<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
-		        	
-		        	<a class="collapser" data-toggle="collapse" data-parent="#accordion" href="#collapse-${media_object.uid}">
-		                <button type="button" class="btn btn-default">
-		                	<span class="glyphicon glyphicon-chevron glyphicon-chevron-up"></span> Collapse
-		            	</button>
-		            </a>
-		        </div>
-		    </tal:iterate>
-            
-            
+		    
+            <div class="panel-group" id="accordion-${context.uid}">
+	            <tal:iterate repeat="media_object context.values()">
+	            	<div class="panel fika-media-panel">
+			            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+			            	<div class="btn-group">
+								<a href="${request.resource_url(media_object, 'edit')}"><button type="button" class="btn btn-default">Edit</button></a>
+								<a href="${request.resource_url(media_object, 'delete')}"><button type="button" class="btn btn-default">Delete</button></a>
+							</div>
+					
+				        	<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
+				        </div>
+			        </div>
+			    </tal:iterate>
+		    </div>
 	    </div>
 	</div>
 
