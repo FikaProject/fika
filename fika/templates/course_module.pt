@@ -22,41 +22,52 @@
 	<div tal:omit-tag="request.view_name!='order'" id="module-segments">	
     
     <tal:iterate repeat="segment context.values()">
-        	<div class="panel panel-default">
-        		<div class="panel-body">
-			        <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
-			        <a href="${request.resource_url(segment)}">
-				        <h4 class="panel-title">
-				               ${segment.title}
-				        </h4>
-			        </a>
-			    
-		        	<div class="course_segment description">
-		            	${segment.get_field_value('description')}
-		        	</div>
-		            
-		            <div class="btn-group btn-group-lg">
-			            <tal:iterate repeat="media_object segment.values()">
-			            	<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${segment.uid}" href="#collapse-${media_object.uid}">
-		            				<span class="glyphicon glyphicon-${media_object.icon}"></span>
-	            			</button>
-					    </tal:iterate>
-		            </div>
-		            
-		            <div class="panel-group" id="accordion-${segment.uid}">
-			            <tal:iterate repeat="media_object segment.values()">
-			            	<div class="panel fika-media-panel">
-					            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-						        	<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
-						        </div>
-					        </div>
-					    </tal:iterate>
-				    </div>
-			    </div>
-			</div>
-        </tal:iterate>
-    
-   </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <!-- <input type="hidden" name="module-segments" value="${segment.uid}" />-->
+                <a href="${request.resource_url(segment)}">
+                    <h4 class="panel-title">
+                           ${segment.title}
+                    </h4>
+                </a>
+        
+                <div class="course_segment description">
+                    ${segment.get_field_value('description')}
+                </div>
+                
+                <div class="btn-group btn-group-lg">
+                    <tal:iterate repeat="media_object segment.values()">
+                        <button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${segment.uid}" href="#collapse-${media_object.uid}">
+                                <span class="glyphicon glyphicon-${media_object.icon}"></span>
+                        </button>
+                    </tal:iterate>
+                </div>
+                
+                <div class="panel-group" id="accordion-${segment.uid}">
+                    <tal:iterate repeat="media_object segment.values()">
+                        <div class="panel fika-media-panel">
+                            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+                                <tal:form  replace="structure media_object.render(request, view)" ></tal:form>
+                            </div>
+                        </div>
+                    </tal:iterate>
+                </div>
+            </div>
+        </div>
+    </tal:iterate>
+
+    <div class="panel panel-default panel-add inline-form-structure">
+        <div class="panel-body inline-form-target">
+            <tal:iterate repeat="type view.addable_types">
+                <a class="btn btn-default add-segment"
+                   href="${request.resource_url(context, 'add', query = {'content_type': type})}">
+                    Add new ${type}
+                </a>
+            </tal:iterate>
+        </div>
+    </div>
+
+    </div>
     
     <span tal:condition="request.view_name=='edit'">
 	    <div class="btn-group" tal:condition="len(view.addable_types) > 0">

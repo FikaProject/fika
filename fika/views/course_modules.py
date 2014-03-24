@@ -1,13 +1,10 @@
 import colander
 import deform
-
 from js.deform import auto_need
 from js.jqueryui import jqueryui
-
 from pyramid.view import view_config
 from pyramid.view import view_defaults
 from pyramid.httpexceptions import HTTPFound
-
 from betahaus.pyracont.factories import createSchema
 
 from fika import security
@@ -16,6 +13,7 @@ from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourseModules
 from fika.models.interfaces import IModuleSegment
 from fika.models.media_object import YoutubeMediaObject, ImageMediaObject
+
 
 @view_defaults(permission = security.VIEW)
 class CourseModulesView(BaseView):

@@ -137,6 +137,10 @@ class BaseForm(BaseView, FormView):
     button_save = deform.Button('save', title = _(u"Save"), css_class = 'btn btn-primary')
     button_add = deform.Button('add', title = _(u"Add"), css_class = 'btn btn-primary')
 
+    @property
+    def form_options(self):
+        return {'action': self.request.url}
+
     def get_bind_data(self):
         return {'context': self.context, 'request': self.request, 'view': self}
 
@@ -175,7 +179,6 @@ class DefaultAdd(BaseForm):
         return (self.button_add, self.button_cancel,)
 
     def __call__(self):
-        factory = self.factory
         #FIXME: Check add permission here...
         return super(DefaultAdd, self).__call__()
 
@@ -192,9 +195,9 @@ class DefaultAdd(BaseForm):
         return createSchema(self.factory._callable.schemas['add'])
 
     def add_success(self, appstruct):
-        self.flash_messages.add(self.default_success, type="success")
         obj = self.factory(**appstruct)
         self.context[obj.uid] = obj
+        self.flash_messages.add(self.default_success, type="success")
         return HTTPFound(location = self.request.resource_url(obj))
 
 

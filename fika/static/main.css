@@ -97,3 +97,9 @@ div.segment
 	list-style-type: none;
 	margin-left:-15px;
 }
+
+/* bootstrap specific */
+.panel-add {
+    border-style: dashed;
+}
+
