@@ -1,3 +1,5 @@
+from StringIO import StringIO
+
 import colander
 from pyramid.traversal import find_root
 from betahaus.pyracont.decorators import schema_factory
@@ -46,3 +48,41 @@ class LoginPasswordValidator(object):
 @schema_factory()
 class DeleteSchema(colander.Schema):
     pass
+
+
+class FileUploadTempStore(object):
+    """
+    A temporary storage for file file uploads
+
+    File uploads are stored in the session so that you don't need
+    to upload your file again if validation of another schema node
+    fails.
+    """
+
+    def __init__(self, request):
+        self.session = request.session
+
+    def keys(self):
+        return [k for k in self.session.keys() if not k.startswith('_')]
+
+    def get(self, key, default = None):
+        return key in self.keys() and self.session[key] or default
+
+    def __setitem__(self, name, value):
+        value = value.copy()
+        fp = value.pop('fp')
+        value['file_contents'] = fp.read()
+        fp.seek(0)
+        self.session[name] = value
+
+    def __getitem__(self, name):
+        #import pdb;pdb.set_trace()
+        value = self.session[name].copy()
+        value['fp'] = StringIO(value.pop('file_contents'))
+        return value
+
+    def __delitem__(self, name):
+        del self.session[name]
+
+    def preview_url(self, name):
+        return None

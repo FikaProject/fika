@@ -21,7 +21,7 @@
         	</div>
             
             <div class="btn-group btn-group-lg">
-	            <tal:iterate repeat="media_object context.values()">
+	            <tal:iterate repeat="media_object media_objects">
 					<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${context.uid}" href="#collapse-${media_object.uid}">
         				<span class="glyphicon glyphicon-${media_object.icon}"></span>
         			</button>
@@ -40,7 +40,7 @@
 		    </div>
 		    
             <div class="panel-group" id="accordion-${context.uid}">
-	            <tal:iterate repeat="media_object context.values()">
+	            <tal:iterate repeat="media_object media_objects">
 	            	<div class="panel fika-media-panel">
 			            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
 			            	<div class="btn-group">

@@ -3,48 +3,57 @@ from zope.interface import Interface
 from betahaus.pyracont.interfaces import IBaseFolder
 
 
-class ISiteRoot(IBaseFolder):
+class ISecurityAware(Interface):
+    pass
+
+
+class IBase(IBaseFolder, ISecurityAware):
+    pass
+
+
+class ISiteRoot(IBase):
     """ Root object for the application. """
 
 
-class IUsers(IBaseFolder):
+class IUsers(IBase):
     """ Single object present in the root. Contains IUsers. """
 
     def get_user_by_email(email):
         """ Fetch a user object through an email address. If validated is true, only check validated email addresses.
         """
 
-class IUser(IBaseFolder):
+
+class IUser(IBase):
     """ User object. Only contains a userid and mapping to other authentication system. """
     title = Attribute("Name of the user")
     email = Attribute("Email address")
     completed_course_modules = Attribute("An OOSet of course module IDs that this user have marked as completed.")
 
 
-class ICourses(IBaseFolder):
+class ICourses(IBase):
     """ Container for ICourse. """
 
     def module_used_in(uid):
         """ Return all the course objects that uses this modules uid. """
 
 
-class ICourse(IBaseFolder):
+class ICourse(IBase):
     """ Contains references to course modules. """
 
 
-class ICourseModules(IBaseFolder):
+class ICourseModules(IBase):
     """ Container for ICourseModule. """
 
 
-class ICourseModule(IBaseFolder):
+class ICourseModule(IBase):
     """ Container for IModuleSegment. Part of a course, or a stand alone object that can be read up on or organised. """
 
 
-class IModuleSegment(IBaseFolder):
+class IModuleSegment(IBase):
     """ Part of a module object. """
 
         
-class IMediaObject(IBaseFolder):
+class IMediaObject(IBase):
     """ Part of a segment object. Could be a text, a video or similar. """
 
     def render(request, view):
@@ -67,8 +76,10 @@ class IVideoMediaObject(IMediaObject):
   
 class IAudioMediaObject(IMediaObject):
     """ Part of a segment object. Contains a audio link. """
-   
 
+
+class IFile(ISecurityAware):
+    """ An uploaded file. """
 
 
 class ISecurity(Interface):
@@ -116,5 +127,4 @@ class ISecurity(Interface):
 
 class IFlashMessages(Interface):
     """ Handle adding and retrieving flash messages. """
-    
     

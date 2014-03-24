@@ -25,6 +25,7 @@ from betahaus.viewcomponent import render_view_group
 from fika.fanstatic import main_css
 from fika.fanstatic import common_js
 from fika.models.interfaces import IMediaObject
+from fika.models.interfaces import ISecurityAware
 from fika.models.flash_messages import get_flash_messages
 from fika import FikaTSF as _
 from fika import security
@@ -201,9 +202,26 @@ class DefaultAdd(BaseForm):
         return HTTPFound(location = self.request.resource_url(obj))
 
 
-@view_config(context = IBaseFolder, name = "delete", renderer = "fika:templates/form.pt",
+@view_config(context = IBaseFolder, name = "add", renderer = "fika:templates/form.pt",
+             request_param = "content_type=File")
+class AddFileForm(DefaultAdd):
+    
+    def add_success(self, appstruct):
+        kwargs = appstruct['file']
+        obj = self.factory(**kwargs)
+        name = appstruct['file']['filename']
+        #XXX validate name
+        self.context[name] = obj
+        self.flash_messages.add(self.default_success, type="success")
+        return HTTPFound(location = self.request.resource_url(obj))
+
+
+@view_config(context = ISecurityAware, name = "delete", renderer = "fika:templates/form.pt",
              permission = security.DELETE)
 class DefaultDelete(BaseForm):
+
+    def appstruct(self):
+        return {}
 
     @property
     def buttons(self):

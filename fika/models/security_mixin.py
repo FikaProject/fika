@@ -4,7 +4,7 @@ from zope.interface import implementer
 from zope.component import adapter
 from zope.interface.interfaces import ComponentLookupError
 #from zope.component.event import objectEventNotify
-from betahaus.pyracont.interfaces import IBaseFolder
+from fika.models.interfaces import ISecurityAware
 
 from fika.models.interfaces import ISecurity
 from fika import security
@@ -17,7 +17,7 @@ GROUPS_NAMESPACE = 'group:'
 NAMESPACES = (ROLES_NAMESPACE, GROUPS_NAMESPACE, )
 
 
-@adapter(IBaseFolder)
+@adapter(ISecurityAware)
 @implementer(ISecurity)
 class Security(object):
     """
@@ -113,7 +113,8 @@ def groupfinder(name, request):
         sec = request.registry.getAdapter(context, ISecurity)
         return sec.get_groups(name)
     except (AttributeError, ComponentLookupError): # pragma : no cover
-        return ()
+        sec = Security(context)
+        return sec.get_groups(name)
 
 
 def includeme(config):
