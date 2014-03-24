@@ -82,13 +82,28 @@ class BaseView(object):
     def roles_in_context(self):
         return effective_principals(self.request)
 
-    def gravatar_link(self, size = 20):
-        if not self.profile:
-            return u''
-        email = self.profile.email
+    def gravatar_image(self, email, size = 30, tags = None, gravatar_opts = None):
         if email:
             email_hash = md5(email.strip().lower()).hexdigest()
-            return """<img src="https://secure.gravatar.com/avatar/%(hash)s?s=%(size)s" height="%(size)s" width="%(size)s" alt="" />""" % {'hash': email_hash, 'size': size}
+            #Gravatar options
+            default_gravatar = {'size': size,
+                                'd': 'retro',}
+            if gravatar_opts:
+                default_gravatar.update(tags)
+            #Tag options
+            default_tags = {'height': size,
+                            'width': size,
+                            'alt': '',
+                            'class': 'profile-image',
+                            }
+            if tags:
+                default_tags.update(tags)
+            out = u'<img src="https://secure.gravatar.com/avatar/%s?' % email_hash
+            out += "&".join(["%s=%s" % (k, v) for (k, v) in default_gravatar.items()])
+            out += '"'
+            out += " ".join(['%s="%s"' % (k, v) for (k, v) in default_tags.items()])
+            out += ' />'
+            return out
         return u''
 
     def show_edit(self, context):
