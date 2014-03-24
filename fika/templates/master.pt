@@ -80,17 +80,6 @@
 
     <h1 metal:define-slot="heading">${context.title}</h1>
 
-    <div class="btn-group" tal:condition="len(view.addable_types) > 0">
-      <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
-        <span i18n:translate="">Add</span> <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <tal:iterate repeat="type view.addable_types">
-            <li><a href="${request.resource_url(context, 'add', query = {'content_type': type})}">${type}</a></li>
-        </tal:iterate>
-      </ul>
-    </div>
-
         <metal:content define-slot="content">
         </metal:content>
 

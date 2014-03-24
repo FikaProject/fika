@@ -1,4 +1,5 @@
 from betahaus.viewcomponent import view_action
+from pyramid.renderers import render
 
 from fika.models.interfaces import ICourseModule
 from fika import security
@@ -20,3 +21,11 @@ def generic_action_menu(context, request, va, **kw):
     url = request.resource_url(context, va.kwargs['view_name'])
     return """<li class="%(active_cls)s"><a href="%(url)s"><span class="glyphicon glyphicon-%(icon)s">%(title)s</span></a></li>""" % \
         {'icon': va.kwargs['icon'], 'title': va.title, 'active_cls': active_cls, 'url': url}
+
+@view_action('actions', 'add', priority = 1, title = _(u"Add"))
+def add_action_menu(context, request, va, **kw):
+    view = kw['view']
+    if not view.addable_types:
+        return
+    response = {'view': view, 'context': context, 'va': va}
+    return render("fika:templates/add_tab.pt", response, request = request)

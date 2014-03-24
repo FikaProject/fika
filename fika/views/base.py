@@ -118,7 +118,7 @@ class BaseView(object):
         response = {}
         response.update(self.response)
         response['context'] = context
-        response['actions'] = render_view_group(context, self.request, 'actions')
+        response['actions'] = render_view_group(context, self.request, 'actions', view = self)
         return render("fika:templates/action_bar.pt", response, request = self.request)
 
     def render_media_object(self, mediaObject):
