@@ -16,7 +16,7 @@
 
   <body class="view-${request.view_name or 'default'}" data-ng-app="">
 
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,37 +34,36 @@
             <li><a href="/users">Users</a></li>
             
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-          	<li>
-				<form action="/search" class="navbar-form navbar-left" role="search" method="post">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search"
-						       i18n:attributes="placeholder" />
-					</div>
-					  <button type="submit" class="btn btn-default">Submit</button>
-				</form>
-			</li>
+           <ul class="nav navbar-nav navbar-right">
               <li class="dropdown" tal:condition="view.userid">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img tal:replace="structure view.gravatar_image(view.profile.email)" />
-                        ${view.profile.title}
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a href="${request.resource_url(view.profile)}">Profile</a></li>
-                      <li><a href="${request.resource_url(view.profile, 'change_password')}">Change password</a></li>
-                      <li class="divider"></li>
-                      <li><a href="/logout">Logout</a></li>
-                    </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img tal:replace="structure view.gravatar_image(view.profile.email)" />
+                    ${view.profile.title}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="${request.resource_url(view.profile)}">Profile</a></li>
+                  <li><a href="${request.resource_url(view.profile, 'change_password')}">Change password</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/logout">Logout</a></li>
+                </ul>
               </li>
               <tal:annon condition="not view.userid">
                   <li><a href="/login">Login</a></li>
                   <li><a href="/register">Register</a></li>
               </tal:annon>
           </ul>
+          <form action="${request.resource_url(view.root,'search')}" id="search" class="navbar-form navbar-right" role="search" method="post">
+            <div class="form-group">
+                  <input name="query" type="text" class="form-control" placeholder="Search"
+                       i18n:attributes="placeholder" /> 
+              </div>
+            <button type="submit" class="btn btn-default">
+            <span class="glyphicon glyphicon-search"></span></button>
+          </form> 
         </div><!--/.nav-collapse -->
-      </div>
-    </div>
+      </div><!-- /.container-->
+    </nav>
 
     <div class="container">
         
