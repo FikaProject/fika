@@ -183,6 +183,9 @@ class DefaultAdd(BaseForm):
         #FIXME: Check add permission here...
         return super(DefaultAdd, self).__call__()
 
+    def appstruct(self):
+        return {}
+
     @reify
     def factory(self):
         content_type = self.request.GET.get('content_type', '')
