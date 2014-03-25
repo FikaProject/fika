@@ -107,6 +107,9 @@ class BaseView(object):
             return out
         return u''
 
+    def context_has_permission(self, context, permission):
+        return security.context_has_permission(context, permission, userid = self.userid)
+
     def show_edit(self, context):
         if 'edit' in context.schemas:
             return True
