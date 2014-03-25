@@ -44,16 +44,30 @@ class CatalogTests(TestCase):
         self.assertNotIn('/one', root.catalog.document_map.address_to_docid)
 
     def test_get_title(self):
-        pass #FIXME
+        obj = _mk_dummy()
+        from fika.models.catalog import get_title
+        title = get_title(obj, None)
+        self.assertEqual(title, "Hello world")
 
     def test_get_sortable_title(self):
-        pass #FIXME
+        obj = _mk_dummy()
+        from fika.models.catalog import get_sortable_title
+        title = get_sortable_title(obj, None)
+        self.assertEqual(title, "hello world")
 
     def test_get_searchable_text(self):
-        pass #FIXME
+        obj = _mk_dummy()
+        obj.set_field_appstruct({"description":"my description"})
+        from fika.models.catalog import get_searchable_text
+        text = get_searchable_text(obj, None)
+        self.assertIn("Hello world", text)
+        self.assertIn("my description", text)
 
     def test_get_content_type(self):
-        pass #FIXME
+        obj = _mk_dummy()
+        from fika.models.catalog import get_content_type
+        type = get_content_type(obj, None)
+        self.assertEqual(type, "DummyCatalogable")
 
     def test_add_subscriber(self):
         root = self._fixture()
