@@ -5,14 +5,13 @@
       metal:define-macro="main"
       i18n:domain="fika">
 
-	<head>
-		<meta charset="utf-8" />
-		<title metal:define-slot="page-title">${context.title|''}</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="Description" />
-		
-		<metal:head define-slot="head"></metal:head>
-	</head>
+    <head>
+        <meta charset="utf-8" />
+        <title metal:define-slot="page-title">${context.title|''}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Description" />
+        <metal:head define-slot="head"></metal:head>
+    </head>
 
   <body class="view-${request.view_name or 'default'}" data-ng-app="">
 
@@ -53,19 +52,19 @@
                   <li><a href="/register">Register</a></li>
               </tal:annon>
           </ul>
-        	<form action="${request.resource_url(view.root,'search')}" id="search" class="navbar-form navbar-right" role="search" method="post">
-        		<div class="form-group">
-        			<div class="input-group">
-        				<input name="query" type="text" class="form-control" placeholder="Search"
-        					i18n:attributes="placeholder" />
-        				<span class="input-group-btn">
-        					<button type="submit" class="btn btn-default">
-        					<span class="glyphicon glyphicon-search"></span>&nbsp;
-        					</button>
-        				</span>
-        			</div>
-        		</div>
-        	</form> 
+          <div class="col-sm-3">
+            <form action="${request.resource_url(view.root,'search')}" id="search" class="navbar-form" role="search" method="post">
+                <div class="input-group">
+                    <input name="query" type="text" class="form-control" placeholder="Search"
+                        i18n:attributes="placeholder" />
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span>&nbsp;
+                        </button>
+                    </span>
+                </div>
+            </form>
+            </div>
         </div><!--/.nav-collapse -->
       </div><!-- /.container-->
     </nav>
