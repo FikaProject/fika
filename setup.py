@@ -20,6 +20,7 @@ requires = [
     'deform_bootstrap',
     'pyramid_deform',
     'repoze.folder',
+    'repoze.catalog',
     'fanstatic',
     'lingua',
     'Babel',

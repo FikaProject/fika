@@ -7,6 +7,11 @@ class ISecurityAware(Interface):
     pass
 
 
+class ICatalogable(Interface):
+    """ Things that will end up in the site roots catalog.
+    """
+
+
 class IBase(IBaseFolder, ISecurityAware):
     pass
 
