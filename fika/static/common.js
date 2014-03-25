@@ -22,9 +22,10 @@ $(document).ready(function(event) {
         target.toggleClass('glyphicon-chevron-down');
     });
 
+    // Slide up any messages that have the fika-auto-destruct tag
     setTimeout( function() {
-    	$('.fika-auto-destruct').css({'display':'none'});
-    	}, 3000 );
+        $('.fika-auto-destruct').slideUp();
+    }, 3000 );
 });
 
 function mark_course_module_done(event) {
