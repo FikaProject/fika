@@ -21,6 +21,7 @@ requires = [
     'pyramid_deform',
     'repoze.folder',
     'repoze.catalog',
+    'zope.index',
     'fanstatic',
     'lingua',
     'Babel',

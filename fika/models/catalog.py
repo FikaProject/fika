@@ -6,6 +6,9 @@ from repoze.catalog.indexes.field import CatalogFieldIndex
 #from repoze.catalog.indexes.keyword import CatalogKeywordIndex
 #from repoze.catalog.indexes.path import CatalogPathIndex
 from repoze.catalog.indexes.text import CatalogTextIndex
+from zope.index.text.lexicon import CaseNormalizer
+from zope.index.text.lexicon import Lexicon
+from zope.index.text.lexicon import Splitter
 
 from fika.models.interfaces import ICatalogable
 from fika.models.interfaces import ISiteRoot
@@ -30,11 +33,12 @@ def update_indexes(catalog, reindex=True):
         an index has been added or removed.
         Will return a set of indexes changed regardless.
     """
+    lexicon = Lexicon(Splitter(), CaseNormalizer())
     
     indexes = {
         'title': CatalogFieldIndex(get_title),
         'sortable_title': CatalogFieldIndex(get_sortable_title),
-        'searchable_text': CatalogTextIndex(get_searchable_text),
+        'searchable_text': CatalogTextIndex(get_searchable_text, lexicon = lexicon),
         'content_type': CatalogFieldIndex(get_content_type),
     }
     
