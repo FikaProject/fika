@@ -19,7 +19,7 @@ def generic_action_menu(context, request, va, **kw):
         return
     active_cls = va.kwargs['view_name'] == request.view_name and 'active' or ''
     url = request.resource_url(context, va.kwargs['view_name'])
-    return """<li class="%(active_cls)s"><a href="%(url)s"><span class="glyphicon glyphicon-%(icon)s">%(title)s</span></a></li>""" % \
+    return """<li class="%(active_cls)s"><a href="%(url)s"><span class="glyphicon glyphicon-%(icon)s"></span> %(title)s</a></li>""" % \
         {'icon': va.kwargs['icon'], 'title': va.title, 'active_cls': active_cls, 'url': url}
 
 @view_action('actions', 'add', priority = 1, title = _(u"Add"))
