@@ -5,9 +5,11 @@
       metal:use-macro="view.main_macro"
       i18n:domain="fika">
 <body>
-<h1 metal:fill-slot="heading">Search results</h1>
+<h1 metal:fill-slot="heading">Search</h1>
 <div metal:fill-slot="content">
-
+    <tal:no_search condition="not results">
+        <h4 i18n:translate="">No results</h4>
+    </tal:no_search>
     <table tal:condition="results" class="table table-striped table-hover table-responsive">
         <thead>
             <tr>
@@ -27,24 +29,6 @@
         </tal:iterate>
         </tbody>
     </table>
-
-
-
-    <tal:comment condition="False">
-    <tal:iterate repeat="obj courses">
-        <div class="panel panel-default">
-            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
-            <div class="panel-body">
-            	${obj.get_field_value('description', "")}
-            	<ul>
-	            <tal:iterate repeat="course_module obj.get_field_value('course_modules', ())">
-			        <li><a href="${request.resource_url(course_modules[course_module])}">${course_modules[course_module].title}</a></li>
-			    </tal:iterate>	
-            	</ul>
-        	</div>
-        </div>
-    </tal:iterate>
-    </tal:comment>
 </div>
 
 </body>
