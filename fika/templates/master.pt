@@ -53,7 +53,7 @@
                   <li><a href="/register">Register</a></li>
               </tal:annon>
           </ul>
-          <form action="${request.resource_url(view.root,'search')}" id="search" class="navbar-form navbar-right" role="search" method="post">
+          <form action="${request.resource_url(view.root,'search')}" id="search" class="navbar-form navbar-right" role="search" method="get">
             <div class="form-group">
                   <input name="query" type="text" class="form-control" placeholder="Search"
                        i18n:attributes="placeholder" /> 

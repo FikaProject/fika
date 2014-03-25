@@ -7,6 +7,30 @@
 <body>
 <h1 metal:fill-slot="heading">Search results</h1>
 <div metal:fill-slot="content">
+
+    <table tal:condition="results" class="table table-striped table-hover table-responsive">
+        <thead>
+            <tr>
+            <th>
+                <span i18n:translate="">Found <tal:ts replace="len(results)" i18n:name="count">5</tal:ts> items</span>
+            </th>
+            </tr>
+        </thead>
+        <tbody>
+        <tal:iterate repeat="obj results">
+            <tr>
+            <td>
+                <a href="${request.resource_url(obj)}">${obj.title}</a>
+                <span class="label label-default pull-right">${getattr(obj, 'display_name', obj.__class__.__name__)}</span>
+            </td>
+            </tr>
+        </tal:iterate>
+        </tbody>
+    </table>
+
+
+
+    <tal:comment condition="False">
     <tal:iterate repeat="obj courses">
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
@@ -20,6 +44,7 @@
         	</div>
         </div>
     </tal:iterate>
+    </tal:comment>
 </div>
 
 </body>

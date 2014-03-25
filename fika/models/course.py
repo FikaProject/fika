@@ -7,13 +7,14 @@ from .interfaces import ICourse
 from .interfaces import ICourses
 from fika.interfaces import IObjectWillBeRemovedEvent
 from .base import FikaBaseFolder
-
+from fika import FikaTSF as _
 
 
 @content_factory('Course')
 @implementer(ICourse)
 class Course(FikaBaseFolder):
     allowed_contexts = (ICourses,)
+    display_name = _(u"Course")
     schemas = {'add': 'CourseSchema',
                'edit': 'CourseSchema',
                'delete': 'DeleteSchema'}

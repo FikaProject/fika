@@ -120,11 +120,11 @@ def get_sortable_title(obj, default):
     return title.lower()
 
 def get_searchable_text(obj, default):
-    output = u""
     if IBaseFolder.providedBy(obj):
+        output = u""
         for field_name in default_searchable_text_fields:
             text = obj.get_field_value(field_name, None)
-            if isinstance(text, str):
+            if isinstance(text, basestring):
                 output += "%s " % text
         output = output.strip()
         if output:
