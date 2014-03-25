@@ -28,7 +28,7 @@ class IUsers(IBase):
         """
 
 
-class IUser(IBase):
+class IUser(IBase, ICatalogable):
     """ User object. Only contains a userid and mapping to other authentication system. """
     title = Attribute("Name of the user")
     email = Attribute("Email address")
@@ -42,7 +42,7 @@ class ICourses(IBase):
         """ Return all the course objects that uses this modules uid. """
 
 
-class ICourse(IBase):
+class ICourse(IBase, ICatalogable):
     """ Contains references to course modules. """
 
 
@@ -50,15 +50,15 @@ class ICourseModules(IBase):
     """ Container for ICourseModule. """
 
 
-class ICourseModule(IBase):
+class ICourseModule(IBase, ICatalogable):
     """ Container for IModuleSegment. Part of a course, or a stand alone object that can be read up on or organised. """
 
 
-class IModuleSegment(IBase):
+class IModuleSegment(IBase, ICatalogable):
     """ Part of a module object. """
 
         
-class IMediaObject(IBase):
+class IMediaObject(IBase, ICatalogable):
     """ Part of a segment object. Could be a text, a video or similar. """
 
     def render(request, view):
@@ -83,7 +83,7 @@ class IAudioMediaObject(IMediaObject):
     """ Part of a segment object. Contains a audio link. """
 
 
-class IFile(ISecurityAware):
+class IFile(ISecurityAware, ICatalogable):
     """ An uploaded file. """
 
 
