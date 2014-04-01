@@ -15,13 +15,14 @@ from .interfaces import IAudioMediaObject
 from .interfaces import IModuleSegment
 from .interfaces import ICourseModule
 from .interfaces import ICourse
+from fika import FikaTSF as _
 
 
 @implementer(IMediaObject)
 class MediaObject(FikaBaseFolder):
     allowed_contexts = (IModuleSegment,)
     schemas = {}
-    content_type = u""
+    display_name = _(u"Media object")
     icon = u""
 
     def render(self, request, view):
@@ -39,7 +40,7 @@ class TextMediaObject(MediaObject):
                'edit': 'TextMediaObjectSchema',
                'view': 'TextMediaObjectSchema',
                'delete': 'DeleteSchema'}
-    content_type = u"TextMediaObject"
+    display_name = _(u"Text media object")
     icon = u"font"
     
     
@@ -55,7 +56,7 @@ class ImageMediaObject(MediaObject):
                'edit': 'ImageMediaObjectSchema',
                'view': 'ImageMediaObjectSchema',
                'delete': 'DeleteSchema'}
-    content_type = u"ImageMediaObject"
+    display_name = _(u"Image media object")
     icon = u"picture"
     
     def render(self, request, view):
@@ -72,7 +73,7 @@ class YoutubeMediaObject(MediaObject):
                'edit': 'YoutubeMediaObjectSchema',
                'view': 'YoutubeMediaObjectSchema',
                'delete': 'DeleteSchema'}
-    content_type = u"YoutubeMediaObject"
+    display_name = _(u"Youtube media object")
     icon = u"film"
     
     def render(self, request, view):
@@ -90,7 +91,7 @@ class VimeoMediaObject(MediaObject):
                'edit': 'VimeoMediaObjectSchema',
                'view': 'VimeoMediaObjectSchema',
                'delete': 'DeleteSchema'}
-    content_type = u"VimeoMediaObjectSchema"
+    display_name = _(u"Vimeo media object")
     icon = u"film"
     
     def render(self, request, view):
@@ -109,7 +110,7 @@ class VideoMediaObject(MediaObject):
                'edit': 'VideoMediaObjectSchema',
                'view': 'VideoMediaObjectSchema',
                'delete': 'DeleteSchema'}
-    content_type = u"VideoMediaObject"
+    display_name = _(u"Video media object")
     icon = u"film"
     
     def render(self, request, view):
@@ -128,7 +129,7 @@ class AudioMediaObject(MediaObject):
                'edit': 'AudioMediaObjectSchema',
                'view': 'AudioMediaObjectSchema',
                'delete': 'DeleteSchema'}
-    content_type = u"AudioMediaObject"
+    display_name = _(u"Audio media object")
     icon = u"headphones"
     
     def render(self, request, view):
