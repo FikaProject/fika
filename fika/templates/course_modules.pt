@@ -19,7 +19,7 @@
             	${obj._num_objects.value} segments:
             	<ul>
             	<tal:iterate repeat="segment obj.values()">
-            		<li><a href="${request.resource_url(segment)}">${segment.title}</a> (${segment.__class__.__name__})</li>
+            		<li><a href="${request.resource_url(segment)}">${segment.title}</a></li>
             	</tal:iterate>
             	</ul>
             	Used in:
