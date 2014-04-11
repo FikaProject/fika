@@ -10,7 +10,7 @@ from fika.models.interfaces import IFile
 from fika.models.interfaces import IModuleSegment
 
 
-@content_factory()
+@content_factory('File')
 @implementer(IFile)
 class File(Persistent):
     schemas = {'add': 'AddFileSchema', 'edit': 'EditFileSchema', 'delete': 'DeleteSchema'}
