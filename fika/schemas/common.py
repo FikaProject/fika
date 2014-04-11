@@ -45,7 +45,7 @@ class LoginPasswordValidator(object):
             raise exc
 
 
-@schema_factory()
+@schema_factory('DeleteSchema')
 class DeleteSchema(colander.Schema):
     pass
 
