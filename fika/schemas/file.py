@@ -12,12 +12,12 @@ def file_upload_widget(node, kw):
     return deform.widget.FileUploadWidget(tmpstorage)
 
 
-@schema_factory()
+@schema_factory('AddFileSchema')
 class AddFileSchema(colander.Schema):
     file = colander.SchemaNode(deform.FileData(),
                                widget = file_upload_widget)
 
 
-@schema_factory()
+@schema_factory('EditFileSchema')
 class EditFileSchema(colander.Schema):
     pass
