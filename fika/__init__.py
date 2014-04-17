@@ -59,7 +59,7 @@ def populate_database():
     from pyramid.threadlocal import get_current_request
     site = SiteRoot()
     site['users'] = Users()
-    admin = User(password = 'admin', email = 'admin@localhost')
+    admin = User(password = 'admin', email = 'admin@admin.com')
     site['users'][admin.uid] = admin
     sec = get_security(site)
     sec.add_groups(admin.userid, [ROLE_ADMIN])
@@ -71,7 +71,7 @@ def populate_database():
         _ = FikaTSF #_ enables translations to be found
         msg = _(u"site_populated_info",
                 default = u"Since this is the first time you're using Fika, the site has been populated "
-                    u"with a default user. You may login with <b>admin@localhost</b> and password <b>admin</b>. ")
+                    u"with a default user. You may login with <b>admin@admin.com</b> and password <b>admin</b>. ")
         fm.add(msg, auto_destruct = False)
     return site
 
