@@ -79,10 +79,11 @@ class ImagesMediaObject(MediaObject):
     
     def render(self, request, view):
         returnString = u'<div class="mediaobject">'
-        for url in self.get_field_value('urls', ()):
+        for image in self.get_field_value('images', ()):
             returnString += u'<img class="image-mediaobject" src="' \
-            + url \
-            + u'" />'
+            + image['url'] \
+            + u'" />' \
+            + image['image_description']
         returnString += u'<div>' \
             + self.get_field_value('description', '') \
             + u'</div></div>'

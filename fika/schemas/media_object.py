@@ -17,12 +17,19 @@ class TextMediaObjectSchema(MediaObject):
     body = colander.SchemaNode(colander.String(),
                                widget = deform.widget.RichTextWidget())
 
-class ImageUrl(colander.SequenceSchema):
+class ImageMedia(colander.MappingSchema):
         url = colander.SchemaNode(colander.String(),)
+        image_description = colander.SchemaNode(colander.String(),
+                                      validator=colander.Length(max=140),
+                                      widget=deform.widget.TextAreaWidget(rows=8, cols=40),
+                                      missing = u"")
+        
+class Images(colander.SequenceSchema):
+    image = ImageMedia()
 
 @schema_factory('ImagesMediaObjectSchema')
 class ImagesMediaObjectSchema(MediaObject):
-    urls = ImageUrl()
+    images = Images()
     
 @schema_factory('ImageMediaObjectSchema')
 class ImageMediaObjectSchema(MediaObject):
