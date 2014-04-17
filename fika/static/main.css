@@ -59,6 +59,11 @@ div.segment
 	padding-top:10px;
 }
 
+.image-mediaobject
+{
+	max-width: 100%;
+}
+
 .auto-resizable-iframe {
   max-width: 640px;
   margin: 0px auto;
