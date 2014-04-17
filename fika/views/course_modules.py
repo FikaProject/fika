@@ -12,7 +12,9 @@ from fika.views.base import BaseView
 from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourseModules
 from fika.models.interfaces import IModuleSegment
-from fika.models.media_object import YoutubeMediaObject, ImageMediaObject
+from fika.models.media_object import YoutubeMediaObject
+from fika.models.media_object import ImageMediaObject
+from fika.models.media_object import ImagesMediaObject
 from fika import FikaTSF as _
 
 

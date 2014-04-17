@@ -8,6 +8,7 @@ from .base import FikaBaseFolder
 from .interfaces import IMediaObject
 from .interfaces import ITextMediaObject
 from .interfaces import IImageMediaObject
+from .interfaces import IImagesMediaObject
 from .interfaces import IYoutubeMediaObject
 from .interfaces import IVideoMediaObject
 from .interfaces import IVimeoMediaObject
@@ -46,7 +47,7 @@ class TextMediaObject(MediaObject):
     
     def render(self, request, view):
         return u'<div class="mediaobject">' \
-            + self.get_field_value('body', ()) \
+            + self.get_field_value('body', '') \
             + u'</div>'
     
 @content_factory('ImageMediaObject')
@@ -61,10 +62,31 @@ class ImageMediaObject(MediaObject):
     
     def render(self, request, view):
         return u'<div class="mediaobject"><img class="image-mediaobject" src="' \
-            + self.get_field_value('url', ()) \
+            + self.get_field_value('url', '') \
             + u'" /><div>' \
-            + self.get_field_value('description', ()) \
+            + self.get_field_value('description', '') \
             + u'</div></div>'
+            
+@content_factory('ImagesMediaObject')
+@implementer(IImagesMediaObject)
+class ImagesMediaObject(MediaObject):
+    schemas = {'add': 'ImagesMediaObjectSchema',
+               'edit': 'ImagesMediaObjectSchema',
+               'view': 'ImagesMediaObjectSchema',
+               'delete': 'DeleteSchema'}
+    display_name = _(u"Images media object")
+    icon = u"picture"
+    
+    def render(self, request, view):
+        returnString = u'<div class="mediaobject">'
+        for url in self.get_field_value('urls', ()):
+            returnString += u'<img class="image-mediaobject" src="' \
+            + url \
+            + u'" />'
+        returnString += u'<div>' \
+            + self.get_field_value('description', '') \
+            + u'</div></div>'
+        return returnString
 
 @content_factory('YoutubeMediaObject')
 @implementer(IYoutubeMediaObject)
@@ -79,9 +101,9 @@ class YoutubeMediaObject(MediaObject):
     def render(self, request, view):
         #FIXME: Refactor into template with settings
         return u'<div class="mediaobject"><div class="auto-resizable-iframe"><div><iframe class="youtube" src="//www.youtube.com/embed/' \
-            + self.get_field_value('youtube_link', ()) \
+            + self.get_field_value('youtube_link', '') \
             + u'" frameborder="0" allowfullscreen></iframe></div></div><div>' \
-            + self.get_field_value('description', ()) \
+            + self.get_field_value('description', '') \
             + u'</div></div>'
 
 @content_factory('VimeoMediaObject')
@@ -97,9 +119,9 @@ class VimeoMediaObject(MediaObject):
     def render(self, request, view):
         #FIXME: Refactor into template with settings
         return u'<div class="mediaobject"><div class="auto-resizable-iframe"><div><iframe class="youtube" src="//player.vimeo.com/video/' \
-            + self.get_field_value('vimeo_link', ()) \
+            + self.get_field_value('vimeo_link', '') \
             + u'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div><div>' \
-            + self.get_field_value('description', ()) \
+            + self.get_field_value('description', '') \
             + u'</div></div>'
 
 
@@ -116,9 +138,9 @@ class VideoMediaObject(MediaObject):
     def render(self, request, view):
         #FIXME: Refactor into template with settings
         return u'<div class="mediaobject"><video controls preload><source src="' \
-            + self.get_field_value('video_link', ()) \
+            + self.get_field_value('video_link', '') \
             + '"  type="video/mp4; codecs=avc1.42E01E,mp4a.40.2"></video>' \
-            + self.get_field_value('description', ()) \
+            + self.get_field_value('description', '') \
             + u'</div>'
 
 
@@ -135,9 +157,9 @@ class AudioMediaObject(MediaObject):
     def render(self, request, view):
         #FIXME: Refactor into template with settings
         return u'<div class="mediaobject"><div><audio controls src="' \
-            + self.get_field_value('audio_link', ()) \
+            + self.get_field_value('audio_link', '') \
             +'"></audio></div>' \
-            + self.get_field_value('description', ()) \
+            + self.get_field_value('description', '') \
             + u'</div>'
 
 

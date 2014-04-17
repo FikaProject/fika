@@ -17,10 +17,17 @@ class TextMediaObjectSchema(MediaObject):
     body = colander.SchemaNode(colander.String(),
                                widget = deform.widget.RichTextWidget())
 
+class ImageUrl(colander.SequenceSchema):
+        url = colander.SchemaNode(colander.String(),)
 
+@schema_factory('ImagesMediaObjectSchema')
+class ImagesMediaObjectSchema(MediaObject):
+    urls = ImageUrl()
+    
 @schema_factory('ImageMediaObjectSchema')
 class ImageMediaObjectSchema(MediaObject):
     url = colander.SchemaNode(colander.String(),)
+
 
 
 @schema_factory('YoutubeMediaObjectSchema')

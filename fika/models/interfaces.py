@@ -70,6 +70,9 @@ class ITextMediaObject(IMediaObject):
 class IImageMediaObject(IMediaObject):
     """ Part of a segment object. Contains an image. """
     
+class IImagesMediaObject(IMediaObject):
+    """ Part of a segment object. Contains multiple images. """
+    
 class IYoutubeMediaObject(IMediaObject):
     """ Part of a segment object. Contains a youtube link. """
     
