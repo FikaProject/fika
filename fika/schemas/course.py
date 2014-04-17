@@ -22,7 +22,7 @@ class CourseModules(colander.SequenceSchema):
 class CourseSchema(colander.Schema):
     title = colander.SchemaNode(colander.String(),)
     description = colander.SchemaNode(colander.String(),
-                                      validator=colander.Length(max=140),
+                                      validator=colander.Length(max=1000),
                                       widget=deform.widget.TextAreaWidget(rows=8, cols=40),
                                       missing = u"")
     course_modules = CourseModules(widget=deform.widget.SequenceWidget(orderable=True))
