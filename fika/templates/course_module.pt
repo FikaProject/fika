@@ -24,7 +24,7 @@
     <tal:iterate repeat="segment context.values()">
         <div class="panel panel-default">
             <div class="panel-body">
-                <!-- <input type="hidden" name="module-segments" value="${segment.uid}" />-->
+                <input type="hidden" name="module-segments" value="${segment.uid}" />
                 <a href="${request.resource_url(segment)}">
                     <h4 class="panel-title">
                            ${segment.title}

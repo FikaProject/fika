@@ -13,6 +13,7 @@ from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourseModules
 from fika.models.interfaces import IModuleSegment
 from fika.models.media_object import YoutubeMediaObject, ImageMediaObject
+from fika import FikaTSF as _
 
 
 @view_defaults(permission = security.VIEW)
@@ -55,15 +56,21 @@ class CourseModulesView(BaseView):
         self.response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
         return self.response
     
-    @view_config(context = ICourseModule, name = 'order', permission = security.EDIT, renderer = "fika:templates/course_module.pt")
+    @view_config(context = ICourseModule, name = 'order', permission = security.EDIT, renderer = "fika:templates/ordering.pt")
     def ordering(self):
         #FIXME not done! This view needs to write the keys within this context to context.order
+        post = self.request.POST
+        if 'save' in post:
+            segments = self.request.POST.items()
+            ordered_segments = ()
+            for (k, v) in segments:
+                if k == 'module-segments':
+                    ordered_segments = ordered_segments + (v, )
+            self.context.set_order(ordered_segments)
+            self.flash_messages.add(_(u"Saved ordering"), type="success")
+            #import pdb;pdb.set_trace()
+            
+        
         self.response['module_segments'] = self.context.values()
-        self.response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
         #import pdb;pdb.set_trace()
-        schema = createSchema(self.context.schemas['order'])
-        schema = schema.bind(context = self.context, request = self.request, view = self)
-        form = deform.Form(schema, buttons = ('save', 'cancel'), action="#")
-        appstruct = self.context.get_field_appstruct(schema)
-        self.response['form'] = form.render(appstruct = appstruct)
         return self.response

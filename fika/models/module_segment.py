@@ -19,3 +19,9 @@ class ModuleSegment(FikaBaseFolder):
                'edit': 'ModuleSegmentSchema',
                'delete': 'DeleteSchema'}
     display_name = _(u"Module segment")
+    
+    def get_order(self, **kwargs):
+        return tuple(self.order)
+    
+    def set_order(self, value, **kwargs):
+        self.order = value
