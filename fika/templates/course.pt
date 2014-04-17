@@ -27,10 +27,15 @@
 </div>
 
 <div tal:condition="course_module" class="page-header">
-	<h1>${context.title} <small tal:condition="course_module">${course_module.title}</small></h1>
-	<div class="course_module description" tal:condition="course_module">
-		${course_module.get_field_value('description')}
-	</div>
+	<h1>
+		${context.title}
+	</h1>
+	<h2>
+		${course_module.title}
+		<p>
+			<small tal:condition="course_module">${course_module.get_field_value('description')}</small>
+		</p>
+	</h2>
 </div>
 
 </metal:heading>

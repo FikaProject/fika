@@ -18,6 +18,7 @@ class File(Persistent):
     filename = u""
     title = filename
     uid = u""
+    icon = u"file"
 
     def __init__(self,
                  filename = None,
@@ -32,6 +33,11 @@ class File(Persistent):
         f.close()
         self.uid = uuid4()
         self.created = utcnow()
+    
+    def render(self, request, view):
+        return u'<div class="mediaobject">' \
+            + self.filename \
+            + u'</div>'
 
 def upload_stream(stream, file):
     size = 0
