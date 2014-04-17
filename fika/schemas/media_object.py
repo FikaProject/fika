@@ -20,7 +20,7 @@ class TextMediaObjectSchema(MediaObject):
 class ImageMedia(colander.MappingSchema):
         url = colander.SchemaNode(colander.String(),)
         image_description = colander.SchemaNode(colander.String(),
-                                      validator=colander.Length(max=140),
+                                      validator=colander.Length(max=1000),
                                       widget=deform.widget.TextAreaWidget(rows=8, cols=40),
                                       missing = u"")
         
