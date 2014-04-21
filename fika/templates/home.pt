@@ -18,11 +18,11 @@
         <div class="col-md-12">
         	<div tal:condition="view.userid">
         	
-			<h1>My courses</h1>
+			<h1 i18n:translate="">My courses</h1>
         	
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<span class="glyphicon glyphicon-book"></span> Currently enrolled
+					<span class="glyphicon glyphicon-book"></span> <span i18n:translate="">Currently enrolled</span>
 				</div>
 				<div class="list-group">
 					<tal:iterate repeat="course view.profile.enrolled_courses()">
@@ -48,7 +48,7 @@
 
 			<div class="panel panel-default">				
 				<div class="panel-heading">
-					<span class="glyphicon glyphicon-ok"></span> Completed
+					<span class="glyphicon glyphicon-ok"></span> <span i18n:translate="">Completed</span>
 				</div>
 				<div class="list-group">
 					<tal:iterate repeat="course view.profile.enrolled_courses()">
@@ -63,6 +63,15 @@
 					</a>
 					</tal:completed>
 					</tal:iterate>
+					<tal:empty condition="len(completed_courses) == 0">
+						<a class="list-group-item" >
+						<div class="row">
+							<div class="col-md-12 text-muted">
+								<span i18n:translate="">You have not completed any courses yet..</span>
+							</div>
+						</div>
+						</a>
+					</tal:empty>
 				</div>
 			</div>
 				

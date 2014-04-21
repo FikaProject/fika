@@ -67,7 +67,7 @@ class CourseModulesView(BaseView):
             ordered_segments = ()
             for (k, v) in segments:
                 if k == 'module-segments':
-                    ordered_segments = ordered_segments + (v, )
+                    ordered_segments += (v, )
             self.context.set_order(ordered_segments)
             self.flash_messages.add(_(u"Saved ordering"), type="success")
             #import pdb;pdb.set_trace()
