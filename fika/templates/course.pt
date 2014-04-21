@@ -95,10 +95,11 @@
     </div>
 
     <div tal:condition="course_module">
-    	<table class="table table-bottom-border">
-        	<tal:iterate repeat="segment course_module.values()">
-				<tr id="${segment.uid}">
-					<td>
+    	<div class="row">
+  			<div class="col-md-12">
+  				<div class="fika-divider"></div>
+				<tal:iterate repeat="segment course_module.values()">
+					<div id="${segment.uid}">
 						<h3>
 			               ${segment.title}
 				        </h3>
@@ -131,10 +132,13 @@
 						        </div>
 					        </tal:iterate>
 					    </div>
-					</td>
-				</tr>
-			</tal:iterate>
-		</table>
+					</div>
+					<div class="fika-divider"></div>
+				</tal:iterate>
+				
+				
+			</div>
+		</div>
 
         <span condition="in_course" tal:content="structure course_module_toggle(course_module)">
             (course module button here)
