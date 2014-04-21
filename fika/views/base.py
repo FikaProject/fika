@@ -252,6 +252,14 @@ class DummyView(BaseView):
         self.response['users'] = self.root['users']
         self.response['courses'] = self.root['courses']
         self.response['course_modules'] = self.root['course_modules']
+        self.response['course_percentage'] = {}
+        if(self.profile):
+            for course in self.profile.enrolled_courses():
+                percentage = 0
+                for course_module in course.get_field_value('course_modules', ()):
+                    if(course_module in self.profile.completed_course_modules):
+                        percentage += 1
+                self.response['course_percentage'][course.uid] = round(percentage / float(len(course.get_field_value('course_modules', ()))) * 100.0, 2); 
         return self.response
 
 
