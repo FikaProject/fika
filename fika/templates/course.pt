@@ -120,6 +120,7 @@
 				            	<div class="panel fika-media-panel">
 						            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
 						        		<tal:form  replace="structure media_object.render(request, view)" >Contents of media</tal:form>
+						        		<br/>
 						        		<button type="button"
 						        			class="btn btn-default btn-sm"
 						        			onclick="location.href='#${segment.uid}';$('#collapse-${media_object.uid}').collapse('hide')">
