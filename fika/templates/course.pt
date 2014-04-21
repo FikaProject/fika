@@ -89,7 +89,7 @@
 				</div>
 			</div>
 			<div class="col-md-8">
-				<!-- TODO course introduction should go here-->
+				<tal:form  replace="structure context.get_field_value('introduction')"></tal:form>
 			</div>
 		</div>
     </div>

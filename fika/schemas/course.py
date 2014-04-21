@@ -25,4 +25,7 @@ class CourseSchema(colander.Schema):
                                       validator=colander.Length(max=1000),
                                       widget=deform.widget.TextAreaWidget(rows=8, cols=40),
                                       missing = u"")
+    introduction = colander.SchemaNode(colander.String(),
+                               widget = deform.widget.RichTextWidget(),
+                               missing = u"")
     course_modules = CourseModules(widget=deform.widget.SequenceWidget(orderable=True))
