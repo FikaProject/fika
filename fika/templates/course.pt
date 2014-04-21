@@ -123,7 +123,11 @@
         <li><a href="${previous(page)}">&laquo;</a></li>
         <tal:iterate repeat="(num, uid) pages.items()">
                 <li tal:attributes="class num == page and 'active' or ''">
-                    <a href="?p=${num}" title="${course_modules[uid].title|''}">${num}</a>
+                    <a href="?p=${num}" title="${course_modules[uid].title|''}">
+                    	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span> </span>
+                    	<span tal:condition="num != 0">${num}</span>
+                    	
+                	</a>
                 </li>
         </tal:iterate>
         <li><a href="${next(page)}">&raquo;</a></li>
