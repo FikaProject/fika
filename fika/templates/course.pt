@@ -17,12 +17,22 @@
         <span class="glyphicon glyphicon-bookmark"></span>
         <span i18n:translate="">Enroll</span>
   	</a>
-  	<a tal:condition="in_course"
-  		href="${request.resource_url(context, 'leave')}"
-  		class="btn btn-primary btn-lg" role="button">
-        <span class="glyphicon glyphicon-ban-circle"></span>
-        <span i18n:translate="">Leave</span>
-  	</a>
+  	<span tal:condition="in_course"
+  		onmouseenter="getElementById('button-enrolled').style.display='none';getElementById('button-leave').style.display='inline-block';"
+  		onmouseleave="getElementById('button-enrolled').style.display='inline-block';getElementById('button-leave').style.display='none';">
+	  	<a href="${request.resource_url(context, 'leave')}"
+	  		class="btn btn-success btn-lg" role="button"
+	  		id="button-enrolled" style="inline-block">
+	        <span class="glyphicon glyphicon-ok"></span>
+	        <span i18n:translate="">Enrolled</span>
+	  	</a>
+	  	<a href="${request.resource_url(context, 'leave')}"
+	  		class="btn btn-warning btn-lg" role="button"
+	  		id="button-leave" style="display:none;">
+	        <span class="glyphicon glyphicon-log-out"></span>
+	        <span i18n:translate="">Leave</span>
+	  	</a>
+  	</span>
   </p>
 </div>
 
@@ -43,18 +53,32 @@
 <div metal:fill-slot="content">
 
     <div tal:condition="not course_module">
-    	<span i18n:translate="">In this course:</span>
-        <ul class="dotless">
-            <tal:iterate repeat="(num, uid) pages.items()">
-                <li tal:condition="num>0">
-                    <span tal:condition="uid in view.profile.completed_course_modules"
-                          class="glyphicon glyphicon-ok-sign"></span>
-                      <span tal:condition="not uid in view.profile.completed_course_modules"
-                          class="glyphicon glyphicon-unchecked"></span>
-                    <a href="${'?p=%s' % num}" tal:content="course_modules[uid].title|'NotFound: %s' % uid">Title</a>
-                </li>
-            </tal:iterate>
-        </ul>
+        <div class="row">
+  			<div class="col-md-4">
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">Contents</div>
+					<div class="list-group">
+						<tal:iterate repeat="(num, uid) pages.items()">
+							<a tal:condition="num>0" class="list-group-item" href="${'?p=%s' % num}">
+								<span tal:condition="uid in view.profile.completed_course_modules"
+									class="label label-success">
+									<span class="glyphicon glyphicon-ok-sign"></span> ${num}
+								</span>
+								<span tal:condition="not uid in view.profile.completed_course_modules"
+									class="label label-default">
+									<span class="glyphicon glyphicon-unchecked"></span> ${num}
+								</span>
+								&nbsp;<span tal:content="course_modules[uid].title|'NotFound: %s' % uid">Title</span>
+							 </a>
+						</tal:iterate>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<!-- TODO course introduction should go here-->
+			</div>
+		</div>
     </div>
 
     <div tal:condition="course_module">
