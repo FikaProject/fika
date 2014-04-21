@@ -44,6 +44,9 @@
 					</tal:completed>
 					</tal:iterate>
 				</div>
+			</div>
+
+			<div class="panel panel-default">				
 				<div class="panel-heading">
 					<span class="glyphicon glyphicon-ok"></span> Completed
 				</div>
