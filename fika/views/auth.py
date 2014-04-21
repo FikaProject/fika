@@ -31,8 +31,8 @@ class LoginForm(BaseForm):
         return schema
 
     def login_success(self, appstruct):
-        self.flash_messages.add(_(u"Welcome!"), type="success")
         user = self.root['users'].get_user_by_email(appstruct['email'])
+        self.flash_messages.add(_(u"Welcome "+user.title+"!"), type="success")
         headers = remember(self.request, user.uid)
         return HTTPFound(location = self.request.application_url, headers = headers)
 
