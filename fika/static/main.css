@@ -108,3 +108,7 @@ div.segment
     border-style: dashed;
 }
 
+table.table-bottom-border td:last-of-type{
+	border-bottom:1px solid #DDD;
+}
+

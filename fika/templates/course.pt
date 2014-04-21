@@ -5,7 +5,7 @@
       metal:use-macro="view.main_macro"
       i18n:domain="fika">
 <body>
-<metal:heading  fill-slot="heading">
+<metal:heading fill-slot="heading">
 
 <div tal:condition="not course_module" class="jumbotron">
   <h1>${context.title}</h1>
@@ -40,6 +40,18 @@
 	<h1>
 		${context.title}
 	</h1>
+	<ul class="pagination pagination-lg">
+        <li><a href="${previous(page)}">&laquo;</a></li>
+        <tal:iterate repeat="(num, uid) pages.items()">
+                <li tal:attributes="class num == page and 'active' or ''">
+                    <a href="?p=${num}" title="${course_modules[uid].title|''}">
+                    	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span> </span>
+                    	<span tal:condition="num != 0">${num}</span>
+                	</a>
+                </li>
+        </tal:iterate>
+        <li><a href="${next(page)}">&raquo;</a></li>
+    </ul>
 	<h2>
 		${page}. ${course_module.title}
 		<p>
@@ -55,7 +67,6 @@
     <div tal:condition="not course_module">
         <div class="row">
   			<div class="col-md-4">
-				
 				<div class="panel panel-default">
 					<div class="panel-heading">Contents</div>
 					<div class="list-group">
@@ -82,8 +93,8 @@
     </div>
 
     <div tal:condition="course_module">
-        <tal:iterate repeat="segment course_module.values()">
-			<table class="table">
+    	<table class="table table-bottom-border">
+        	<tal:iterate repeat="segment course_module.values()">
 				<tr id="${segment.uid}">
 					<td>
 						<h3>
@@ -119,14 +130,14 @@
 					    </div>
 					</td>
 				</tr>
-			</table>
-		</tal:iterate>
+			</tal:iterate>
+		</table>
 
         <span condition="in_course" tal:content="structure course_module_toggle(course_module)">
             (course module button here)
         </span>
     </div>
-
+	
     <ul class="pagination pagination-lg">
         <li><a href="${previous(page)}">&laquo;</a></li>
         <tal:iterate repeat="(num, uid) pages.items()">

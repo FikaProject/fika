@@ -58,7 +58,7 @@ class BaseView(object):
     @reify
     def main_macro(self):
         return get_renderer('fika:templates/master.pt').implementation().macros['main']
-
+    
     @reify
     def root(self):
         return find_root(self.context)
