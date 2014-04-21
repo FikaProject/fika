@@ -36,12 +36,12 @@
   </p>
 </div>
 
-<div tal:condition="course_module" class="page-header">
+<div tal:condition="course_module" class="">
 	<h1>
 		${context.title}
 	</h1>
 	<h2>
-		${course_module.title}
+		${page}. ${course_module.title}
 		<p>
 			<small tal:condition="course_module">${course_module.get_field_value('description')}</small>
 		</p>
@@ -83,36 +83,44 @@
 
     <div tal:condition="course_module">
         <tal:iterate repeat="segment course_module.values()">
-        	<div class="panel panel-default" >
-				<div class="panel-body">
-			        <!-- <input type="hidden" name="module-segments" value="${context.uid}" />-->
-			        <h4 class="panel-title">
+			<table class="table">
+				<tr id="${segment.uid}">
+					<td>
+						<h3>
 			               ${segment.title}
-			        </h4>
-		        	<div class="course_segment description">
-		            	${segment.get_field_value('description')}
-		        	</div>
-		            
-		            <div class="btn-group btn-group-lg">
-			            <tal:iterate repeat="media_object segment.values()">
-		            		<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${segment.uid}" href="#collapse-${media_object.uid}">
-		            				<span class="glyphicon glyphicon-${media_object.icon}"></span>
-	            			</button>
-					    </tal:iterate>
-		            </div>
-		            
-		            <div class="panel-group" id="accordion-${segment.uid}">
-			            <tal:iterate repeat="media_object segment.values()">
-			            	<div class="panel fika-media-panel">
-					            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-					        		<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
+				        </h3>
+			        	
+			            <div class="btn-group btn-group-lg">
+			            	<tal:iterate repeat="media_object segment.values()">
+			            		<button type="button"
+			            			class="btn btn-default collapser fika-media-button"
+			            			data-toggle="collapse"
+			            			data-parent="#accordion-${segment.uid}"
+			            			href="#collapse-${media_object.uid}">
+			            				<span class="glyphicon glyphicon-${media_object.icon}"></span>
+			        			</button>
+		        			</tal:iterate>
+			            </div>
+			            
+			            <div class="panel-group" id="accordion-${segment.uid}">
+			            	<tal:iterate repeat="media_object segment.values()">
+				            	<div class="panel fika-media-panel">
+						            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+						        		<tal:form  replace="structure media_object.render(request, view)" >Contents of media</tal:form>
+						        		<button type="button"
+						        			class="btn btn-default btn-sm"
+						        			onclick="location.href='#${segment.uid}';$('#collapse-${media_object.uid}').collapse('hide')">
+											<span class="glyphicon glyphicon-chevron-up"></span>
+											<span i18n:translate="">Close</span>
+										</button>
+							        </div>
 						        </div>
-					        </div>
-					    </tal:iterate>
-				    </div>
-			    </div>
-		    </div>
-        </tal:iterate>
+					        </tal:iterate>
+					    </div>
+					</td>
+				</tr>
+			</table>
+		</tal:iterate>
 
         <span condition="in_course" tal:content="structure course_module_toggle(course_module)">
             (course module button here)
@@ -126,7 +134,6 @@
                     <a href="?p=${num}" title="${course_modules[uid].title|''}">
                     	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span> </span>
                     	<span tal:condition="num != 0">${num}</span>
-                    	
                 	</a>
                 </li>
         </tal:iterate>
