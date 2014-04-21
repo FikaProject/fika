@@ -82,9 +82,9 @@ class ImagesMediaObject(MediaObject):
         for image in self.get_field_value('images', ()):
             returnString += u'<img class="image-mediaobject" src="' \
             + image['url'] \
-            + u'" /><div>' \
+            + u'" /><div><p>' \
             + image['image_description'] \
-            + u'</div>'
+            + u'</p></div>'
         returnString += u'<div>' \
             + self.get_field_value('description', '') \
             + u'</div></div>'
