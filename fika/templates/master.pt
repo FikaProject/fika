@@ -55,7 +55,7 @@
                   <li><a href="/register">Register</a></li>
               </tal:annon>
           </ul>
-          <div class="col-sm-3">
+          <div class="col-sm-4">
             <form action="${request.resource_url(view.root,'search')}" id="search" class="navbar-form" role="search" method="get">
                 <div class="input-group">
                     <input name="query" type="text" class="form-control" placeholder="Search"
