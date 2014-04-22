@@ -117,3 +117,29 @@ table.table-bottom-border td:last-of-type{
 	border-bottom:1px solid #DDD;
 }
 
+/* navbar buttons compressed into icons on small screen */
+.fika-nav-button-text{
+	display:none;
+}
+@media (min-width: 1200px)
+{
+	.fika-nav-button-text{
+		display:inline;
+	}
+}
+@media (max-width: 768px)
+{
+	.fika-nav-button-text{
+		display:inline;
+	}
+	.navbar-header .fika-nav-button-text{
+		display:none;
+	} 
+}
+.navbar-header > .navbar-nav > li
+{
+	float:left;
+} 
+/* end of compressed navbar*/
+
+
