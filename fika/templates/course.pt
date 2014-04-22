@@ -48,7 +48,9 @@
                     	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
                     	<span tal:condition="num != 0">
                     		<span tal:omit-tag="uid not in view.profile.completed_course_modules"
-									class="label label-success">${num}</span> </span>
+									class="label label-success">${num}</span>
+							&nbsp;
+						</span>
                 	</a>
                 </li>
         </tal:iterate>
@@ -150,7 +152,9 @@
                     	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
                     	<span tal:condition="num != 0">
                     		<span tal:omit-tag="uid not in view.profile.completed_course_modules"
-									class="label label-success">${num}</span> </span>
+									class="label label-success">${num}</span>
+							&nbsp;
+						</span>
                 	</a>
                 </li>
         </tal:iterate>
