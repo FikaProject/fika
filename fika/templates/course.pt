@@ -45,7 +45,7 @@
         <tal:iterate repeat="(num, uid) pages.items()">
                 <li tal:attributes="class num == page and 'active' or ''">
                     <a href="?p=${num}" title="${course_modules[uid].title|''}">
-                    	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span> </span>
+                    	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
                     	<span tal:condition="num != 0">
                     		<span tal:omit-tag="uid not in view.profile.completed_course_modules"
 									class="label label-success">${num}</span> </span>
@@ -147,7 +147,7 @@
         <tal:iterate repeat="(num, uid) pages.items()">
                 <li tal:attributes="class num == page and 'active' or ''">
                     <a href="?p=${num}" title="${course_modules[uid].title|''}">
-                    	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span> </span>
+                    	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
                     	<span tal:condition="num != 0">
                     		<span tal:omit-tag="uid not in view.profile.completed_course_modules"
 									class="label label-success">${num}</span> </span>
