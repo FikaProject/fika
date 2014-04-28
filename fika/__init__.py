@@ -78,7 +78,7 @@ def includeme(config):
     config.include('fika.populator')
     config.include('fika.models')
     config.include('fika.schemas')
-#    config.include('fika.views')
+    config.include('fika.views')
     config.add_translation_dirs('fika:locale/')
     from arche.security import get_acl_registry
     from arche.utils import get_content_factories

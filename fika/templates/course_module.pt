@@ -2,19 +2,17 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="view.main_macro"
+      metal:use-macro="view.macro('arche:templates/base_view.pt')">
       i18n:domain="fika">
 <body>
 
-<metal:head fill-slot="head">
+<div metal:fill-slot="main-content">
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('#module-segments').sortable();
 		});
 	</script>
-</metal:head>
 
-<div metal:fill-slot="content">
 
 	<form tal:condition="request.view_name=='edit'" tal:replace="structure form">Form here</form>
 	<form tal:condition="request.view_name=='order'" tal:replace="structure form">Form here</form>
@@ -32,7 +30,7 @@
                 </a>
         
                 <div class="course_segment description">
-                    ${segment.get_field_value('description')}
+                    ${segment.description}
                 </div>
                 
                 <div class="btn-group btn-group-lg">
@@ -58,10 +56,10 @@
 
     <div class="panel panel-default panel-add inline-form-structure">
         <div class="panel-body inline-form-target">
-            <tal:iterate repeat="type view.addable_types">
+            <tal:iterate repeat="type view.addable_content(context)">
                 <a class="btn btn-default add-segment"
-                   href="${request.resource_url(context, 'add', query = {'content_type': type})}">
-                    Add new ${type}
+                   href="${request.resource_url(context, 'add', query = {'content_type': type.type_name})}">
+                    Add new ${type.type_name}
                 </a>
             </tal:iterate>
         </div>
@@ -70,13 +68,13 @@
     </div>
     
     <span tal:condition="request.view_name=='edit'">
-	    <div class="btn-group" tal:condition="len(view.addable_types) > 0">
+	    <div class="btn-group" tal:condition="len(view.addable_content(context)) > 0">
 	      <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
 	        <span i18n:translate="">Add</span> <span class="caret"></span>
 	      </button>
 	      <ul class="dropdown-menu" role="menu">
-	        <tal:iterate repeat="type view.addable_types">
-	            <li><a href="${request.resource_url(context, 'add', query = {'content_type': type})}">${type}</a></li>
+	        <tal:iterate repeat="type view.addable_content(context)">
+	            <li><a href="${request.resource_url(context, 'add', query = {'content_type': type.type_name})}">${type}</a></li>
 	        </tal:iterate>
 	      </ul>
 	    </div>
@@ -86,7 +84,7 @@
 	    Used in courses:
 	    <ul>
 		    <tal:iterate repeat="obj used_in_courses">
-		        <li><a href="${request.resource_url(obj)}" alt="${obj.get_field_value('description')}" title="${obj.get_field_value('description')}">${obj.title}</a></li>
+		        <li><a href="${request.resource_url(obj)}" alt="${obj.description}" title="${obj.description}">${obj.title}</a></li>
 		    </tal:iterate>
 		</ul>
 		Created: ${context.created} <br />

@@ -2,14 +2,13 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="view.main_macro"
+      metal:use-macro="view.macro('arche:templates/base_view.pt')">
       i18n:domain="fika">
 <body>
-<metal:heading fill-slot="heading">
-
+<div metal:fill-slot="main-column">
 <div tal:condition="not course_module" class="jumbotron">
   <h1>${context.title}</h1>
-  <div tal:content="structure context.get_field_value('description')">Description</div>
+  <div tal:content="structure context.description">Description</div>
   <p>
   	<a tal:condition="not in_course"
   		href="${request.resource_url(context, 'join')}"
@@ -49,12 +48,10 @@
 	<h2>
 		${page}. ${course_module.title}
 		<p>
-			<small tal:condition="course_module">${course_module.get_field_value('description')}</small>
+			<small tal:condition="course_module">${course_module.description}</small>
 		</p>
 	</h2>
 </div>
-
-</metal:heading>
 
 <div metal:fill-slot="content">
     <div tal:condition="not course_module">
@@ -80,7 +77,7 @@
 				</div>
 			</div>
 			<div class="col-md-8">
-				<tal:form  replace="structure context.get_field_value('introduction')"></tal:form>
+				<tal:form  replace="structure context.introduction"></tal:form>
 			</div>
 		</div>
     </div>
@@ -151,6 +148,6 @@
         <li><a href="${next(page)}">&raquo;</a></li>
     </ul>
 </div>
-
+</div><!-- main-column -->
 </body>
 </html>

@@ -11,10 +11,9 @@ class Courses(FikaBaseFolder):
     type_name = "Courses"
 
     def module_used_in(self, uid):
-        XXX
         results = set()
         for obj in self.values():
-            if uid in obj.get_field_value('course_modules', ()):
+            if uid in obj.course_modules:
                 results.add(obj)
         return results
 

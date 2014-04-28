@@ -3,18 +3,33 @@ from pyramid.view import view_defaults
 from pyramid.renderers import render
 from pyramid.response import Response
 from pyramid.httpexceptions import HTTPFound
-from betahaus.pyracont.interfaces import IBaseFolder
+#from betahaus.pyracont.interfaces import IBaseFolder
+from arche.views.base import BaseView
+from arche import security
 
-from fika.views.base import BaseView
+#from fika.views.base import BaseView
 from fika.models.interfaces import ICourse
 from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourses
-from fika.models.interfaces import IUser
-from fika import security
+from fika.models.interfaces import IFikaUser
+#from fika import security
+from fika.fanstatic import main_css
+from fika.fanstatic import common_js
 
-
-@view_defaults(permission = security.VIEW)
+@view_defaults(permission = security.PERM_VIEW)
 class CourseView(BaseView):
+
+    @property
+    def profile(self):
+        if self.request.authenticated_userid:
+            user = self.root['users'][self.request.authenticated_userid]
+            return self.request.registry.getAdapter(user, IFikaUser)
+
+    def __init__(self, context, request):
+        main_css.need()
+        common_js.need()
+        super(CourseView, self).__init__(context, request)
+        self.response = {}
 
     @view_config(context = ICourse, renderer = "fika:templates/course.pt")
     def course(self):
@@ -60,12 +75,15 @@ class CourseView(BaseView):
         self.response['course_modules'] = self.root['course_modules']
         return self.response
     
-    @view_config(context = ICourse, name = "join", renderer = "fika:templates/course.pt")
+    @view_config(context = ICourse, name = "join")
     def join(self):
         self.profile.join_course(self.context)
         return HTTPFound(location = self.request.resource_url(self.context))
 
-    @view_config(context = ICourse, name = "leave", renderer = "fika:templates/course.pt")
+    @view_config(context = ICourse, name = "leave")
     def leave(self):
         self.profile.leave_course(self.context)
         return HTTPFound(location = self.request.resource_url(self.context)) 
+
+def includeme(config):
+    config.scan('.courses')

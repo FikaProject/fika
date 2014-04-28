@@ -1,4 +1,6 @@
 
 
 def includeme(config):
-    config.scan('fika.views')
+    config.include('.course_modules')
+    config.include('.courses')
+#    config.scan('fika.views')

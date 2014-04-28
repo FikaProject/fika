@@ -2,13 +2,13 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="view.main_macro"
+      metal:use-macro="view.macro('arche:templates/base_view.pt')">
       i18n:domain="fika">
 <body>
-
-<div metal:fill-slot="content">
+<div metal:fill-slot="main-content">
     <tal:iterate repeat="obj course_modules">
-        <div tal:replace="structure view.render_action_bar(obj)">Actions</div>
+        <!--
+        <div tal:replace="structure view.render_action_bar(obj)">Actions</div>-->
 
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
@@ -24,7 +24,7 @@
             	</ul>
             	Used in:
 			    <ul>
-			    <tal:iterate repeat="course courses.module_used_in(obj.uid)">
+			    <tal:iterate repeat="course courses.module_used_in(obj.__name__)">
 			       <li><a href="${request.resource_url(course)}">${course.title}</a></li>
 			    </tal:iterate>
 			    </ul>
@@ -32,6 +32,5 @@
         </div>
     </tal:iterate>
 </div>
-
 </body>
 </html>

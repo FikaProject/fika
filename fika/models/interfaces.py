@@ -3,6 +3,10 @@ from zope.interface import Interface
 #from betahaus.pyracont.interfaces import IBaseFolder
 
 
+class IFikaUser(Interface):
+    """ Adapter to extend functionality of base fika users.
+    """
+
 class ISecurityAware(Interface):
     pass
 
