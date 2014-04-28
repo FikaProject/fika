@@ -77,6 +77,16 @@ FikaTSF = _ = TranslationStringFactory('fika')
 def includeme(config):
     config.include('fika.populator')
     config.include('fika.models')
-#    config.include('fika.schemas')
+    config.include('fika.schemas')
 #    config.include('fika.views')
     config.add_translation_dirs('fika:locale/')
+    from arche.security import get_acl_registry
+    from arche.utils import get_content_factories
+    from arche.security import ROLE_ADMIN
+    acl_reg = get_acl_registry(config.registry)
+    factories = get_content_factories(config.registry)
+    add_perms = []
+    for factory in factories.values():
+        if hasattr(factory, 'add_permission'):
+            add_perms.append(factory.add_permission)
+    acl_reg.default.add(ROLE_ADMIN, add_perms)

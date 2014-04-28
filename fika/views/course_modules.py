@@ -58,21 +58,19 @@ class CourseModulesView(BaseView):
         self.response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
         return self.response
     
-    @view_config(context = ICourseModule, name = 'order', permission = security.EDIT, renderer = "fika:templates/ordering.pt")
-    def ordering(self):
-        #FIXME not done! This view needs to write the keys within this context to context.order
-        post = self.request.POST
-        if 'save' in post:
-            segments = self.request.POST.items()
-            ordered_segments = ()
-            for (k, v) in segments:
-                if k == 'module-segments':
-                    ordered_segments += (v, )
-            self.context.set_order(ordered_segments)
-            self.flash_messages.add(_(u"Saved ordering"), type="success")
-            #import pdb;pdb.set_trace()
-            
-        
-        self.response['module_segments'] = self.context.values()
-        #import pdb;pdb.set_trace()
-        return self.response
+#     @view_config(context = ICourseModule, name = 'order', permission = security.EDIT, renderer = "fika:templates/ordering.pt")
+#     def ordering(self):
+#         #FIXME not done! This view needs to write the keys within this context to context.order
+#         post = self.request.POST
+#         if 'save' in post:
+#             segments = self.request.POST.items()
+#             ordered_segments = ()
+#             for (k, v) in segments:
+#                 if k == 'module-segments':
+#                     ordered_segments += (v, )
+#             self.context.set_order(ordered_segments)
+#             self.flash_messages.add(_(u"Saved ordering"), type="success")
+#             
+#         
+#         self.response['module_segments'] = self.context.values()
+#         return self.response

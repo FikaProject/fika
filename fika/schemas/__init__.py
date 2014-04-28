@@ -1,4 +1,6 @@
 
 
 def includeme(config):
-    config.scan('fika.schemas')
+    config.include('.course')
+    config.include('.course_module')
+    config.include('.module_segment')

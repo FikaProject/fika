@@ -9,7 +9,7 @@ from fika import FikaTSF as _
 class CourseModule(FikaBaseFolder):
     type_title = _(u"Course module")
     type_name = u"CourseModule"
-    addable_to = ("CourseModules")
+    addable_to = ("CourseModules",)
     add_permission = "Add %s" % type_name
 
 

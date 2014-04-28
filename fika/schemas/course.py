@@ -1,6 +1,5 @@
 import colander
 import deform
-from betahaus.pyracont.decorators import schema_factory
 
 
 @colander.deferred
@@ -18,7 +17,6 @@ class CourseModules(colander.SequenceSchema):
                                         widget = course_module_widget)
 
 
-@schema_factory('CourseSchema')
 class CourseSchema(colander.Schema):
     title = colander.SchemaNode(colander.String(),)
     description = colander.SchemaNode(colander.String(),
@@ -29,3 +27,8 @@ class CourseSchema(colander.Schema):
                                widget = deform.widget.RichTextWidget(),
                                missing = u"")
     course_modules = CourseModules(widget=deform.widget.SequenceWidget(orderable=True))
+
+
+def includeme(config):
+    config.add_content_schema('Course', CourseSchema, 'add')
+    config.add_content_schema('Course', CourseSchema, 'edit')
