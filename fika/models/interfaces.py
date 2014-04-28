@@ -1,6 +1,6 @@
 from zope.interface import Attribute
 from zope.interface import Interface
-from betahaus.pyracont.interfaces import IBaseFolder
+#from betahaus.pyracont.interfaces import IBaseFolder
 
 
 class ISecurityAware(Interface):
@@ -12,7 +12,7 @@ class ICatalogable(Interface):
     """
 
 
-class IBase(IBaseFolder, ISecurityAware):
+class IBase(ISecurityAware):
     pass
 
 

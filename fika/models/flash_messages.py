@@ -47,5 +47,5 @@ def get_flash_messages(request):
         return FlashMessages(request)
 
 
-def includeme(config):
-    config.registry.registerAdapter(FlashMessages)
+#def includeme(config):
+#    config.registry.registerAdapter(FlashMessages)

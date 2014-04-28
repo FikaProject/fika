@@ -1,7 +1,5 @@
 import colander
 import deform
-from betahaus.pyracont.factories import createSchema
-from betahaus.pyracont.decorators import content_factory
 from zope.interface import implementer
 
 from .base import FikaBaseFolder
@@ -11,17 +9,18 @@ from .interfaces import ICourse
 from fika import FikaTSF as _
 
 
-@content_factory('ModuleSegment')
+#@content_factory('ModuleSegment')
 @implementer(IModuleSegment)
 class ModuleSegment(FikaBaseFolder):
-    allowed_contexts = (ICourseModule,)
-    schemas = {'add': 'ModuleSegmentSchema',
-               'edit': 'ModuleSegmentSchema',
-               'delete': 'DeleteSchema'}
-    display_name = _(u"Module segment")
-    
-    def get_order(self, **kwargs):
-        return tuple(self.order)
-    
-    def set_order(self, value, **kwargs):
-        self.order = value
+    addable_to = ("CourseModule",)
+#     schemas = {'add': 'ModuleSegmentSchema',
+#                'edit': 'ModuleSegmentSchema',
+#                'delete': 'DeleteSchema'}
+    type_name = "ModuleSegment"
+    type_title = _(u"Module segment")
+    add_permission = "Add %s" % type_name
+    type_title = _(u"Course module")
+
+
+def includeme(config):
+    config.add_content_factory(ModuleSegment)
