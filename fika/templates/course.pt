@@ -17,22 +17,12 @@
         <span class="glyphicon glyphicon-bookmark"></span>
         <span i18n:translate="">Enroll</span>
   	</a>
-  	<span tal:condition="in_course"
-  		onmouseenter="getElementById('button-enrolled').style.display='none';getElementById('button-leave').style.display='inline-block';"
-  		onmouseleave="getElementById('button-enrolled').style.display='inline-block';getElementById('button-leave').style.display='none';">
-	  	<a href="${request.resource_url(context, 'leave')}"
-	  		class="btn btn-success btn-lg" role="button"
-	  		id="button-enrolled" style="inline-block">
-	        <span class="glyphicon glyphicon-ok"></span>
-	        <span i18n:translate="">Enrolled</span>
-	  	</a>
-	  	<a href="${request.resource_url(context, 'leave')}"
-	  		class="btn btn-warning btn-lg" role="button"
-	  		id="button-leave" style="display:none;">
-	        <span class="glyphicon glyphicon-log-out"></span>
-	        <span i18n:translate="">Leave</span>
-	  	</a>
-  	</span>
+  	<a tal:condition="in_course"
+  		href="${request.resource_url(context, 'leave')}"
+  		class="btn btn-success btn-lg" role="button">
+        <span class="glyphicon glyphicon-ok"></span>
+        <span i18n:translate="">Enrolled</span>
+  	</a>
   </p>
 </div>
 

@@ -14,13 +14,15 @@
             	<span class="fika-enroll-button-right">
 	            	<a tal:condition="not view.profile.in_course(obj)"
 				  		href="${request.resource_url(obj, 'join')}"
-				  		class="btn btn-primary glyphicon glyphicon-bookmark" role="button">
-				      <span i18n:translate="">Enroll</span>
+				  		class="btn btn-primary btn-sm" role="button">
+				  		<span class="glyphicon glyphicon-bookmark"></span>
+						<span i18n:translate="">Enroll</span>
 				  	</a>
 				  	<a tal:condition="view.profile.in_course(obj)"
 				  		href="${request.resource_url(obj, 'leave')}"
-				  		class="btn btn-primary glyphicon glyphicon-ban-circle" role="button">
-				      <span i18n:translate="">Leave</span>
+				  		class="btn btn-success btn-sm" role="button">
+				  		<span class="glyphicon glyphicon-ok"></span>
+						<span i18n:translate="">Enrolled</span>
 				  	</a>
 			  	</span>
             </div>
