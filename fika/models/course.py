@@ -14,7 +14,7 @@ from fika import FikaTSF as _
 class Course(FikaBaseFolder):
     type_title =  _(u"Course")
     type_name = u"Course"
-    addable_to = ("Courses")
+    addable_to = ("Courses",)
     add_permission = "Add %s" % type_name
     introduction = ""
 
