@@ -14,7 +14,7 @@ from fika.models.interfaces import IModuleSegment
 @implementer(IFile)
 class File(Persistent):
     schemas = {'add': 'AddFileSchema', 'edit': 'EditFileSchema', 'delete': 'DeleteSchema'}
-    allowed_contexts = (IModuleSegment,)
+    addable_to = ("ModuleSegment",)
     filename = u""
     title = filename
     uid = u""
