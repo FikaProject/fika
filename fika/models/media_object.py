@@ -1,7 +1,5 @@
 import colander
 import deform
-from betahaus.pyracont.factories import createSchema
-from betahaus.pyracont.decorators import content_factory
 from zope.interface import implementer
 
 from .base import FikaBaseFolder
@@ -18,6 +16,8 @@ from .interfaces import ICourseModule
 from .interfaces import ICourse
 from fika import FikaTSF as _
 
+#FIXME: Refactor this arche way!
+
 
 @implementer(IMediaObject)
 class MediaObject(FikaBaseFolder):
@@ -32,9 +32,8 @@ class MediaObject(FikaBaseFolder):
         form = deform.Form(schema, buttons = (), action="derp")
         appstruct = self.get_field_appstruct(schema)
         return form.render(appstruct = appstruct, readonly = True)
-        
 
-@content_factory('TextMediaObject')
+
 @implementer(ITextMediaObject)
 class TextMediaObject(MediaObject):
     schemas = {'add': 'TextMediaObjectSchema',
@@ -49,8 +48,8 @@ class TextMediaObject(MediaObject):
         return u'<div class="mediaobject">' \
             + self.get_field_value('body', '') \
             + u'</div>'
-    
-@content_factory('ImageMediaObject')
+
+
 @implementer(IImageMediaObject)
 class ImageMediaObject(MediaObject):
     schemas = {'add': 'ImageMediaObjectSchema',
@@ -66,8 +65,8 @@ class ImageMediaObject(MediaObject):
             + u'" /><div>' \
             + self.get_field_value('description', '') \
             + u'</div></div>'
-            
-@content_factory('ImagesMediaObject')
+
+
 @implementer(IImagesMediaObject)
 class ImagesMediaObject(MediaObject):
     schemas = {'add': 'ImagesMediaObjectSchema',
@@ -90,7 +89,7 @@ class ImagesMediaObject(MediaObject):
             + u'</div></div>'
         return returnString
 
-@content_factory('YoutubeMediaObject')
+
 @implementer(IYoutubeMediaObject)
 class YoutubeMediaObject(MediaObject):
     schemas = {'add': 'YoutubeMediaObjectSchema',
@@ -108,7 +107,7 @@ class YoutubeMediaObject(MediaObject):
             + self.get_field_value('description', '') \
             + u'</div></div>'
 
-@content_factory('VimeoMediaObject')
+
 @implementer(IVimeoMediaObject)
 class VimeoMediaObject(MediaObject):
     schemas = {'add': 'VimeoMediaObjectSchema',
@@ -127,7 +126,6 @@ class VimeoMediaObject(MediaObject):
             + u'</div></div>'
 
 
-@content_factory('VideoMediaObject')
 @implementer(IVideoMediaObject)
 class VideoMediaObject(MediaObject):
     schemas = {'add': 'VideoMediaObjectSchema',
@@ -146,7 +144,6 @@ class VideoMediaObject(MediaObject):
             + u'</div>'
 
 
-@content_factory('AudioMediaObject')
 @implementer(IAudioMediaObject)
 class AudioMediaObject(MediaObject):
     schemas = {'add': 'AudioMediaObjectSchema',
@@ -163,5 +160,3 @@ class AudioMediaObject(MediaObject):
             +'"></audio></div>' \
             + self.get_field_value('description', '') \
             + u'</div>'
-
-

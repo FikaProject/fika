@@ -23,9 +23,8 @@ class CourseTests(TestCase):
     def test_verify_class(self):
         self.failUnless(verifyClass(ICourse, self._cut))
 
-    def test_verify_class(self):
+    def test_verify_obj(self):
         self.failUnless(verifyObject(ICourse, self._cut()))
-
 
 
 class DeleteCourseTests(TestCase):
@@ -42,8 +41,8 @@ class DeleteCourseTests(TestCase):
         return removeUsersFromCourse
     
     def test_added(self):
-        from fika.models.user import User
-        from fika.models.users import Users
+        from arche.resources import User
+        from arche.resources import Users
         from fika.models.course import Course
         user = User()
         course = Course()
