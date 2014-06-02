@@ -21,7 +21,6 @@ from fika import FikaTSF as _
 
 @implementer(IMediaObject)
 class MediaObject(FikaBaseFolder):
-    addable_to = ("ModuleSegment",)
     display_name = _(u"Media object")
     icon = u""
 

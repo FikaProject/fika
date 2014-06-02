@@ -14,7 +14,6 @@ from fika import FikaTSF as _
 class Course(FikaBaseFolder):
     type_title =  _(u"Course")
     type_name = u"Course"
-    addable_to = ("Courses",)
     add_permission = "Add %s" % type_name
     introduction = ""
 
@@ -44,3 +43,4 @@ def removeUsersFromCourse(course, event):
 def includeme(config):
     config.add_content_factory(Course)
     config.add_subscriber(removeUsersFromCourse, [ICourse, IObjectWillBeRemovedEvent])
+    config.add_addable_content("Course", "Courses")

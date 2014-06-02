@@ -9,7 +9,6 @@ import deform
 
 @implementer(IModuleSegment)
 class ModuleSegment(FikaBaseFolder):
-    addable_to = ("CourseModule",)
     type_name = "ModuleSegment"
     type_title = _(u"Module segment")
     add_permission = "Add %s" % type_name
@@ -17,3 +16,4 @@ class ModuleSegment(FikaBaseFolder):
 
 def includeme(config):
     config.add_content_factory(ModuleSegment)
+    config.add_addable_content("ModuleSegment", "CourseModule")
