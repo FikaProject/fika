@@ -37,7 +37,7 @@ def removeUsersFromCourse(course, event):
     root = find_root(course)
     users = root['users']
     for user in users.values():
-        if course.uid in user.__courses__:
+        if course.uid in getattr(user, '__courses__', {}):
             del user.__courses__[course.uid]
 
 

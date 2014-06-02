@@ -44,13 +44,16 @@ class DeleteCourseTests(TestCase):
         from arche.resources import User
         from arche.resources import Users
         from fika.models.course import Course
+        from fika.models.user import FikaUser
+        self.config.include('fika.models.user')
         user = User()
         course = Course()
-        user.join_course(course)
-        self.assertTrue(user.in_course(course))
         root = testing.DummyResource()
         root['users'] = Users()
-        root['users'][user.uid] = user
+        root['users']['dummy'] = user
         root['course'] = course
+        fikauser = FikaUser(user)
+        fikauser.join_course(course)
+        self.assertTrue(fikauser.in_course(course))
         self._fut(course, None)
-        self.assertFalse(user.in_course(course))
+        self.assertFalse(fikauser.in_course(course))
