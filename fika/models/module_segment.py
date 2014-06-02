@@ -1,12 +1,10 @@
+from .base import FikaBaseFolder
+from .interfaces import ICourse, ICourseModule, IModuleSegment
+from fika import FikaTSF as _
+from zope.interface import implementer
 import colander
 import deform
-from zope.interface import implementer
 
-from .base import FikaBaseFolder
-from .interfaces import IModuleSegment
-from .interfaces import ICourseModule
-from .interfaces import ICourse
-from fika import FikaTSF as _
 
 
 @implementer(IModuleSegment)
