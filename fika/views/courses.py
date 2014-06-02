@@ -43,7 +43,10 @@ class CourseView(BaseView):
             previos = page - 1
             return page > 0 and "?p=%s" % previos or ""
             
-        course_modules = self.root['course_modules']
+        #course_modules = self.root['course_modules']
+        course_modules = {}
+        for uid in self.context.course_modules:
+            course_modules[uid] = self.resolve_uid(uid)
         page = int(self.request.GET.get('p', 0))
         self.response['page'] = page
         self.response['pages'] = pages

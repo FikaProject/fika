@@ -1,20 +1,20 @@
 import colander
 import deform
+from arche.widgets import ReferenceWidget
 
-
-@colander.deferred
-def course_module_widget(node, kw):
-    view = kw['view']
-    root = view.root
-    values = []
-    for (name, obj) in root['course_modules'].items():
-        values.append((name, obj.title))
-    return deform.widget.SelectWidget(values = values)
-
-
-class CourseModules(colander.SequenceSchema):
-    course_module = colander.SchemaNode(colander.String(),
-                                        widget = course_module_widget)
+# @colander.deferred
+# def course_module_widget(node, kw):
+#     view = kw['view']
+#     root = view.root
+#     values = []
+#     for (name, obj) in root['course_modules'].items():
+#         values.append((name, obj.title))
+#     return deform.widget.SelectWidget(values = values)
+# 
+# 
+# class CourseModules(colander.SequenceSchema):
+#     course_module = colander.SchemaNode(colander.List(),
+#                                         widget = ReferenceWidget(query_params = {'type_name': 'CourseModule'}))
 
 
 class CourseSchema(colander.Schema):
@@ -26,7 +26,9 @@ class CourseSchema(colander.Schema):
     introduction = colander.SchemaNode(colander.String(),
                                widget = deform.widget.RichTextWidget(),
                                missing = u"")
-    course_modules = CourseModules(widget=deform.widget.SequenceWidget(orderable=True))
+    #course_modules = CourseModules(widget=deform.widget.SequenceWidget(orderable=True))
+    course_modules = colander.SchemaNode(colander.List(),
+                                        widget = ReferenceWidget(query_params = {'type_name': 'CourseModule'}))
 
 
 def includeme(config):
