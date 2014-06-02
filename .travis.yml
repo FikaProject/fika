@@ -5,7 +5,7 @@ python:
 
 install:
   - python bootstrap.py
-  - bin/buildout
+  - bin/buildout -c test.cfg
 
 script: bin/py setup.py test -q
 
