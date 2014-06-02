@@ -12,7 +12,6 @@ from .base import FikaBaseFolder
 from .interfaces import ICourse
 from .interfaces import IFikaUser
 from fika import  _
-#from fika import security
 #from fika.interfaces import IObjectAddedEvent 
 
 
