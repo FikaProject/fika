@@ -6,7 +6,7 @@
       i18n:domain="fika">
 <body>
 
-<div metal:fill-slot="content">
+<div metal:fill-slot="main-content">
 
     <tal:iterate repeat="obj courses">
         <div class="panel panel-default">
@@ -27,7 +27,7 @@
 			  	</span>
             </div>
             <div class="panel-body">
-            	<span tal:replace="structure obj.get_field_value('description', ())"></span>
+            	<span tal:replace="structure obj.description"></span>
         	</div>
         </div>
     </tal:iterate>
