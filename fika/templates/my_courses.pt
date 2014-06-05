@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="view.macro('arche:templates/base_view.pt')"
+      i18n:domain="fika">
+      
+<title metal:fill-slot="page-title">${view.main_title}</title>
+
+<body>
+
+<h1 metal:fill-slot="heading">
+
+</h1>
+
+<div metal:fill-slot="main-content">
+    <div class="row">
+        <div class="col-md-12">
+        	<div tal:condition="profile|False">
+				<h1 i18n:translate="">My courses</h1>
+	        	
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-book"></span> <span i18n:translate="">Currently enrolled</span>
+					</div>
+					<div class="list-group">
+						<tal:iterate repeat="courseuid profile.courses">
+						<tal:completed condition="course_percentage[courseuid] < 100">
+						<a class="list-group-item" href="${request.resource_url(view.resolve_uid(courseuid))}">
+							<div class="row">
+								<div class="col-md-6">
+									${view.resolve_uid(courseuid).title}
+								</div>
+								<div class="col-md-6">
+									<div class="progress" style="width:100%;height:5px;margin-bottom:0px;">
+										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="${course_percentage[courseuid]}" aria-valuemin="0" aria-valuemax="100" style="width: ${course_percentage[courseuid]}%;">
+											<span class="sr-only">${course_percentage[courseuid]}% Complete</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</a>
+						</tal:completed>
+						</tal:iterate>
+					</div>
+				</div>
+	
+				<div class="panel panel-default">				
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-ok"></span> <span i18n:translate="">Completed</span>
+					</div>
+					<div class="list-group">
+						<tal:iterate repeat="courseuid profile.courses">
+						<tal:completed condition="course_percentage[courseuid] >= 100">
+						<a class="list-group-item" href="${request.resource_url(view.resolve_uid(courseuid))}">
+							<div class="row">
+								<div class="col-md-12">
+									${view.resolve_uid(courseuid).title}
+									<span class="label label-success pull-right"><span class="glyphicon glyphicon-ok"></span> </span>
+								</div>
+							</div>
+						</a>
+						</tal:completed>
+						</tal:iterate>
+						<tal:empty condition="len(completed_courses) == 0">
+							<a class="list-group-item" >
+							<div class="row">
+								<div class="col-md-12 text-muted">
+									<span i18n:translate="">You have not completed any courses yet..</span>
+								</div>
+							</div>
+							</a>
+						</tal:empty>
+					</div>
+				</div>
+			</div>
+			
+			<div tal:condition="not profile|True">
+				Welcome to Fika. Please <a href="/login">log in</a> to see your courses.
+			</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
