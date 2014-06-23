@@ -75,6 +75,7 @@ FikaTSF = _ = TranslationStringFactory('fika')
 
 
 def includeme(config):
+    config.commit()
     config.include('fika.populator')
     config.include('fika.models')
     config.include('fika.schemas')

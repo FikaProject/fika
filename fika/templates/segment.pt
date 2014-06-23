@@ -6,8 +6,8 @@
       i18n:domain="fika">
 <body>
 
-<div metal:fill-slot="content">
-	
+<div metal:fill-slot="main-column">
+
 	<div class="panel panel-default">
 	    <div class="panel-heading">
 	        <h4 class="panel-title">
@@ -15,29 +15,16 @@
 	        </h4>
 	    </div>
 	    <div class="panel-body">
-	        
         	<div class="course_segment description">
-            	${context.get_field_value('description')}
+                ${context.description}
         	</div>
-            
             <div class="btn-group btn-group-lg">
 	            <tal:iterate repeat="media_object media_objects">
 					<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${context.uid}" href="#collapse-${media_object.uid}">
-        				<span class="glyphicon glyphicon-${media_object.icon}"></span>
+                        <span class="glyphicon glyphicon-${getattr(media_object, 'icon', 'file')}"></span>
         			</button>
 			    </tal:iterate>
             </div>
-            
-            <div class="btn-group" tal:condition="len(view.addable_types) > 0" >
-		      <button type="button" class="btn btn-default btn-lg dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
-		        <span i18n:translate="">Add</span> <span class="caret"></span>
-		      </button>
-		      <ul class="dropdown-menu" role="menu">
-		        <tal:iterate repeat="type view.addable_types">
-		            <li><a href="${request.resource_url(context, 'add', query = {'content_type': type})}">${type}</a></li>
-		        </tal:iterate>
-		      </ul>
-		    </div>
 		    
             <div class="panel-group" id="accordion-${context.uid}">
 	            <tal:iterate repeat="media_object media_objects">
@@ -47,8 +34,12 @@
 								<a href="${request.resource_url(media_object, 'edit')}"><button type="button" class="btn btn-default">Edit</button></a>
 								<a href="${request.resource_url(media_object, 'delete')}"><button type="button" class="btn btn-default">Delete</button></a>
 							</div>
-					
-				        	<tal:form  replace="structure media_object.render(request, view)" ></tal:form>
+					        <div class="media-area">
+                            Loading...
+                            <script type="text/javascript">
+                                $('#collapse-${media_object.uid} .media-area').load('${request.resource_url(media_object)}');
+                            </script>
+					        </div>
 				        </div>
 			        </div>
 			    </tal:iterate>

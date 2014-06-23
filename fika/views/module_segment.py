@@ -12,5 +12,4 @@ class ModuleSegment(BaseView):
    
     @view_config(context = IModuleSegment, renderer = "fika:templates/segment.pt")
     def module_segment(self):
-        self.response['media_objects'] = [x for x in self.context.values() if IMediaObject.providedBy(x)]
-        return self.response
+        return {'media_objects': self.context.values()}

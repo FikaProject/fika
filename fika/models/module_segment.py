@@ -1,10 +1,7 @@
-from .base import FikaBaseFolder
-from .interfaces import ICourse, ICourseModule, IModuleSegment
+from fika.models.base import FikaBaseFolder
+from fika.models.interfaces import IModuleSegment
 from fika import FikaTSF as _
 from zope.interface import implementer
-import colander
-import deform
-
 
 
 @implementer(IModuleSegment)
@@ -17,3 +14,4 @@ class ModuleSegment(FikaBaseFolder):
 def includeme(config):
     config.add_content_factory(ModuleSegment)
     config.add_addable_content("ModuleSegment", "CourseModule")
+    config.add_addable_content("ExternalResource", "ModuleSegment")
