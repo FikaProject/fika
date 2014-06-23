@@ -15,3 +15,4 @@ def includeme(config):
     config.add_content_factory(ModuleSegment)
     config.add_addable_content("ModuleSegment", "CourseModule")
     config.add_addable_content("ExternalResource", "ModuleSegment")
+    config.add_addable_content("Image", "ModuleSegment")
