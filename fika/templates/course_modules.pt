@@ -13,8 +13,8 @@
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
             <div class="panel-body">
-            	Created: ${obj.created} <br />
-            	Modified: ${obj.modified} <br />
+                Created: ${request.dt_handler.format_dt(obj.created)} <br />
+                Modified: ${request.dt_handler.format_dt(obj.modified)} <br />
             	<br />
             	${obj._num_objects.value} segments:
             	<ul>
