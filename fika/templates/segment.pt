@@ -5,8 +5,7 @@
       metal:use-macro="view.macro('arche:templates/base_view.pt')"
       i18n:domain="fika">
 <body>
-
-<div metal:fill-slot="main-column">
+<div metal:fill-slot="main-content">
 
 	<div class="panel panel-default">
 	    <div class="panel-heading">
@@ -48,7 +47,5 @@
 	</div>
 
 </div>
-
-
 </body>
 </html>
