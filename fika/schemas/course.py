@@ -28,7 +28,8 @@ class CourseSchema(colander.Schema):
                                missing = u"")
     #course_modules = CourseModules(widget=deform.widget.SequenceWidget(orderable=True))
     course_modules = colander.SchemaNode(colander.List(),
-                                        widget = ReferenceWidget(query_params = {'type_name': 'CourseModule'}))
+                                         missing = (),
+                                         widget = ReferenceWidget(query_params = {'type_name': 'CourseModule'}))
 
 
 def includeme(config):
