@@ -99,7 +99,7 @@
 			            			data-toggle="collapse"
 			            			data-parent="#accordion-${segment.uid}"
 			            			href="#collapse-${media_object.uid}">
-			            				<span class="glyphicon glyphicon-${media_object.icon}"></span>
+			            				<span class="glyphicon glyphicon-${getattr(media_object, 'icon', 'file')}"></span>
 			        			</button>
 		        			</tal:iterate>
 			            </div>
@@ -108,7 +108,12 @@
 			            	<tal:iterate repeat="media_object segment.values()">
 				            	<div class="panel fika-media-panel">
 						            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-						        		<tal:form  replace="structure media_object.render(request, view)" >Contents of media</tal:form>
+						        		<div class="media-area">
+				                            Loading...
+				                            <script type="text/javascript">
+				                                $('#collapse-${media_object.uid} .media-area').load('${request.resource_url(media_object)}');
+				                            </script>
+								        </div>
 						        		<br/>
 						        		<button type="button"
 						        			class="btn btn-default btn-sm"
