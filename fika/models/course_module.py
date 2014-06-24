@@ -1,7 +1,7 @@
 from zope.interface import implementer
 
-from .base import FikaBaseFolder
-from .interfaces import ICourseModule
+from fika.models.base import FikaBaseFolder
+from fika.models.interfaces import ICourseModule
 from fika import FikaTSF as _
 
 
@@ -15,3 +15,6 @@ class CourseModule(FikaBaseFolder):
 def includeme(config):
     config.add_content_factory(CourseModule)
     config.add_addable_content("CourseModule", "CourseModules")
+    config.add_addable_content("ExternalResource", "CourseModule")
+    config.add_addable_content("Image", "CourseModule")
+    config.add_addable_content("Document", "CourseModule")
