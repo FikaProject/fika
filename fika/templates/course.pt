@@ -5,7 +5,7 @@
       metal:use-macro="view.macro('arche:templates/base_view.pt')"
       i18n:domain="fika">
 <body>
-<div metal:fill-slot="main-column">
+<div metal:fill-slot="main-content">
 <div tal:condition="not course_module" class="jumbotron">
   <h1>${context.title}</h1>
   <div tal:content="structure context.description">Description</div>
