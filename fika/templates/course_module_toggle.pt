@@ -12,7 +12,7 @@
     <a tal:condition="not module_done" role="button"
        href="${request.resource_url(context, '_set_course_module_status', query = {'status': 1})}"
        class="btn btn-default mark-course-module-done">
-      <span i18n:translate="">Finished</span>
+      <span i18n:translate="">Mark as finished</span>
       <span class="glyphicon glyphicon-question-sign"></span>
     </a>
 </tal:main>
