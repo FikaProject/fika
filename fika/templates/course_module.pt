@@ -21,11 +21,11 @@
 	    Used in courses:
 	    <ul>
 		    <tal:iterate repeat="obj used_in_courses">
-		        <li><a href="${request.resource_url(obj)}" alt="${obj.description}" title="${obj.description}">${obj.title}</a></li>
+		        <li><span class="glyphicon glyphicon-book"></span> <a href="${request.resource_url(obj)}" alt="${obj.description}" title="${obj.description}">${obj.title}</a></li>
 		    </tal:iterate>
 		</ul>
-		Created: ${request.dt_handler.format_dt(context.created)} <br />
-        Modified: ${request.dt_handler.format_dt(context.modified)} <br />
+		<span class="glyphicon glyphicon-file" title="Created"></span> ${request.dt_handler.format_dt(context.created)} <br />
+        <span class="glyphicon glyphicon-pencil" title="Modified"></span> ${request.dt_handler.format_dt(context.modified)} <br />
 	</div>
 	
 	<div tal:omit-tag="request.view_name!='order'" id="module-segments">	

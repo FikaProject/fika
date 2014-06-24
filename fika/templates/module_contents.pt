@@ -12,7 +12,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">
-								<span class="glyphicon glyphicon-font"></span>  ${obj.title}
+								<span class="glyphicon glyphicon-${getattr(obj, 'icon', 'file')}"></span>  ${obj.title}
 							</a>
 						</h4>
 					</div>
