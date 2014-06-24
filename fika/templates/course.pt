@@ -6,148 +6,154 @@
       i18n:domain="fika">
 <body>
 <div metal:fill-slot="main-content">
-<div tal:condition="not course_module" class="jumbotron">
-  <h1>${context.title}</h1>
-  <div tal:content="structure context.description">Description</div>
-  <p>
-  	<a tal:condition="not in_course"
-  		href="${request.resource_url(context, 'join')}"
-  		class="btn btn-primary btn-lg" role="button">
-        <span class="glyphicon glyphicon-bookmark"></span>
-        <span i18n:translate="">Enroll</span>
-  	</a>
-  	<a tal:condition="in_course"
-  		href="${request.resource_url(context, 'leave')}"
-  		class="btn btn-success btn-lg" role="button">
-        <span class="glyphicon glyphicon-ok"></span>
-        <span i18n:translate="">Enrolled</span>
-  	</a>
-  </p>
+<div tal:condition="not course_module" class="jumbotron media">
+  <div class="row">
+      <div class="col-sm-9">
+          <h1 class="media-heading">${context.title}</h1>
+          <div tal:content="structure context.description">Description</div>
+          <p>
+              <a tal:condition="not in_course"
+                  href="${request.resource_url(context, 'join')}"
+                  class="btn btn-primary btn-lg" role="button">
+                <span class="glyphicon glyphicon-bookmark"></span>
+                <span i18n:translate="">Enroll</span>
+              </a>
+              <a tal:condition="in_course"
+                  href="${request.resource_url(context, 'leave')}"
+                  class="btn btn-success btn-lg" role="button">
+                <span class="glyphicon glyphicon-ok"></span>
+                <span i18n:translate="">Enrolled</span>
+              </a>
+          </p>
+      </div>
+      <div class="col-sm-3">
+          <img tal:replace="structure view.thumb_tag(context, 'col-3', extra_cls = 'media-object')" />
+      </div>
+  </div>
 </div>
 
 <div tal:condition="course_module" class="">
-	<h1>
-		${context.title}
-	</h1>
-	<ul class="pagination pagination-lg">
-        <li><a href="${previous(page)}">&laquo;</a></li>
-        <tal:iterate repeat="(num, uid) pages.items()">
-                <li tal:attributes="class num == page and 'active' or ''">
-                    <a href="?p=${num}" title="${course_modules[uid].title|''}">
-                    	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
-                    	<span tal:condition="num != 0">
-                    		<span tal:omit-tag="uid not in view.profile.completed_course_modules"
-									class="label label-success">${num}</span>
-							&nbsp;
-						</span>
-                	</a>
-                </li>
-        </tal:iterate>
-        <li><a href="${next(page)}">&raquo;</a></li>
-    </ul>
-	<h2>
-		${page}. ${course_module.title}
-		<p>
-			<small tal:condition="course_module">${course_module.description}</small>
-		</p>
-	</h2>
-</div>
-
-<div metal:fill-slot="content">
-    <div tal:condition="not course_module">
-        <div class="row">
-  			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">Contents</div>
-					<div class="list-group">
-						<tal:iterate repeat="(num, uid) pages.items()">
-							<a tal:condition="num>0" class="list-group-item" href="${'?p=%s' % num}">
-								<span tal:condition="uid in view.profile.completed_course_modules"
-									class="label label-success">
-									<span class="glyphicon glyphicon-ok-sign"></span> ${num}
-								</span>
-								<span tal:condition="not uid in view.profile.completed_course_modules"
-									class="label label-default">
-									<span class="glyphicon glyphicon-unchecked"></span> ${num}
-								</span>
-								&nbsp;<span tal:content="course_modules[uid].title|'NotFound: %s' % uid">Title</span>
-							 </a>
-						</tal:iterate>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-8">
-				<tal:form  replace="structure context.introduction"></tal:form>
-			</div>
-		</div>
-    </div>
-
-    <div tal:condition="course_module">
-    	<div class="row">
-  			<div class="col-md-12">
-  				<div class="fika-divider"></div>
-				<tal:iterate repeat="segment course_module.values()">
-					<div id="${segment.uid}">
-						<h3>
-			               ${segment.title}
-				        </h3>
-			        	
-			            <div class="btn-group btn-group-lg">
-			            	<tal:iterate repeat="media_object segment.values()">
-			            		<button type="button"
-			            			class="btn btn-default collapser fika-media-button"
-			            			data-toggle="collapse"
-			            			data-parent="#accordion-${segment.uid}"
-			            			href="#collapse-${media_object.uid}">
-			            				<span class="glyphicon glyphicon-${getattr(media_object, 'icon', 'file')}"></span>
-			        			</button>
-		        			</tal:iterate>
-			            </div>
-			            
-			            <div class="panel-group" id="accordion-${segment.uid}">
-			            	<tal:iterate repeat="media_object segment.values()">
-				            	<div class="panel fika-media-panel">
-						            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-						        		<div class="media-area">
-				                            Loading...
-				                            <script type="text/javascript">
-				                                $('#collapse-${media_object.uid} .media-area').load('${request.resource_url(media_object)}');
-				                            </script>
-								        </div>
-						        		<br/>
-						        		<button type="button"
-						        			class="btn btn-default btn-sm"
-						        			onclick="location.href='#${segment.uid}';$('#collapse-${media_object.uid}').collapse('hide')">
-											<span class="glyphicon glyphicon-chevron-up"></span>
-											<span i18n:translate="">Close</span>
-										</button>
-							        </div>
-						        </div>
-					        </tal:iterate>
-					    </div>
-					</div>
-					<div class="fika-divider"></div>
-				</tal:iterate>
-			</div>
-		</div>
-
-        <span condition="in_course" tal:content="structure course_module_toggle(course_module)">
-            (course module button here)
-        </span>
-    </div>
-	
+    <h1>
+        ${context.title}
+    </h1>
     <ul class="pagination pagination-lg">
         <li><a href="${previous(page)}">&laquo;</a></li>
         <tal:iterate repeat="(num, uid) pages.items()">
                 <li tal:attributes="class num == page and 'active' or ''">
                     <a href="?p=${num}" title="${course_modules[uid].title|''}">
-                    	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
-                    	<span tal:condition="num != 0">
-                    		<span tal:omit-tag="uid not in view.profile.completed_course_modules"
-									class="label label-success">${num}</span>
-							&nbsp;
-						</span>
-                	</a>
+                        <span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
+                        <span tal:condition="num != 0">
+                            <span tal:omit-tag="uid not in view.profile.completed_course_modules"
+                                    class="label label-success">${num}</span>
+                            &nbsp;
+                        </span>
+                    </a>
+                </li>
+        </tal:iterate>
+        <li><a href="${next(page)}">&raquo;</a></li>
+    </ul>
+    <h2>
+        ${page}. ${course_module.title}
+        <p>
+            <small tal:condition="course_module">${course_module.description}</small>
+        </p>
+    </h2>
+</div>
+
+<div metal:fill-slot="content">
+    <div tal:condition="not course_module">
+        <div class="row">
+              <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Contents</div>
+                    <div class="list-group">
+                        <tal:iterate repeat="(num, uid) pages.items()">
+                            <a tal:condition="num>0" class="list-group-item" href="${'?p=%s' % num}">
+                                <span tal:condition="uid in view.profile.completed_course_modules"
+                                    class="label label-success">
+                                    <span class="glyphicon glyphicon-ok-sign"></span> ${num}
+                                </span>
+                                <span tal:condition="not uid in view.profile.completed_course_modules"
+                                    class="label label-default">
+                                    <span class="glyphicon glyphicon-unchecked"></span> ${num}
+                                </span>
+                                &nbsp;<span tal:content="course_modules[uid].title|'NotFound: %s' % uid">Title</span>
+                             </a>
+                        </tal:iterate>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <tal:form  replace="structure context.introduction"></tal:form>
+            </div>
+        </div>
+    </div>
+
+    <div tal:condition="course_module">
+        <div class="row">
+              <div class="col-md-12">
+                  <div class="fika-divider"></div>
+                <tal:iterate repeat="segment course_module.values()">
+                    <div id="${segment.uid}">
+                        <h3>
+                           ${segment.title}
+                        </h3>
+                        <div class="btn-group btn-group-lg">
+                            <tal:iterate repeat="media_object segment.values()">
+                                <button type="button"
+                                    class="btn btn-default collapser fika-media-button"
+                                    data-toggle="collapse"
+                                    data-parent="#accordion-${segment.uid}"
+                                    href="#collapse-${media_object.uid}">
+                                        <span class="glyphicon glyphicon-${getattr(media_object, 'icon', 'file')}"></span>
+                                </button>
+                            </tal:iterate>
+                        </div>
+                        
+                        <div class="panel-group" id="accordion-${segment.uid}">
+                            <tal:iterate repeat="media_object segment.values()">
+                                <div class="panel fika-media-panel">
+                                    <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+                                        <div class="media-area">
+                                            Loading...
+                                            <script type="text/javascript">
+                                                $('#collapse-${media_object.uid} .media-area').load('${request.resource_url(media_object)}');
+                                            </script>
+                                        </div>
+                                        <br/>
+                                        <button type="button"
+                                            class="btn btn-default btn-sm"
+                                            onclick="location.href='#${segment.uid}';$('#collapse-${media_object.uid}').collapse('hide')">
+                                            <span class="glyphicon glyphicon-chevron-up"></span>
+                                            <span i18n:translate="">Close</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </tal:iterate>
+                        </div>
+                    </div>
+                    <div class="fika-divider"></div>
+                </tal:iterate>
+            </div>
+        </div>
+
+        <span condition="in_course" tal:content="structure course_module_toggle(course_module)">
+            (course module button here)
+        </span>
+    </div>
+    
+    <ul class="pagination pagination-lg">
+        <li><a href="${previous(page)}">&laquo;</a></li>
+        <tal:iterate repeat="(num, uid) pages.items()">
+                <li tal:attributes="class num == page and 'active' or ''">
+                    <a href="?p=${num}" title="${course_modules[uid].title|''}">
+                        <span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
+                        <span tal:condition="num != 0">
+                            <span tal:omit-tag="uid not in view.profile.completed_course_modules"
+                                    class="label label-success">${num}</span>
+                            &nbsp;
+                        </span>
+                    </a>
                 </li>
         </tal:iterate>
         <li><a href="${next(page)}">&raquo;</a></li>

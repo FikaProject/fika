@@ -1,35 +1,13 @@
-body {}
-
 .nav .profile-image {
     margin: -5px 0;
 }
-div.segment
-{
-	
-}
-
 .image-segment
 {
 	width: 100%;
 }
-
-@media (min-width: 768px)
-{
-	.image-segment
-	{
-		max-width: 500px;
-	}
-}
-
-
 .description {
     font-weight: bold;
 }
-
-.collapse {
-    
-}
-
 .collapser{
 	display:block;
 }
@@ -121,25 +99,26 @@ table.table-bottom-border td:last-of-type{
 .fika-nav-button-text{
 	display:none;
 }
-@media (min-width: 1200px)
-{
-	.fika-nav-button-text{
-		display:inline;
-	}
-}
-@media (max-width: 768px)
-{
-	.fika-nav-button-text{
-		display:inline;
-	}
-	.navbar-header .fika-nav-button-text{
-		display:none;
-	} 
-}
 .navbar-header > .navbar-nav > li
 {
-	float:left;
-} 
-/* end of compressed navbar*/
-
-
+    float:left;
+}
+@media (min-width: 1200px)
+{
+    .fika-nav-button-text{
+        display:inline;
+    }
+}
+@media (min-width: 768px)
+{
+    .image-segment
+    {
+        max-width: 500px;
+    }
+    .fika-nav-button-text{
+        display:inline;
+    }
+    .navbar-header .fika-nav-button-text{
+        display:none;
+    } 
+}

@@ -1,16 +1,16 @@
-from zope.interface import implementer
-#from pyramid.events import subscriber
-from pyramid.traversal import find_root
+from arche.interfaces import IBlobs
 from arche.interfaces import IObjectWillBeRemovedEvent
+from arche.interfaces import IThumbnailedContent
 from persistent.list import PersistentList
+from pyramid.traversal import find_root
+from zope.interface import implementer
 
-from .interfaces import ICourse
-#from .interfaces import ICourses
-from .base import FikaBaseFolder
 from fika import FikaTSF as _
+from fika.models.base import FikaBaseFolder
+from fika.models.interfaces import ICourse
 
 
-@implementer(ICourse)
+@implementer(ICourse, IThumbnailedContent)
 class Course(FikaBaseFolder):
     type_title =  _(u"Course")
     type_name = u"Course"
@@ -30,6 +30,12 @@ class Course(FikaBaseFolder):
         for uid in self.course_modules:
             pages[len(pages)] = uid
         return pages
+
+    @property
+    def image_data(self): pass
+    @image_data.setter
+    def image_data(self, value):
+        IBlobs(self).create_from_formdata('image', value)
 
 
 def removeUsersFromCourse(course, event):
