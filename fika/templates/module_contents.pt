@@ -1,0 +1,32 @@
+<tal:main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="Fika">
+
+<div class="row">
+	<div class="col-md-12">
+        <div class="panel-group" id="accordion">
+        	<tal:iterate repeat="obj context.values()">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">
+								<span class="glyphicon glyphicon-font"></span>  ${obj.title}
+							</a>
+						</h4>
+					</div>
+					<div id="collapse-${obj.uid}" tal:attributes="class repeat['obj'].start and 'panel-collapse collapse in' or 'panel-collapse collapse'">
+						<div class="panel-body">
+                            Loading...
+                            <script type="text/javascript">
+                                $('#collapse-${obj.uid} .panel-body').load('${request.resource_url(obj)}');
+                            </script>
+						</div>
+					</div>
+				</div>
+			</tal:iterate>
+		</div>
+	</div>
+</div>
+</tal:main>

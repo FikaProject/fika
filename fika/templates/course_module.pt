@@ -17,72 +17,6 @@
 	<form tal:condition="request.view_name=='edit'" tal:replace="structure form">Form here</form>
 	<form tal:condition="request.view_name=='order'" tal:replace="structure form">Form here</form>
 
-	<div tal:omit-tag="request.view_name!='order'" id="module-segments">	
-    
-    <tal:iterate repeat="segment context.values()">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <input type="hidden" name="module-segments" value="${segment.uid}" />
-                <a href="${request.resource_url(segment)}">
-                    <h4 class="panel-title">
-                           ${segment.title}
-                    </h4>
-                </a>
-        
-                <div class="course_segment description">
-                    ${segment.description}
-                </div>
-                
-                <div class="btn-group btn-group-lg">
-                    <tal:iterate repeat="media_object segment.values()">
-                        <button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${segment.uid}" href="#collapse-${media_object.uid}">
-                                <span class="glyphicon glyphicon-${getattr(media_object, 'icon' ,'file')}"></span>
-                        </button>
-                    </tal:iterate>
-                </div>
-                
-                <div class="panel-group" id="accordion-${segment.uid}">
-                    <tal:iterate repeat="media_object segment.values()">
-                        <div class="panel fika-media-panel">
-                            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-                                Loading...
-                                <script type="text/javascript">
-                                    $('#collapse-${media_object.uid}').load('${request.resource_url(media_object)}');
-                                </script>
-                            </div>
-                        </div>
-                    </tal:iterate>
-                </div>
-            </div>
-        </div>
-    </tal:iterate>
-
-    <div class="panel panel-default panel-add inline-form-structure">
-        <div class="panel-body inline-form-target">
-            <tal:iterate repeat="type view.addable_content(context)">
-                <a class="btn btn-default add-segment"
-                   href="${request.resource_url(context, 'add', query = {'content_type': type.type_name})}">
-                    Add new ${type.type_name}
-                </a>
-            </tal:iterate>
-        </div>
-    </div>
-
-    </div>
-    
-    <span tal:condition="request.view_name=='edit'">
-	    <div class="btn-group" tal:condition="len(view.addable_content(context)) > 0">
-	      <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown">
-	        <span i18n:translate="">Add</span> <span class="caret"></span>
-	      </button>
-	      <ul class="dropdown-menu" role="menu">
-	        <tal:iterate repeat="type view.addable_content(context)">
-	            <li><a href="${request.resource_url(context, 'add', query = {'content_type': type.type_name})}">${type}</a></li>
-	        </tal:iterate>
-	      </ul>
-	    </div>
-    </span>
-
 	<div>
 	    Used in courses:
 	    <ul>
@@ -90,9 +24,16 @@
 		        <li><a href="${request.resource_url(obj)}" alt="${obj.description}" title="${obj.description}">${obj.title}</a></li>
 		    </tal:iterate>
 		</ul>
-		Created: ${context.created} <br />
-        Modified: ${context.modified} <br />
+		Created: ${request.dt_handler.format_dt(context.created)} <br />
+        Modified: ${request.dt_handler.format_dt(context.modified)} <br />
 	</div>
+	
+	<div tal:omit-tag="request.view_name!='order'" id="module-segments">	
+	    <tal:module tal:replace="structure view.render_template('fika:templates/module_contents.pt')" />
+    </div>
+    
+
+	
 	
 </div>
 
