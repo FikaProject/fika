@@ -9,26 +9,48 @@
     <tal:iterate repeat="obj course_modules">
         <!--
         <div tal:replace="structure view.render_action_bar(obj)">Actions</div>-->
+		
 
-        <div class="panel panel-default">
-            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a></div>
-            <div class="panel-body">
-                Created: ${request.dt_handler.format_dt(obj.created)} <br />
-                Modified: ${request.dt_handler.format_dt(obj.modified)} <br />
-            	<br />
-            	${obj._num_objects.value} segments:
-            	<ul>
-            	<tal:iterate repeat="segment obj.values()">
-            		<li><a href="${request.resource_url(segment)}">${segment.title}</a></li>
-            	</tal:iterate>
-            	</ul>
-            	Used in:
-			    <ul>
-			    <tal:iterate repeat="course courses.module_used_in(obj.__name__)">
-			       <li><a href="${request.resource_url(course)}">${course.title}</a></li>
-			    </tal:iterate>
-			    </ul>
-            	</div>
+		<div class="panel-group" id="modules-accordion">
+	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	            	<a href="${request.resource_url(obj)}">${obj.title}</a>
+	            	
+            		<span class="badge pull-right" title="Used in ${courses.module_used_in(obj.uid).__len__()} courses">
+	            		<span class="glyphicon glyphicon-book"></span> ${courses.module_used_in(obj.uid).__len__()}
+            		</span>
+	            </div>
+	            
+            	<div class="panel-body">
+	            	
+	            		${obj.description}
+	            		<div>
+	            			<a data-toggle="collapse" data-parent="#modules-accordion" href="#collapse-${obj.uid}">
+	            				<span class="glyphicon glyphicon-chevron-down"></span>
+        					</a>
+    					</div>
+            		
+	            	<div id="collapse-${obj.uid}" class="panel-collapse collapse row">
+	            		<div class="col-md-4">
+			                <span class="glyphicon glyphicon-file" title="Created"></span> ${request.dt_handler.format_dt(obj.created)} <br />
+			                <span class="glyphicon glyphicon-pencil" title="Modified"></span> ${request.dt_handler.format_dt(obj.modified)} <br />
+			            </div>
+			            
+		            	<div class="col-md-4" tal:condition="courses.module_used_in(obj.uid).__len__() > 0">Used in:
+						    <ul>
+						    <tal:iterate repeat="course courses.module_used_in(obj.uid)">
+						       <li><span class="glyphicon glyphicon-book"></span> <a href="${request.resource_url(course)}">${course.title}</a></li>
+						    </tal:iterate>
+						    </ul>
+					    </div>
+					    <div class="col-md-4 text-muted" tal:condition="courses.module_used_in(obj.uid).__len__() == 0">
+			            	This module is not used in any courses yet.
+		            	</div>
+				    </div>
+				    
+        		</div>
+        		
+	        </div>
         </div>
     </tal:iterate>
 </div>
