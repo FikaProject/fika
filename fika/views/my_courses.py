@@ -6,7 +6,29 @@ from fika.models.interfaces import IFikaUser
 class MyCoursesView(ContentView):
     title = _('My Courses')
 
+
+    
+
     def __call__(self):
+        
+        def _get_first_unfinished_page(courseuid):
+            course = self.resolve_uid(courseuid)
+            
+            noModulesCompleted = True
+            for uid in course.course_modules:
+                if uid in self.profile.completed_course_modules:
+                    noModulesCompleted = False
+                    break
+            if noModulesCompleted:
+                return 0
+            
+            for uid in course.course_modules:
+                if uid not in self.profile.completed_course_modules:
+                    for (k,v) in course.cm_pages().items():
+                        if v == uid:
+                            return k
+            return 0
+        
         response ={'contents': [x for x in self.context.values() if getattr(x, 'listing_visible', False)]}
         response['course_percentage'] = {}
         response['completed_courses'] = ()
@@ -22,8 +44,12 @@ class MyCoursesView(ContentView):
                 response['course_percentage'][uid] = round(completed_modules / float(len(course.course_modules)) * 100.0, 2); 
                 if completed_modules == len(course.course_modules):
                     response['completed_courses'] += (course.uid ,)
-        #import pdb;pdb.set_trace()
+        
+        response['get_first_unfinished_page'] = _get_first_unfinished_page
         return response
+    
+    
+    
 
 
 def includeme(config):
