@@ -11,24 +11,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="${request.resource_url(obj)}">${obj.title}</a>
-                    <span class="badge pull-right" title="Used in ${courses.module_used_in(obj.uid).__len__()} courses">
-                        <span class="glyphicon glyphicon-book"></span> ${courses.module_used_in(obj.uid).__len__()}
-                    </span>
                 </div>
                 
                 <div class="panel-body">
-                    ${obj.description}
-                    <div>
-                        <a data-toggle="collapse" data-parent="#modules-accordion" href="#collapse-${obj.uid}">
-                            <span class="glyphicon glyphicon-chevron-down"></span>
-                        </a>
-                    </div>
+                    <div class="row">
+                    	<div class="col-md-8">${obj.description}</div>
                     
-                    <div id="collapse-${obj.uid}" class="panel-collapse collapse row">
-                        <div class="col-md-4">
-                            <span i18n:translate="">Created</span> ${request.dt_handler.format_relative(obj.created)} |
-                            <span i18n:translate="">Modified</span> ${request.dt_handler.format_relative(obj.modified)}
-                        </div>
                         
                         <div class="col-md-4" tal:condition="courses.module_used_in(obj.uid).__len__() > 0">Used in:
                             <ul>
