@@ -36,22 +36,22 @@
     <h1>
         ${context.title}
     </h1>
-    <ul class="pagination pagination-lg">
-        <li><a href="${previous(page)}">&laquo;</a></li>
-        <tal:iterate repeat="(num, uid) pages.items()">
-                <li tal:attributes="class num == page and 'active' or ''">
-                    <a href="?p=${num}" title="${course_modules[uid].title|''}">
-                        <span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
-                        <span tal:condition="num != 0">
-                            <span tal:omit-tag="uid not in view.profile.completed_course_modules"
-                                    class="label label-success">${num}</span>
-                            &nbsp;
-                        </span>
-                    </a>
-                </li>
+    
+    <div class="btn-group btn-group-lg">
+    	<a tal:attributes="class page==0 and 'disabled btn btn-default' or 'btn btn-default';href page>0 and previous(page)" role="button">&laquo;</a>
+    	<tal:iterate repeat="(num, uid) pages.items()">
+                <a class="${css_class(num, uid, page)}"
+                	role="button" href="?p=${num}"
+                	title="${course_modules[uid].title|''}">
+                	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
+                	<span tal:condition="num != 0">
+                		${num}
+                	</span>
+                </a>
         </tal:iterate>
-        <li><a href="${next(page)}">&raquo;</a></li>
-    </ul>
+        <a tal:attributes="class page==len(pages)-1 and 'disabled btn btn-default' or 'btn btn-default';href page<len(pages)-1 and next(page)" role="button">&raquo;</a>
+    </div>
+    
     <h2>
         ${page}. ${course_module.title}
         <p>
@@ -98,22 +98,21 @@
         </span>
     </div>
     
-    <ul class="pagination pagination-lg">
-        <li><a href="${previous(page)}">&laquo;</a></li>
-        <tal:iterate repeat="(num, uid) pages.items()">
-                <li tal:attributes="class num == page and 'active' or ''">
-                    <a href="?p=${num}" title="${course_modules[uid].title|''}">
-                        <span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
-                        <span tal:condition="num != 0">
-                            <span tal:omit-tag="uid not in view.profile.completed_course_modules"
-                                    class="label label-success">${num}</span>
-                            &nbsp;
-                        </span>
-                    </a>
-                </li>
+    <p></p>
+    <div class="btn-group btn-group-lg">
+    	<a tal:attributes="class page==0 and 'disabled btn btn-default' or 'btn btn-default';href page>0 and previous(page)" role="button">&laquo;</a>
+    	<tal:iterate repeat="(num, uid) pages.items()">
+                <a class="${css_class(num, uid, page)}"
+                	role="button" href="?p=${num}"
+                	title="${course_modules[uid].title|''}">
+                	<span tal:condition="num == 0"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;</span>
+                	<span tal:condition="num != 0">
+                		${num}
+                	</span>
+                </a>
         </tal:iterate>
-        <li><a href="${next(page)}">&raquo;</a></li>
-    </ul>
+        <a tal:attributes="class page==len(pages)-1 and 'disabled btn btn-default' or 'btn btn-default';href page<len(pages)-1 and next(page)" role="button">&raquo;</a>
+    </div>
 </div>
 </div><!-- main-column -->
 </body>

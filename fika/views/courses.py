@@ -42,6 +42,16 @@ class CourseView(BaseView):
         def _previous(page):
             previos = page - 1
             return page > 0 and "?p=%s" % previos or ""
+        
+        def _css_class(page, uid, currentpage):
+            cssclass = 'btn'
+            if uid in self.profile.completed_course_modules:
+                cssclass += ' btn-success'
+            else:
+                cssclass += ' btn-default'
+            if page == currentpage:
+                cssclass += ' active'
+            return cssclass
             
         #course_modules = self.root['course_modules']
         course_modules = {}
@@ -54,6 +64,7 @@ class CourseView(BaseView):
         self.response['course_module'] = course_modules.get(cm_uid, None)
         self.response['next'] = _next
         self.response['previous'] = _previous
+        self.response['css_class'] = _css_class
         self.response['course_modules'] = course_modules
         self.response['in_course'] = self.profile.in_course(self.context)
         self.response['course_module_toggle'] = self._render_course_module_toggle
