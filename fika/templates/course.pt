@@ -54,9 +54,6 @@
     
     <h2>
         ${page}. ${course_module.title}
-        <p>
-            <small tal:condition="course_module">${course_module.description}</small>
-        </p>
     </h2>
 </div>
 

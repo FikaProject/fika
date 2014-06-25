@@ -7,6 +7,13 @@
 <body>
 <div metal:fill-slot="main-content">
 	<div>
+		<h2>
+	        ${context.title}
+	        <p>
+	            <small>${context.description}</small>
+	        </p>
+	    </h2>
+        
 	    Used in courses:
 	    <ul>
 		    <tal:iterate repeat="obj used_in_courses">
