@@ -35,5 +35,7 @@ function mark_course_module_done(event) {
     request.done(function(data) {
         $(event.delegateTarget).replaceWith(data);
         $('.mark-course-module-done').on('click', mark_course_module_done);
+        $('.btn-group .active').toggleClass('btn-default');
+        $('.btn-group .active').toggleClass('btn-success');
     });
 }
