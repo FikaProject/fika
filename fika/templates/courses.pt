@@ -12,13 +12,13 @@
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a>
             	<span class="fika-enroll-button-right">
-	            	<a tal:condition="not view.profile.in_course(obj)"
+	            	<a tal:condition="not view.fikaProfile.in_course(obj)"
 				  		href="${request.resource_url(obj, 'join')}"
 				  		class="btn btn-primary btn-sm" role="button">
 				  		<span class="glyphicon glyphicon-bookmark"></span>
 						<span i18n:translate="">Enroll</span>
 				  	</a>
-				  	<a tal:condition="view.profile.in_course(obj)"
+				  	<a tal:condition="view.fikaProfile.in_course(obj)"
 				  		href="${request.resource_url(obj, 'leave')}"
 				  		class="btn btn-success btn-sm" role="button">
 				  		<span class="glyphicon glyphicon-ok"></span>

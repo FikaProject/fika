@@ -7,5 +7,5 @@ from js.jquery import jquery
 
 
 lib_fika = Library("fika", "static")
-main_css = Resource(lib_fika, 'main.css')
+main_css_fika = Resource(lib_fika, 'main.css')
 common_js = Resource(lib_fika, "common.js", depends = (jquery, bootstrap))
