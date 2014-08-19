@@ -26,7 +26,7 @@ class CourseView(BaseView):
             return self.request.registry.getAdapter(user, IFikaUser)
 
     def __init__(self, context, request):
-        #main_css_fika.need()
+        main_css_fika.need()
         common_js.need()
         super(CourseView, self).__init__(context, request)
         self.response = {}

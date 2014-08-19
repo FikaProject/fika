@@ -97,18 +97,18 @@ table.table-bottom-border td:last-of-type{
 
 /* navbar buttons compressed into icons on small screen */
 .fika-nav-button-text{
+    display:inline;
+}
+.navbar-header .fika-nav-button-text{
 	display:none;
 }
+
 .navbar-header > .navbar-nav > li
 {
     float:left;
 }
-@media (min-width: 1200px)
-{
-    .fika-nav-button-text{
-        display:inline;
-    }
-}
+
+
 @media (min-width: 768px)
 {
     .image-segment
@@ -116,9 +116,12 @@ table.table-bottom-border td:last-of-type{
         max-width: 500px;
     }
     .fika-nav-button-text{
+        display:none;
+    }
+}
+@media (min-width: 1200px)
+{
+    .fika-nav-button-text, .navbar-header .fika-nav-button-text{
         display:inline;
     }
-    .navbar-header .fika-nav-button-text{
-        display:none;
-    } 
 }
