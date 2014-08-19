@@ -16,7 +16,7 @@
 <div metal:fill-slot="main-content">
     <div class="row">
         <div class="col-md-12">
-        	<div tal:condition="profile|False">
+        	<div tal:condition="fikaProfile|False">
 				<h1 i18n:translate="">My courses</h1>
 	        	
 				<div class="panel panel-default">
@@ -24,7 +24,7 @@
 						<span class="glyphicon glyphicon-book"></span> <span i18n:translate="">Currently enrolled</span>
 					</div>
 					<div class="list-group">
-						<tal:iterate repeat="courseuid profile.courses">
+						<tal:iterate repeat="courseuid fikaProfile.courses">
 						<tal:completed condition="course_percentage[courseuid] < 100">
 						<a class="list-group-item" href="${request.resource_url(view.resolve_uid(courseuid))}?p=${get_first_unfinished_page(courseuid)}">
 							<div class="row">
@@ -50,7 +50,7 @@
 						<span class="glyphicon glyphicon-ok"></span> <span i18n:translate="">Completed</span>
 					</div>
 					<div class="list-group">
-						<tal:iterate repeat="courseuid profile.courses">
+						<tal:iterate repeat="courseuid fikaProfile.courses">
 						<tal:completed condition="course_percentage[courseuid] >= 100">
 						<a class="list-group-item" href="${request.resource_url(view.resolve_uid(courseuid))}">
 							<div class="row">
@@ -75,7 +75,7 @@
 				</div>
 			</div>
 			
-			<div tal:condition="not profile|True">
+			<div tal:condition="not fikaProfile|True">
 				Welcome to Fika. Please <a href="/login">log in</a> to see your courses.
 			</div>
         </div>

@@ -6,7 +6,8 @@
       i18n:domain="fika">
 <body>
 
-<div metal:fill-slot="content">
+<div metal:fill-slot="main-content">
+	derp
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
@@ -16,13 +17,14 @@
                 </div>
             </div>
         </div>
+        
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">Courses</div>
                 <div class="panel-body">
                     <ul>
-                        <li tal:repeat="course context.enrolled_courses()">
-                            <a href="${request.resource_url(course)}">${course.title}</a>
+                        <li tal:repeat="courseuid fikaProfile.courses">
+                            <a href="${request.resource_url(view.resolve_uid(courseuid))}?p=${get_first_unfinished_page(courseuid)}">${view.resolve_uid(courseuid).title}</a>
                         </li>
                     </ul>
                 </div>

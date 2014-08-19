@@ -34,12 +34,12 @@ class MyCoursesView(ContentView):
         response['completed_courses'] = ()
         user = self.root['users'].get(self.request.authenticated_userid, None)
         if user:
-            response['profile'] = IFikaUser(user)
-            for uid in response['profile'].courses:
+            response['fikaProfile'] = IFikaUser(user)
+            for uid in response['fikaProfile'].courses:
                 course = self.resolve_uid(uid)
                 completed_modules = 0
                 for course_module in course.course_modules:
-                    if(course_module in response['profile'].completed_course_modules):
+                    if(course_module in response['fikaProfile'].completed_course_modules):
                         completed_modules += 1
                 response['course_percentage'][uid] = round(completed_modules / float(len(course.course_modules)) * 100.0, 2); 
                 if completed_modules == len(course.course_modules):

@@ -69,6 +69,7 @@ class CourseView(BaseView):
         self.response['in_course'] = self.fikaProfile.in_course(self.context)
         self.response['course_module_toggle'] = self._render_course_module_toggle
         return self.response
+        
 
     def _render_course_module_toggle(self, context):
         response = {'context': context,
