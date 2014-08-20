@@ -41,7 +41,10 @@ class MyCoursesView(ContentView):
                 for course_module in course.course_modules:
                     if(course_module in response['fikaProfile'].completed_course_modules):
                         completed_modules += 1
-                response['course_percentage'][uid] = round(completed_modules / float(len(course.course_modules)) * 100.0, 2); 
+                if len(course.course_modules) <= 0:
+                    response['course_percentage'][uid] = 0
+                else    
+                    response['course_percentage'][uid] = round(completed_modules / float(len(course.course_modules)) * 100.0, 2); 
                 if completed_modules == len(course.course_modules):
                     response['completed_courses'] += (course.uid ,)
         
