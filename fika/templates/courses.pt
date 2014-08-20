@@ -8,6 +8,16 @@
 
 <div metal:fill-slot="main-content">
 
+	<div tal:condition="can_create_course|False">
+		<div class="pull-right">
+			<a class="btn btn-default" href="${request.resource_url(context, 'add', query = {'content_type': 'Course'})}">
+				<span class="glyphicon glyphicon-plus"></span> Create new course
+			</a>
+		</div>
+		
+		<p class="clearfix"></p>
+	</div>
+	
     <tal:iterate repeat="obj courses">
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a>

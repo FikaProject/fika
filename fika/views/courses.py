@@ -88,6 +88,9 @@ class CourseView(BaseView):
     def courses(self):
         self.response['courses'] = self.context.values()
         self.response['course_modules'] = self.root['course_modules']
+        self.response['can_create_course'] = False;
+        if self.request.has_permission(security.PERM_EDIT, self.context):
+            self.response['can_create_course'] = True;
         return self.response
     
     @view_config(context = ICourse, name = "join")
