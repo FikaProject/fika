@@ -43,7 +43,7 @@ class MyCoursesView(ContentView):
                         completed_modules += 1
                 if len(course.course_modules) <= 0:
                     response['course_percentage'][uid] = 0
-                else    
+                else:
                     response['course_percentage'][uid] = round(completed_modules / float(len(course.course_modules)) * 100.0, 2); 
                 if completed_modules == len(course.course_modules):
                     response['completed_courses'] += (course.uid ,)
