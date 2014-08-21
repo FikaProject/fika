@@ -16,6 +16,9 @@ class CourseModulesView(BaseView):
         response = {}
         response['course_modules'] = self.context.values()
         response['courses'] = self.root['courses']
+        response['can_create_module'] = False;
+        if self.request.has_permission(security.PERM_EDIT, self.context):
+            response['can_create_module'] = True;
         return response
 
     @view_config(context = ICourseModule, renderer = "fika:templates/course_module.pt")
