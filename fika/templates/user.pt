@@ -7,7 +7,6 @@
 <body>
 
 <div metal:fill-slot="main-content">
-	derp
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
