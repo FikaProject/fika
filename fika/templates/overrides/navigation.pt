@@ -13,8 +13,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="${request.application_url}">
-          <img height="40" width="40"
-              src="${request.static_url('arche:static/images/arche.png')}" />
+          	${view.root.title}
       </a>
       <ul class="nav navbar-nav">
       	<li>
