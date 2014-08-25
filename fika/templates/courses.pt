@@ -7,7 +7,7 @@
 <body>
 
 <div metal:fill-slot="main-content">
-
+	<h1 i18n:translate="">Courses</h1>
 	<div tal:condition="can_create_course|False">
 		<div class="pull-right">
 			<a class="btn btn-default" href="${request.resource_url(context, 'add', query = {'content_type': 'Course'})}">
