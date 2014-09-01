@@ -9,6 +9,7 @@ from fika import FikaTSF as _
 class CourseModules(FikaBaseFolder):
     title = type_title = _(u"Course modules")
     type_name = u"CourseModules"
+    is_permanent = True
     addable_to = ()
 
 

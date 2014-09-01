@@ -9,6 +9,7 @@ from fika import FikaTSF as _
 class Courses(FikaBaseFolder):
     type_title = title = _("Courses")
     type_name = "Courses"
+    is_permanent = True
 
     def module_used_in(self, uid):
         results = set()
