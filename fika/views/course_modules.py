@@ -11,7 +11,7 @@ from fika.models.interfaces import ICourseModules
 @view_defaults(permission = security.PERM_VIEW)
 class CourseModulesView(BaseView):
 
-    @view_config(context = ICourseModules, renderer = "fika:templates/course_modules.pt")
+    @view_config(context = ICourseModules, renderer = "fika:templates/course_modules.pt", permission=security.PERM_VIEW)
     def course_modules(self):
         response = {}
         response['course_modules'] = self.context.values()
@@ -21,7 +21,7 @@ class CourseModulesView(BaseView):
             response['can_create_module'] = True;
         return response
 
-    @view_config(context = ICourseModule, renderer = "fika:templates/course_module.pt")
+    @view_config(context = ICourseModule, renderer = "fika:templates/course_module.pt", permission=security.PERM_VIEW)
     def course_module(self):
         response = {}
         response['module_segments'] = self.context.values()

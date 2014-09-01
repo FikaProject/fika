@@ -31,7 +31,7 @@ class CourseView(BaseView):
         super(CourseView, self).__init__(context, request)
         self.response = {}
 
-    @view_config(context = ICourse, renderer = "fika:templates/course.pt")
+    @view_config(context = ICourse, renderer = "fika:templates/course.pt", permission=security.PERM_VIEW)
     def course(self):
         pages = self.context.cm_pages()
 
@@ -84,7 +84,7 @@ class CourseView(BaseView):
             self.fikaProfile.completed_course_modules.remove(self.context.uid)
         return Response(self._render_course_module_toggle(self.context))
 
-    @view_config(context = ICourses, renderer = "fika:templates/courses.pt")
+    @view_config(context = ICourses, renderer = "fika:templates/courses.pt", permission=security.PERM_VIEW)
     def courses(self):
         self.response['courses'] = self.context.values()
         self.response['course_modules'] = self.root['course_modules']
