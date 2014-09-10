@@ -15,7 +15,7 @@
 							</a>
 						</h4>
 					</div>
-					<div id="collapse-${obj.uid}" tal:attributes="class repeat['obj'].start and 'panel-collapse collapse in' or 'panel-collapse collapse'">
+					<div id="collapse-${obj.uid}" class="panel-collapse collapse">
 						<div class="panel-body">
                             Loading...
                             <script type="text/javascript">
