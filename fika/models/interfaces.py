@@ -7,24 +7,15 @@ class IFikaUser(Interface):
     """ Adapter to extend functionality of base fika users.
     """
 
-class ISecurityAware(Interface):
-    pass
-
-
 class ICatalogable(Interface):
     """ Things that will end up in the site roots catalog.
     """
 
-
-class IBase(ISecurityAware):
-    pass
-
-
-class ISiteRoot(IBase):
+class ISiteRoot(Interface):
     """ Root object for the application. """
 
 
-class IUsers(IBase):
+class IUsers(Interface):
     """ Single object present in the root. Contains IUsers. """
 
     def get_user_by_email(email):
@@ -32,37 +23,39 @@ class IUsers(IBase):
         """
 
 
-class IUser(IBase, ICatalogable):
+class IUser(Interface, ICatalogable):
     """ User object. Only contains a userid and mapping to other authentication system. """
     title = Attribute("Name of the user")
     email = Attribute("Email address")
     completed_course_modules = Attribute("An OOSet of course module IDs that this user have marked as completed.")
 
 
-class ICourses(IBase):
+class ICourses(Interface):
     """ Container for ICourse. """
 
     def module_used_in(uid):
         """ Return all the course objects that uses this modules uid. """
 
 
-class ICourse(IBase, ICatalogable):
+class ICourse(Interface, ICatalogable):
     """ Contains references to course modules. """
 
 
-class ICourseModules(IBase):
+class ICourseModules(Interface):
     """ Container for ICourseModule. """
 
 
-class ICourseModule(IBase, ICatalogable):
+class ICourseModule(Interface, ICatalogable):
     """ Container for IModuleSegment. Part of a course, or a stand alone object that can be read up on or organised. """
 
 
-class IModuleSegment(IBase, ICatalogable):
+class IModuleSegment(Interface, ICatalogable):
     """ Part of a module object. """
 
+class IImageSlideshow(Interface):
+    """ A set of images that is shown as a slideshow. """
         
-class IMediaObject(IBase, ICatalogable):
+class IMediaObject(Interface, ICatalogable):
     """ Part of a segment object. Could be a text, a video or similar. """
 
     def render(request, view):
@@ -90,7 +83,7 @@ class IAudioMediaObject(IMediaObject):
     """ Part of a segment object. Contains a audio link. """
 
 
-class IFile(ISecurityAware, ICatalogable):
+class IFile(Interface, ICatalogable):
     """ An uploaded file. """
 
 

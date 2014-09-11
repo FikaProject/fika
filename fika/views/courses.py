@@ -13,6 +13,9 @@ from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourses
 from fika.models.interfaces import IFikaUser
 #from fika import security
+from fika.models.image_slideshow import ImageSlideshow
+from fika.fanstatic import lightbox_js
+from fika.fanstatic import lightbox_css
 from fika.fanstatic import main_css_fika
 from fika.fanstatic import common_js
 
@@ -68,6 +71,13 @@ class CourseView(BaseView):
         self.response['course_modules'] = course_modules
         self.response['in_course'] = self.fikaProfile.in_course(self.context)
         self.response['course_module_toggle'] = self._render_course_module_toggle
+        
+        if self.response['course_module'] != None:
+            for obj in self.response['course_module'].values():
+                if isinstance(obj, ImageSlideshow):
+                    lightbox_js.need()
+                    lightbox_css.need()
+                    break
         return self.response
         
 

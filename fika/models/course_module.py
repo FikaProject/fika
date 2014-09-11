@@ -18,3 +18,4 @@ def includeme(config):
     config.add_addable_content("ExternalResource", "CourseModule")
     config.add_addable_content("Image", "CourseModule")
     config.add_addable_content("Document", "CourseModule")
+    config.add_addable_content("ImageSlideshow", "CourseModule")

@@ -6,6 +6,10 @@ from pyramid.view import view_defaults
 from fika import _
 from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourseModules
+from fika.models.image_slideshow import ImageSlideshow
+
+from fika.fanstatic import lightbox_js
+from fika.fanstatic import lightbox_css
 
 
 @view_defaults(permission = security.PERM_VIEW)
@@ -26,6 +30,11 @@ class CourseModulesView(BaseView):
         response = {}
         response['module_segments'] = self.context.values()
         response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
+        for obj in self.context.values():
+            if isinstance(obj, ImageSlideshow):
+                lightbox_js.need()
+                lightbox_css.need()
+                break
         return response
 
 
