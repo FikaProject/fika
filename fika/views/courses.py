@@ -72,6 +72,15 @@ class CourseView(BaseView):
         self.response['in_course'] = self.fikaProfile.in_course(self.context)
         self.response['course_module_toggle'] = self._render_course_module_toggle
         
+        self.response['course_modules_media'] = {}
+        for course_module in self.response['course_modules']:
+            self.response['course_modules_media'][course_module] = {}
+            for media in self.response['course_modules'][course_module].values():
+                if media.icon in self.response['course_modules_media'][course_module]:
+                    self.response['course_modules_media'][course_module][media.icon] += 1
+                else:
+                    self.response['course_modules_media'][course_module][media.icon] = 1
+        
         if self.response['course_module'] != None:
             for obj in self.response['course_module'].values():
                 if isinstance(obj, ImageSlideshow):
