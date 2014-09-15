@@ -21,8 +21,17 @@
 		    </tal:iterate>
 		</ul>
         <div class="well well-sm">
-            <span i18n:translate="">Created</span> ${request.dt_handler.format_relative(context.created)} |
-            <span i18n:translate="">Modified</span> ${request.dt_handler.format_relative(context.modified)}
+            <span i18n:translate="">Created</span>
+            <span tal:condition="getattr(context, 'created', None)"
+                title="${request.dt_handler.format_dt(context.created)}">
+                ${request.dt_handler.format_relative(context.created)}
+            </span>
+            |
+            <span i18n:translate="">Modified</span>
+            <span tal:condition="getattr(context, 'modified', None)"
+                title="${request.dt_handler.format_dt(context.modified)}">
+                ${request.dt_handler.format_relative(context.modified)}
+            </span>
 		</div>
 	</div>
     <tal:module tal:replace="structure view.render_template('fika:templates/module_contents.pt')" />
