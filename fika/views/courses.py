@@ -111,17 +111,14 @@ class CourseView(BaseView):
         response = {'context': context}
         return render("fika:templates/course_status.pt", response, request = self.request)
     
-    @view_config(name = "_set_course_status", context = ICourse, permission=security.PERM_EDIT) # FIXME: change this permission when the new roles are implemented
+    #FIXME: change this permission when the new roles are implemented
+    @view_config(name = "_set_course_status", context = ICourse, permission=security.PERM_EDIT)
     def course_status(self):
         self.context.status = CourseStatus(int(self.request.GET.get('status')))
-        #self.context.status = CourseStatus(1)
         return Response(self._render_course_status(self.context))
 
     @view_config(context = ICourses, renderer = "fika:templates/courses.pt", permission=security.PERM_VIEW)
     def courses(self):
-        #self.response['courses'] = self.context.values()
-        print self.context.values()
-        
         self.response['courses'] = {}
         for (uid,course) in self.context.items():
             if course.status == CourseStatus.approved:
