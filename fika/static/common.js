@@ -15,6 +15,7 @@ fika.do_request = do_request;
 
 $(document).ready(function(event) {
     $('.mark-course-module-done').on('click', mark_course_module_done);
+    $('.change-course-status').on('click', change_course_status);
     
     $('.collapser').on('click', function(event) {
         var target = $(this).children('.glyphicon-chevron');
@@ -37,5 +38,16 @@ function mark_course_module_done(event) {
         $('.mark-course-module-done').on('click', mark_course_module_done);
         $('.btn-group .active').toggleClass('btn-default');
         $('.btn-group .active').toggleClass('btn-success');
+    });
+}
+
+function change_course_status(event) {
+    event.preventDefault();
+    var url = $(event.delegateTarget).attr('href');
+    var request = fika.do_request(url);
+    request.done(function(data) {
+    	dropdown = $(event.delegateTarget).parent().parent().parent();
+        $(dropdown).replaceWith(data);
+        $('.change-course-status').on('click', change_course_status);
     });
 }

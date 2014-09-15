@@ -1,0 +1,27 @@
+<tal:main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="fika">
+	<div class="dropdown">
+		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+			<span class=" glyphicon glyphicon-minus-sign" tal:condition="context.status.value == 1"></span>
+			<span class="glyphicon glyphicon-question-sign" tal:condition="context.status.value == 2"></span>
+			<span class="glyphicon glyphicon-ok-sign" tal:condition="context.status.value == 3"></span>
+			${context.status.name}
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+			<tal:status repeat="(name, status) context.status.__class__.__members__.items()">
+				<li tal:attributes="class context.status.value==status.value and 'active'">
+					<a tabindex="-1" href="${request.resource_url(context, '_set_course_status', query = {'status': status.value})}" class="change-course-status">
+						<span class=" glyphicon glyphicon-minus-sign" tal:condition="status.value == 1"></span>
+						<span class="glyphicon glyphicon-question-sign" tal:condition="status.value == 2"></span>
+						<span class="glyphicon glyphicon-ok-sign" tal:condition="status.value == 3"></span>
+						${name}
+					</a>
+				</li>
+			</tal:status>
+		</ul>
+	</div>
+</tal:main>

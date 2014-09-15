@@ -18,6 +18,25 @@
 		<p class="clearfix"></p>
 	</div>
 	
+	<div tal:condition="len(private_courses) > 0">
+	<h2 i18n:translate="">My private courses</h2>
+	    <tal:iterate repeat="obj private_courses">
+	    	<div class="panel panel-default">
+	            <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a>
+	            	<span class="pull-right">
+					  		<span class=" glyphicon glyphicon-minus-sign" tal:condition="obj.status.value == 1"></span>
+							<span class="glyphicon glyphicon-question-sign" tal:condition="obj.status.value == 2"></span>
+							<span i18n:translate="">${obj.status.name}</span>
+				  	</span>
+	            </div>
+	            <div class="panel-body">
+	            	<span tal:replace="structure obj.description"></span>
+	        	</div>
+	        </div>
+	    </tal:iterate>
+    </div>
+    	
+    <h2 i18n:translate="">Public courses</h2>
     <tal:iterate repeat="obj courses">
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a>

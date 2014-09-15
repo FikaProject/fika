@@ -2,6 +2,7 @@ from pyramid.view import view_config
 from pyramid.view import view_defaults
 from pyramid.renderers import render
 from pyramid.response import Response
+from pyramid.security import Allowed
 from pyramid.httpexceptions import HTTPFound
 #from betahaus.pyracont.interfaces import IBaseFolder
 from arche.views.base import BaseView
@@ -14,6 +15,7 @@ from fika.models.interfaces import ICourses
 from fika.models.interfaces import IFikaUser
 #from fika import security
 from fika.models.image_slideshow import ImageSlideshow
+from fika.models.course import CourseStatus
 from fika.fanstatic import lightbox_js
 from fika.fanstatic import lightbox_css
 from fika.fanstatic import main_css_fika
@@ -71,6 +73,8 @@ class CourseView(BaseView):
         self.response['course_modules'] = course_modules
         self.response['in_course'] = self.fikaProfile.in_course(self.context)
         self.response['course_module_toggle'] = self._render_course_module_toggle
+        self.response['course_status'] = self._render_course_status
+        self.response['can_change_course_status'] = security.has_permission(self.request, security.PERM_EDIT, self.context).boolval
         
         self.response['course_modules_media'] = {}
         for course_module in self.response['course_modules']:
@@ -102,10 +106,30 @@ class CourseView(BaseView):
         elif self.context.uid in self.fikaProfile.completed_course_modules:
             self.fikaProfile.completed_course_modules.remove(self.context.uid)
         return Response(self._render_course_module_toggle(self.context))
+    
+    def _render_course_status(self, context):
+        response = {'context': context}
+        return render("fika:templates/course_status.pt", response, request = self.request)
+    
+    @view_config(name = "_set_course_status", context = ICourse, permission=security.PERM_EDIT) # FIXME: change this permission when the new roles are implemented
+    def course_status(self):
+        self.context.status = CourseStatus(int(self.request.GET.get('status')))
+        #self.context.status = CourseStatus(1)
+        return Response(self._render_course_status(self.context))
 
     @view_config(context = ICourses, renderer = "fika:templates/courses.pt", permission=security.PERM_VIEW)
     def courses(self):
-        self.response['courses'] = self.context.values()
+        #self.response['courses'] = self.context.values()
+        print self.context.values()
+        
+        self.response['courses'] = {}
+        for (uid,course) in self.context.items():
+            if course.status == CourseStatus.approved:
+                self.response['courses'][course] = course
+        self.response['private_courses'] = {}
+        for (uid,course) in self.context.items():
+            if course.status == CourseStatus.private or course.status == CourseStatus.review and self.request.has_permission(security.PERM_EDIT, course):
+                self.response['private_courses'][course] = course
         self.response['course_modules'] = self.root['course_modules']
         self.response['can_create_course'] = False;
         if self.request.has_permission(security.PERM_EDIT, self.context):

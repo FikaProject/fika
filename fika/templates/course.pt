@@ -59,38 +59,43 @@
 
 <div metal:fill-slot="content">
     <div tal:condition="not course_module">
-        <div class="row">
-              <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Contents</div>
-                    <div class="list-group">
-                        <tal:iterate repeat="(num, uid) pages.items()">
-                            <a tal:condition="num>0" class="list-group-item" href="${'?p=%s' % num}">
-                                <span tal:condition="uid in view.profile.completed_course_modules"
-                                    class="label label-success">
-                                    <span class="glyphicon glyphicon-ok-sign"></span> ${num}
-                                </span>
-                                <span tal:condition="not uid in view.profile.completed_course_modules"
-                                    class="label label-default">
-                                    <span class="glyphicon glyphicon-unchecked"></span> ${num}
-                                </span>
-                                &nbsp;<span tal:content="course_modules[uid].title|'NotFound: %s' % uid">Title</span>
-                                
-                                <div tal:repeat="(icon, count) course_modules_media[uid].items()" class="pull-right">
-                                	<span class="badge">
-                                		<span class="glyphicon glyphicon-${icon}"></span>
-                            			${count}
-                        			</span>
-                                </div>
-                             </a>
-                        </tal:iterate>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <tal:form  replace="structure context.introduction"></tal:form>
-            </div>
-        </div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">Contents</div>
+					<div class="list-group">
+						<tal:iterate repeat="(num, uid) pages.items()">
+							<a tal:condition="num>0" class="list-group-item" href="${'?p=%s' % num}">
+								<span tal:condition="uid in view.profile.completed_course_modules"
+								    class="label label-success">
+									<span class="glyphicon glyphicon-ok-sign"></span> ${num}
+								</span>
+								<span tal:condition="not uid in view.profile.completed_course_modules"
+								    class="label label-default">
+									<span class="glyphicon glyphicon-unchecked"></span> ${num}
+								</span>
+								&nbsp;<span tal:content="course_modules[uid].title|'NotFound: %s' % uid">Title</span>
+								
+								<div tal:repeat="(icon, count) course_modules_media[uid].items()" class="pull-right">
+									<span class="badge">
+										<span class="glyphicon glyphicon-${icon}"></span>
+										${count}
+									</span>
+								</div>
+							</a>
+						</tal:iterate>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8" tal:condition="can_change_course_status">
+				<span tal:content="structure course_status(context)">
+		            (course status control here)
+		        </span>
+			</div>
+			<div class="col-md-8">
+				<tal:form  replace="structure context.introduction"></tal:form>
+			</div>
+		</div>
     </div>
 
     <div tal:condition="course_module">
