@@ -13,15 +13,29 @@
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">
 								<span class="glyphicon glyphicon-${getattr(obj, 'icon', 'file')}"></span>  ${obj.title}
 							</a>
+							<span tal:condition="isinstance(obj, segment_class)">
+								<tal:segmentcontents repeat="segmentcontent obj.values()">
+									<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${obj.uid}" href="#collapse-${segmentcontent.uid}">
+					                    <span class="glyphicon glyphicon-${getattr(segmentcontent, 'icon', 'file')}"></span>
+					    			</button>
+								</tal:segmentcontents>
+							</span>
 						</h4>
+						
 					</div>
-					<div id="collapse-${obj.uid}" class="panel-collapse collapse">
+					<div id="collapse-${obj.uid}" class="panel-collapse collapse" tal:condition="not isinstance(obj, segment_class)">
 						<div class="panel-body">
                             Loading...
                             <script type="text/javascript">
                                 $('#collapse-${obj.uid} .panel-body').load('${request.resource_url(obj)}');
                             </script>
 						</div>
+					</div>
+					<div id="segment-${obj.uid}" class="panel-body" tal:condition="isinstance(obj, segment_class)" >
+                        Loading...
+                        <script type="text/javascript">
+                            $('#segment-${obj.uid}').load('${request.resource_url(obj)}');
+                        </script>
 					</div>
 				</div>
 			</tal:iterate>

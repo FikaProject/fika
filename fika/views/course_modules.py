@@ -7,6 +7,7 @@ from fika import _
 from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourseModules
 from fika.models.image_slideshow import ImageSlideshow
+from fika.models.segment import Segment
 
 from fika.fanstatic import lightbox_js
 from fika.fanstatic import lightbox_css
@@ -30,11 +31,18 @@ class CourseModulesView(BaseView):
         response = {}
         response['module_segments'] = self.context.values()
         response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
+        response['segment_class'] = Segment
         for obj in self.context.values():
             if isinstance(obj, ImageSlideshow):
                 lightbox_js.need()
                 lightbox_css.need()
                 break
+            elif isinstance(obj, Segment):
+                for segmentcontent in obj.values():
+                    if isinstance(segmentcontent, ImageSlideshow):
+                        lightbox_js.need()
+                        lightbox_css.need()
+                        break
         return response
 
 

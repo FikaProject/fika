@@ -2,50 +2,45 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="view.macro('arche:templates/base_view.pt')"
+      metal:use-macro="view.macro('arche:templates/base_view.pt', 'arche:templates/inline.pt')"
       i18n:domain="fika">
 <body>
-<div metal:fill-slot="main-content">
+	
+<h1>${context.title}</h1>
 
-	<div class="panel panel-default">
-	    <div class="panel-heading">
-	        <h4 class="panel-title">
-	        	${context.title}
-	        </h4>
-	    </div>
-	    <div class="panel-body">
-        	<div class="course_segment description">
-                ${context.description}
-        	</div>
-            <div class="btn-group btn-group-lg">
-	            <tal:iterate repeat="media_object media_objects">
-					<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${context.uid}" href="#collapse-${media_object.uid}">
-                        <span class="glyphicon glyphicon-${getattr(media_object, 'icon', 'file')}"></span>
-        			</button>
-			    </tal:iterate>
-            </div>
-		    
-            <div class="panel-group" id="accordion-${context.uid}">
-	            <tal:iterate repeat="media_object media_objects">
-	            	<div class="panel fika-media-panel">
-			            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-			            	<div class="btn-group">
-								<a href="${request.resource_url(media_object, 'edit')}"><button type="button" class="btn btn-default">Edit</button></a>
-								<a href="${request.resource_url(media_object, 'delete')}"><button type="button" class="btn btn-default">Delete</button></a>
-							</div>
-					        <div class="media-area">
-                            Loading...
-                            <script type="text/javascript">
-                                $('#collapse-${media_object.uid} .media-area').load('${request.resource_url(media_object)}');
-                            </script>
-					        </div>
+<div class="course_segment description">
+            ${context.description}
+    	</div>
+        <div class="btn-group btn-group-lg">
+            <tal:iterate repeat="media_object contents">
+				<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${context.uid}" href="#collapse-${media_object.uid}">
+                    <span class="glyphicon glyphicon-${getattr(media_object, 'icon', 'file')}"></span>
+    			</button>
+		    </tal:iterate>
+        </div>
+        
+<div metal:fill-slot="main-content">
+		
+    	
+	    
+        <div class="panel-group" id="accordion-${context.uid}">
+            <tal:iterate repeat="media_object contents">
+            	<div class="panel fika-media-panel">
+		            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+		            	<div class="btn-group">
+							<a href="${request.resource_url(media_object, 'edit')}"><button type="button" class="btn btn-default">Edit</button></a>
+							<a href="${request.resource_url(media_object, 'delete')}"><button type="button" class="btn btn-default">Delete</button></a>
+						</div>
+				        <div class="media-area">
+                        Loading...
+                        <script type="text/javascript">
+                            $('#collapse-${media_object.uid} .media-area').load('${request.resource_url(media_object)}');
+                        </script>
 				        </div>
 			        </div>
-			    </tal:iterate>
-		    </div>
+		        </div>
+		    </tal:iterate>
 	    </div>
-	</div>
-
 </div>
 </body>
 </html>

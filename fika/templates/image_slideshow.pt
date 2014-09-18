@@ -3,7 +3,7 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="view.macro('arche:templates/base_view.pt', 'arche:templates/inline.pt')"
-      i18n:domain="Arche">
+      i18n:domain="fika">
 <body>
 <div metal:fill-slot="main-content">
     <h1>${context.title}</h1>

@@ -46,10 +46,10 @@ class ICourseModules(Interface):
 
 
 class ICourseModule(Interface, ICatalogable):
-    """ Container for IModuleSegment. Part of a course, or a stand alone object that can be read up on or organised. """
+    """ Container for ISegment. Part of a course, or a stand alone object that can be read up on or organised. """
 
 
-class IModuleSegment(Interface, ICatalogable):
+class ISegment(Interface, ICatalogable):
     """ Part of a module object. """
 
 class IImageSlideshow(Interface):

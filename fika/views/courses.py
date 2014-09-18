@@ -15,6 +15,7 @@ from fika.models.interfaces import ICourses
 from fika.models.interfaces import IFikaUser
 #from fika import security
 from fika.models.image_slideshow import ImageSlideshow
+from fika.models.segment import Segment
 from fika.models.course import CourseStatus
 from fika.fanstatic import lightbox_js
 from fika.fanstatic import lightbox_css
@@ -75,11 +76,22 @@ class CourseView(BaseView):
         self.response['course_module_toggle'] = self._render_course_module_toggle
         self.response['course_status'] = self._render_course_status
         self.response['can_change_course_status'] = security.has_permission(self.request, security.PERM_EDIT, self.context).boolval
+        self.response['segment_class'] = Segment
         
         self.response['course_modules_media'] = {}
         for course_module in self.response['course_modules']:
             self.response['course_modules_media'][course_module] = {}
             for media in self.response['course_modules'][course_module].values():
+                if isinstance(media, Segment):
+                    for segmentmedia in media.values():
+                        if not hasattr(segmentmedia, 'icon'):
+                            continue
+                        if segmentmedia.icon in self.response['course_modules_media'][course_module]:
+                            self.response['course_modules_media'][course_module][segmentmedia.icon] += 1
+                        else:
+                            self.response['course_modules_media'][course_module][segmentmedia.icon] = 1
+                if not hasattr(media, 'icon'):
+                    continue
                 if media.icon in self.response['course_modules_media'][course_module]:
                     self.response['course_modules_media'][course_module][media.icon] += 1
                 else:

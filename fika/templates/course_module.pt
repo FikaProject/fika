@@ -34,7 +34,7 @@
             </span>
 		</div>
 	</div>
-    <tal:module tal:replace="structure view.render_template('fika:templates/module_contents.pt')" />
+    <tal:module tal:replace="structure view.render_template('fika:templates/module_contents.pt', segment_class=segment_class)" />
 </div>
 </body>
 </html>

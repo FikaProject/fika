@@ -99,7 +99,7 @@
     </div>
 
     <div tal:condition="course_module">
-    	<tal:module tal:replace="structure view.render_template('fika:templates/module_contents.pt', context=course_module)" />
+    	<tal:module tal:replace="structure view.render_template('fika:templates/module_contents.pt', context=course_module, segment_class=segment_class)" />
     	
     	<p>&nbsp;</p>
         <span tal:condition="in_course" tal:content="structure course_module_toggle(course_module)">
