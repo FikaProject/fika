@@ -78,6 +78,8 @@ class CourseView(BaseView):
         self.response['can_change_course_status'] = security.has_permission(self.request, security.PERM_EDIT, self.context).boolval
         self.response['segment_class'] = Segment
         
+        
+        
         self.response['course_modules_media'] = {}
         for course_module in self.response['course_modules']:
             self.response['course_modules_media'][course_module] = {}
@@ -90,19 +92,17 @@ class CourseView(BaseView):
                             self.response['course_modules_media'][course_module][segmentmedia.icon] += 1
                         else:
                             self.response['course_modules_media'][course_module][segmentmedia.icon] = 1
-                if not hasattr(media, 'icon'):
-                    continue
-                if media.icon in self.response['course_modules_media'][course_module]:
-                    self.response['course_modules_media'][course_module][media.icon] += 1
-                else:
-                    self.response['course_modules_media'][course_module][media.icon] = 1
-        
+
         if self.response['course_module'] != None:
+            self.response['module_segments'] = {} 
             for obj in self.response['course_module'].values():
-                if isinstance(obj, ImageSlideshow):
-                    lightbox_js.need()
-                    lightbox_css.need()
-                    break
+                if isinstance(obj, Segment):
+                    self.response['module_segments'][obj] = obj
+                    for segmentcontent in obj.values():
+                        if isinstance(segmentcontent, ImageSlideshow):
+                            lightbox_js.need()
+                            lightbox_css.need()
+                            break
         return self.response
         
 

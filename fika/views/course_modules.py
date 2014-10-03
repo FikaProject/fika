@@ -29,20 +29,17 @@ class CourseModulesView(BaseView):
     @view_config(context = ICourseModule, renderer = "fika:templates/course_module.pt", permission=security.PERM_VIEW)
     def course_module(self):
         response = {}
-        response['module_segments'] = self.context.values()
-        response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
-        response['segment_class'] = Segment
+        #response['module_segments'] = self.context.values()
+        response['module_segments'] = {} 
         for obj in self.context.values():
-            if isinstance(obj, ImageSlideshow):
-                lightbox_js.need()
-                lightbox_css.need()
-                break
-            elif isinstance(obj, Segment):
+            if isinstance(obj, Segment):
+                response['module_segments'][obj] = obj
                 for segmentcontent in obj.values():
                     if isinstance(segmentcontent, ImageSlideshow):
                         lightbox_js.need()
                         lightbox_css.need()
                         break
+        response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
         return response
 
 
