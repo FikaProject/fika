@@ -14,7 +14,6 @@ class FikaPopulator(Populator):
     def populate(self, **kw):
         factories = get_content_factories()
         self.context['courses'] = factories['Courses']()
-        self.context['course_modules'] = factories['CourseModules']()
 
 
 def includeme(config):

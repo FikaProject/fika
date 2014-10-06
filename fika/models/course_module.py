@@ -16,7 +16,7 @@ class CourseModule(FikaBaseFolder, DCMetadataMixin, LocalRolesMixin):
 
 def includeme(config):
     config.add_content_factory(CourseModule)
-    config.add_addable_content("CourseModule", ("CourseModules", "Course"))
+    config.add_addable_content("CourseModule", "Course")
     config.add_addable_content("ExternalResource", "CourseModule")
     config.add_addable_content("Image", "CourseModule")
     config.add_addable_content("Document", "CourseModule")

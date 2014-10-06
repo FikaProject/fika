@@ -5,6 +5,7 @@ from .interfaces import ICourseModules
 from .base import FikaBaseFolder
 from fika import FikaTSF as _
 
+#FIXME Warning will be deleted!
 
 @implementer(ICourseModules)
 class CourseModules(FikaBaseFolder, LocalRolesMixin):

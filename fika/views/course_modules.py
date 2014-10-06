@@ -16,15 +16,15 @@ from fika.fanstatic import lightbox_css
 @view_defaults(permission = security.PERM_VIEW)
 class CourseModulesView(BaseView):
 
-    @view_config(context = ICourseModules, renderer = "fika:templates/course_modules.pt", permission=security.PERM_VIEW)
-    def course_modules(self):
-        response = {}
-        response['course_modules'] = self.context.values()
-        response['courses'] = self.root['courses']
-        response['can_create_module'] = False;
-        if self.request.has_permission(security.PERM_EDIT, self.context):
-            response['can_create_module'] = True;
-        return response
+#     @view_config(context = ICourseModules, renderer = "fika:templates/course_modules.pt", permission=security.PERM_VIEW)
+#     def course_modules(self):
+#         response = {}
+#         response['course_modules'] = self.context.values()
+#         response['courses'] = self.root['courses']
+#         response['can_create_module'] = False;
+#         if self.request.has_permission(security.PERM_EDIT, self.context):
+#             response['can_create_module'] = True;
+#         return response
 
     @view_config(context = ICourseModule, renderer = "fika:templates/course_module.pt", permission=security.PERM_VIEW)
     def course_module(self):

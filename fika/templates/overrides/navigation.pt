@@ -32,7 +32,6 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapsible">
     	 <ul class="nav navbar-nav">
-			<li><a href="/course_modules" title="Course modules"><span class="glyphicon glyphicon-th-large"></span><span class="fika-nav-button-text"> Course modules</span></a></li>
 			<li><a href="/users" title="Users"><span class="glyphicon glyphicon-user"></span><span class="fika-nav-button-text"> Users</span></a></li>
 		</ul>
 		

@@ -1,7 +1,6 @@
+from arche.schemas import file_upload_widget
 import colander
 import deform
-from arche.widgets import ReferenceWidget
-from arche.schemas import file_upload_widget
 
 from fika import _
 
@@ -15,9 +14,6 @@ class CourseSchema(colander.Schema):
     introduction = colander.SchemaNode(colander.String(),
                                widget = deform.widget.RichTextWidget(),
                                missing = u"")
-    course_modules = colander.SchemaNode(colander.List(),
-                                         missing = (),
-                                         widget = ReferenceWidget(query_params = {'type_name': 'CourseModule'}))
     image_data = colander.SchemaNode(deform.FileData(),
                                      missing = None,
                                      title = _(u"Image"),

@@ -11,6 +11,7 @@ from fika import FikaTSF as _
 from fika.models.base import FikaBaseFolder
 from fika.models.interfaces import ICourse
 
+
 @implementer(ICourse, IThumbnailedContent)
 class Course(FikaBaseFolder, DCMetadataMixin, LocalRolesMixin):
     type_title =  _(u"Course")
@@ -20,11 +21,9 @@ class Course(FikaBaseFolder, DCMetadataMixin, LocalRolesMixin):
 
     @property
     def course_modules(self):
-        return getattr(self, '_course_modules', ())
-
-    @course_modules.setter
-    def course_modules(self, value):
-        self._course_modules = PersistentList(value)
+        #This might change, since CourseModule objects are contained now
+        #The old attribute returned UIDs
+        return [x.uid for x in self.values() if x.type_name == 'CourseModule']
 
     def cm_pages(self):
         pages = {0: ''}
