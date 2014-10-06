@@ -1,18 +1,13 @@
-#from betahaus.pyracont.decorators import content_factory
-from zope.interface import implementer
-from zope.component import adapter
-from pyramid.traversal import find_root
 from BTrees.OOBTree import OOBTree
 from BTrees.OOBTree import OOSet
 from arche.interfaces import IUser
+from pyramid.traversal import find_root
+from zope.component import adapter
+from zope.interface import implementer
 
-from .base import FikaBaseFolder
-#from .interfaces import IUser
-#from .interfaces import IUsers
-from .interfaces import ICourse
-from .interfaces import IFikaUser
 from fika import  _
-#from fika.interfaces import IObjectAddedEvent 
+from fika.models.interfaces import ICourse
+from fika.models.interfaces import IFikaUser
 
 
 @adapter(IUser)
