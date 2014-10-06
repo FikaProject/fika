@@ -117,7 +117,7 @@ class CourseView(BaseView):
     @view_config(context = ICourses, renderer = "fika:templates/courses.pt", permission=security.PERM_VIEW)
     def courses(self):
         self.response['courses'] = self.context.values()
-        self.response['course_modules'] = self.root['course_modules']
+        #self.response['course_modules'] = self.root['course_modules']
         self.response['can_create_course'] = False;
         if self.request.has_permission(security.PERM_EDIT, self.context):
             self.response['can_create_course'] = True;
