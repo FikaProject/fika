@@ -1,5 +1,3 @@
-from enum import Enum
-
 from arche.interfaces import IBlobs
 from arche.interfaces import IObjectWillBeRemovedEvent
 from arche.interfaces import IThumbnailedContent
@@ -11,10 +9,6 @@ from fika import FikaTSF as _
 from fika.models.base import FikaBaseFolder
 from fika.models.interfaces import ICourse
 
-class CourseStatus(Enum):
-    private = 1
-    review = 2
-    approved =3
 
 @implementer(ICourse, IThumbnailedContent)
 class Course(FikaBaseFolder):
@@ -22,7 +16,6 @@ class Course(FikaBaseFolder):
     type_name = u"Course"
     add_permission = "Add %s" % type_name
     introduction = ""
-    status = CourseStatus.private
 
     @property
     def course_modules(self):
