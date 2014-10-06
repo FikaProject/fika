@@ -1,5 +1,4 @@
-from arche.resources import Content
-from zope.interface import implementer
+from arche.api import Content
 
 
 class FikaBaseFolder(Content):

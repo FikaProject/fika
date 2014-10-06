@@ -1,135 +1,36 @@
 from zope.interface import Attribute
 from zope.interface import Interface
-#from betahaus.pyracont.interfaces import IBaseFolder
+
+from arche.interfaces import IContent
 
 
 class IFikaUser(Interface):
     """ Adapter to extend functionality of base fika users.
     """
 
-class ICatalogable(Interface):
-    """ Things that will end up in the site roots catalog.
-    """
 
-class ISiteRoot(Interface):
-    """ Root object for the application. """
-
-
-class IUsers(Interface):
-    """ Single object present in the root. Contains IUsers. """
-
-    def get_user_by_email(email):
-        """ Fetch a user object through an email address. If validated is true, only check validated email addresses.
-        """
-
-
-class IUser(Interface, ICatalogable):
-    """ User object. Only contains a userid and mapping to other authentication system. """
-    title = Attribute("Name of the user")
-    email = Attribute("Email address")
-    completed_course_modules = Attribute("An OOSet of course module IDs that this user have marked as completed.")
-
-
-class ICourses(Interface):
+class ICourses(IContent):
     """ Container for ICourse. """
 
     def module_used_in(uid):
         """ Return all the course objects that uses this modules uid. """
 
 
-class ICourse(Interface, ICatalogable):
+class ICourse(IContent):
     """ Contains references to course modules. """
 
 
-class ICourseModules(Interface):
+class ICourseModules(IContent):
     """ Container for ICourseModule. """
 
 
-class ICourseModule(Interface, ICatalogable):
+class ICourseModule(IContent):
     """ Container for ISegment. Part of a course, or a stand alone object that can be read up on or organised. """
 
 
-class ISegment(Interface, ICatalogable):
+class ISegment(IContent):
     """ Part of a module object. """
 
-class IImageSlideshow(Interface):
+
+class IImageSlideshow(IContent):
     """ A set of images that is shown as a slideshow. """
-        
-class IMediaObject(Interface, ICatalogable):
-    """ Part of a segment object. Could be a text, a video or similar. """
-
-    def render(request, view):
-        """ Render this media object. """
-
-class ITextMediaObject(IMediaObject):
-    """ Part of a segment object. Contains text. """
-    
-class IImageMediaObject(IMediaObject):
-    """ Part of a segment object. Contains an image. """
-    
-class IImagesMediaObject(IMediaObject):
-    """ Part of a segment object. Contains multiple images. """
-    
-class IYoutubeMediaObject(IMediaObject):
-    """ Part of a segment object. Contains a youtube link. """
-    
-class IVimeoMediaObject(IMediaObject):
-    """ Part of a segment object. Contains a vimeo link. """
-    
-class IVideoMediaObject(IMediaObject):
-    """ Part of a segment object. Contains a video link. """
-  
-class IAudioMediaObject(IMediaObject):
-    """ Part of a segment object. Contains a audio link. """
-
-
-class IFile(Interface, ICatalogable):
-    """ An uploaded file. """
-
-
-class ISecurity(Interface):
-    """ Mixin for all content that should handle groups.
-        Principal in this terminology is a userid or a group id.
-    """
-    
-    def get_groups(principal):
-        """ Return groups for a principal in this context.
-            The special group "role:Owner" is never inherited.
-        """
-
-    def check_groups(groups):
-        """ Check dependencies and group names. """
-
-    def add_groups(principal, groups, event = True):
-        """ Add groups for a principal in this context.
-            If event is True, an IObjectUpdatedEvent will be sent.
-        """
-
-    def del_groups(principal, groups, event = True):
-        """ Delete groups for a principal in this context.
-            If event is True, an IObjectUpdatedEvent will be sent.
-        """
-
-    def set_groups(principal, groups, event = True):
-        """ Set groups for a principal in this context. (This clears any previous setting)
-            If event is True, an IObjectUpdatedEvent will be sent.
-        """
-
-    def get_security():
-        """ Return the current security settings.
-        """
-    
-    def set_security(value):
-        """ Set current security settings according to value, that is a list of dicts with keys
-            userid and groups.
-            Warning! This method will also clear any settings for users not present in value!
-            This method will send an IObjectUpdatedEvent.
-        """
-
-    def list_all_groups():
-        """ Returns a set of all groups in this context. """
-
-
-class IFlashMessages(Interface):
-    """ Handle adding and retrieving flash messages. """
-    
