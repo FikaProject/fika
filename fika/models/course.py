@@ -1,5 +1,3 @@
-from enum import Enum
-
 from arche.api import DCMetadataMixin
 from arche.api import LocalRolesMixin
 from arche.interfaces import IBlobs
@@ -13,20 +11,12 @@ from fika import FikaTSF as _
 from fika.models.base import FikaBaseFolder
 from fika.models.interfaces import ICourse
 
-
-class CourseStatus(Enum):
-    private = 1
-    review = 2
-    approved =3
-
-
 @implementer(ICourse, IThumbnailedContent)
 class Course(FikaBaseFolder, DCMetadataMixin, LocalRolesMixin):
     type_title =  _(u"Course")
     type_name = u"Course"
     add_permission = "Add %s" % type_name
     introduction = ""
-    status = CourseStatus.private
 
     @property
     def course_modules(self):

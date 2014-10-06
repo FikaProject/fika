@@ -87,11 +87,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-8" tal:condition="can_change_course_status">
-				<span tal:content="structure course_status(context)">
-		            (course status control here)
-		        </span>
-			</div>
 			<div class="col-md-8">
 				<tal:form  replace="structure context.introduction"></tal:form>
 			</div>
