@@ -1,3 +1,5 @@
+from arche.schemas import BaseSchema
+from arche.schemas import DCMetadataSchema
 from arche.schemas import file_upload_widget
 import colander
 import deform
@@ -5,7 +7,7 @@ import deform
 from fika import _
 
 
-class CourseSchema(colander.Schema):
+class CourseSchema(DCMetadataSchema, BaseSchema):
     title = colander.SchemaNode(colander.String(),)
     description = colander.SchemaNode(colander.String(),
                                       validator=colander.Length(max=1000),
