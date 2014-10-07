@@ -48,8 +48,12 @@ a.navbar-brand{
 
 
 /* bootstrap specific */
-.panel-add {
+.btn-add, .panel-add {
     border-style: dashed;
+}
+
+.panel-group-with-overflow {
+	overflow:visible !important;
 }
 
 table.table-bottom-border td:last-of-type{
