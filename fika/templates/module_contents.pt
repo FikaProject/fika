@@ -7,7 +7,7 @@
 	<div class="col-md-12">
         <div class="panel-group" id="accordion">
         	<tal:iterate repeat="obj module_segments">
-				<div class="panel panel-default" style="overflow:visible">
+				<div class="panel panel-default panel-group-with-overflow">
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">
@@ -21,7 +21,7 @@
 								
 								
 							<div class="btn-group btn-group-sm">
-								<button type="button" class="btn btn-default dropdown-toggle" style="border-style:dashed" data-toggle="dropdown">
+								<button type="button" class="btn btn-default dropdown-toggle btn-add" data-toggle="dropdown">
 									<span class="text-muted">
 										<span class="glyphicon glyphicon-plus"></span> <span class="caret"></span>
 									</span>
@@ -42,7 +42,7 @@
 					</div>
 				</div>
 			</tal:iterate>
-			<div class="panel panel-default" style="border-style:dashed">
+			<div class="panel panel-default panel-add">
 				<div class="panel-body">
 					<a href="${request.resource_url(context, 'add', query = {'content_type': 'Segment'})}">
 						<span class="text-muted">
