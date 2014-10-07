@@ -84,6 +84,12 @@
 								</div>
 							</a>
 						</tal:iterate>
+						
+						<a class="list-group-item" href="${request.resource_url(context, 'add', query = {'content_type': 'CourseModule'})}">
+				          <span class=" text-muted">
+				          	<span class="glyphicon glyphicon-plus"></span> Add new module
+				          </span> 
+				        </a>
 					</div>
 				</div>
 			</div>
