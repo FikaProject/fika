@@ -2,26 +2,23 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="view.macro('arche:templates/base_view.pt', 'arche:templates/inline.pt')"
+      metal:use-macro="view.macro('arche:templates/master.pt', 'arche:templates/inline.pt')"
       i18n:domain="fika">
 <body>
-<div metal:fill-slot="main-content">
-    <h1>${context.title}</h1>
-    
-    <div tal:repeat="image context.values()">
-    	<div>
-    		<a href="${request.resource_url(image, 'view')}" data-lightbox="image-slideshow-${context.title}" data-title="${image.description}">
-				<img class="img-responsive" sizes="100vw"
-				srcset="${view.request.thumb_url(image, 'col-12', key = 'file')} 1160w,
-				        ${view.request.thumb_url(image, 'col-9', key = 'file')} 860w, 
-				        ${view.request.thumb_url(image, 'col-6', key = 'file')} 560w,
-				        ${view.request.thumb_url(image, 'col-4', key = 'file')} 360w" 
-				alt="${image.description}" />
-    		</a>
-    		${image.description}
-    	</div>
-    	<br />
-	</div>
+<div metal:fill-slot="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>${context.title}</h1>
+    </div>
+    <tal:iterate tal:repeat="image context.values()">
+      <div class="col-sm-3">
+  		<a href="${request.resource_url(image, 'view')}" data-lightbox="image-slideshow-${context.title}" data-title="${image.description}">
+            <img class="img-responsive" src="${view.request.thumb_url(image, 'col-3', key = 'file')}" alt="${context.title}" />
+  		</a>
+  		${image.description}
+      </div>
+	</tal:iterate>
+  </div>
 </div>
 </body>
 </html>
