@@ -57,8 +57,8 @@ class MyCoursesView(ContentView):
 
 def includeme(config):
     config.add_view(MyCoursesView,
-                    name = 'my_courses_view',
+                    name = 'view',
                     permission = security.PERM_VIEW,
                     renderer = "fika:templates/my_courses.pt",
-                    context = 'arche.interfaces.IBase')
-    config.add_content_view('Root', 'my_courses_view', MyCoursesView)
+                    context = 'arche.interfaces.IRoot')
+    config.add_content_view('Root', 'view', MyCoursesView)
