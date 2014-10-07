@@ -9,8 +9,6 @@ from fika.fanstatic import lightbox_js
 from fika.fanstatic import lightbox_css
 
 
-
-
 class AddImageSlideshowForm(AddFileForm):
     type_name = u"ImageSlideshow"
     
@@ -22,6 +20,7 @@ class AddImageSlideshowForm(AddFileForm):
         self.context[name] = obj
         return HTTPFound(location = self.request.resource_url(obj))
 
+
 class ImageSlideshowView(DefaultView):
 
     def __init__(self, context, request):
@@ -29,6 +28,7 @@ class ImageSlideshowView(DefaultView):
         lightbox_js.need()
         super(DefaultView, self).__init__(context, request)
         self.response = {}
+
 
 def includeme(config):
     config.add_view(AddImageSlideshowForm,

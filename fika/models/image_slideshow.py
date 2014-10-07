@@ -1,5 +1,4 @@
 from zope.interface import implementer
-from arche.interfaces import IContent
 from arche.api import DCMetadataMixin
 
 from fika import FikaTSF as _
