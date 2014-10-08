@@ -4,7 +4,7 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:define-macro="main"
-      i18n:domain="Arche">
+      i18n:domain="fika">
 <!-- FIXME: Set lang attr from pyramid locale -->
     <head>
         <tal:head replace="structure view.render_template('arche:templates/head.pt')" />
