@@ -18,11 +18,11 @@ from fika.fanstatic import common_js
 
 
 @view_defaults(permission = security.PERM_VIEW)
-class CourseModulesView(FikaBaseView):
+class CourseModuleView(FikaBaseView):
 
     def __init__(self, context, request):
         common_js.need()
-        super(CourseModulesView, self).__init__(context, request)
+        super(CourseModuleView, self).__init__(context, request)
         self.response = {}
 
     @view_config(context = ICourseModule, renderer = "fika:templates/course_module.pt", permission=security.PERM_VIEW)
@@ -45,7 +45,6 @@ class CourseModulesView(FikaBaseView):
             response['module_index'] = tuple(response['course'].keys()).index(self.context.__name__)+1
         except IndexError, KeyError:
             response['module_index'] = 1
-        response['used_in_courses'] = self.root['courses'].module_used_in(self.context.uid)
         return response
     
     def _render_course_module_toggle(self, context):

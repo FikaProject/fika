@@ -12,15 +12,15 @@ class MyCoursesView(ContentView):
             course = self.resolve_uid(courseuid)
             
             noModulesCompleted = True
-            for uid in course.course_modules:
-                if uid in self.profile.completed_course_modules:
+            for coursemodule in course.values():
+                if coursemodule.uid in self.profile.completed_course_modules:
                     noModulesCompleted = False
                     break
             if noModulesCompleted:
                 return course
             
-            for uid in course.course_modules:
-                if uid not in self.profile.completed_course_modules:
+            for coursemodule in course.values():
+                if coursemodule.uid not in self.profile.completed_course_modules:
                     return self.resolve_uid(uid)
             return course
         
@@ -33,14 +33,14 @@ class MyCoursesView(ContentView):
             for uid in response['fikaProfile'].courses:
                 course = self.resolve_uid(uid)
                 completed_modules = 0
-                for course_module in course.course_modules:
-                    if(course_module in response['fikaProfile'].completed_course_modules):
+                for course_module in course.values():
+                    if(course_module.uid in response['fikaProfile'].completed_course_modules):
                         completed_modules += 1
-                if len(course.course_modules) <= 0:
+                if len(course) <= 0:
                     response['course_percentage'][uid] = 0
                 else:
-                    response['course_percentage'][uid] = round(completed_modules / float(len(course.course_modules)) * 100.0, 2); 
-                if completed_modules == len(course.course_modules):
+                    response['course_percentage'][uid] = round(completed_modules / float(len(course)) * 100.0, 2); 
+                if completed_modules == len(course):
                     response['completed_courses'] += (course.uid ,)
         
         response['get_first_unfinished_page'] = _get_first_unfinished_page
