@@ -18,7 +18,7 @@
 	</p>
     
     <p>
-	    <div tal:condition="in_course" tal:content="structure course_pagination(context, request, view)">
+	    <div tal:content="structure course_pagination(context, request, view)">
 	        (course pagination here)
 	    </div>
 	</p>
@@ -81,7 +81,7 @@
     </div>
     
     <p>
-		<div tal:condition="in_course" tal:content="structure course_pagination(context, request, view)">
+		<div tal:content="structure course_pagination(context, request, view)">
 		    (course pagination here)
 		</div>
     </p>
