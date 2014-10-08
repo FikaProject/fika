@@ -20,16 +20,6 @@ from fika.fanstatic import common_js
 @view_defaults(permission = security.PERM_VIEW)
 class CourseModulesView(FikaBaseView):
 
-#     @view_config(context = ICourseModules, renderer = "fika:templates/course_modules.pt", permission=security.PERM_VIEW)
-#     def course_modules(self):
-#         response = {}
-#         response['course_modules'] = self.context.values()
-#         response['courses'] = self.root['courses']
-#         response['can_create_module'] = False;
-#         if self.request.has_permission(security.PERM_EDIT, self.context):
-#             response['can_create_module'] = True;
-#         return response
-
     def __init__(self, context, request):
         common_js.need()
         super(CourseModulesView, self).__init__(context, request)
@@ -38,7 +28,6 @@ class CourseModulesView(FikaBaseView):
     @view_config(context = ICourseModule, renderer = "fika:templates/course_module.pt", permission=security.PERM_VIEW)
     def course_module(self):
         response = {}
-        #response['module_segments'] = self.context.values()
         response['course'] = find_interface(self.context, ICourse)
         response['course_modules'] = response['course'].items()
         response['in_course'] = self.fikaProfile.in_course(response['course'])

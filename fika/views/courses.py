@@ -3,7 +3,6 @@ from pyramid.view import view_defaults
 from pyramid.renderers import render
 from pyramid.security import Allowed
 from pyramid.httpexceptions import HTTPFound
-#from betahaus.pyracont.interfaces import IBaseFolder
 
 from arche import security
 
@@ -12,7 +11,6 @@ from fika.models.interfaces import ICourse
 from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourses
 from fika.views.course_pagination import render_course_pagination
-#from fika import security
 
 @view_defaults(permission = security.PERM_VIEW)
 class CourseView(FikaBaseView):
@@ -23,7 +21,6 @@ class CourseView(FikaBaseView):
 
     @view_config(context = ICourse, renderer = "fika:templates/course.pt", permission=security.PERM_VIEW)
     def course(self):
-        #course_modules = self.root['course_modules']
         course_modules = {}
         for uid in self.context.course_modules:
             course_modules[uid] = self.resolve_uid(uid)
@@ -48,7 +45,6 @@ class CourseView(FikaBaseView):
     @view_config(context = ICourses, renderer = "fika:templates/courses.pt", permission=security.PERM_VIEW)
     def courses(self):
         self.response['courses'] = self.context.values()
-        #self.response['course_modules'] = self.root['course_modules']
         self.response['can_create_course'] = False;
         if self.request.has_permission(security.PERM_EDIT, self.context):
             self.response['can_create_course'] = True;

@@ -6,9 +6,6 @@ from fika.models.interfaces import IFikaUser
 class MyCoursesView(ContentView):
     title = _('My Courses')
 
-
-    
-
     def __call__(self):
         
         def _get_first_unfinished_page(courseuid):
@@ -27,7 +24,7 @@ class MyCoursesView(ContentView):
                     return self.resolve_uid(uid)
             return course
         
-        response ={'contents': [x for x in self.context.values() if getattr(x, 'listing_visible', False)]}
+        response = {'contents': [x for x in self.context.values() if getattr(x, 'listing_visible', False)]}
         response['course_percentage'] = {}
         response['completed_courses'] = ()
         user = self.root['users'].get(self.request.authenticated_userid, None)
@@ -50,9 +47,6 @@ class MyCoursesView(ContentView):
         return response
     
     
-    
-
-
 def includeme(config):
     config.add_view(MyCoursesView,
                     name = 'view',

@@ -23,7 +23,57 @@
 	    </div>
 	</p>
 	
-    <tal:module tal:replace="structure view.render_template('fika:templates/module_contents.pt', module_segments=module_segments)" />
+    <div class="row">
+		<div class="col-md-12">
+	        <div class="panel-group" id="accordion">
+	        	<tal:iterate repeat="obj module_segments">
+					<div class="panel panel-default panel-group-with-overflow">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">
+									${obj.title}
+								</a>
+								<tal:segmentcontents repeat="segmentcontent obj.values()">
+									<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${obj.uid}" href="#collapse-${segmentcontent.uid}">
+					                    <span class="glyphicon glyphicon-${getattr(segmentcontent, 'icon', 'file')}"></span>
+					    			</button>
+								</tal:segmentcontents>
+									
+									
+								<div class="btn-group btn-group-sm">
+									<button type="button" class="btn btn-default dropdown-toggle btn-add" data-toggle="dropdown">
+										<span class="text-muted">
+											<span class="glyphicon glyphicon-plus"></span> <span class="caret"></span>
+										</span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="${request.resource_url(obj, 'add', query = {'content_type': 'Document'})}"><span class="glyphicon glyphicon-font"></span> Text</a></li>
+										<li><a href="${request.resource_url(obj, 'add', query = {'content_type': 'ImageSlideshow'})}"><span class="glyphicon glyphicon-picture"> Image(s)</a></li>
+									</ul>
+								</div>
+							</h4>
+							
+						</div>
+						<div id="segment-${obj.uid}" class="panel-body" >
+	                        Loading...
+	                        <script type="text/javascript">
+	                            $('#segment-${obj.uid}').load('${request.resource_url(obj)}');
+	                        </script>
+						</div>
+					</div>
+				</tal:iterate>
+				<div class="panel panel-default panel-add">
+					<div class="panel-body">
+						<a href="${request.resource_url(context, 'add', query = {'content_type': 'Segment'})}">
+							<span class="text-muted">
+								<span class="glyphicon glyphicon-plus"></span> Add new segment
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
     
     <p>&nbsp;</p>
     <div tal:condition="in_course" tal:content="structure course_module_toggle(context)">
