@@ -17,8 +17,7 @@
 		
 		<p class="clearfix"></p>
 	</div>
-	    	
-    <h2 i18n:translate="">Public courses</h2>
+	
     <tal:iterate repeat="obj courses">
         <div class="panel panel-default">
             <div class="panel-heading"><a href="${request.resource_url(obj)}">${obj.title}</a>

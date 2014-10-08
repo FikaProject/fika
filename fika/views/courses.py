@@ -14,37 +14,35 @@ from fika.views.course_pagination import render_course_pagination
 
 @view_defaults(permission = security.PERM_VIEW)
 class CourseView(FikaBaseView):
-    
-    def __init__(self, context, request):
-        super(CourseView, self).__init__(context, request)
-        self.response = {}
 
     @view_config(context = ICourse, renderer = "fika:templates/course.pt", permission=security.PERM_VIEW)
     def course(self):
-        self.response['course_modules'] = self.context.values()
-        self.response['in_course'] = self.fikaProfile.in_course(self.context)
-        self.response['course_pagination'] = render_course_pagination
+        response = {}
+        response['course_modules'] = self.context.values()
+        response['in_course'] = self.fikaProfile.in_course(self.context)
+        response['course_pagination'] = render_course_pagination
         
-        self.response['course_modules_media'] = {}
-        for course_module in self.response['course_modules']:
-            self.response['course_modules_media'][course_module.uid] = {}
+        response['course_modules_media'] = {}
+        for course_module in response['course_modules']:
+            response['course_modules_media'][course_module.uid] = {}
             for segment in course_module.values():
                 for media in segment.values():
                     if not hasattr(media, 'icon'):
                         continue
-                    if media.icon in self.response['course_modules_media'][course_module.uid]:
-                        self.response['course_modules_media'][course_module.uid][media.icon] += 1
+                    if media.icon in response['course_modules_media'][course_module.uid]:
+                        response['course_modules_media'][course_module.uid][media.icon] += 1
                     else:
-                        self.response['course_modules_media'][course_module.uid][media.icon] = 1
-        return self.response
+                        response['course_modules_media'][course_module.uid][media.icon] = 1
+        return response
     
     @view_config(context = ICourses, renderer = "fika:templates/courses.pt", permission=security.PERM_VIEW)
     def courses(self):
-        self.response['courses'] = self.context.values()
-        self.response['can_create_course'] = False;
+        response = {}
+        response['courses'] = [x for x in self.context.values() if self.request.has_permission(security.PERM_VIEW, x)]
+        response['can_create_course'] = False;
         if self.request.has_permission(security.PERM_EDIT, self.context):
-            self.response['can_create_course'] = True;
-        return self.response
+            response['can_create_course'] = True;
+        return response
     
     @view_config(context = ICourse, name = "join")
     def join(self):
