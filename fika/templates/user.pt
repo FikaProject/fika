@@ -22,8 +22,8 @@
                 <div class="panel-heading">Courses</div>
                 <div class="panel-body">
                     <ul>
-                        <li tal:repeat="courseuid fikaProfile.courses">
-                            <a href="${request.resource_url(view.resolve_uid(courseuid))}?p=${get_first_unfinished_page(courseuid)}">${view.resolve_uid(courseuid).title}</a>
+                        <li tal:repeat="courseuid view.fikaProfile.courses">
+                            <a href="${request.resource_url(view.resolve_uid(courseuid))}">${view.resolve_uid(courseuid).title}</a>
                         </li>
                     </ul>
                 </div>

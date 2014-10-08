@@ -25,12 +25,6 @@ class Course(FikaBaseFolder, DCMetadataMixin, LocalRolesMixin):
         #The old attribute returned UIDs
         return [x.uid for x in self.values() if x.type_name == 'CourseModule']
 
-    def cm_pages(self):
-        pages = {0: ''}
-        for uid in self.course_modules:
-            pages[len(pages)] = uid
-        return pages
-
     @property
     def image_data(self): pass
     @image_data.setter
