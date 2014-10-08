@@ -20,12 +20,6 @@ class Course(FikaBaseFolder, DCMetadataMixin, LocalRolesMixin, ContextACLMixin):
     introduction = ""
 
     @property
-    def course_modules(self):
-        #This might change, since CourseModule objects are contained now
-        #The old attribute returned UIDs
-        return [x.uid for x in self.values() if x.type_name == 'CourseModule']
-
-    @property
     def image_data(self): pass
     @image_data.setter
     def image_data(self, value):

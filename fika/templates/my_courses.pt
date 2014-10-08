@@ -9,9 +9,7 @@
 
 <body>
 
-<h1 metal:fill-slot="heading">
-
-</h1>
+<h1 metal:fill-slot="heading"></h1>
 
 <div metal:fill-slot="main-content">
     <div class="row">

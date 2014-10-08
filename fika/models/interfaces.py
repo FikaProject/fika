@@ -12,16 +12,9 @@ class IFikaUser(Interface):
 class ICourses(IContent):
     """ Container for ICourse. """
 
-    def module_used_in(uid):
-        """ Return all the course objects that uses this modules uid. """
-
 
 class ICourse(IContent):
     """ Contains references to course modules. """
-
-
-class ICourseModules(IContent):
-    """ Container for ICourseModule. """
 
 
 class ICourseModule(IContent):
