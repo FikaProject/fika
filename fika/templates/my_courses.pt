@@ -26,7 +26,7 @@
 					<div class="list-group">
 						<tal:iterate repeat="courseuid fikaProfile.courses">
 						<tal:completed condition="course_percentage[courseuid] < 100">
-						<a class="list-group-item" href="${request.resource_url(view.resolve_uid(courseuid))}?p=${get_first_unfinished_page(courseuid)}">
+						<a class="list-group-item" href="${request.resource_url(get_first_unfinished_page(courseuid))}">
 							<div class="row">
 								<div class="col-md-6">
 									${view.resolve_uid(courseuid).title}

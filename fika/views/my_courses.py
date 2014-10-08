@@ -20,14 +20,12 @@ class MyCoursesView(ContentView):
                     noModulesCompleted = False
                     break
             if noModulesCompleted:
-                return 0
+                return course
             
             for uid in course.course_modules:
                 if uid not in self.profile.completed_course_modules:
-                    for (k,v) in course.cm_pages().items():
-                        if v == uid:
-                            return k
-            return 0
+                    return self.resolve_uid(uid)
+            return course
         
         response ={'contents': [x for x in self.context.values() if getattr(x, 'listing_visible', False)]}
         response['course_percentage'] = {}
@@ -57,8 +55,8 @@ class MyCoursesView(ContentView):
 
 def includeme(config):
     config.add_view(MyCoursesView,
-                    name = 'my_courses_view',
+                    name = 'view',
                     permission = security.PERM_VIEW,
                     renderer = "fika:templates/my_courses.pt",
-                    context = 'arche.interfaces.IBase')
-    config.add_content_view('Root', 'my_courses_view', MyCoursesView)
+                    context = 'arche.interfaces.IRoot')
+    config.add_content_view('Root', 'view', MyCoursesView)
