@@ -24,7 +24,10 @@ def render_course_pagination(context, request, view):
     
     
     def _is_last(context):
-        return context.__name__ == course.keys()[-1]
+        try:
+            return context.__name__ == course.keys()[-1]
+        except IndexError:
+            return True
     
     
     def _get_next(context):
