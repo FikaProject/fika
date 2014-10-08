@@ -6,35 +6,51 @@
       i18n:domain="fika">
 <body>
 <div metal:fill-slot="main-content">
-	<div>
-		<h2>
-	        ${context.title}
-	        <p>
-	            <small>${context.description}</small>
-	        </p>
-	    </h2>
-        
-	    Used in courses:
-	    <ul>
-		    <tal:iterate repeat="obj used_in_courses">
-		        <li><span class="glyphicon glyphicon-book"></span> <a href="${request.resource_url(obj)}" alt="${obj.description}" title="${obj.description}">${obj.title}</a></li>
-		    </tal:iterate>
-		</ul>
-        <div class="well well-sm">
-            <span i18n:translate="">Created</span>
-            <span tal:condition="getattr(context, 'created', None)"
-                title="${request.dt_handler.format_dt(context.created)}">
-                ${request.dt_handler.format_relative(context.created)}
-            </span>
-            |
-            <span i18n:translate="">Modified</span>
-            <span tal:condition="getattr(context, 'modified', None)"
-                title="${request.dt_handler.format_dt(context.modified)}">
-                ${request.dt_handler.format_relative(context.modified)}
-            </span>
-		</div>
-	</div>
+	
+	<h1>
+        ${course.title}
+    </h1>
+	<h2>
+        ${module_index}. ${context.title}
+    </h2>
+    <p>
+    	${context.description}
+	</p>
+    
+    <p>
+	    <div tal:condition="in_course" tal:content="structure course_pagination(context, request, view)">
+	        (course pagination here)
+	    </div>
+	</p>
+	
     <tal:module tal:replace="structure view.render_template('fika:templates/module_contents.pt', module_segments=module_segments)" />
+    
+    <p>&nbsp;</p>
+    <div tal:condition="in_course" tal:content="structure course_module_toggle(context)">
+        (course module button here)
+    </div>
+    
+    <p>
+		<div tal:condition="in_course" tal:content="structure course_pagination(context, request, view)">
+		    (course pagination here)
+		</div>
+    </p>
+    
+    <p>
+	    <div class="well well-sm">
+	        <span i18n:translate="">Created</span>
+	        <span tal:condition="getattr(context, 'created', None)"
+	            title="${request.dt_handler.format_dt(context.created)}">
+	            ${request.dt_handler.format_relative(context.created)}
+	        </span>
+	        |
+	        <span i18n:translate="">Modified</span>
+	        <span tal:condition="getattr(context, 'modified', None)"
+	            title="${request.dt_handler.format_dt(context.modified)}">
+	            ${request.dt_handler.format_relative(context.modified)}
+	        </span>
+		</div>
+	</p>
 </div>
 </body>
 </html>
