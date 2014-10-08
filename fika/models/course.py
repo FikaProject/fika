@@ -1,9 +1,9 @@
+from arche.api import ContextACLMixin
 from arche.api import DCMetadataMixin
 from arche.api import LocalRolesMixin
 from arche.interfaces import IBlobs
 from arche.interfaces import IObjectWillBeRemovedEvent
 from arche.interfaces import IThumbnailedContent
-from persistent.list import PersistentList
 from pyramid.traversal import find_root
 from zope.interface import implementer
 
@@ -13,7 +13,7 @@ from fika.models.interfaces import ICourse
 
 
 @implementer(ICourse, IThumbnailedContent)
-class Course(FikaBaseFolder, DCMetadataMixin, LocalRolesMixin):
+class Course(FikaBaseFolder, DCMetadataMixin, LocalRolesMixin, ContextACLMixin):
     type_title =  _(u"Course")
     type_name = u"Course"
     add_permission = "Add %s" % type_name

@@ -1,5 +1,4 @@
 from arche.api import DCMetadataMixin
-from arche.api import LocalRolesMixin
 from zope.interface import implementer
 
 from fika.models.base import FikaBaseFolder
@@ -8,7 +7,7 @@ from fika import FikaTSF as _
 
 
 @implementer(ICourseModule)
-class CourseModule(FikaBaseFolder, DCMetadataMixin, LocalRolesMixin):
+class CourseModule(FikaBaseFolder, DCMetadataMixin):
     type_title = _(u"Course module")
     type_name = u"CourseModule"
     add_permission = "Add %s" % type_name
