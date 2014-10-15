@@ -14,7 +14,6 @@ from fika.models.interfaces import ICourse
 from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourses
 from fika.views.course_pagination import render_course_pagination
-from pip._vendor.requests.api import request
 
 @view_defaults(permission = security.PERM_VIEW)
 class CourseView(FikaBaseView):
