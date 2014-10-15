@@ -41,7 +41,6 @@
                     <span class="badge">
                         <span class="glyphicon glyphicon-unchecked"></span>
                         ${num_modules[obj]}
-                        
                     </span>
                     :
                     <span class="badge">
