@@ -27,9 +27,15 @@
             <tal:iterate repeat="media_object contents">
             	<div class="panel fika-media-panel">
 		            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-		            	<div class="btn-group">
-							<a href="${request.resource_url(media_object, 'edit')}"><button type="button" class="btn btn-default">Edit</button></a>
-							<a href="${request.resource_url(media_object, 'delete')}"><button type="button" class="btn btn-default">Delete</button></a>
+		            	<div class="btn-group" tal:condition="request.has_permission('perm:Edit', media_object)|request.has_permission('perm:Delete', media_object)" >
+							<a href="${request.resource_url(media_object, 'edit')}"
+								tal:condition="request.has_permission('perm:Edit', media_object)">
+								<button type="button" class="btn btn-default">Edit</button>
+							</a>
+							<a href="${request.resource_url(media_object, 'delete')}"
+								tal:condition="request.has_permission('perm:Delete', media_object)">
+								<button type="button" class="btn btn-default">Delete</button>
+							</a>
 						</div>
 				        <div class="media-area">
                         Loading...
