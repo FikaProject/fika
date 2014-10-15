@@ -5,6 +5,9 @@ from pyramid.renderers import render
 from pyramid.response import Response
 from pyramid.traversal import find_interface
 
+from arche.utils import get_addable_content
+from arche.utils import get_content_factories
+
 from fika import _
 from fika.views.fika_base_view import FikaBaseView
 from fika.views.course_pagination import render_course_pagination
@@ -41,6 +44,12 @@ class CourseModuleView(FikaBaseView):
                     lightbox_js.need()
                     lightbox_css.need()
                     break
+        response['addable_types'] = {}
+        factories = get_content_factories(self.request.registry)
+        for (obj, addable) in get_addable_content(self.request.registry).items():
+            if 'Segment' in addable:
+                factory = factories.get(obj, None)
+                response['addable_types'][obj] = getattr(factory, 'icon', 'file')
         try:
             response['module_index'] = tuple(response['course'].keys()).index(self.context.__name__)+1
         except IndexError, KeyError:

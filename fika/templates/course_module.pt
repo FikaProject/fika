@@ -40,15 +40,18 @@
 								</tal:segmentcontents>
 									
 									
-								<div class="btn-group btn-group-sm">
+								<div class="btn-group btn-group-sm" tal:condition="request.has_permission('perm:Edit', context)" >
 									<button type="button" class="btn btn-default dropdown-toggle btn-add" data-toggle="dropdown">
 										<span class="text-muted">
 											<span class="glyphicon glyphicon-plus"></span> <span class="caret"></span>
 										</span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
-										<li><a href="${request.resource_url(obj, 'add', query = {'content_type': 'Document'})}"><span class="glyphicon glyphicon-font"></span> Text</a></li>
-										<li><a href="${request.resource_url(obj, 'add', query = {'content_type': 'ImageSlideshow'})}"><span class="glyphicon glyphicon-picture"> Image(s)</a></li>
+										<li tal:repeat="(addable_type,icon) addable_types.items()">
+											<a href="${request.resource_url(obj, 'add', query = {'content_type': 'addable_type'})}">
+												<span class="glyphicon glyphicon-${icon}"></span> ${addable_type.title()}
+											</a>
+										</li>
 									</ul>
 								</div>
 							</h4>
@@ -62,7 +65,7 @@
 						</div>
 					</div>
 				</tal:iterate>
-				<div class="panel panel-default panel-add">
+				<div class="panel panel-default panel-add" tal:condition="request.has_permission('perm:Edit', context)">
 					<div class="panel-body">
 						<a href="${request.resource_url(context, 'add', query = {'content_type': 'Segment'})}">
 							<span class="text-muted">
