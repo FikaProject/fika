@@ -47,17 +47,18 @@ class CourseView(FikaBaseView):
             response['can_create_course'] = True;
         response['num_modules'] = {}
         response['num_media'] = {}
+        addable_types = {}
+        factories = get_content_factories(self.request.registry)
+        for (obj, addable) in get_addable_content(self.request.registry).items():
+            if 'Segment' in addable:
+                factory = factories.get(obj, None)
+                addable_types[obj] = getattr(factory, 'icon', 'file')
         for course in response['courses']:
             response['num_modules'][course] = len(self.catalog_search(resolve = False,
                                                                       path = resource_path(course),
                                                                       type_name='CourseModule'))
             response['num_media'][course] = {}
-            addable_types = {}
-            factories = get_content_factories(self.request.registry)
-            for (obj, addable) in get_addable_content(self.request.registry).items():
-                if 'Segment' in addable:
-                    factory = factories.get(obj, None)
-                    addable_types[obj] = getattr(factory, 'icon', 'file')
+            
             for (media, icon) in addable_types.items():
                 response['num_media'][course][icon] = len(self.catalog_search(resolve = False,
                                                                              path = resource_path(course),
