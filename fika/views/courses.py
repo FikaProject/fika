@@ -2,15 +2,19 @@ from pyramid.view import view_config
 from pyramid.view import view_defaults
 from pyramid.renderers import render
 from pyramid.security import Allowed
+from pyramid.traversal import resource_path
 from pyramid.httpexceptions import HTTPFound
 
 from arche import security
+from arche.utils import get_addable_content
+from arche.utils import get_content_factories
 
 from fika.views.fika_base_view import FikaBaseView
 from fika.models.interfaces import ICourse
 from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourses
 from fika.views.course_pagination import render_course_pagination
+from pip._vendor.requests.api import request
 
 @view_defaults(permission = security.PERM_VIEW)
 class CourseView(FikaBaseView):
@@ -42,6 +46,23 @@ class CourseView(FikaBaseView):
         response['can_create_course'] = False;
         if self.request.has_permission(security.PERM_EDIT, self.context):
             response['can_create_course'] = True;
+        response['num_modules'] = {}
+        response['num_media'] = {}
+        for course in response['courses']:
+            response['num_modules'][course] = len(self.catalog_search(resolve = False,
+                                                                      path = resource_path(course),
+                                                                      type_name='CourseModule'))
+            response['num_media'][course] = {}
+            addable_types = {}
+            factories = get_content_factories(self.request.registry)
+            for (obj, addable) in get_addable_content(self.request.registry).items():
+                if 'Segment' in addable:
+                    factory = factories.get(obj, None)
+                    addable_types[obj] = getattr(factory, 'icon', 'file')
+            for (media, icon) in addable_types.items():
+                response['num_media'][course][icon] = len(self.catalog_search(resolve = False,
+                                                                             path = resource_path(course),
+                                                                             type_name=media))
         return response
     
     @view_config(context = ICourse, name = "join")
