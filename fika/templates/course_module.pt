@@ -30,9 +30,7 @@
 					<div class="panel panel-default panel-group-with-overflow">
 						<div class="panel-heading">
 							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordion" href="#collapse-${obj.uid}">
-									${obj.title}
-								</a>
+								${obj.title}
 								<tal:segmentcontents repeat="segmentcontent obj.values()">
 									<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${obj.uid}" href="#collapse-${segmentcontent.uid}">
 					                    <span class="glyphicon glyphicon-${getattr(segmentcontent, 'icon', 'file')}"></span>
