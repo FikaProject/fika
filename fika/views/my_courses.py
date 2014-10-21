@@ -21,7 +21,7 @@ class MyCoursesView(ContentView):
             
             for coursemodule in course.values():
                 if coursemodule.uid not in self.profile.completed_course_modules:
-                    return self.resolve_uid(uid)
+                    return coursemodule
             return course
         
         response = {'contents': [x for x in self.context.values() if getattr(x, 'listing_visible', False)]}
