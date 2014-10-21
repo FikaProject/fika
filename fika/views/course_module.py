@@ -8,7 +8,7 @@ from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 
 from arche.utils import get_addable_content
 from arche.utils import get_content_factories
-from arche.fanstatic_lib import jqueryui
+from arche.fanstatic_lib import jqueryui, touchpunch_js
 
 from fika import _
 from fika.views.fika_base_view import FikaBaseView
@@ -35,6 +35,7 @@ class CourseModuleView(FikaBaseView):
     def course_module(self):
         if self.request.has_permission('perm:Edit', self.context):
             jqueryui.need()
+            touchpunch_js.need()
         response = {}
         response['course'] = find_interface(self.context, ICourse)
         response['course_modules'] = response['course'].items()
