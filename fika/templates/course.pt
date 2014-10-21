@@ -38,26 +38,31 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Contents</div>
 				<div class="list-group">
-					<tal:iterate repeat="coursemodule context.values()">
-						<a class="list-group-item" href="${request.resource_url(coursemodule)}">
-							<span tal:condition="coursemodule.uid in view.profile.completed_course_modules"
-							    class="label label-success">
-								<span class="glyphicon glyphicon-ok-sign"></span> ${repeat.coursemodule.number}
-							</span>
-							<span tal:condition="not coursemodule.uid in view.profile.completed_course_modules"
-							    class="label label-default">
-								<span class="glyphicon glyphicon-unchecked"></span> ${repeat.coursemodule.number}
-							</span>
-							&nbsp;<span tal:content="coursemodule.title">Title</span>
-							
-							<div tal:repeat="(icon, count) course_modules_media[coursemodule.uid].items()" class="pull-right">
-								<span class="badge">
-									<span class="glyphicon glyphicon-${icon}"></span>
-									${count}
+					<form id="sortable-form"  tal:omit-tag="not request.has_permission('perm:Edit', context)">
+						<span id="sortable"  tal:omit-tag="not request.has_permission('perm:Edit', context)">
+						<tal:iterate repeat="coursemodule context.values()">
+							<a class="list-group-item" href="${request.resource_url(coursemodule)}">
+								<input type="hidden" name="module_name" value="${coursemodule.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
+								<span tal:condition="coursemodule.uid in view.profile.completed_course_modules"
+								    class="label label-success">
+									<span class="glyphicon glyphicon-ok-sign"></span> ${repeat.coursemodule.number}
 								</span>
-							</div>
-						</a>
-					</tal:iterate>
+								<span tal:condition="not coursemodule.uid in view.profile.completed_course_modules"
+								    class="label label-default">
+									<span class="glyphicon glyphicon-unchecked"></span> ${repeat.coursemodule.number}
+								</span>
+								&nbsp;<span tal:content="coursemodule.title">Title</span>
+								
+								<div tal:repeat="(icon, count) course_modules_media[coursemodule.uid].items()" class="pull-right">
+									<span class="badge">
+										<span class="glyphicon glyphicon-${icon}"></span>
+										${count}
+									</span>
+								</div>
+							</a>
+						</tal:iterate>
+						</span>
+					</form>
 					
 					<a tal:condition="request.has_permission('perm:Edit', context)" class="list-group-item" href="${request.resource_url(context, 'add', query = {'content_type': 'CourseModule'})}">
 			          <span class=" text-muted">
@@ -93,6 +98,18 @@
 	        </span>
 		</div>
 	</p>
+	<script>
+		$(function()
+		{
+			$( "#sortable" ).sortable({
+				stop: function( event, ui ) {
+					$.post("${request.resource_url(context, 'sorted')}", $( "#sortable-form" ).serialize());
+					window.location.reload(); //FIXME reload the content list and pagination inline instead of refresh page
+				}
+			});
+			$( "#sortable" ).disableSelection();
+		});
+	</script>
 </div>
 </div><!-- main-column -->
 </body>

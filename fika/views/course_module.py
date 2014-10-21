@@ -4,9 +4,11 @@ from pyramid.view import view_defaults
 from pyramid.renderers import render
 from pyramid.response import Response
 from pyramid.traversal import find_interface
+from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 
 from arche.utils import get_addable_content
 from arche.utils import get_content_factories
+from arche.fanstatic_lib import jqueryui
 
 from fika import _
 from fika.views.fika_base_view import FikaBaseView
@@ -20,6 +22,7 @@ from fika.fanstatic import lightbox_css
 from fika.fanstatic import common_js
 
 
+
 @view_defaults(permission = security.PERM_VIEW)
 class CourseModuleView(FikaBaseView):
 
@@ -30,15 +33,16 @@ class CourseModuleView(FikaBaseView):
 
     @view_config(context = ICourseModule, renderer = "fika:templates/course_module.pt", permission=security.PERM_VIEW)
     def course_module(self):
+        if self.request.has_permission('perm:Edit', self.context):
+            jqueryui.need()
         response = {}
         response['course'] = find_interface(self.context, ICourse)
         response['course_modules'] = response['course'].items()
         response['in_course'] = self.fikaProfile.in_course(response['course'])
         response['course_module_toggle'] = self._render_course_module_toggle
         response['course_pagination'] = render_course_pagination
-        response['module_segments'] = {} 
+        response['module_segments'] = self.context.values()
         for segment in self.context.values():
-            response['module_segments'][segment] = segment
             for segmentcontent in segment.values():
                 if isinstance(segmentcontent, ImageSlideshow):
                     lightbox_js.need()
@@ -68,6 +72,18 @@ class CourseModuleView(FikaBaseView):
         elif self.context.uid in self.fikaProfile.completed_course_modules:
             self.fikaProfile.completed_course_modules.remove(self.context.uid)
         return Response(self._render_course_module_toggle(self.context))
+    
+    @view_config(context = ICourseModule, name = "sorted")
+    def sorted(self):
+        segment_names = self.request.POST.getall('segment_name')
+        keys = set(self.context.keys())
+        for item in segment_names:
+            if item not in keys:
+                return HTTPNotFound()
+            keys.remove(item)
+        segment_names.extend(keys)
+        self.context.order = segment_names
+        return HTTPFound(location = self.request.resource_url(self.context))
 
 
 def includeme(config):
