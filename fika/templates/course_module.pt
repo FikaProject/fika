@@ -32,8 +32,8 @@
 							<div class="panel panel-default panel-group-with-overflow">
 								<input type="hidden" name="segment_name" value="${obj.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
 								<div class="panel-heading">
-									<h4 class="panel-title">
-										${obj.title}
+									<div class="panel-title">
+										<h4>${obj.title}</h4>
 										<tal:segmentcontents repeat="segmentcontent obj.values()">
 											<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${obj.uid}" href="#collapse-${segmentcontent.uid}">
 							                    <span class="glyphicon glyphicon-${getattr(segmentcontent, 'icon', 'file')}"></span>
@@ -53,7 +53,12 @@
 												</li>
 											</ul>
 										</div>
-									</h4>
+										<div class="pull-right sort-handle" tal:condition="request.has_permission('perm:Edit', context)" >
+											<div type="button" class="btn btn-default">
+												<span class="glyphicon glyphicon-resize-vertical"></span>
+											</div>
+										</div>
+									</div>
 								</div>
 								<div id="segment-${obj.uid}" class="panel-body" >
 			                        Loading...
@@ -109,6 +114,7 @@
 		$(function()
 		{
 			$( "#sortable" ).sortable({
+				handle: ".sort-handle",
 				stop: function( event, ui ) {
 					$.post("${request.resource_url(context, 'sorted')}", $( "#sortable-form" ).serialize());
 				}

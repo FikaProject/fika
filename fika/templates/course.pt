@@ -43,22 +43,26 @@
 						<tal:iterate repeat="coursemodule context.values()">
 							<a class="list-group-item" href="${request.resource_url(coursemodule)}">
 								<input type="hidden" name="module_name" value="${coursemodule.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
-								<span tal:condition="coursemodule.uid in view.profile.completed_course_modules"
-								    class="label label-success">
-									<span class="glyphicon glyphicon-ok-sign"></span> ${repeat.coursemodule.number}
-								</span>
-								<span tal:condition="not coursemodule.uid in view.profile.completed_course_modules"
-								    class="label label-default">
-									<span class="glyphicon glyphicon-unchecked"></span> ${repeat.coursemodule.number}
-								</span>
-								&nbsp;<span tal:content="coursemodule.title">Title</span>
-								
-								<div tal:repeat="(icon, count) course_modules_media[coursemodule.uid].items()" class="pull-right">
-									<span class="badge">
+								<h4 class="list-group-item-heading">
+									<span tal:condition="coursemodule.uid in view.profile.completed_course_modules"
+									    class="label label-success">
+										<span class="glyphicon glyphicon-ok-sign"></span>
+									</span>
+									<span tal:condition="not coursemodule.uid in view.profile.completed_course_modules"
+									    class="label label-default">
+										<span class="glyphicon glyphicon-unchecked"></span>
+									</span>
+									&nbsp;${repeat.coursemodule.number}.&nbsp;<span tal:content="coursemodule.title">Title</span>
+								</h4>
+								<p>
+									<tal:iterate repeat="(icon, count) course_modules_media[coursemodule.uid].items()">
 										<span class="glyphicon glyphicon-${icon}"></span>
 										${count}
+									</tal:iterate>
+									<span type="button" class="pull-right sort-handle btn btn-default" tal:condition="request.has_permission('perm:Edit', context)" >
+										<span class="glyphicon glyphicon-resize-vertical"></span>
 									</span>
-								</div>
+								</p>
 							</a>
 						</tal:iterate>
 						</span>
@@ -102,6 +106,7 @@
 		$(function()
 		{
 			$( "#sortable" ).sortable({
+				handle: ".sort-handle",
 				stop: function( event, ui ) {
 					$.post("${request.resource_url(context, 'sorted')}", $( "#sortable-form" ).serialize());
 					window.location.reload(); //FIXME reload the content list and pagination inline instead of refresh page
