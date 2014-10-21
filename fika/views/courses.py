@@ -8,7 +8,7 @@ from pyramid.traversal import resource_path
 from arche import security
 from arche.utils import get_addable_content
 from arche.utils import get_content_factories
-from arche.fanstatic_lib import jqueryui
+from arche.fanstatic_lib import jqueryui, touchpunch_js
 
 from fika.views.fika_base_view import FikaBaseView
 from fika.models.interfaces import ICourse
@@ -34,6 +34,7 @@ class CourseView(FikaBaseView):
     def course(self):
         if self.request.has_permission('perm:Edit', self.context):
             jqueryui.need()
+            touchpunch_js.need()
         response = {}
         response['course_modules'] = self.context.values()
         response['in_course'] = self.fikaProfile.in_course(self.context)
