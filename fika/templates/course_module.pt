@@ -47,7 +47,7 @@
 											</button>
 											<ul class="dropdown-menu" role="menu">
 												<li tal:repeat="(addable_type,icon) addable_types.items()">
-													<a href="${request.resource_url(obj, 'add', query = {'content_type': 'addable_type'})}">
+													<a href="${request.resource_url(obj, 'add', query = {'content_type': addable_type})}">
 														<span class="glyphicon glyphicon-${icon}"></span> ${addable_type.title()}
 													</a>
 												</li>
