@@ -43,26 +43,39 @@
 						<tal:iterate repeat="coursemodule context.values()">
 							<a class="list-group-item" href="${request.resource_url(coursemodule)}">
 								<input type="hidden" name="module_name" value="${coursemodule.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
-								<h4 class="list-group-item-heading">
-									<span tal:condition="coursemodule.uid in view.profile.completed_course_modules"
-									    class="label label-success">
-										<span class="glyphicon glyphicon-ok-sign"></span>
-									</span>
-									<span tal:condition="not coursemodule.uid in view.profile.completed_course_modules"
-									    class="label label-default">
-										<span class="glyphicon glyphicon-unchecked"></span>
-									</span>
-									&nbsp;${repeat.coursemodule.number}.&nbsp;<span tal:content="coursemodule.title">Title</span>
-								</h4>
-								<p>
-									<tal:iterate repeat="(icon, count) course_modules_media[coursemodule.uid].items()">
-										<span class="glyphicon glyphicon-${icon}"></span>
-										${count}
-									</tal:iterate>
-									<span type="button" class="pull-right sort-handle btn btn-default" tal:condition="request.has_permission('perm:Edit', context)" >
-										<span class="glyphicon glyphicon-resize-vertical"></span>
-									</span>
-								</p>
+								<div class="row">
+									<div class="col-xs-1">
+										<span tal:condition="coursemodule.uid in view.profile.completed_course_modules"
+										    class="label label-success">
+											<span class="glyphicon glyphicon-ok-sign"></span>
+										</span>
+										<span tal:condition="not coursemodule.uid in view.profile.completed_course_modules"
+										    class="label label-default">
+											<span class="glyphicon glyphicon-unchecked"></span>
+										</span>
+									</div>
+									<div class="col-xs-8">
+										${repeat.coursemodule.number}.
+										&nbsp;
+										<span tal:content="coursemodule.title">Title</span>
+									</div>
+									<div class="col-md-2 pull-right">
+										<span type="button" class="sort-handle btn btn-default" tal:condition="request.has_permission('perm:Edit', context)" >
+											<span class="glyphicon glyphicon-resize-vertical"></span>
+										</span>
+									</div>
+								</div>
+								<p></p>
+								<div class="row">
+									<div class="col-md-1">&nbsp;</div>
+									<div class="col-md-8">
+										<tal:iterate repeat="(icon, count) course_modules_media[coursemodule.uid].items()">
+											<span class="glyphicon glyphicon-${icon}"></span>
+											${count}
+										</tal:iterate>
+									</div>
+									
+								</div>
 							</a>
 						</tal:iterate>
 						</span>
