@@ -15,5 +15,5 @@ class Segment(FikaBaseFolder):
 def includeme(config):
     config.add_content_factory(Segment)
     config.add_addable_content("ImageSlideshow", "Segment")
-    config.add_addable_content("Document", "Segment")
+    config.add_addable_content("Text", "Segment")
     #FIXME add video, audio, pdf here once they exist

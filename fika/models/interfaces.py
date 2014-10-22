@@ -27,3 +27,6 @@ class ISegment(IContent):
 
 class IImageSlideshow(IContent):
     """ A set of images that is shown as a slideshow. """
+    
+class IText(IContent):
+    """ Text that is put into a segment. """
