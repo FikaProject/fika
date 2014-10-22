@@ -56,26 +56,28 @@ class CourseView(FikaBaseView):
     @view_config(context = ICourses, renderer = "fika:templates/courses.pt", permission=security.PERM_VIEW)
     def courses(self):
         response = {}
-        response['courses'] = [x for x in self.context.values() if self.request.has_permission(security.PERM_VIEW, x)]
         response['can_create_course'] = False;
         if self.request.has_permission(security.PERM_EDIT, self.context):
             response['can_create_course'] = True;
-        response['num_modules'] = {}
-        response['num_media'] = {}
         addable_types = {}
         factories = get_content_factories(self.request.registry)
         for (obj, addable) in get_addable_content(self.request.registry).items():
             if 'Segment' in addable:
                 factory = factories.get(obj, None)
                 addable_types[obj] = getattr(factory, 'icon', 'file')
-        for course in response['courses']:
-            response['num_modules'][course] = len(self.catalog_search(resolve = False,
-                                                                      path = resource_path(course),
-                                                                      type_name='CourseModule'))
-            response['num_media'][course] = {}
-            
+        response['courses'] = courses = []
+        response['num_modules'] = {}
+        response['num_media'] = {}
+        for (name, course) in self.context.items():
+            if not self.request.has_permission(security.PERM_VIEW, course):
+                continue
+            courses.append(course)
+            response['num_modules'][name] = len(self.catalog_search(resolve = False,
+                                                                    path = resource_path(course),
+                                                                    type_name='CourseModule'))
+            response['num_media'][name] = {}
             for (media, icon) in addable_types.items():
-                response['num_media'][course][icon] = len(self.catalog_search(resolve = False,
+                response['num_media'][name][icon] = len(self.catalog_search(resolve = False,
                                                                              path = resource_path(course),
                                                                              type_name=media))
         return response
