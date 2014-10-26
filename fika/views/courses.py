@@ -1,20 +1,19 @@
-from pyramid.httpexceptions import HTTPFound, HTTPNotFound
-from pyramid.view import view_config
-from pyramid.view import view_defaults
-from pyramid.renderers import render
-from pyramid.security import Allowed
-from pyramid.traversal import resource_path
-
 from arche import security
+from arche.fanstatic_lib import jqueryui
+from arche.fanstatic_lib import touchpunch_js
 from arche.utils import get_addable_content
 from arche.utils import get_content_factories
-from arche.fanstatic_lib import jqueryui, touchpunch_js
+from pyramid.httpexceptions import HTTPFound
+from pyramid.httpexceptions import HTTPNotFound
+from pyramid.traversal import resource_path
+from pyramid.view import view_config
+from pyramid.view import view_defaults
 
-from fika.views.fika_base_view import FikaBaseView
 from fika.models.interfaces import ICourse
-from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourses
 from fika.views.course_pagination import render_course_pagination
+from fika.views.fika_base_view import FikaBaseView
+
 
 @view_defaults(permission = security.PERM_VIEW)
 class CourseView(FikaBaseView):

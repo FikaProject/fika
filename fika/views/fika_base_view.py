@@ -2,6 +2,7 @@ from arche.views.base import BaseView
 
 from fika.models.interfaces import IFikaUser
 
+
 class FikaBaseView(BaseView):
     
     @property
