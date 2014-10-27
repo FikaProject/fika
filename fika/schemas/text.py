@@ -11,7 +11,7 @@ class TextSchema(colander.Schema):
                                       missing = u"",
                                       description=u"Write a short description of the text here. Max 140 characters.",)
     body = colander.SchemaNode(colander.String(),
-                               widget=deform.widget.TextAreaWidget(rows=8, cols=80),
+                               widget=deform.widget.RichTextWidget(rows=8, cols=80),
                                description=u"Write the piece of text here.",)
 
 
