@@ -9,44 +9,40 @@
 <h1>${context.title}</h1>
 
 <div class="course_segment description">
-            ${context.description}
-    	</div>
-        <div class="btn-group btn-group-lg">
-            <tal:iterate repeat="media_object contents">
-				<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${context.uid}" href="#collapse-${media_object.uid}">
-                    <span class="glyphicon glyphicon-${getattr(media_object, 'icon', 'file')}"></span>
-    			</button>
-		    </tal:iterate>
-        </div>
-        
+	${context.description}
+</div>
+<div class="btn-group btn-group-lg">
+	<tal:iterate repeat="media_object contents">
+		<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${context.uid}" href="#collapse-${media_object.uid}">
+			<span class="glyphicon glyphicon-${getattr(media_object, 'icon', 'file')}"></span>
+		</button>
+	</tal:iterate>
+</div>
 <div metal:fill-slot="main-content">
-		
-    	
-	    
-        <div class="panel-group" id="accordion-${context.uid}">
-            <tal:iterate repeat="media_object contents">
-            	<div class="panel fika-media-panel">
-		            <div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-		            	<div class="btn-group" tal:condition="request.has_permission('perm:Edit', media_object)|request.has_permission('perm:Delete', media_object)" >
-							<a href="${request.resource_url(media_object, 'edit')}"
-								tal:condition="request.has_permission('perm:Edit', media_object)">
-								<button type="button" class="btn btn-default">Edit</button>
-							</a>
-							<a href="${request.resource_url(media_object, 'delete')}"
-								tal:condition="request.has_permission('perm:Delete', media_object)">
-								<button type="button" class="btn btn-default">Delete</button>
-							</a>
-						</div>
-				        <div class="media-area">
-                        Loading...
-                        <script type="text/javascript">
-                            $('#collapse-${media_object.uid} .media-area').load('${request.resource_url(media_object)}');
-                        </script>
-				        </div>
-			        </div>
-		        </div>
-		    </tal:iterate>
-	    </div>
+	<div class="panel-group" id="accordion-${context.uid}">
+		<tal:iterate repeat="media_object contents">
+			<div class="panel fika-media-panel">
+				<div id="collapse-${media_object.uid}" class="panel-collapse collapse">
+					<div class="btn-group" tal:condition="request.has_permission('perm:Edit', media_object)|request.has_permission('perm:Delete', media_object)" >
+						<a href="${request.resource_url(media_object, 'edit')}"
+							tal:condition="request.has_permission('perm:Edit', media_object)">
+							<button type="button" class="btn btn-default">Edit</button>
+						</a>
+						<a href="${request.resource_url(media_object, 'delete')}"
+							tal:condition="request.has_permission('perm:Delete', media_object)">
+							<button type="button" class="btn btn-default">Delete</button>
+						</a>
+					</div>
+					<div class="media-area">
+						Loading...
+						<script type="text/javascript">
+							$('#collapse-${media_object.uid} .media-area').load('${request.resource_url(media_object)}');
+						</script>
+					</div>
+				</div>
+			</div>
+		</tal:iterate>
+	</div>
 </div>
 </body>
 </html>
