@@ -12,12 +12,23 @@
     </div>
     <tal:iterate tal:repeat="image context.values()">
       <div class="col-sm-3">
+  		<p>
   		<a href="${request.resource_url(image, 'view')}" data-lightbox="image-slideshow-${context.title}" data-title="${image.description}">
             <img class="img-responsive" src="${view.request.thumb_url(image, 'col-3', key = 'file')}" alt="${context.title}" />
   		</a>
   		${image.description}
+  		</p>
       </div>
 	</tal:iterate>
+	<div class="col-sm-3">
+		<a tal:condition="request.has_permission('perm:Edit', context)" href="${request.resource_url(context, 'add', query = {'content_type': 'Image'})}">
+			<button type="button" class="btn btn-default btn-add">
+				<span class=" text-muted">
+					<span class="glyphicon glyphicon-plus"></span> Add new image
+				</span>
+			</button> 
+		</a>
+	</div>
   </div>
 </div>
 </body>

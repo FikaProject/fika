@@ -3,7 +3,8 @@ from pyramid.view import view_config
 
 from arche.views.base import DefaultView
 from arche import security
-from arche.interfaces import IContent
+from arche.interfaces import IContent, IImage
+from fika.models.interfaces import IImageSlideshow
 
 class DefaultContentView(DefaultView):
 
@@ -18,6 +19,14 @@ class DefaultContentView(DefaultView):
                   permission=security.PERM_VIEW)
     def default_content(self):
         return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__))
+    
+    @view_config(context = IImage, renderer = "arche:templates/content/basic.pt",
+                  permission=security.PERM_VIEW)
+    def default_image(self):
+        if IImageSlideshow.providedBy(self.context.__parent__):
+            return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__.__parent__))
+        else:
+            return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__))
 
 
 def includeme(config):
