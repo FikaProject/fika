@@ -10,7 +10,6 @@ class DefaultContentView(DefaultView):
     @view_config(name = 'inline', context = IContent, renderer = "arche:templates/content/basic.pt",
                   permission=security.PERM_VIEW)
     def default_content_inline(self):
-        print "fika default content inline"
         super(DefaultView, self).__init__(self.context, self.request)
         response = {}
         return response
@@ -18,7 +17,6 @@ class DefaultContentView(DefaultView):
     @view_config(name = 'view', context = IContent, renderer = "arche:templates/content/basic.pt",
                   permission=security.PERM_VIEW)
     def default_content(self):
-        print "fika default content"
         return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__))
 
 
