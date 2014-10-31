@@ -110,7 +110,7 @@
 		</div>
 	</p>
 	
-	<script>
+	<script tal:condition="request.has_permission('perm:Edit', context)">
 		$(function()
 		{
 			$( "#sortable" ).sortable({

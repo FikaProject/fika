@@ -10,16 +10,36 @@
     <div class="col-sm-12">
       <h1>${context.title}</h1>
     </div>
-    <tal:iterate tal:repeat="image context.values()">
-      <div class="col-sm-3">
-  		<p>
-  		<a href="${request.resource_url(image, 'view')}" data-lightbox="image-slideshow-${context.title}" data-title="${image.description}">
-            <img class="img-responsive" src="${view.request.thumb_url(image, 'col-3', key = 'file')}" alt="${context.title}" />
-  		</a>
-  		${image.description}
-  		</p>
-      </div>
-	</tal:iterate>
+    	<form id="sortable-form-imageslideshow-${context.uid}" tal:omit-tag="not request.has_permission('perm:Edit', context)">
+			<span id="sortable-${context.uid}" tal:omit-tag="not request.has_permission('perm:Edit', context)">
+			    <tal:iterate tal:repeat="image context.values()">
+				    <div class="col-sm-3">
+						<input type="hidden" name="image_name" value="${image.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
+						<p>
+							<a href="${request.resource_url(image, 'view')}" data-lightbox="image-slideshow-${context.title}" data-title="${image.description}">
+								<img class="img-responsive" src="${view.request.thumb_url(image, 'col-3', key = 'file')}" alt="${image.title}" />
+							</a>
+							${image.description}
+						</p>
+						<div>
+							<a class="btn btn-default" href="${request.resource_url(image, 'edit')}" role="button"
+								tal:condition="request.has_permission('perm:Edit', image)">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</a>
+							<a class="btn btn-default" href="${request.resource_url(image, 'delete')}" role="button"
+								tal:condition="request.has_permission('perm:Edit', image)">
+								<span class="glyphicon glyphicon-trash"></span>
+							</a>
+							<span class="sort-handle" tal:condition="request.has_permission('perm:Edit', context)" >
+								<div type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-move"></span>
+								</div>
+							</span>
+						</div>
+				    </div>
+				</tal:iterate>
+			</span>
+		</form>
 	<div class="col-sm-3">
 		<a tal:condition="request.has_permission('perm:Edit', context)" href="${request.resource_url(context, 'add', query = {'content_type': 'Image'})}">
 			<button type="button" class="btn btn-default btn-add">
@@ -29,6 +49,18 @@
 			</button> 
 		</a>
 	</div>
+	<script tal:condition="request.has_permission('perm:Edit', context)">
+		$(function()
+		{
+			$( "#sortable-${context.uid}" ).sortable({
+				handle: ".sort-handle",
+				stop: function( event, ui ) {
+					$.post("${request.resource_url(context, 'sorted')}", $( "#sortable-form-imageslideshow-${context.uid}" ).serialize());
+				}
+			});
+			$( "#sortable-${context.uid}" ).disableSelection();
+		});
+	</script>
   </div>
 </div>
 </body>

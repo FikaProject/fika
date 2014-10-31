@@ -1,4 +1,4 @@
-from pyramid.httpexceptions import HTTPFound
+from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 from pyramid.view import view_config
 
 from arche.views.base import DefaultView
@@ -40,6 +40,18 @@ class ImageSlideshowView(DefaultView):
                   permission=security.PERM_VIEW)
     def image_slideshow(self):
         return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__))
+    
+    @view_config(context = IImageSlideshow, name = "sorted")
+    def sorted(self):
+        image_names = self.request.POST.getall('image_name')
+        keys = set(self.context.keys())
+        for item in image_names:
+            if item not in keys:
+                return HTTPNotFound()
+            keys.remove(item)
+        image_names.extend(keys)
+        self.context.order = image_names
+        return HTTPFound(location = self.request.resource_url(self.context))
 
 
 def includeme(config):
