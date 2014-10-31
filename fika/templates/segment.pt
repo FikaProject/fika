@@ -23,14 +23,14 @@
 		<tal:iterate repeat="media_object contents">
 			<div class="panel fika-media-panel">
 				<div id="collapse-${media_object.uid}" class="panel-collapse collapse">
-					<div class="btn-group" tal:condition="request.has_permission('perm:Edit', media_object)|request.has_permission('perm:Delete', media_object)" >
-						<a href="${request.resource_url(media_object, 'edit')}"
+					<div tal:condition="request.has_permission('perm:Edit', media_object)|request.has_permission('perm:Delete', media_object)" >
+						<a class="btn btn-default" role="button" href="${request.resource_url(media_object, 'edit')}"
 							tal:condition="request.has_permission('perm:Edit', media_object)">
-							<button type="button" class="btn btn-default">Edit</button>
+							<span class="glyphicon glyphicon-pencil"></span>
 						</a>
-						<a href="${request.resource_url(media_object, 'delete')}"
+						<a class="btn btn-default" role="button" href="${request.resource_url(media_object, 'delete')}"
 							tal:condition="request.has_permission('perm:Delete', media_object)">
-							<button type="button" class="btn btn-default">Delete</button>
+							<span class="glyphicon glyphicon-trash"></span>
 						</a>
 					</div>
 					<div class="media-area">
