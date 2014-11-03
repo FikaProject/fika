@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="view.macro('arche:templates/master.pt', 'arche:templates/inline.pt')"
+      i18n:domain="fika">
+<body>
+<div metal:fill-slot="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>${context.title}</h1>
+    </div>
+    <div class="col-sm-12">
+      <div tal:condition="python:context.video_type == 'youtube'">
+        <div class="auto-resizable-iframe"><div><iframe class="youtube" src="//www.youtube.com/embed/${context.url}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div>
+      </div>
+      <div tal:condition="python:context.video_type == 'vimeo'">
+        <div class="auto-resizable-iframe"><div><iframe class="youtube" src="//player.vimeo.com/video/${context.url}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div>
+      </div>
+      <div tal:condition="python:context.video_type == 'file'">
+        <video width="320" height="240" controls>
+          <source src="${context.url}" type="video/mp4" />
+        Your browser does not support the video tag.
+        </video>
+      </div>
+      <div>
+        ${context.description}
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
