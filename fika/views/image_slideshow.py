@@ -41,16 +41,37 @@ class ImageSlideshowView(DefaultView):
     def image_slideshow(self):
         return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__))
     
-    @view_config(context = IImageSlideshow, name = "sorted")
-    def sorted(self):
-        image_names = self.request.POST.getall('image_name')
-        keys = set(self.context.keys())
-        for item in image_names:
-            if item not in keys:
-                return HTTPNotFound()
-            keys.remove(item)
-        image_names.extend(keys)
-        self.context.order = image_names
+    @view_config(context = IImageSlideshow, name = "move_up")
+    def move_up(self):
+        image_name = self.request.GET.get('image_name')
+        new_order = []
+        for item in self.context.order:
+            if len(new_order) > 0 and image_name == item:
+                previous = new_order.pop()
+                new_order.append(item)
+                new_order.append(previous)
+            else:
+                new_order.append(item)
+        self.context.order = new_order
+        return HTTPFound(location = self.request.resource_url(self.context))
+    
+    @view_config(context = IImageSlideshow, name = "move_down")
+    def move_down(self):
+        image_name = self.request.GET.get('image_name')
+        new_order = []
+        temp = None
+        for item in self.context.order:
+            if image_name == item:
+                temp = item
+            else:
+                new_order.append(item)
+                if temp != None:
+                    new_order.append(temp)
+                    temp = None
+        if temp != None:
+            new_order.append(temp)
+            temp = None
+        self.context.order = new_order
         return HTTPFound(location = self.request.resource_url(self.context))
 
 

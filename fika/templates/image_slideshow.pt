@@ -30,11 +30,14 @@
 								tal:condition="request.has_permission('perm:Edit', image)">
 								<span class="glyphicon glyphicon-trash"></span>
 							</a>
-							<span class="sort-handle" tal:condition="request.has_permission('perm:Edit', context)" >
-								<div type="button" class="btn btn-default">
-									<span class="glyphicon glyphicon-move"></span>
-								</div>
-							</span>
+							<a class="btn btn-default" href="${request.resource_url(context, 'move_up', query={'image_name':image.__name__})}" role="button"
+								tal:condition="request.has_permission('perm:Edit', image)">
+								<span class="glyphicon glyphicon-arrow-left"></span>
+							</a>
+							<a class="btn btn-default" href="${request.resource_url(context, 'move_down', query={'image_name':image.__name__})}" role="button"
+								tal:condition="request.has_permission('perm:Edit', image)">
+								<span class="glyphicon glyphicon-arrow-right"></span>
+							</a>
 						</div>
 				    </div>
 				</tal:iterate>
