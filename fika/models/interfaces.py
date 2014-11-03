@@ -30,3 +30,6 @@ class IImageSlideshow(IContent):
     
 class IText(IContent):
     """ Text that is put into a segment. """
+
+class IVideo(IContent):
+    """ Video that is embedded in a segment """
