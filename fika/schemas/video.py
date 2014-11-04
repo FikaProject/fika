@@ -1,6 +1,8 @@
 import colander
+from colander import null
+from colander import Invalid
 import deform
-
+import string
 
 class VideoSchema(colander.Schema):
     title = colander.SchemaNode(colander.String(),
@@ -18,8 +20,30 @@ class VideoSchema(colander.Schema):
         title=u'Video type')
     url = colander.SchemaNode(colander.String(),
         title=u'URL',
-        description=u"For .mp4 files, the full URL of the video file. For Youtube, the part of the URL between '=' and '&'. For Vimeo, the sequence of numbers in the URL.",)
+        description=u"For .mp4 files, the full URL of the video file. For Youtube, the full URL. For Vimeo, the sequence of numbers in the URL.",)
 
+    def deserialize(self, cstruct):
+        # import pdb; pdb.set_trace()
+        url_string = cstruct['url']
+        if url_string is null:
+            return null
+        if not isinstance(url_string, basestring):
+            import pdb; pdb.set_trace()
+            raise Invalid(node, '%r is not a string' % url_string)
+        index = string.find(url_string, 'v=')
+        if index > 0:
+            url_string = url_string[index+2:]
+        index = string.find(url_string, 'youtu.be/')
+        if index > 0:
+            url_string = url_string[index+9:]
+        index = string.find(url_string, '&')
+        if index > 0:
+            url_string = url_string[:index]
+        index = string.find(url_string, '#')
+        if index > 0:
+            url_string = url_string[:index]
+        cstruct['url'] = url_string
+        return super(VideoSchema, self).deserialize(cstruct)
 
 def includeme(config):
     config.add_content_schema('Video', VideoSchema, 'add')
