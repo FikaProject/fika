@@ -10,6 +10,7 @@ from fika import FikaTSF as _
 class Courses(FikaBaseFolder, LocalRolesMixin):
     type_title = title = _("Courses")
     type_name = "Courses"
+    is_permanent = True
 
 
 def includeme(config):
