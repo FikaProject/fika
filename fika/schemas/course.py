@@ -1,6 +1,6 @@
 from arche.schemas import BaseSchema
 from arche.schemas import DCMetadataSchema
-from arche.schemas import file_upload_widget
+from arche.widgets import FileAttachmentWidget
 import colander
 import deform
 
@@ -23,7 +23,7 @@ class CourseSchema(DCMetadataSchema, BaseSchema):
                                      description=u"(Optional) An image that will be shown next to the description.",
                                      missing = None,
                                      title = _(u"Image"),
-                                     widget = file_upload_widget)
+                                     widget = FileAttachmentWidget())
 
 
 def includeme(config):
