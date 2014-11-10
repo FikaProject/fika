@@ -18,3 +18,4 @@ def includeme(config):
     config.add_content_factory(CourseModule)
     config.add_addable_content("CourseModule", "Course")
     config.add_addable_content("Segment", "CourseModule")
+    config.add_addable_content("Assessment", "CourseModule")

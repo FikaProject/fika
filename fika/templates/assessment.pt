@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  metal:use-macro="view.macro('arche:templates/master.pt', 'arche:templates/inline.pt')"
+  i18n:domain="Arche">
+  <div metal:fill-slot="content" class="row">
+    <div class="col-md-12">
+      <div tal:condition="request.has_permission('perm:Edit', context)|request.has_permission('perm:Delete', context)" >
+        <a class="btn btn-default" role="button" href="${request.resource_url(context, 'edit')}"
+          tal:condition="request.has_permission('perm:Edit', context)">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        <a class="btn btn-default" role="button" href="${request.resource_url(context, 'delete')}"
+          tal:condition="request.has_permission('perm:Delete', context)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+      </div>
+      <form tal:replace="structure form" />
+    </div>
+  </div>
+</html>

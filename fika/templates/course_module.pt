@@ -46,7 +46,7 @@
 							                    <span class="glyphicon glyphicon-${getattr(segmentcontent, 'icon', 'file')}"></span>
 							    			</button>
 										</tal:segmentcontents>
-										<div class="btn-group btn-group-sm" tal:condition="request.has_permission('perm:Edit', context)" >
+										<div class="btn-group btn-group-sm" tal:condition="python:request.has_permission('perm:Edit', context) and obj.type_name=='Segment'" >
 											<button type="button" class="btn btn-default dropdown-toggle btn-add" data-toggle="dropdown">
 												<span class="text-muted">
 													<span class="glyphicon glyphicon-plus"></span> <span class="caret"></span>
@@ -77,15 +77,25 @@
 						</tal:iterate>
 					</span>
 				</form>
-				<div class="panel panel-default panel-add" tal:condition="request.has_permission('perm:Edit', context)">
-					<div class="panel-body">
-						<a href="${request.resource_url(context, 'add', query = {'content_type': 'Segment'})}">
-							<span class="text-muted">
-								<span class="glyphicon glyphicon-plus"></span> Add new segment
-							</span>
-						</a>
+					<div class="col-xs-6 panel panel-default panel-add" tal:condition="request.has_permission('perm:Edit', context)">
+						<div class="panel-body">
+							<a href="${request.resource_url(context, 'add', query = {'content_type': 'Segment'})}">
+								<span class="text-muted">
+									<span class="glyphicon glyphicon-plus"></span> Add new segment
+								</span>
+							</a>
+						</div>
 					</div>
-				</div>
+					<div></div>
+					<div class="col-xs-6 panel panel-default panel-add" tal:condition="request.has_permission('perm:Edit', context)">
+						<div class="panel-body">
+							<a href="${request.resource_url(context, 'add', query = {'content_type': 'Assessment'})}">
+								<span class="text-muted">
+									<span class="glyphicon glyphicon-plus"></span> Add new assessment
+								</span>
+							</a>
+						</div>
+					</div>
 			</div>
 		</div>
 	</div>
