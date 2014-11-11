@@ -17,4 +17,5 @@ def includeme(config):
     config.add_addable_content("ImageSlideshow", "Segment")
     config.add_addable_content("Text", "Segment")
     config.add_addable_content("Video", "Segment")
+    config.add_addable_content("File", "Segment")
     #FIXME add video, audio, pdf here once they exist

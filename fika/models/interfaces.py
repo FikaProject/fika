@@ -33,3 +33,6 @@ class IText(IContent):
 
 class IVideo(IContent):
     """ Video that is embedded in a segment """
+    
+class IPdf(IContent):
+    """ Pdf that is put in a segment """
