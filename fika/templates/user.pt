@@ -16,13 +16,12 @@
                 </div>
             </div>
         </div>
-        
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">Courses</div>
                 <div class="panel-body">
                     <ul>
-                        <li tal:repeat="courseuid view.fikaProfile.courses">
+                        <li tal:repeat="courseuid context.__courses__">
                             <a href="${request.resource_url(view.resolve_uid(courseuid))}">${view.resolve_uid(courseuid).title}</a>
                         </li>
                     </ul>
