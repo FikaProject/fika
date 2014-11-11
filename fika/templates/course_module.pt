@@ -33,7 +33,13 @@
 								<input type="hidden" name="segment_name" value="${obj.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
 								<div class="panel-heading">
 									<div class="panel-title">
-										<h4>${obj.title}</h4>
+										<h4>
+											${obj.title}
+											<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'edit')}"
+												tal:condition="request.has_permission('perm:Edit', obj)">
+												<span class="glyphicon glyphicon-pencil"></span>
+											</a>
+										</h4>
 										<tal:segmentcontents repeat="segmentcontent obj.values()">
 											<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${obj.uid}" href="#collapse-${segmentcontent.uid}">
 							                    <span class="glyphicon glyphicon-${getattr(segmentcontent, 'icon', 'file')}"></span>
