@@ -4,11 +4,13 @@ from pyramid.view import view_config
 from arche.views.base import DefaultView
 from arche import security
 from arche.interfaces import IContent, IImage, IFile
+from arche.views.file import mimetype_view_selector
+
 from fika.models.interfaces import IImageSlideshow
 
 class DefaultContentView(DefaultView):
 
-    @view_config(name = 'inline', context = IContent, renderer = "arche:templates/content/basic.pt",
+    @view_config(name = 'inline_in_segment', context = IContent, renderer = "arche:templates/content/basic.pt",
                   permission=security.PERM_VIEW)
     def default_content_inline(self):
         super(DefaultView, self).__init__(self.context, self.request)
@@ -32,3 +34,7 @@ class DefaultContentView(DefaultView):
 
 def includeme(config):
     config.scan('.image_slideshow')
+    config.add_view(mimetype_view_selector,
+                context = 'arche.interfaces.IFile',
+                permission = security.PERM_VIEW,
+                name = 'inline_in_segment')
