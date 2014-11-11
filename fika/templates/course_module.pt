@@ -10,17 +10,18 @@
 	<h1>
         ${course.title}
     </h1>
-	<h2>
-        ${module_index}. ${context.title}
-    </h2>
-    <p>
-    	${context.description}
-	</p>
     
     <p>
 	    <div tal:content="structure course_pagination(context, request, view)">
 	        (course pagination here)
 	    </div>
+	</p>
+    
+	<h2>
+        ${module_index}. ${context.title}
+    </h2>
+    <p>
+    	${context.description}
 	</p>
 	
     <div class="row">
