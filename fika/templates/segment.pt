@@ -36,7 +36,7 @@
 					<div class="media-area">
 						Loading...
 						<script type="text/javascript">
-							$('#collapse-${media_object.uid} .media-area').load('${request.resource_url(media_object, 'inline')}');
+							$('#collapse-${media_object.uid} .media-area').load('${request.resource_url(media_object, 'inline_in_segment')}');
 						</script>
 					</div>
 				</div>

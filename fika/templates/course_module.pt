@@ -70,7 +70,7 @@
 								<div id="segment-${obj.uid}" class="panel-body" >
 			                        Loading...
 			                        <script type="text/javascript">
-			                            $('#segment-${obj.uid}').load('${request.resource_url(obj, 'inline_in_segment')}');
+			                            $('#segment-${obj.uid}').load('${request.resource_url(obj, 'inline_in_module')}');
 			                        </script>
 								</div>
 							</div>

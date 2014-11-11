@@ -17,8 +17,8 @@ class SegmentView(DefaultView):
     def segment(self):
         return HTTPFound(location = self.request.resource_url(self.context.__parent__))
     
-    @view_config(name = 'inline', context = ISegment, renderer = "fika:templates/segment.pt", permission=security.PERM_VIEW)
-    def segment_inline(self):
+    @view_config(name = 'inline_in_module', context = ISegment, renderer = "fika:templates/segment.pt", permission=security.PERM_VIEW)
+    def segment_inline_in_module(self):
         response = {}
         response['contents'] = self.context.values()        
         for obj in self.context.values():
