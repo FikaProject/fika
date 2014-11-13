@@ -27,6 +27,3 @@ class SegmentView(DefaultView):
                 lightbox_css.need()
                 break
         return response
-    
-def includeme(config):
-    config.scan('.segment')

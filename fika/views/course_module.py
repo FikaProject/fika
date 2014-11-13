@@ -85,7 +85,3 @@ class CourseModuleView(FikaBaseView):
         segment_names.extend(keys)
         self.context.order = segment_names
         return HTTPFound(location = self.request.resource_url(self.context))
-
-
-def includeme(config):
-    config.scan('.course_modules')

@@ -36,7 +36,3 @@ class VideoView(DefaultView):
                   permission=security.PERM_VIEW)
     def video(self):
         return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__))
-
-
-def includeme(config):
-    config.scan('.video') #Fixme Necessary?

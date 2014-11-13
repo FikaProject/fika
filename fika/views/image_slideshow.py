@@ -73,7 +73,3 @@ class ImageSlideshowView(DefaultView):
             temp = None
         self.context.order = new_order
         return HTTPFound(location = self.request.resource_url(self.context))
-
-
-def includeme(config):
-    config.scan('.image_slideshow')

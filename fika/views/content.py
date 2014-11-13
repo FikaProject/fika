@@ -33,7 +33,6 @@ class DefaultContentView(DefaultView):
 
 
 def includeme(config):
-    config.scan('.image_slideshow')
     config.add_view(mimetype_view_selector,
                 context = 'arche.interfaces.IFile',
                 permission = security.PERM_VIEW,
