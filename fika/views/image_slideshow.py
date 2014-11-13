@@ -27,7 +27,7 @@ class AddImageSlideshowForm(AddFileForm):
 
 class ImageSlideshowView(DefaultView):
 
-    @view_config(name = 'inline', context = IImageSlideshow, renderer = "fika:templates/image_slideshow.pt",
+    @view_config(name = 'inline_in_segment', context = IImageSlideshow, renderer = "fika:templates/image_slideshow.pt",
                   permission=security.PERM_VIEW)
     def image_slideshow_inline(self):
         lightbox_css.need()
