@@ -8,4 +8,3 @@ def includeme(config):
     config.include('.video')
     config.include('.segment')
     config.include('.assessment')
-    config.include('.assessment_view')

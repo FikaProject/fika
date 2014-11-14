@@ -14,4 +14,4 @@ class AssessmentView(BaseForm):
 		return super(BaseForm, self).__init__(context, request)
 
 def includeme(config):
-    config.scan('.assessment_view')
+    config.scan('.assessment')
