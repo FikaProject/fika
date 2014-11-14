@@ -27,6 +27,9 @@ class ISegment(IContent):
 class IAssessment(IContent):
     """ Part of a module object. """
 
+class IAssessmentResponse(IContent):
+    """ Part of a module object. """
+
 class IImageSlideshow(IContent):
     """ A set of images that is shown as a slideshow. """
     
