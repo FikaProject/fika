@@ -41,7 +41,7 @@
 												<span class="glyphicon glyphicon-pencil"></span>
 											</a>
 										</h4>
-										<tal:segmentcontents repeat="segmentcontent obj.values()">
+										<tal:segmentcontents repeat="segmentcontent obj.values()" condition="not is_assessment[obj.__name__]">
 											<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${obj.uid}" href="#collapse-${segmentcontent.uid}">
 							                    <span class="glyphicon glyphicon-${getattr(segmentcontent, 'icon', 'file')}"></span>
 							    			</button>

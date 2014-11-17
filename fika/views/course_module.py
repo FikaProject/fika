@@ -16,6 +16,7 @@ from fika.views.course_pagination import render_course_pagination
 from fika.models.interfaces import ICourseModule
 from fika.models.interfaces import ICourse
 from fika.models.image_slideshow import ImageSlideshow
+from fika.models.assessment import Assessment
 
 from fika.fanstatic import lightbox_js
 from fika.fanstatic import lightbox_css
@@ -43,7 +44,9 @@ class CourseModuleView(FikaBaseView):
         response['course_module_toggle'] = self._render_course_module_toggle
         response['course_pagination'] = render_course_pagination
         response['module_segments'] = self.context.values()
+        response['is_assessment'] = {}
         for segment in self.context.values():
+            response['is_assessment'][segment.__name__] = isinstance(segment, Assessment)
             for segmentcontent in segment.values():
                 if isinstance(segmentcontent, ImageSlideshow):
                     lightbox_js.need()

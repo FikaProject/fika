@@ -17,7 +17,17 @@
           <span class="glyphicon glyphicon-trash"></span>
         </a>
       </div>
-      <form tal:replace="structure form" />
+      <div tal:condition="not request.has_permission('perm:Edit', context)" >
+        <form tal:replace="structure form" />
+      </div>
+      <div tal:condition="request.has_permission('perm:Edit', context)" >
+        <dl>
+          <tal:iterate repeat="answer answers">
+            <dt>${answer.__name__}</dt>
+            <dd>${answer.answer}</dd>
+          </tal:iterate>
+        </dl>
+      </div>
     </div>
   </div>
 </html>

@@ -19,5 +19,6 @@ class AssessmentInline(colander.Schema):
 def includeme(config):
     config.add_content_schema('Assessment', Assessment, 'add')
     config.add_content_schema('Assessment', Assessment, 'edit')
-    config.add_content_schema('AssessmentResponse', AssessmentInline, 'inline')
+    config.add_content_schema('AssessmentResponse', AssessmentInline, 'add')
+    config.add_content_schema('AssessmentResponse', AssessmentInline, 'inline_in_module')
 
