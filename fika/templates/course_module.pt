@@ -36,6 +36,10 @@
 									<div class="panel-title">
 										<h4>
 											${obj.title}
+											<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'delete')}"
+												tal:condition="request.has_permission('perm:Delete', obj)">
+												<span class="glyphicon glyphicon-trash"></span>
+											</a>
 											<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'edit')}"
 												tal:condition="request.has_permission('perm:Edit', obj)">
 												<span class="glyphicon glyphicon-pencil"></span>

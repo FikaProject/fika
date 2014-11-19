@@ -11,6 +11,7 @@ class Assessment(FikaBaseFolder):
     type_title = _(u"Assessment")
     type_name = u"Assessment"
     add_permission = "Add %s" % type_name
+    question = ""
 
 @implementer(IAssessmentResponse)
 class AssessmentResponse(FikaBaseFolder):
