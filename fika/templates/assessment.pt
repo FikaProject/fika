@@ -14,7 +14,11 @@
       <div tal:condition="request.has_permission('perm:Edit', context)" >
         <dl>
           <tal:iterate repeat="answer answers">
-            <dt>${answer.__name__}</dt>
+            <dt>
+            	<a href="${request.resource_url(view.resolve_uid(answer.user_uid))}">
+            		${view.resolve_uid(answer.user_uid).title}
+            	</a>
+         	</dt>
             <dd>${answer.answer}</dd>
           </tal:iterate>
         </dl>

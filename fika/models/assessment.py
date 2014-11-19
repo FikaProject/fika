@@ -18,6 +18,7 @@ class AssessmentResponse(FikaBaseFolder):
     type_title = _(u"Assessment Response")
     type_name = u"AssessmentResponse"
     add_permission = "Add %s" % type_name
+    user_uid = u""
     answer = u""
 
 
