@@ -8,7 +8,13 @@
   <div metal:fill-slot="content" class="row">
     <div class="col-md-12">
       <div tal:replace="structure context.question"></div>
-      <div tal:condition="not request.has_permission('perm:Edit', context)" >
+      <div tal:condition="user_answer|False" >
+		<blockquote>
+		<header>Your answer:</header>
+		<p>${user_answer.answer}</p>
+		</blockquote>
+      </div>
+      <div tal:condition="not request.has_permission('perm:Edit', context) and not user_answer|True" >
         <form tal:replace="structure form" />
       </div>
       <div tal:condition="request.has_permission('perm:Edit', context)" >

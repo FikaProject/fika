@@ -26,6 +26,15 @@ class AssessmentForm(BaseForm):
     schema_name = 'inline_in_module'	
     def __init__(self, context, request):
         return super(AssessmentForm, self).__init__(context, request)
+    
+    def __call__(self):
+        response = {}
+        for answer in self.context.values():
+             if answer.user_uid == self.profile.uid:
+                 response['user_answer'] = answer
+        if 'user_answer' in response:
+            return response
+        return super(AssessmentForm, self).__call__()
 
     def save_success(self, appstruct):
         self.flash_messages.add(_(u"Response submitted"), type="success")
