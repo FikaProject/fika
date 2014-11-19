@@ -26,14 +26,6 @@ class AssessmentForm(BaseForm):
     schema_name = 'inline_in_module'	
     def __init__(self, context, request):
         return super(AssessmentForm, self).__init__(context, request)
-    
-    def __call__(self):
-        if self.request.has_permission('perm:Edit', self.context):
-            response = {}
-            response['answers'] = self.context.values()
-            return response
-        else:
-            return super(AssessmentForm, self).__call__()
 
     def save_success(self, appstruct):
         self.flash_messages.add(_(u"Response submitted"), type="success")
