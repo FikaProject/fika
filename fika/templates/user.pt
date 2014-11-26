@@ -10,8 +10,9 @@
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
-                <div class="panel-heading">${context.title}</div>
+                <div class="panel-heading">${context.title} (${context.__name__})</div>
                 <div class="panel-body">
+                    <img tal:replace="structure view.thumb_tag(context, 'col-3', extra_cls = 'media-object')" />
                     ${context.email}
                 </div>
             </div>
