@@ -24,6 +24,7 @@ from fika.models.interfaces import ICourses
 from fika.models.interfaces import IFikaUser
 from fika.views.course_pagination import render_course_pagination
 from fika.views.fika_base_view import FikaBaseView
+from fika.models.interfaces import IAssessment
 
 
 @view_defaults(permission = security.PERM_VIEW)
@@ -113,11 +114,38 @@ class CourseView(FikaBaseView):
         module_names.extend(keys)
         self.context.order = module_names
         return HTTPFound(location = self.request.resource_url(self.context))
+    
+    
+    
+    @view_config(context = ICourse, name = "responses_overview", renderer = "fika:templates/responses_overview.pt", permission=security.PERM_EDIT)
+    def responses_overview(self):
+        response = {}
+        response['answers'] = {}
+        for module in self.context.values():
+            for segment in module.values():
+                if IAssessment.providedBy(segment):
+                    response['answers'][segment.uid] = {}
+                    for answer in segment.values():
+                        response['answers'][segment.uid][answer.uid] = answer
+        return response
+    
+@view_action('actions_menu', 'responses_overview',
+             title = _("Responses overview"),
+             permission = security.PERM_EDIT, #FIXME which permission do you need here?
+             priority = 50)
+def actionbar_responses_overview(context, request, va, **kw):
+    if ICourse.providedBy(context):
+        return """<li><a href="%(url)s">%(title)s</a></li>""" %\
+            {'url': request.resource_url(context, 'responses_overview'),
+             'title': va.title}
+                    
+                    
+        
 
 @view_action('actions_menu', 'assign_course',
              title = _("Assign to user"),
              permission = security.PERM_EDIT, #FIXME which permission do you need here?
-             priority = 50)
+             priority = 60)
 def actionbar_assign(context, request, va, **kw):
     if ICourse.providedBy(context):
         return """<li><a href="%(url)s">%(title)s</a></li>""" %\
@@ -165,6 +193,8 @@ class AssignCourseForm(BaseForm):
         plural = "s" if nr_of_users != 1 else ""
         self.flash_messages.add(_(u"Assigned course to "+str(nr_of_users)+" user"+plural+"."), type="success")
         return HTTPFound(location = self.request.resource_url(self.context))
+    
+    
 
 def includeme(config):
     config.add_content_schema('Course', AssignCourseSchema, 'assign_course')
