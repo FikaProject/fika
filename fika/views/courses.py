@@ -121,12 +121,17 @@ class CourseView(FikaBaseView):
     def responses_overview(self):
         response = {}
         response['answers'] = {}
+        response['user_answers'] = {}
         for module in self.context.values():
             for segment in module.values():
                 if IAssessment.providedBy(segment):
                     response['answers'][segment.uid] = {}
                     for answer in segment.values():
                         response['answers'][segment.uid][answer.uid] = answer
+                        if answer.user_uid not in response['user_answers']:
+                            response['user_answers'][answer.user_uid] = {}
+                        response['user_answers'][answer.user_uid][segment.uid] = answer.uid
+                        
         return response
     
 @view_action('actions_menu', 'responses_overview',

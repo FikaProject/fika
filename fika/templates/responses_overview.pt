@@ -12,6 +12,58 @@
 		<a class="btn btn-default" href="${request.resource_url(context)}" role="button"><span class="glyphicon glyphicon-bookmark"></span> Back to course</a>
 	</p>
 	
+	<h3>Grouped per user</h3>
+	
+	<tal:iterate repeat="user_uid user_answers">
+		<p>
+			<div class="panel-group" id="accordion-${user_uid}" role="tablist" aria-multiselectable="true">
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion-${user_uid}" href="#collapse-${user_uid}" aria-expanded="true" aria-controls="collapse-${user_uid}"
+								tal:content="structure view.resolve_uid(user_uid).title"></a>
+								<span class="badge pull-right"><span class="glyphicon glyphicon-comment"></span> ${len(user_answers[user_uid])}</span>
+						</h4>
+					</div>
+					<div id="collapse-${user_uid}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+						<table class="table table-hover">
+			    		<thead>
+			    			<tr>
+			    				<th><span i18n:translate="">Question</span></th>
+			    				<th><span i18n:translate="">Answer</span></th>
+			    			</tr>
+			    		</thead>
+			    		<tbody class="table-striped">
+			    		<tal:iterate condition="len(user_answers[user_uid]) > 0" repeat="question_uid user_answers[user_uid].keys()">
+					    		<tr>
+					    			<td>
+					    				<h4>${view.resolve_uid(question_uid).title}</h4>
+					    				<p tal:content="structure view.resolve_uid(question_uid).question"></p>
+					    			</td>
+					    			<td>${view.resolve_uid(user_answers[user_uid][question_uid]).answer}</td>
+					    			<td>
+						    			<span tal:condition="getattr(view.resolve_uid(user_answers[user_uid][question_uid]), 'modified', None)"
+								            title="${request.dt_handler.format_dt(view.resolve_uid(user_answers[user_uid][question_uid]).modified)}">
+								            ${request.dt_handler.format_relative(view.resolve_uid(user_answers[user_uid][question_uid]).modified)}
+								        </span>
+								        <span tal:condition="not getattr(view.resolve_uid(user_answers[user_uid][question_uid]), 'modified', None) and getattr(view.resolve_uid(user_answers[user_uid][question_uid]), 'created', None)"
+								            title="${request.dt_handler.format_dt(view.resolve_uid(user_answers[user_uid][question_uid]).created)}">
+								            ${request.dt_handler.format_relative(view.resolve_uid(user_answers[user_uid][question_uid]).created)}
+								        </span>
+							        </td>
+					    		</tr>
+				    		</tal:iterate>
+				    	</tbody> 
+					</table>
+					</div>
+				</div>
+			</div>
+		</p>
+	</tal:iterate>
+	
+	
+	<h3>Grouped per question</h3>
+	
     <tal:iterate repeat="question answers">
     	<p>
 	    	<div class="panel-group" id="accordion-${question}" role="tablist" aria-multiselectable="true">
@@ -63,6 +115,8 @@
 			</div>
     	</p>
     </tal:iterate> 
+    
+    
 </div>
 
 </body>
