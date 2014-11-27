@@ -27,34 +27,51 @@
 					</div>
 					<div id="collapse-${user_uid}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 						<table class="table table-hover">
-			    		<thead>
-			    			<tr>
-			    				<th><span i18n:translate="">Question</span></th>
-			    				<th><span i18n:translate="">Answer</span></th>
-			    			</tr>
-			    		</thead>
-			    		<tbody class="table-striped">
-			    		<tal:iterate condition="len(user_answers[user_uid]) > 0" repeat="question_uid user_answers[user_uid].keys()">
-					    		<tr>
-					    			<td>
-					    				<h4>${view.resolve_uid(question_uid).title}</h4>
-					    				<p tal:content="structure view.resolve_uid(question_uid).question"></p>
-					    			</td>
-					    			<td>${view.resolve_uid(user_answers[user_uid][question_uid]).answer}</td>
-					    			<td>
-						    			<span tal:condition="getattr(view.resolve_uid(user_answers[user_uid][question_uid]), 'modified', None)"
-								            title="${request.dt_handler.format_dt(view.resolve_uid(user_answers[user_uid][question_uid]).modified)}">
-								            ${request.dt_handler.format_relative(view.resolve_uid(user_answers[user_uid][question_uid]).modified)}
-								        </span>
-								        <span tal:condition="not getattr(view.resolve_uid(user_answers[user_uid][question_uid]), 'modified', None) and getattr(view.resolve_uid(user_answers[user_uid][question_uid]), 'created', None)"
-								            title="${request.dt_handler.format_dt(view.resolve_uid(user_answers[user_uid][question_uid]).created)}">
-								            ${request.dt_handler.format_relative(view.resolve_uid(user_answers[user_uid][question_uid]).created)}
-								        </span>
-							        </td>
-					    		</tr>
-				    		</tal:iterate>
-				    	</tbody> 
-					</table>
+				    		<thead>
+				    			<tr>
+				    				<th><span i18n:translate="">Question</span></th>
+				    				<th><span i18n:translate="">Answer</span></th>
+				    			</tr>
+				    		</thead>
+				    		<tbody class="table-striped">
+				    		<tal:iterate condition="len(user_answers[user_uid]) > 0" repeat="question_uid user_answers[user_uid].keys()">
+						    		<tr>
+						    			<td>
+						    				<h4>${view.resolve_uid(question_uid).title}</h4>
+						    				<p tal:content="structure view.resolve_uid(question_uid).question"></p>
+						    			</td>
+						    			<td>${view.resolve_uid(user_answers[user_uid][question_uid]).answer}</td>
+						    			<td>
+							    			<span tal:condition="getattr(view.resolve_uid(user_answers[user_uid][question_uid]), 'modified', None)"
+									            title="${request.dt_handler.format_dt(view.resolve_uid(user_answers[user_uid][question_uid]).modified)}">
+									            ${request.dt_handler.format_relative(view.resolve_uid(user_answers[user_uid][question_uid]).modified)}
+									        </span>
+									        <span tal:condition="not getattr(view.resolve_uid(user_answers[user_uid][question_uid]), 'modified', None) and getattr(view.resolve_uid(user_answers[user_uid][question_uid]), 'created', None)"
+									            title="${request.dt_handler.format_dt(view.resolve_uid(user_answers[user_uid][question_uid]).created)}">
+									            ${request.dt_handler.format_relative(view.resolve_uid(user_answers[user_uid][question_uid]).created)}
+									        </span>
+								        </td>
+						    		</tr>
+					    		</tal:iterate>
+					    	</tbody> 
+						</table>
+						<div class="panel-body">
+							<form action="${request.resource_url(context,'email_feedback')}" method="post">
+								<h4>Send feedback</h4>
+								<input type="hidden" name="user_uid" value="${user_uid}"></input>
+								<textarea rows="5" style="width:100%;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;"
+											placeholder="Write feedback here..."
+											name="feedback"></textarea>
+								<div>
+									<label>
+										from
+										<input type="text" name="from" value="${view.profile.email}"></input>
+									</label>
+									<input type="submit" value="Send"></input>
+								</div>
+								
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

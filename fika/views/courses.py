@@ -134,6 +134,20 @@ class CourseView(FikaBaseView):
                         
         return response
     
+    @view_config(context = ICourse, name = "email_feedback", renderer = "fika:templates/responses_overview.pt", permission=security.PERM_EDIT)
+    def email_feedback(self):
+        #module_names = self.request.POST.getall('module_name')
+        user_uid = self.request.POST.get('user_uid')
+        feedback = self.request.POST.get('feedback')
+        from_email = self.request.POST.get('from')
+        user = self.resolve_uid(user_uid)
+        success = send_email('Feedback on your answers in course '+self.context.title, user.email, feedback, sender=from_email, plaintext=feedback, send_immediately=True)
+        if success != None:
+            self.flash_messages.add(_(u"Email with feedback send to "+user.title+"."), type="success")
+        else:
+            self.flash_messages.add(_(u"Could not send email feedback to "+user.title+"."), type="danger")
+        return HTTPFound(location = self.request.resource_url(self.context, 'responses_overview'))
+    
 @view_action('actions_menu', 'responses_overview',
              title = _("Responses overview"),
              permission = security.PERM_EDIT, #FIXME which permission do you need here?
