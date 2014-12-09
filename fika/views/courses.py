@@ -1,23 +1,19 @@
-import colander
-from arche import _
 from arche import security
 from arche.fanstatic_lib import jqueryui
 from arche.fanstatic_lib import touchpunch_js
+from arche.schemas import BaseSchema
 from arche.utils import get_addable_content
 from arche.utils import get_content_factories
-from arche.utils import get_content_views
-from arche.schemas import BaseSchema
-from arche.widgets import ReferenceWidget
-from arche.views.base import DefaultEditForm, BaseForm
 from arche.utils import send_email
+from arche.views.base import BaseForm
+from arche.widgets import ReferenceWidget
+from betahaus.viewcomponent import view_action
 from pyramid.httpexceptions import HTTPFound
 from pyramid.httpexceptions import HTTPNotFound
 from pyramid.traversal import resource_path
 from pyramid.view import view_config
 from pyramid.view import view_defaults
-from pyramid_deform import FormView
-
-from betahaus.viewcomponent import view_action
+import colander
 
 from fika.models.interfaces import ICourse
 from fika.models.interfaces import ICourses
@@ -25,6 +21,7 @@ from fika.models.interfaces import IFikaUser
 from fika.views.course_pagination import render_course_pagination
 from fika.views.fika_base_view import FikaBaseView
 from fika.models.interfaces import IAssessment
+from fika import _
 
 
 @view_defaults(permission = security.PERM_VIEW)
@@ -114,9 +111,7 @@ class CourseView(FikaBaseView):
         module_names.extend(keys)
         self.context.order = module_names
         return HTTPFound(location = self.request.resource_url(self.context))
-    
-    
-    
+
     @view_config(context = ICourse, name = "responses_overview", renderer = "fika:templates/responses_overview.pt", permission=security.PERM_EDIT)
     def responses_overview(self):
         response = {}
@@ -131,12 +126,10 @@ class CourseView(FikaBaseView):
                         if answer.user_uid not in response['user_answers']:
                             response['user_answers'][answer.user_uid] = {}
                         response['user_answers'][answer.user_uid][segment.uid] = answer.uid
-                        
         return response
-    
+
     @view_config(context = ICourse, name = "email_feedback", renderer = "fika:templates/responses_overview.pt", permission=security.PERM_EDIT)
     def email_feedback(self):
-        #module_names = self.request.POST.getall('module_name')
         user_uid = self.request.POST.get('user_uid')
         feedback = self.request.POST.get('feedback')
         from_email = self.request.POST.get('from')
@@ -157,9 +150,7 @@ def actionbar_responses_overview(context, request, va, **kw):
         return """<li><a href="%(url)s">%(title)s</a></li>""" %\
             {'url': request.resource_url(context, 'responses_overview'),
              'title': va.title}
-                    
-                    
-        
+
 
 @view_action('actions_menu', 'assign_course',
              title = _("Assign to user"),
@@ -174,11 +165,11 @@ def actionbar_assign(context, request, va, **kw):
 
 class AssignCourseSchema(BaseSchema):
     users = colander.SchemaNode(colander.List(),
-                                   title = _(u"Select content to show"),
+                                   title = _("Assign users to course"),
                                    missing = colander.null,
                                    widget = ReferenceWidget(query_params = {'type_name': 'User'}))
 
-#@view_config(context = ICourse, name = "assign_course", renderer = "fika:templates/assign_course.pt")
+
 class AssignCourseForm(BaseForm):
     type_name = u'Course'
     schema_name = 'assign_course'
@@ -186,12 +177,10 @@ class AssignCourseForm(BaseForm):
 
     def __call__(self):
         contents = []
-        #import pdb;pdb.set_trace()
         for name in self.root['users']:
             user = self.root['users'][name]
             if self.context.__name__ in user.__courses__:
                 contents.append(name)
-        #return {'contents': contents}
         result = super(AssignCourseForm, self).__call__()
         return result
     
