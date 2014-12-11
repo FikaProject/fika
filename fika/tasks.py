@@ -62,6 +62,7 @@ def convert_file(filename, suffix):
     assert suffix.startswith('.')
     output_filename = mktemp(suffix = suffix)
     print output_filename
+    #FIXME: Check that ffmpeg is in current path. Make it configurable?
     if call(['ffmpeg', '-i', filename, output_filename]) == 0:
         return filename, output_filename
     os.remove(output_filename)
