@@ -10,6 +10,7 @@ def includeme(config):
     config.include('fika.schemas')
     config.include('fika.fanstatic')
     config.include('fika.views')
+    config.include('fika.subscribers')
     config.add_translation_dirs('fika:locale/')
     config.override_asset(to_override='arche:templates/master.pt',override_with='fika:templates/overrides/master.pt')
     from arche.security import get_acl_registry
