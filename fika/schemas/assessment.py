@@ -9,6 +9,8 @@ class Assessment(colander.Schema):
     								  description = u"The question text.",
                                       widget=deform.widget.RichTextWidget(rows=8, cols=40),
                                       missing = u"")
+    email = colander.SchemaNode(colander.String(),
+                      description = u"Will be displayed in case participants wish to contact the examinator.")
 
 class AssessmentInline(colander.Schema):
 	answer = colander.SchemaNode(colander.String(), description = u"Type your answer here.",

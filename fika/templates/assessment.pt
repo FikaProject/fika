@@ -16,6 +16,7 @@
       </div>
       <div tal:condition="not request.has_permission('perm:Edit', context) and not user_answer|True" >
         <form tal:replace="structure form" />
+        Examinator <a href="mailto:${context.email}">${context.email}</a>
       </div>
       <div tal:condition="request.has_permission('perm:Edit', context)" >
         <dl>
