@@ -47,7 +47,13 @@ class CourseView(FikaBaseView):
         response['course_modules'] = self.context.values()
         response['in_course'] = self.fikaProfile.in_course(self.context)
         response['course_pagination'] = render_course_pagination
-        
+
+        #FIXME: Only show enrolled users belonging to current organisation
+        response['enrolled_users'] = [] 
+        for user in self.root['users'].values():
+            if self.context.uid in user.__courses__:
+                response['enrolled_users'].append(user)
+
         response['course_modules_media'] = {}
         for course_module in response['course_modules']:
             response['course_modules_media'][course_module.uid] = {}
