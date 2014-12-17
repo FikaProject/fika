@@ -125,7 +125,6 @@
 					window.location.reload(); //FIXME reload the content list and pagination inline instead of refresh page
 				}
 			});
-			$( "#sortable" ).disableSelection();
 		});
 	</script>
 </div>

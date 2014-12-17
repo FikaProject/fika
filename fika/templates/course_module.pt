@@ -140,7 +140,6 @@
 					$.post("${request.resource_url(context, 'sorted')}", $( "#sortable-form" ).serialize());
 				}
 			});
-			$( "#sortable" ).disableSelection();
 		});
 	</script>
 </div>
