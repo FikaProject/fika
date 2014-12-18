@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-sm-12">
       <h1>${context.title}</h1>
-      <p><a role="button" class="btn btn-default" href="${request.resource_url(context,'inline_browser')}" target="_blank"><span class="glyphicon glyphicon-save"></span>Download</a></p>
+      <p><a role="button" class="btn btn-default" href="${request.resource_url(context,'inline')}" target="_blank"><span class="glyphicon glyphicon-save"></span>Download</a></p>
     </div>
   </div>
 </div>
