@@ -70,17 +70,6 @@
 										</span>
 									</div>
 								</div>
-								<p></p>
-								<div class="row">
-									<div class="col-md-1">&nbsp;</div>
-									<div class="col-md-8">
-										<tal:iterate repeat="(icon, count) course_modules_media[coursemodule.uid].items()">
-											<span class="glyphicon glyphicon-${icon}"></span>
-											${count}
-										</tal:iterate>
-									</div>
-									
-								</div>
 							</a>
 						</tal:iterate>
 						</span>

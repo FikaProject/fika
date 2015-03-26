@@ -54,17 +54,6 @@ class CourseView(FikaBaseView):
             if self.context.uid in user.__courses__:
                 response['enrolled_users'].append(user)
 
-        response['course_modules_media'] = {}
-        for course_module in response['course_modules']:
-            response['course_modules_media'][course_module.uid] = {}
-            for segment in course_module.values():
-                for media in segment.values():
-                    if not hasattr(media, 'icon'):
-                        continue
-                    if media.icon in response['course_modules_media'][course_module.uid]:
-                        response['course_modules_media'][course_module.uid][media.icon] += 1
-                    else:
-                        response['course_modules_media'][course_module.uid][media.icon] = 1
         return response
     
     @view_config(context = ICourses, renderer = "fika:templates/courses.pt", permission=security.PERM_VIEW)
