@@ -41,7 +41,6 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="panel panel-default">
-				<div class="panel-heading">Contents</div>
 				<div class="list-group">
 					<form id="sortable-form"  tal:omit-tag="not request.has_permission('perm:Edit', context)">
 						<span id="sortable"  tal:omit-tag="not request.has_permission('perm:Edit', context)">
