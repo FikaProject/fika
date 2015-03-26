@@ -20,9 +20,6 @@
 	<h2>
         ${context.title}
     </h2>
-    <p>
-    	${context.description}
-	</p>
 	
     <div class="row">
 		<div class="col-md-12">
