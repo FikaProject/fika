@@ -28,7 +28,6 @@ class VideoSchema(colander.Schema):
         if url_string is null:
             return null
         if not isinstance(url_string, basestring):
-            import pdb; pdb.set_trace()
             raise Invalid(node, '%r is not a string' % url_string)
         index = string.find(url_string, 'v=')
         if index > 0:
