@@ -15,7 +15,7 @@
       <a class="navbar-brand" href="${request.application_url}">
           	${view.root.title}
       </a>
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" tal:condition="view.profile">
       	<li>
           <a href="/" title="My courses">
           	<span class="glyphicon glyphicon-home"></span>
@@ -31,7 +31,7 @@
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapsible">
-    	 <ul class="nav navbar-nav">
+    	 <ul class="nav navbar-nav" tal:condition="view.profile">
 			<li><a href="/users" title="Users"><span class="glyphicon glyphicon-user"></span><span class="fika-nav-button-text"> Users</span></a></li>
 		</ul>
 		
@@ -49,12 +49,11 @@
 				</ul>
 			</li>
 			<tal:annon condition="not view.profile">
-				<li><a href="/login">Login</a></li>
 				<li><a href="/register">Register</a></li>
 			</tal:annon>
 		</ul>
 		
-        <div class="nav navbar-nav navbar-right">
+        <div class="nav navbar-nav navbar-right" tal:condition="view.profile">
             <form action="${request.resource_url(view.root,'search')}" id="search" class="navbar-form" role="search" method="get">
                 <div class="input-group">
                     <input name="query" type="text" class="form-control" placeholder="Search"
