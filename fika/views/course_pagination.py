@@ -20,7 +20,10 @@ def render_course_pagination(context, request, view):
     
     
     def _is_first(context):
-        return context.uid == course.uid
+        try:
+            return context.__name__ == course.keys()[0]
+        except IndexError:
+            return True
     
     
     def _is_last(context):

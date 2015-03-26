@@ -8,25 +8,18 @@
     	<a role="button"
     		tal:attributes="class _is_first(context) and 'disabled btn btn-default' or 'btn btn-default';
     		href not _is_first(context) and request.resource_url(_get_prev(context))">
-    		&laquo;
+    		&laquo; <span i18n:translate="">Previous</span>
 		</a>
     	<a role="button" class="${_css_class(course, context)}"
     		 href="${request.resource_url(course)}">
     		 <span class="glyphicon glyphicon-bookmark"></span>&nbsp;
 		 </a>
     	
-    	<tal:iterate repeat="coursemodule course.values()">
-            <a class="${_css_class(coursemodule, context)}"
-            	role="button"
-            	href="${request.resource_url(coursemodule)}"
-            	title="${coursemodule.title|''}">
-            	${repeat.coursemodule.number}
-            </a>
-        </tal:iterate>
+    	
         <a role="button"
         	tal:attributes="class _is_last(context) and 'disabled btn btn-default' or 'btn btn-default';
         	href not _is_last(context) and request.resource_url(_get_next(context))">
-        	&raquo;
+        	<span i18n:translate="">Next</span> &raquo;
     	</a>
     </div>
     
