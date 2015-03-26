@@ -59,8 +59,6 @@
 										</span>
 									</div>
 									<div class="col-xs-8">
-										${repeat.coursemodule.number}.
-										&nbsp;
 										<span tal:content="coursemodule.title">Title</span>
 									</div>
 									<div class="col-md-2 pull-right">
