@@ -18,7 +18,7 @@
 	</p>
     
 	<h2>
-        ${module_index}. ${context.title}
+        ${context.title}
     </h2>
     <p>
     	${context.description}

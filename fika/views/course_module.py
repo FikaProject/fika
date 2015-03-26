@@ -58,10 +58,6 @@ class CourseModuleView(FikaBaseView):
             if 'Segment' in addable:
                 factory = factories.get(obj, None)
                 response['addable_types'][obj] = getattr(factory, 'icon', 'file')
-        try:
-            response['module_index'] = tuple(response['course'].keys()).index(self.context.__name__)+1
-        except IndexError, KeyError:
-            response['module_index'] = 1
         return response
     
     def _render_course_module_toggle(self, context):
