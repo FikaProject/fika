@@ -34,7 +34,12 @@
 
 <div metal:fill-slot="content">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-8">
+			<tal:form  replace="structure context.introduction"></tal:form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
 			<div class="panel panel-default">
 				<div class="panel-heading">Contents</div>
 				<div class="list-group">
@@ -88,9 +93,6 @@
 			        </a>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-8">
-			<tal:form  replace="structure context.introduction"></tal:form>
 		</div>
 	</div>
 
