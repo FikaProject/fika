@@ -36,7 +36,7 @@
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown" tal:condition="view.profile">
+			<li class="dropdown" tal:condition="request.has_permission('perm:Edit', context)">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					${view.profile.title}
 					<b class="caret"></b>
