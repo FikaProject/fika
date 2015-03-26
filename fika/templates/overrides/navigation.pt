@@ -31,7 +31,7 @@
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapsible">
-    	 <ul class="nav navbar-nav" tal:condition="view.profile">
+    	 <ul class="nav navbar-nav" tal:condition="request.has_permission('perm:Edit', context)">
 			<li><a href="/users" title="Users"><span class="glyphicon glyphicon-user"></span><span class="fika-nav-button-text"> Users</span></a></li>
 		</ul>
 		
