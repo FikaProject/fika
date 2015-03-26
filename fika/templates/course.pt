@@ -96,12 +96,6 @@
 		</div>
 	</div>
 
-    <p></p>
-    
-    <span tal:content="structure course_pagination(context, request, view)">
-        (course pagination here)
-    </span>
-    
     <p>
 	    <div class="well well-sm">
 	        <span i18n:translate="">Created</span>
