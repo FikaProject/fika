@@ -48,6 +48,11 @@
 					<li><a href="/logout" title="Logout"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
 				</ul>
 			</li>
+			
+			<li tal:condition="not request.has_permission('perm:Edit', context)">
+				<a tal:condition="view.profile" href="/logout" title="Logout"><span class="glyphicon glyphicon-off"></span> Logout</a>
+			</li>
+			
 			<tal:annon condition="not view.profile">
 				<li><a href="/register">Register</a></li>
 			</tal:annon>
