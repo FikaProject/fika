@@ -40,18 +40,6 @@
           </span>
         </div>
         <div class="panel-body">
-          <span class="pull-right">
-            <span class="badge">
-              <span class="glyphicon glyphicon-unchecked"></span>
-              ${num_modules[obj.__name__]}
-            </span> : 
-            <span class="badge">
-              <span tal:repeat="media num_media[obj.__name__]">
-                <span class="glyphicon glyphicon-${media}"></span>
-                ${num_media[obj.__name__][media]}
-              </span>
-            </span>
-          </span>
           <span tal:replace="structure obj.description"></span>
         </div>
       </div>

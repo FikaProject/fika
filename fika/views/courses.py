@@ -62,27 +62,11 @@ class CourseView(FikaBaseView):
         response['can_create_course'] = False;
         if self.request.has_permission(security.PERM_EDIT, self.context):
             response['can_create_course'] = True;
-        addable_types = {}
-        factories = get_content_factories(self.request.registry)
-        for (obj, addable) in get_addable_content(self.request.registry).items():
-            if 'Segment' in addable:
-                factory = factories.get(obj, None)
-                addable_types[obj] = getattr(factory, 'icon', 'file')
         response['courses'] = courses = []
-        response['num_modules'] = {}
-        response['num_media'] = {}
-        for (name, course) in self.context.items():
+        for course in self.context.values():
             if not self.request.has_permission(security.PERM_VIEW, course):
                 continue
             courses.append(course)
-            response['num_modules'][name] = len(self.catalog_search(resolve = False,
-                                                                    path = resource_path(course),
-                                                                    type_name='CourseModule'))
-            response['num_media'][name] = {}
-            for (media, icon) in addable_types.items():
-                response['num_media'][name][icon] = len(self.catalog_search(resolve = False,
-                                                                             path = resource_path(course),
-                                                                             type_name=media))
         return response
     
     @view_config(context = ICourse, name = "join")
