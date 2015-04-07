@@ -25,7 +25,7 @@
 					<span class="glyphicon glyphicon-book"></span> <span i18n:translate="">Currently enrolled</span>
 				</div>
 				<div class="list-group">
-					<tal:iterate repeat="course view.profile.enrolled_courses()">
+					<tal:iterate repeat="course request.profile.enrolled_courses()">
 					<tal:completed condition="course_percentage[course.uid] < 100">
 					<a class="list-group-item" href="${request.resource_url(course)}">
 						<div class="row">
@@ -51,7 +51,7 @@
 					<span class="glyphicon glyphicon-ok"></span> <span i18n:translate="">Completed</span>
 				</div>
 				<div class="list-group">
-					<tal:iterate repeat="course view.profile.enrolled_courses()">
+					<tal:iterate repeat="course request.profile.enrolled_courses()">
 					<tal:completed condition="course_percentage[course.uid] >= 100">
 					<a class="list-group-item" href="${request.resource_url(course)}">
 						<div class="row">

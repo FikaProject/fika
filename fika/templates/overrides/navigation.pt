@@ -15,7 +15,7 @@
       <a class="navbar-brand" href="${request.application_url}">
           	${view.root.title}
       </a>
-      <ul class="nav navbar-nav" tal:condition="view.profile">
+      <ul class="nav navbar-nav" tal:condition="request.authenticated_userid">
       	<li>
           <a href="/" title="My courses">
           	<span class="glyphicon glyphicon-home"></span>
@@ -31,34 +31,34 @@
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapsible">
-    	 <ul class="nav navbar-nav" tal:condition="request.has_permission('perm:Edit', context)">
+    	 <ul class="nav navbar-nav" tal:condition="request.has_permission('perm:Show controls', context)">
 			<li><a href="/users" title="Users"><span class="glyphicon glyphicon-user"></span><span class="fika-nav-button-text"> Users</span></a></li>
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown" tal:condition="request.has_permission('perm:Edit', context)">
+			<li class="dropdown" tal:condition="request.has_permission('perm:Show controls', context)">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					${view.profile.title}
+					${getattr(request.profile, 'title', 'Profile')}
 					<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="${request.resource_url(view.profile)}" title="Profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-					<li><a href="${request.resource_url(view.profile, 'change_password')}" title="Change password"><span class="glyphicon glyphicon-cog"></span> Change password</a></li>
+					<li><a href="${request.resource_url(request.profile)}" title="Profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+					<li><a href="${request.resource_url(request.profile, 'change_password')}" title="Change password"><span class="glyphicon glyphicon-cog"></span> Change password</a></li>
 					<li class="divider"></li>
 					<li><a href="/logout" title="Logout"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
 				</ul>
 			</li>
 			
-			<li tal:condition="not request.has_permission('perm:Edit', context)">
-				<a tal:condition="view.profile" href="/logout" title="Logout"><span class="glyphicon glyphicon-off"></span> Logout</a>
+			<li tal:condition="not request.has_permission('perm:Show controls', context)">
+				<a tal:condition="request.authenticated_userid" href="/logout" title="Logout"><span class="glyphicon glyphicon-off"></span> Logout</a>
 			</li>
 			
-			<tal:annon condition="not view.profile">
+			<tal:annon condition="not request.authenticated_userid">
 				<li><a href="/register">Register</a></li>
 			</tal:annon>
 		</ul>
 		
-        <div class="nav navbar-nav navbar-right" tal:condition="view.profile">
+        <div class="nav navbar-nav navbar-right" tal:condition="request.authenticated_userid">
             <form action="${request.resource_url(view.root,'search')}" id="search" class="navbar-form" role="search" method="get">
                 <div class="input-group">
                     <input name="query" type="text" class="form-control" placeholder="Search"
