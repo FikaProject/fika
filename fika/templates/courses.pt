@@ -18,32 +18,35 @@
       </div>
       <p class="clearfix"></p>
     </div>
-
-    <tal:iterate repeat="obj courses">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <a href="${request.resource_url(obj)}">${obj.title}</a>
-          <span class="fika-enroll-button-right"
-            tal:condition="request.authenticated_userid"> <a
-            tal:condition="not view.fikaProfile.in_course(obj)"
-            href="${request.resource_url(obj, 'join')}"
-            class="btn btn-primary btn-sm" role="button">
-            <span class="glyphicon glyphicon-bookmark"></span>
-            <span i18n:translate="">Enroll</span>
-          </a>
-          <a tal:condition="view.fikaProfile.in_course(obj)"
-            href="${request.resource_url(obj, 'leave')}"
-            class="btn btn-success btn-sm" role="button">
-            <span class="glyphicon glyphicon-ok"></span>
-            <span i18n:translate="">Enrolled</span>
-          </a>
-          </span>
-        </div>
-        <div class="panel-body">
-          <span tal:replace="structure obj.description"></span>
-        </div>
-      </div>
-    </tal:iterate>
+    
+    <tal:iterate repeat="course courses">
+		<div class="row">
+			<div class="col-md-12">
+				<a href="${request.resource_url(get_first_unfinished_page(course.uid))}">
+					<h4 class="fika-courselist-title" >								
+						${course.title}
+					</h4>
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="progress" style="width:100%;height:5px;margin-bottom:0px;">
+					<div tal:condition="course.uid in course_percentage" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="${course_percentage[course.uid]}" aria-valuemin="0" aria-valuemax="100" style="width: ${course_percentage[course.uid]}%;">
+						<span class="sr-only">${course_percentage[course.uid]}% Complete</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<p>
+					<span tal:replace="structure course.description"></span>
+				</p>
+			</div>
+		</div>
+	</tal:iterate>
+	
   </div>
 
 </body>

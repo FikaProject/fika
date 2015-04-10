@@ -37,6 +37,7 @@ class CourseView(FikaBaseView):
         content_keys.extend(keys)
         self.context.order = content_keys
         return HTTPFound(location = self.request.resource_url(self.context))
+        
 
     @view_config(context = ICourse, renderer = "fika:templates/course.pt", permission=security.PERM_VIEW)
     def course(self):
@@ -67,6 +68,21 @@ class CourseView(FikaBaseView):
             if not self.request.has_permission(security.PERM_VIEW, course):
                 continue
             courses.append(course)
+        response['get_first_unfinished_page'] = self._get_first_unfinished_page
+        response['course_percentage'] = {}
+        user = self.root['users'].get(self.request.authenticated_userid, None)
+        if user:
+            response['fikaProfile'] = IFikaUser(user)
+            for uid in response['fikaProfile'].courses:
+                course = self.resolve_uid(uid)
+                completed_modules = 0
+                for course_module in course.values():
+                    if(course_module.uid in response['fikaProfile'].completed_course_modules):
+                        completed_modules += 1
+                if len(course) <= 0:
+                    response['course_percentage'][uid] = 0
+                else:
+                    response['course_percentage'][uid] = round(completed_modules / float(len(course)) * 100.0, 2);
         return response
     
     @view_config(context = ICourse, name = "join")
@@ -119,6 +135,22 @@ class CourseView(FikaBaseView):
         else:
             self.flash_messages.add(_(u"Could not send email feedback to "+user.title+"."), type="danger")
         return HTTPFound(location = self.request.resource_url(self.context, 'responses_overview'))
+    
+    def _get_first_unfinished_page(self, courseuid):
+        course = self.resolve_uid(courseuid)
+        
+        noModulesCompleted = True
+        for coursemodule in course.values():
+            if coursemodule.uid in self.profile.completed_course_modules:
+                noModulesCompleted = False
+                break
+        if noModulesCompleted:
+            return course
+        
+        for coursemodule in course.values():
+            if coursemodule.uid not in self.profile.completed_course_modules:
+                return coursemodule
+        return course
     
 @view_action('actions_menu', 'responses_overview',
              title = _("Responses overview"),

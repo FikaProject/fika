@@ -8,6 +8,12 @@
 	display:block;
 }
 
+.fika-courselist-title, .fika-courselist-title:hover
+{
+    margin-bottom:0px;
+    color:#000;
+}
+
 .fika-media-button
 {
 	display:inline;

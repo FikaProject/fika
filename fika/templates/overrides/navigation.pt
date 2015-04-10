@@ -25,7 +25,7 @@
         <li>
         	<a href="/courses" title="Courses">
         		<span class="glyphicon glyphicon-book"></span>
-        		<span class="fika-nav-button-text"> Courses</span>
+        		<span class="fika-nav-button-text"> All courses</span>
     		</a>
         </li>
       </ul>
