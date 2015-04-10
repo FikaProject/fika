@@ -21,15 +21,15 @@ class DefaultContentView(DefaultView):
     @view_config(name = 'view', context = IContent, renderer = "arche:templates/content/basic.pt",
                   permission=security.PERM_VIEW)
     def default_content(self):
-        return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__))
+        return HTTPFound(location = self.request.resource_url(self.context.__parent__))
     
     @view_config(context = IImage, renderer = "arche:templates/content/basic.pt",
                   permission=security.PERM_VIEW)
     def default_image(self):
         if IImageSlideshow.providedBy(self.context.__parent__):
-            return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__.__parent__))
-        else:
             return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__))
+        else:
+            return HTTPFound(location = self.request.resource_url(self.context.__parent__))
 
 
 def includeme(config):

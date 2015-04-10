@@ -20,6 +20,104 @@
 	<h2>
         ${context.title}
     </h2>
+    
+    <form id="sortable-form" tal:omit-tag="not request.has_permission('perm:Edit', context)">
+		<span id="sortable" tal:omit-tag="not request.has_permission('perm:Edit', context)">
+			<tal:iterate repeat="obj module_segments">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<input type="hidden" name="segment_name" value="${obj.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
+								<div id="${obj.uid}" class="">
+									<script type="text/javascript">
+			                            $('#${obj.uid}').load('${request.resource_url(obj, 'inline_in_segment')}');
+			                        </script>
+		                        </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</tal:iterate>
+		</span>
+	</form>
+	
+	<div class="row">
+		<div class="col-md-1" tal:condition="request.has_permission('perm:Edit', context)" tal:repeat="(addable_type,icon) addable_types.items()">
+			<div class="panel panel-default panel-add">
+				<div class="panel-body">
+					<a href="${request.resource_url(context, 'add', query = {'content_type': addable_type})}" alt="Add a ${addable_type.title()}">
+						<span class="h3">
+							<span class="text-muted">
+								<span class="glyphicon glyphicon-${icon}"></span>
+							</span>
+						</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1" tal:condition="request.has_permission('perm:Edit', context)">
+			<div class="panel panel-default panel-add">
+				<div class="panel-body">
+					<a href="${request.resource_url(context, 'add', query = {'content_type': 'Assessment'})}">
+						<span class="h3">
+							<span class="text-muted">
+								<span class="glyphicon glyphicon-question-sign"></span>
+							</span>
+						</span>						
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<h1>
+        ${course.title}
+    </h1>
+    
+    <p>
+	    <div tal:content="structure course_pagination(context, request, view)">
+	        (course pagination here)
+	    </div>
+	</p>
+    
+	<h2>
+        ${context.title}
+    </h2>
 	
     <div class="row">
 		<div class="col-md-12">

@@ -20,7 +20,7 @@ class AddVideoForm(AddFileForm):
         obj = factory(**appstruct)
         name = generate_slug(self.context, obj.title)
         self.context[name] = obj
-        return HTTPFound(location = self.request.resource_url(obj.__parent__.__parent__))
+        return HTTPFound(location = self.request.resource_url(obj.__parent__))
 
 
 class VideoView(DefaultView):
@@ -35,4 +35,4 @@ class VideoView(DefaultView):
     @view_config(name = 'view', context = IVideo, renderer = "fika:templates/video.pt",
                   permission=security.PERM_VIEW)
     def video(self):
-        return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__))
+        return HTTPFound(location = self.request.resource_url(self.context.__parent__))

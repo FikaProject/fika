@@ -39,7 +39,7 @@ class ImageSlideshowView(DefaultView):
     @view_config(name = 'view', context = IImageSlideshow, renderer = "fika:templates/image_slideshow.pt",
                   permission=security.PERM_VIEW)
     def image_slideshow(self):
-        return HTTPFound(location = self.request.resource_url(self.context.__parent__.__parent__))
+        return HTTPFound(location = self.request.resource_url(self.context.__parent__))
     
     @view_config(context = IImageSlideshow, name = "move_up")
     def move_up(self):

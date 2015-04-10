@@ -17,5 +17,9 @@ class CourseModule(FikaBaseFolder, DCMetadataMixin):
 def includeme(config):
     config.add_content_factory(CourseModule)
     config.add_addable_content("CourseModule", "Course")
-    config.add_addable_content("Segment", "CourseModule")
+    #config.add_addable_content("Segment", "CourseModule")
     config.add_addable_content("Assessment", "CourseModule")
+    config.add_addable_content("ImageSlideshow", "CourseModule")
+    config.add_addable_content("Text", "CourseModule")
+    config.add_addable_content("Video", "CourseModule")
+    config.add_addable_content("File", "CourseModule")
