@@ -1,3 +1,5 @@
+from pyramid.httpexceptions import HTTPFound
+
 from arche.views.base import ContentView
 from arche import security
 from arche import _
@@ -42,6 +44,8 @@ class MyCoursesView(ContentView):
                     response['course_percentage'][uid] = round(completed_modules / float(len(course)) * 100.0, 2); 
                 if completed_modules == len(course):
                     response['completed_courses'] += (course.uid ,)
+        else:
+            return HTTPFound(location = self.request.resource_url(self.request.root, 'login'))
         
         response['get_first_unfinished_page'] = _get_first_unfinished_page
         return response
