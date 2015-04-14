@@ -7,17 +7,14 @@
 <body>
 <div metal:fill-slot="content">
   <div class="row">
-    <div class="col-sm-12">
-      <h1>${context.title}</h1>
-    </div>
     	<form id="sortable-form-imageslideshow-${context.uid}" tal:omit-tag="not request.has_permission('perm:Edit', context)">
 			<span id="sortable-${context.uid}" tal:omit-tag="not request.has_permission('perm:Edit', context)">
 			    <tal:iterate tal:repeat="image context.values()">
-				    <div class="col-sm-3">
+				    <div tal:attributes="class len(context.values())>1 and 'col-sm-6' or 'col-sm-12'">
 						<input type="hidden" name="image_name" value="${image.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
 						<p>
 							<a href="${request.resource_url(image, 'view')}" data-lightbox="image-slideshow-${context.title}" data-title="${image.description}">
-								<img class="img-responsive" src="${view.request.thumb_url(image, 'col-3', key = 'file')}" alt="${image.title}" />
+								<img class="img-responsive" src="${view.request.thumb_url(image, 'col-6', key = 'file')}" alt="${image.title}" />
 							</a>
 							${image.description}
 						</p>
@@ -40,6 +37,7 @@
 							</a>
 						</div>
 				    </div>
+				    <div class="clearfix" tal:condition="repeat['image'].index%2==1"></div>
 				</tal:iterate>
 			</span>
 		</form>
