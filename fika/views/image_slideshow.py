@@ -22,7 +22,7 @@ class AddImageSlideshowForm(AddFileForm):
         obj = factory(**appstruct)
         name = generate_slug(self.context, obj.title)
         self.context[name] = obj
-        return HTTPFound(location = self.request.resource_url(obj.__parent__.__parent__))
+        return HTTPFound(location = self.request.resource_url(obj.__parent__))
 
 
 class ImageSlideshowView(DefaultView):

@@ -6,7 +6,7 @@ from arche.interfaces import ISchemaCreatedEvent
 
 
 class ImageSlideshowSchema(colander.Schema):
-    title = colander.SchemaNode(colander.String(),)
+    pass
     
 class AddImageSchema(AddFileSchema):
     pass

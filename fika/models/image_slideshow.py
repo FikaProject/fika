@@ -14,6 +14,10 @@ class ImageSlideshow(FikaBaseFolder, DCMetadataMixin):
     type_name = u"ImageSlideshow"
     add_permission = "Add %s" % type_name
     icon = u"picture"
+    
+    @property
+    def title(self):
+        return self.uid
 
 
 def includeme(config):
