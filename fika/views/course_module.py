@@ -47,6 +47,10 @@ class CourseModuleView(FikaBaseView):
         response['is_assessment'] = {}
         for segment in self.context.values():
             response['is_assessment'][segment.__name__] = isinstance(segment, Assessment)
+            if isinstance(segment, ImageSlideshow):
+                lightbox_js.need()
+                lightbox_css.need()
+                break
             for segmentcontent in segment.values():
                 if isinstance(segmentcontent, ImageSlideshow):
                     lightbox_js.need()

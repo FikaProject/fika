@@ -29,6 +29,18 @@
 						<div class="panel panel-default">
 							<div class="panel-body">
 								<input type="hidden" name="segment_name" value="${obj.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
+								<div>
+								<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'delete')}"
+									tal:condition="request.has_permission('perm:Delete', obj)">
+									<span class="glyphicon glyphicon-trash"></span>
+								</a>
+								<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'edit')}"
+									tal:condition="request.has_permission('perm:Edit', obj)">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</a>
+								</div>
+								<div class="clearfix"></div>
+								
 								<div id="${obj.uid}" class="">
 									<script type="text/javascript">
 			                            $('#${obj.uid}').load('${request.resource_url(obj, 'inline_in_segment')}');
@@ -71,135 +83,6 @@
 		</div>
 	</div>
 	
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<h1>
-        ${course.title}
-    </h1>
-    
-    <p>
-	    <div tal:content="structure course_pagination(context, request, view)">
-	        (course pagination here)
-	    </div>
-	</p>
-    
-	<h2>
-        ${context.title}
-    </h2>
-	
-    <div class="row">
-		<div class="col-md-12">
-	        <div class="panel-group" id="accordion">
-	        	<form id="sortable-form" tal:omit-tag="not request.has_permission('perm:Edit', context)">
-					<span id="sortable" tal:omit-tag="not request.has_permission('perm:Edit', context)">
-			        	<tal:iterate repeat="obj module_segments">
-							<div class="panel panel-default panel-group-with-overflow">
-								<input type="hidden" name="segment_name" value="${obj.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
-								<div class="panel-heading">
-									<div class="panel-title">
-										<h4>
-											${obj.title}
-											<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'delete')}"
-												tal:condition="request.has_permission('perm:Delete', obj)">
-												<span class="glyphicon glyphicon-trash"></span>
-											</a>
-											<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'edit')}"
-												tal:condition="request.has_permission('perm:Edit', obj)">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</a>
-										</h4>
-										<tal:segmentcontents repeat="segmentcontent obj.values()" condition="not is_assessment[obj.__name__]">
-											<button type="button" class="btn btn-default collapser fika-media-button" data-toggle="collapse" data-parent="#accordion-${obj.uid}" href="#collapse-${segmentcontent.uid}">
-							                    <span class="glyphicon glyphicon-${getattr(segmentcontent, 'icon', 'file')}"></span>
-							    			</button>
-										</tal:segmentcontents>
-										<div class="btn-group btn-group-sm" tal:condition="python:request.has_permission('perm:Edit', context) and obj.type_name=='Segment'" >
-											<button type="button" class="btn btn-default dropdown-toggle btn-add" data-toggle="dropdown">
-												<span class="text-muted">
-													<span class="glyphicon glyphicon-plus"></span> <span class="caret"></span>
-												</span>
-											</button>
-											<ul class="dropdown-menu" role="menu">
-												<li tal:repeat="(addable_type,icon) addable_types.items()">
-													<a href="${request.resource_url(obj, 'add', query = {'content_type': addable_type})}">
-														<span class="glyphicon glyphicon-${icon}"></span> ${addable_type.title()}
-													</a>
-												</li>
-											</ul>
-										</div>
-										<div class="pull-right sort-handle" tal:condition="request.has_permission('perm:Edit', context)" >
-											<div type="button" class="btn btn-default">
-												<span class="glyphicon glyphicon-resize-vertical"></span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div id="segment-${obj.uid}" class="panel-body" >
-			                        Loading...
-			                        <script type="text/javascript">
-			                            $('#segment-${obj.uid}').load('${request.resource_url(obj, 'inline_in_module')}');
-			                        </script>
-								</div>
-							</div>
-						</tal:iterate>
-					</span>
-				</form>
-					<div class="col-xs-6 panel panel-default panel-add" tal:condition="request.has_permission('perm:Edit', context)">
-						<div class="panel-body">
-							<a href="${request.resource_url(context, 'add', query = {'content_type': 'Segment'})}">
-								<span class="text-muted">
-									<span class="glyphicon glyphicon-plus"></span> Add new segment
-								</span>
-							</a>
-						</div>
-					</div>
-					<div></div>
-					<div class="col-xs-6 panel panel-default panel-add" tal:condition="request.has_permission('perm:Edit', context)">
-						<div class="panel-body">
-							<a href="${request.resource_url(context, 'add', query = {'content_type': 'Assessment'})}">
-								<span class="text-muted">
-									<span class="glyphicon glyphicon-plus"></span> Add new assessment
-								</span>
-							</a>
-						</div>
-					</div>
-			</div>
-		</div>
-	</div>
-    
-    <p>&nbsp;</p>
     <div tal:condition="in_course" tal:content="structure course_module_toggle(context)">
         (course module button here)
     </div>
