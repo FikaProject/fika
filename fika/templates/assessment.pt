@@ -7,6 +7,7 @@
   i18n:domain="Arche">
   <div metal:fill-slot="content" class="row">
     <div class="col-md-12">
+      <h1>${context.title}</h1>
       <div tal:replace="structure context.question"></div>
       <div tal:condition="user_answer|False" >
 		<blockquote>

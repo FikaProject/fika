@@ -25,7 +25,7 @@ class AddVideoForm(AddFileForm):
 
 class VideoView(DefaultView):
 
-    @view_config(name = 'inline_in_segment', context = IVideo, renderer = "fika:templates/video.pt",
+    @view_config(name = 'inline_in_module', context = IVideo, renderer = "fika:templates/video.pt",
                   permission=security.PERM_VIEW)
     def video_inline(self):
         super(DefaultView, self).__init__(self.context, self.request)
