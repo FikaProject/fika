@@ -88,8 +88,7 @@
 			$( "#sortable" ).sortable({
 				handle: ".sort-handle",
 				stop: function( event, ui ) {
-					$.post("${request.resource_url(context, 'sorted')}", $( "#sortable-form" ).serialize());
-					window.location.reload(); //FIXME reload the content list and pagination inline instead of refresh page
+					$.post("${request.resource_url(context, 'sorted')}", $( "#sortable-form" ).serialize(), window.location.reload());
 				}
 			});
 		});
