@@ -1,13 +1,14 @@
 import colander
 import deform
 
+from fika import _
 
 class TextSchema(colander.Schema):
     title = colander.SchemaNode(colander.String(),
-                                description=u"The title of the text.",)
+                                description=_(u"The title of the text."),)
     body = colander.SchemaNode(colander.String(),
                                widget=deform.widget.RichTextWidget(rows=8, cols=80),
-                               description=u"Write the piece of text here.",)
+                               description=_(u"Write the piece of text here."),)
 
 
 def includeme(config):

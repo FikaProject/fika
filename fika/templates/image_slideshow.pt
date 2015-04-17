@@ -45,7 +45,7 @@
 		<a tal:condition="request.has_permission('perm:Edit', context)" href="${request.resource_url(context, 'add', query = {'content_type': 'Image'})}">
 			<button type="button" class="btn btn-default btn-add">
 				<span class=" text-muted">
-					<span class="glyphicon glyphicon-plus"></span> Add new image
+					<span class="glyphicon glyphicon-plus"></span> <span i18n:translate="">Add new image</span>
 				</span>
 			</button> 
 		</a>

@@ -18,21 +18,19 @@
       <ul class="nav navbar-nav" tal:condition="request.authenticated_userid">
       	<li>
           <a href="/" title="My courses">
-          	<span class="glyphicon glyphicon-home"></span>
-          	<span class="fika-nav-button-text"> My courses</span>
+          	<span class="glyphicon glyphicon-home"></span> <span class="fika-nav-button-text" i18n:translate="">My courses</span>
       	</a>
         </li>
         <li>
         	<a href="/courses" title="Courses">
-        		<span class="glyphicon glyphicon-book"></span>
-        		<span class="fika-nav-button-text"> All courses</span>
+        		<span class="glyphicon glyphicon-book"></span> <span class="fika-nav-button-text" i18n:translate="">All courses</span>
     		</a>
         </li>
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapsible">
     	 <ul class="nav navbar-nav" tal:condition="request.has_permission('perm:Show controls', context)">
-			<li><a href="/users" title="Users"><span class="glyphicon glyphicon-user"></span><span class="fika-nav-button-text"> Users</span></a></li>
+			<li><a href="/users" title="Users"><span class="glyphicon glyphicon-user"></span><span class="fika-nav-button-text"> <span i18n:translate="">Users</span></span></a></li>
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-right">
@@ -42,10 +40,10 @@
 					<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="${request.resource_url(request.profile)}" title="Profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-					<li><a href="${request.resource_url(request.profile, 'change_password')}" title="Change password"><span class="glyphicon glyphicon-cog"></span> Change password</a></li>
+					<li><a href="${request.resource_url(request.profile)}" title="Profile"><span class="glyphicon glyphicon-user"></span> <span i18n:translate="">Profile</span></a></li>
+					<li><a href="${request.resource_url(request.profile, 'change_password')}" title="Change password"><span class="glyphicon glyphicon-cog"></span> <span i18n:translate="">Change password</span></a></li>
 					<li class="divider"></li>
-					<li><a href="/logout" title="Logout"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+					<li><a href="/logout" title="Logout"><span class="glyphicon glyphicon-off"></span> <span i18n:translate="">Logout</span></a></li>
 				</ul>
 			</li>
 			
@@ -54,7 +52,7 @@
 			</li>
 			
 			<tal:annon condition="not request.authenticated_userid">
-				<li><a href="/register">Register</a></li>
+				<li><a href="/register" i18n:translate="">Register</a></li>
 			</tal:annon>
 		</ul>
 		

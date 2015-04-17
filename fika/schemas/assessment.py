@@ -1,19 +1,20 @@
 import colander
 import deform
 
+from fika import _
 
 class Assessment(colander.Schema):
     title = colander.SchemaNode(colander.String(),
-                                description = u"The title of the assessment question. Please include what part of the course or module this question relates to.")
+                                description = _(u"The title of the assessment question. Please include what part of the course or module this question relates to."))
     question = colander.SchemaNode(colander.String(),
-    								  description = u"The question text.",
+    								  description = _(u"The question text."),
                                       widget=deform.widget.RichTextWidget(rows=8, cols=40),
                                       missing = u"")
     email = colander.SchemaNode(colander.String(),
-                      description = u"Will be displayed in case participants wish to contact the examinator.")
+                      description = _(u"Will be displayed in case participants wish to contact the examinator."))
 
 class AssessmentInline(colander.Schema):
-	answer = colander.SchemaNode(colander.String(), description = u"Type your answer here.",
+	answer = colander.SchemaNode(colander.String(), description = _(u"Type your answer here."),
                                       widget=deform.widget.TextAreaWidget(rows=8, cols=40),
                                       missing = u"")
 def includeme(config):

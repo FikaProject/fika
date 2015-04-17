@@ -3,12 +3,13 @@ from arche.schemas import DCMetadataSchema
 from arche.interfaces import ISchemaCreatedEvent
 
 import colander
-import deform
+
+from fika import _
 
 
 class CourseModuleSchema(BaseSchema, DCMetadataSchema):
     title = colander.SchemaNode(colander.String(),
-                                description = u"The title of the course module.")
+                                description = _(u"The title of the course module."))
     
 def course_module_schema_adjustment(schema, event):
     if 'description' in schema:

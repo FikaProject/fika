@@ -12,8 +12,8 @@
       <div class="pull-right">
         <a class="btn btn-default"
           href="${request.resource_url(context, 'add', query = {'content_type': 'Course'})}">
-          <span class="glyphicon glyphicon-plus"></span> Create new
-          course
+          <span class="glyphicon glyphicon-plus"></span> <span i18n:translate="">Create new
+          course</span>
         </a>
       </div>
       <p class="clearfix"></p>

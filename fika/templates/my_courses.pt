@@ -16,7 +16,7 @@
         <div class="col-md-12">
         	<div tal:condition="fikaProfile|False">
 	        	
-				<h3>Currently Enrolled</h3>
+				<h3 i18n:translate="">Currently enrolled</h3>
 				
 				<tal:iterate repeat="courseuid fikaProfile.courses">
 					<tal:completed condition="course_percentage[courseuid] < 100">

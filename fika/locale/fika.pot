@@ -1,154 +1,297 @@
-# Translations template for fika.
-# Copyright (C) 2014 ORGANIZATION
-# This file is distributed under the same license as the fika project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
-#
+# 
+# SOME DESCRIPTIVE TITLE
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: fika 0.1dev\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-03-04 10:22+0100\n"
+"Project-Id-Version: PACKAGE 1.0\n"
+"POT-Creation-Date: 2015-04-17 15:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 1.3\n"
+"Generated-By: Lingua 3.9\n"
 
-#: fika/security.py:20
-msgid "Administrator"
+#: ./fika/populator.py:11
+msgid "Fika site"
 msgstr ""
 
-#: fika/security.py:21
-msgid "Content manager"
+#: ./fika/populator.py:12
+msgid "Setup and install Fika"
 msgstr ""
 
-#: fika/models/course_modules.py:10
-msgid "Course modules"
-msgstr ""
-
-#: fika/models/courses.py:10
+#: ./fika/models/courses.py:11 ./fika/templates/courses.pt:10
 msgid "Courses"
 msgstr ""
 
-#: fika/models/site.py:11
-msgid "Home"
+#: ./fika/models/course.py:17
+msgid "Course"
 msgstr ""
 
-#: fika/models/user.py:35
-msgid "(Anonymous)"
+#: ./fika/models/video.py:13
+msgid "Video"
 msgstr ""
 
-#: fika/models/users.py:10
-msgid "Users"
+#: ./fika/models/image_slideshow.py:13
+msgid "Image Slideshow"
 msgstr ""
 
-#: fika/schemas/common.py:16
-msgid "Must only contain unique values"
+#: ./fika/models/course_module.py:11
+msgid "Course module"
 msgstr ""
 
-#: fika/schemas/common.py:37
-msgid "Invalid email"
+#: ./fika/models/assessment.py:11
+msgid "Assessment"
 msgstr ""
 
-#: fika/schemas/common.py:42
-msgid "Wrong password. Remember that passwords are case sensitive."
+#: ./fika/models/assessment.py:19
+msgid "Assessment Response"
 msgstr ""
 
-#: fika/schemas/permissions.py:19
-msgid "UserID"
+#: ./fika/models/segment.py:10
+msgid "Segment"
 msgstr ""
 
-#: fika/schemas/permissions.py:24
-msgid "Groups"
+#: ./fika/models/text.py:11
+msgid "Text"
 msgstr ""
 
-#: fika/schemas/permissions.py:31
-msgid "Roles for user"
+#: ./fika/views/courses.py:187
+msgid "Assign course to users"
 msgstr ""
 
-#: fika/schemas/permissions.py:35
-msgid "Permissions"
+#: ./fika/views/courses.py:156
+msgid "Responses overview"
 msgstr ""
 
-#. Default: Set permission for each UserID that should have rights in this meeting.
-#. If you remove a UserID, their permissions will be cleared.
-#: fika/schemas/permissions.py:36
-msgid "permissions_schema_main_description"
+#: ./fika/views/courses.py:167
+msgid "Assign to user"
 msgstr ""
 
-#: fika/schemas/permissions.py:39
-msgid "Role settings for users"
+#: ./fika/views/courses.py:179
+msgid "Assign users to course"
 msgstr ""
 
-#: fika/schemas/user.py:12
-msgid "Your name"
+#: ./fika/views/my_courses.py:9
+msgid "My Courses"
 msgstr ""
 
-#: fika/templates/course.pt:17 fika/templates/courses.pt:18
+#: ./fika/views/assessment.py:40
+msgid "Response submitted"
+msgstr ""
+
+#: ./fika/templates/course_module_toggle.pt:9
+msgid "Finished"
+msgstr ""
+
+#: ./fika/templates/course_module_toggle.pt:15
+msgid "Mark as finished"
+msgstr ""
+
+#: ./fika/templates/home.pt:21 ./fika/templates/overrides/navigation.pt:21
+msgid "My courses"
+msgstr ""
+
+#: ./fika/templates/home.pt:25 ./fika/templates/my_courses.pt:19
+msgid "Currently enrolled"
+msgstr ""
+
+#: ./fika/templates/home.pt:51
+msgid "Completed"
+msgstr ""
+
+#: ./fika/templates/home.pt:70
+msgid "You have not completed any courses yet.."
+msgstr ""
+
+#: ./fika/templates/assessment.pt:14
+msgid "Your answer:"
+msgstr ""
+
+#: ./fika/templates/pdf.pt:12
+msgid "Download"
+msgstr ""
+
+#: ./fika/templates/course.pt:19
 msgid "Enroll"
 msgstr ""
 
-#: fika/templates/course.pt:22 fika/templates/courses.pt:23
-msgid "Leave"
+#: ./fika/templates/course.pt:25
+msgid "Enrolled"
 msgstr ""
 
-#: fika/templates/course_module.pt:30 fika/templates/master.pt:85
-#: fika/views/base.py:123
-msgid "Add"
+#: ./fika/templates/course.pt:77
+msgid "Add new module"
 msgstr ""
 
-#: fika/templates/master.pt:41
-msgid "Search"
-msgstr ""
-
-#: fika/views/auth.py:22
-msgid "Login"
-msgstr ""
-
-#: fika/views/auth.py:31
-msgid "Welcome!"
-msgstr ""
-
-#: fika/views/auth.py:42
-msgid "Register"
-msgstr ""
-
-#: fika/views/auth.py:49
-msgid "Welcome, you're now registered!"
-msgstr ""
-
-#: fika/views/base.py:117
-msgid "Done"
-msgstr ""
-
-#: fika/views/base.py:118
-msgid "Canceled"
-msgstr ""
-
-#: fika/views/base.py:120 fika/views/components/actions.py:12
-msgid "Delete"
-msgstr ""
-
-#: fika/views/base.py:121
-msgid "Cancel"
-msgstr ""
-
-#: fika/views/base.py:122
+#: ./fika/templates/ordering.pt:39
 msgid "Save"
 msgstr ""
 
-#: fika/views/components/actions.py:8
-msgid "View"
+#: ./fika/templates/ordering.pt:40
+msgid "Cancel"
 msgstr ""
 
-#: fika/views/components/actions.py:10
-msgid "Edit"
+#: ./fika/templates/courses.pt:15
+msgid "Create new course"
 msgstr ""
 
-#: fika/views/components/actions.py:14
-msgid "Order"
+#: ./fika/templates/course_pagination.pt:11
+msgid "Previous"
 msgstr ""
 
+#: ./fika/templates/course_pagination.pt:22
+msgid "Next"
+msgstr ""
+
+#: ./fika/templates/my_courses.pt:83
+msgid "You have not enrolled in any courses yet."
+msgstr ""
+
+#: ./fika/templates/responses_overview.pt:32
+msgid "Question"
+msgstr ""
+
+#: ./fika/templates/responses_overview.pt:33
+#: ./fika/templates/responses_overview.pt:103
+msgid "Answer"
+msgstr ""
+
+#: ./fika/templates/responses_overview.pt:34
+#: ./fika/templates/responses_overview.pt:104
+msgid "Last modified"
+msgstr ""
+
+#: ./fika/templates/responses_overview.pt:102
+msgid "User"
+msgstr ""
+
+#: ./fika/templates/image_slideshow.pt:48
+msgid "Add new image"
+msgstr ""
+
+#: ./fika/templates/overrides/navigation.pt:10
+msgid "Toggle navigation"
+msgstr ""
+
+#: ./fika/templates/overrides/navigation.pt:26
+msgid "All courses"
+msgstr ""
+
+#: ./fika/templates/overrides/navigation.pt:33
+msgid "Users"
+msgstr ""
+
+#: ./fika/templates/overrides/navigation.pt:43
+msgid "Profile"
+msgstr ""
+
+#: ./fika/templates/overrides/navigation.pt:44
+msgid "Change password"
+msgstr ""
+
+#: ./fika/templates/overrides/navigation.pt:46
+msgid "Logout"
+msgstr ""
+
+#: ./fika/templates/overrides/navigation.pt:55
+msgid "Register"
+msgstr ""
+
+#: ./fika/templates/overrides/navigation.pt:62
+msgid "Search"
+msgstr ""
+
+#: ./fika/schemas/course.py:12
+msgid "The title of the course."
+msgstr ""
+
+#: ./fika/schemas/course.py:14
+msgid "A short description of the course."
+msgstr ""
+
+#: ./fika/schemas/course.py:19
+msgid ""
+"Describe who the course is for, why the course is relevant, and give a short "
+"example of a problem the course will help in solving."
+msgstr ""
+
+#: ./fika/schemas/course.py:23
+msgid "(Optional) An image that will be shown next to the description."
+msgstr ""
+
+#: ./fika/schemas/course.py:25
+msgid "Image"
+msgstr ""
+
+#: ./fika/schemas/video.py:11
+msgid "The title of the video."
+msgstr ""
+
+#: ./fika/schemas/video.py:16
+msgid "Write a short description of the video here. Max 140 characters."
+msgstr ""
+
+#: ./fika/schemas/video.py:17
+msgid "MP4 file"
+msgstr ""
+
+#: ./fika/schemas/video.py:17
+msgid "Youtube"
+msgstr ""
+
+#: ./fika/schemas/video.py:17
+msgid "Vimeo"
+msgstr ""
+
+#: ./fika/schemas/video.py:25
+msgid ""
+"For .mp4 files, the full URL of the video file. For Youtube, the full URL. "
+"For Vimeo, the sequence of numbers in the URL."
+msgstr ""
+
+#: ./fika/schemas/video.py:33
+msgid "%r is not a string"
+msgstr ""
+
+#: ./fika/schemas/course_module.py:12
+msgid "The title of the course module."
+msgstr ""
+
+#: ./fika/schemas/assessment.py:8
+msgid ""
+"The title of the assessment question. Please include what part of the course "
+"or module this question relates to."
+msgstr ""
+
+#: ./fika/schemas/assessment.py:10
+msgid "The question text."
+msgstr ""
+
+#: ./fika/schemas/assessment.py:14
+msgid "Will be displayed in case participants wish to contact the examinator."
+msgstr ""
+
+#: ./fika/schemas/assessment.py:17
+msgid "Type your answer here."
+msgstr ""
+
+#: ./fika/schemas/segment.py:8
+msgid "The title of the segment."
+msgstr ""
+
+#: ./fika/schemas/segment.py:10
+msgid "A short description of the segment."
+msgstr ""
+
+#: ./fika/schemas/text.py:8
+msgid "The title of the text."
+msgstr ""
+
+#: ./fika/schemas/text.py:11
+msgid "Write the piece of text here."
+msgstr ""

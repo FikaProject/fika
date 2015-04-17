@@ -74,7 +74,7 @@
 					
 					<a tal:condition="request.has_permission('perm:Edit', context)" class="list-group-item" href="${request.resource_url(context, 'add', query = {'content_type': 'CourseModule'})}">
 			          <span class=" text-muted">
-			          	<span class="glyphicon glyphicon-plus"></span> Add new module
+			          	<span class="glyphicon glyphicon-plus"></span> <span i18n:translate="">Add new module</span>
 			          </span> 
 			        </a>
 				</div>
