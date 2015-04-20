@@ -29,12 +29,12 @@
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapsible">
-    	 <ul class="nav navbar-nav" tal:condition="request.has_permission('perm:Show controls', context)">
+    	 <ul class="nav navbar-nav" tal:condition="request.has_permission('perm:Show controls', context)|False">
 			<li><a href="/users" title="Users"><span class="glyphicon glyphicon-user"></span><span class="fika-nav-button-text"> <span i18n:translate="">Users</span></span></a></li>
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown" tal:condition="request.has_permission('perm:Show controls', context)">
+			<li class="dropdown" tal:condition="request.has_permission('perm:Show controls', context)|False">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					${getattr(request.profile, 'title', 'Profile')}
 					<b class="caret"></b>
@@ -47,7 +47,7 @@
 				</ul>
 			</li>
 			
-			<li tal:condition="not request.has_permission('perm:Show controls', context)">
+			<li tal:condition="not request.has_permission('perm:Show controls', context)|False">
 				<a tal:condition="request.authenticated_userid" href="/logout" title="Logout"><span class="glyphicon glyphicon-off"></span> Logout</a>
 			</li>
 			
