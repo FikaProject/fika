@@ -21,7 +21,7 @@
     <nav tal:replace="structure view.render_template('fika:templates/overrides/navigation.pt')" />
 
     <div class="container">
-        <tal:actionbar replace="structure view.render_actionbar()" condition="request.has_permission('perm:Show controls', context)"/>
+        <tal:actionbar replace="structure view.render_actionbar()" condition="request.has_permission('perm:Show controls', context)|False"/>
 
         <div tal:replace="structure view.flash_messages.render()">Flash messages, if any</div>
 
