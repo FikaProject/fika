@@ -12,7 +12,8 @@ class MyCoursesView(ContentView):
         
         def _get_first_unfinished_page(courseuid):
             course = self.resolve_uid(courseuid)
-            
+            if course is None:
+                return course
             noModulesCompleted = True
             for coursemodule in course.values():
                 if coursemodule.uid in self.profile.completed_course_modules:
