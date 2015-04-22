@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2015-04-17 15:43+0200\n"
+"POT-Creation-Date: 2015-04-22 08:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,19 +60,19 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: ./fika/views/courses.py:187
+#: ./fika/views/courses.py:188
 msgid "Assign course to users"
 msgstr ""
 
-#: ./fika/views/courses.py:156
+#: ./fika/views/courses.py:157
 msgid "Responses overview"
 msgstr ""
 
-#: ./fika/views/courses.py:167
+#: ./fika/views/courses.py:168
 msgid "Assign to user"
 msgstr ""
 
-#: ./fika/views/courses.py:179
+#: ./fika/views/courses.py:180
 msgid "Assign users to course"
 msgstr ""
 

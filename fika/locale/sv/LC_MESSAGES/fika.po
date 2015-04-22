@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fika 1.0\n"
-"POT-Creation-Date: 2015-04-17 15:43+0200\n"
+"POT-Creation-Date: 2015-04-22 08:43+0200\n"
 "PO-Revision-Date: 2015-04-17 11:01+0200\n"
 "Last-Translator: Niels Swinkels <niels@tii.se>\n"
 "Language-Team: Swedish\n"
@@ -18,11 +18,11 @@ msgstr ""
 
 #: fika/populator.py:11
 msgid "Fika site"
-msgstr "Fika sida"
+msgstr "Fika webbsida"
 
 #: fika/populator.py:12
 msgid "Setup and install Fika"
-msgstr "Sätta upp och installera Fika"
+msgstr "Arrangera och installera Fika"
 
 #: fika/models/courses.py:11 fika/templates/courses.pt:10
 msgid "Courses"
@@ -42,7 +42,7 @@ msgstr "Bildspel"
 
 #: fika/models/course_module.py:11
 msgid "Course module"
-msgstr "Kurs modul"
+msgstr "Kursmodul"
 
 #: fika/models/assessment.py:11
 msgid "Assessment"
@@ -60,21 +60,21 @@ msgstr "Segment"
 msgid "Text"
 msgstr "Text"
 
-#: fika/views/courses.py:187
+#: fika/views/courses.py:188
 msgid "Assign course to users"
-msgstr "Tilldela kursen till användarna"
+msgstr "Tilldela användare kursen"
 
-#: fika/views/courses.py:156
+#: fika/views/courses.py:157
 msgid "Responses overview"
 msgstr "Svar översikt"
 
-#: fika/views/courses.py:167
+#: fika/views/courses.py:168
 msgid "Assign to user"
-msgstr "Tilldela till användare"
+msgstr "Tilldela användare"
 
-#: fika/views/courses.py:179
+#: fika/views/courses.py:180
 msgid "Assign users to course"
-msgstr "Tilldela användarna till kurs"
+msgstr "Tilldela kursen användare"
 
 #: fika/views/my_courses.py:9
 msgid "My Courses"
@@ -82,7 +82,7 @@ msgstr "Mina kurser"
 
 #: fika/views/assessment.py:40
 msgid "Response submitted"
-msgstr "Svar skickat"
+msgstr "Svar är skickat"
 
 #: fika/templates/course_module_toggle.pt:9
 msgid "Finished"
@@ -90,7 +90,7 @@ msgstr "Avslutad"
 
 #: fika/templates/course_module_toggle.pt:15
 msgid "Mark as finished"
-msgstr "Markera som färdig"
+msgstr "Markera som avslutad"
 
 #: fika/templates/home.pt:21 fika/templates/overrides/navigation.pt:21
 msgid "My courses"
@@ -98,7 +98,7 @@ msgstr "Mina kurser"
 
 #: fika/templates/home.pt:25 fika/templates/my_courses.pt:19
 msgid "Currently enrolled"
-msgstr "Närvarande inskrivna"
+msgstr "Inskrivna"
 
 #: fika/templates/home.pt:51
 msgid "Completed"
@@ -106,11 +106,11 @@ msgstr "Färdig"
 
 #: fika/templates/home.pt:70
 msgid "You have not completed any courses yet.."
-msgstr "Du har inte slutfört någon kurs ännu.. "
+msgstr "Du har ännu inte avslutat någon kurs.. "
 
 #: fika/templates/assessment.pt:14
 msgid "Your answer:"
-msgstr "Din svar:"
+msgstr "Ditt svar:"
 
 #: fika/templates/pdf.pt:12
 msgid "Download"
@@ -118,7 +118,7 @@ msgstr "Ladda ner"
 
 #: fika/templates/course.pt:19
 msgid "Enroll"
-msgstr "Skrivna in"
+msgstr "Skriva in dig"
 
 #: fika/templates/course.pt:25
 msgid "Enrolled"
@@ -126,7 +126,7 @@ msgstr "Inskrivna"
 
 #: fika/templates/course.pt:77
 msgid "Add new module"
-msgstr "Lägg till ny modul"
+msgstr "Lägg till en ny modul"
 
 #: fika/templates/ordering.pt:39
 msgid "Save"
@@ -134,11 +134,11 @@ msgstr "Spara"
 
 #: fika/templates/ordering.pt:40
 msgid "Cancel"
-msgstr "Annullera"
+msgstr "Annulera"
 
 #: fika/templates/courses.pt:15
 msgid "Create new course"
-msgstr "Skapa ny kurs"
+msgstr "Skapa en ny kurs"
 
 #: fika/templates/course_pagination.pt:11
 msgid "Previous"
@@ -150,7 +150,7 @@ msgstr "Nästa"
 
 #: fika/templates/my_courses.pt:83
 msgid "You have not enrolled in any courses yet."
-msgstr "Du är inte inskrivna i någon kurs ännu."
+msgstr "Du är ännu inte inskriven i någon kurs."
 
 #: fika/templates/responses_overview.pt:32
 msgid "Question"
@@ -172,19 +172,17 @@ msgstr "Användare"
 
 #: fika/templates/image_slideshow.pt:48
 msgid "Add new image"
-msgstr ""
+msgstr "Lägg till en bild"
 
 #: fika/templates/overrides/navigation.pt:10
 msgid "Toggle navigation"
 msgstr "Växla navigering"
 
 #: fika/templates/overrides/navigation.pt:26
-#, fuzzy
 msgid "All courses"
-msgstr "Mina kurser"
+msgstr "Alla kurser"
 
 #: fika/templates/overrides/navigation.pt:33
-#, fuzzy
 msgid "Users"
 msgstr "Användare"
 
@@ -202,7 +200,7 @@ msgstr "Logga ut"
 
 #: fika/templates/overrides/navigation.pt:55
 msgid "Register"
-msgstr "Registrera"
+msgstr "Registrera dig"
 
 #: fika/templates/overrides/navigation.pt:62
 msgid "Search"
@@ -210,7 +208,7 @@ msgstr "Sök"
 
 #: fika/schemas/course.py:12
 msgid "The title of the course."
-msgstr "Titeln av kursen."
+msgstr "Titeln på kursen."
 
 #: fika/schemas/course.py:14
 msgid "A short description of the course."
@@ -221,12 +219,12 @@ msgid ""
 "Describe who the course is for, why the course is relevant, and give a short "
 "example of a problem the course will help in solving."
 msgstr ""
-"Beskriv vem kursen är till för, varför den är relevant, och ge en kort "
-"exempel av ett problem kursen kommer att hjälpa att lösa."
+"Beskriv vem kursen är till för, varför den är relevant, och ge ett kort "
+"exempel på ett problem som kursen kan hjälpa till med att lösa."
 
 #: fika/schemas/course.py:23
 msgid "(Optional) An image that will be shown next to the description."
-msgstr "(Frivillig) En bild som visas brevid beskrivningen."
+msgstr "(Valfritt) Lägg upp en bild som visas bredvid beskrivningen."
 
 #: fika/schemas/course.py:25
 msgid "Image"
@@ -234,11 +232,11 @@ msgstr "Bild"
 
 #: fika/schemas/video.py:11
 msgid "The title of the video."
-msgstr "Titeln av videon"
+msgstr "Titeln på videon"
 
 #: fika/schemas/video.py:16
 msgid "Write a short description of the video here. Max 140 characters."
-msgstr "Skriv en kort beskrivning av videon här. Maximalt 140 tecken."
+msgstr "Beskriv videon kortfattat här. Maximalt 140 tecken."
 
 #: fika/schemas/video.py:17
 msgid "MP4 file"
@@ -257,40 +255,38 @@ msgid ""
 "For .mp4 files, the full URL of the video file. For Youtube, the full URL. "
 "For Vimeo, the sequence of numbers in the URL."
 msgstr ""
-"För .mp4 filar, hela URL av video filen. För Youtube, hela URL. För Vimeo, "
-"sekvensen av ciffror i URL."
+"För .mp4 filer använd videofilens hela URL. För Youtube använd hela URL. För Vimeo använd nummer sekvensen i URL."
 
 #: fika/schemas/video.py:33
 msgid "%r is not a string"
-msgstr "%r är ingen string"
+msgstr "%r är ingen textsträng"
 
 #: fika/schemas/course_module.py:12
 msgid "The title of the course module."
-msgstr "Titeln av kurs modulen."
+msgstr "Titeln på kursmodulen."
 
 #: fika/schemas/assessment.py:8
 msgid ""
 "The title of the assessment question. Please include what part of the course "
 "or module this question relates to."
 msgstr ""
-"Titeln av bedömnings frågan. Vänligen inklusiv vilken del av kursen eller "
-"modulen denna fråga avser."
+"Titeln på bedömnings frågan. Var vänlig och inkludera vilken del av kursen eller modulen frågan är kopplad till."
 
 #: fika/schemas/assessment.py:10
 msgid "The question text."
-msgstr "Frågans text."
+msgstr "Den formulerade frågan."
 
 #: fika/schemas/assessment.py:14
 msgid "Will be displayed in case participants wish to contact the examinator."
-msgstr "Kommer att visas om deltagarna önskar att kontakta examinator."
+msgstr "Visas för deltagarna som önskar att kontakta examinatorn"
 
 #: fika/schemas/assessment.py:17
 msgid "Type your answer here."
-msgstr "Skriv din svar här."
+msgstr "Skriv ditt svar här."
 
 #: fika/schemas/segment.py:8
 msgid "The title of the segment."
-msgstr "Titeln av segmentet."
+msgstr "Titeln på segmentet."
 
 #: fika/schemas/segment.py:10
 msgid "A short description of the segment."
@@ -298,7 +294,7 @@ msgstr "En kort beskrivning av segmentet."
 
 #: fika/schemas/text.py:8
 msgid "The title of the text."
-msgstr "Titeln av texten."
+msgstr "Titeln på texten."
 
 #: fika/schemas/text.py:11
 msgid "Write the piece of text here."
