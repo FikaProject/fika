@@ -118,7 +118,7 @@ msgstr "Ladda ner"
 
 #: fika/templates/course.pt:19
 msgid "Enroll"
-msgstr "Skriva in dig"
+msgstr "Skriv in dig"
 
 #: fika/templates/course.pt:25
 msgid "Enrolled"
