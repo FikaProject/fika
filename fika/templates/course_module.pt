@@ -30,14 +30,19 @@
 							<div class="panel-body">
 								<input type="hidden" name="segment_name" value="${obj.__name__}" tal:condition="request.has_permission('perm:Edit', context)" />
 								<div>
-								<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'delete')}"
-									tal:condition="request.has_permission('perm:Delete', obj)">
-									<span class="glyphicon glyphicon-trash"></span>
-								</a>
-								<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'edit')}"
-									tal:condition="request.has_permission('perm:Edit', obj)">
-									<span class="glyphicon glyphicon-pencil"></span>
-								</a>
+									<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'delete')}"
+										tal:condition="request.has_permission('perm:Delete', obj)">
+										<span class="glyphicon glyphicon-trash"></span>
+									</a>
+									<a class="btn btn-default pull-right" role="button" href="${request.resource_url(obj, 'edit')}"
+										tal:condition="request.has_permission('perm:Edit', obj)">
+										<span class="glyphicon glyphicon-pencil"></span>
+									</a>
+									<div class="pull-right sort-handle" tal:condition="request.has_permission('perm:Edit', context)" >
+										<div type="button" class="btn btn-default">
+											<span class="glyphicon glyphicon-resize-vertical"></span>
+										</div>
+									</div>
 								</div>
 								<div class="clearfix"></div>
 								
