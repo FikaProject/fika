@@ -30,7 +30,3 @@ def includeme(config):
     acl_reg['public'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
     acl_reg['user'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
     
-    #temporary until the pull request on arche is accepted
-    from arche.security import PERM_VIEW, PERM_EDIT, PERM_DELETE, PERM_MANAGE_USERS
-    acl_reg['user'].add(ROLE_ADMIN, [PERM_VIEW, PERM_EDIT, PERM_MANAGE_USERS, PERM_DELETE])
-    
