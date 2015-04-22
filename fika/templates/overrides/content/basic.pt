@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="view.macro('arche:templates/base_view.pt', 'arche:templates/inline.pt')"
+      tal:define="contents contents|None"
+      i18n:domain="Arche">
+<body>
+<div metal:fill-slot="main-content">
+  <tal:default_contents condition="not contents">
+    <img tal:replace="structure view.thumb_tag(context, 'col-2', extra_cls = 'pull-right')" />
+	
+    <h3>${context.title}</h3>
+
+    <p class="description lead"
+         tal:define="description context.description|None"
+         tal:condition="description"
+         tal:content="structure description">Description text</p>
+    <div class="body"
+         tal:define="body context.body|None"
+         tal:condition="body"
+         tal:content="structure body">Body text</div>
+    <div class="clearfix"><!-- --></div>
+  </tal:default_contents>
+  <tal:other condition="contents" replace="structure contents" />
+</div>
+</body>
+</html>
