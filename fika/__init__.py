@@ -28,5 +28,5 @@ def includeme(config):
     acl_reg['public'].add(ROLE_ADMIN, add_perms)
     
     acl_reg['public'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
-    acl_reg['user'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
+    acl_reg['User'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
     
