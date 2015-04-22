@@ -51,7 +51,7 @@
 				<a tal:condition="request.authenticated_userid" href="/logout" title="Logout"><span class="glyphicon glyphicon-off"></span> Logout</a>
 			</li>
 			
-			<tal:annon condition="not request.authenticated_userid">
+			<tal:annon condition="False|not request.authenticated_userid">
 				<li><a href="/register" i18n:translate="">Register</a></li>
 			</tal:annon>
 		</ul>
