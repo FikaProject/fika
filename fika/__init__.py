@@ -14,6 +14,7 @@ def includeme(config):
     config.include('fika.subscribers')
     config.add_translation_dirs('fika:locale/')
     config.override_asset(to_override='arche:templates/master.pt',override_with='fika:templates/overrides/master.pt')
+    config.override_asset(to_override='arche_video:templates/video.pt',override_with='fika:templates/overrides/video.pt')
     from arche.security import get_acl_registry
     from arche.utils import get_content_factories
     from arche.security import ROLE_ADMIN

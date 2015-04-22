@@ -8,7 +8,7 @@
 <div metal:fill-slot="content">
   <div class="row">
     <div class="col-sm-12">
-      <h1>${context.title}</h1>
+      <h3>${context.title}</h3>
       <p><a role="button" class="btn btn-default" href="${request.resource_url(context,'inline')}" target="_blank"><span class="glyphicon glyphicon-save"></span><span i18n:translate="">Download</span></a></p>
     </div>
   </div>
