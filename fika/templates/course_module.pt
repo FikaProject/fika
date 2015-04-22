@@ -63,7 +63,7 @@
 		<div class="col-md-1" tal:condition="request.has_permission('perm:Edit', context)" tal:repeat="(addable_type,icon) addable_types.items()">
 			<div class="panel panel-default panel-add">
 				<div class="panel-body">
-					<a href="${request.resource_url(context, 'add', query = {'content_type': addable_type})}" alt="Add a ${addable_type.title()}">
+					<a href="${request.resource_url(context, 'add', query = {'content_type': addable_type})}" title="Add a ${addable_type.title()}">
 						<span class="h3">
 							<span class="text-muted">
 								<span class="glyphicon glyphicon-${icon}"></span>
