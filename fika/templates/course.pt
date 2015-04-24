@@ -88,7 +88,7 @@
 			$( "#sortable" ).sortable({
 				handle: ".sort-handle",
 				stop: function( event, ui ) {
-					$.post("${request.resource_url(context, 'sorted')}", $( "#sortable-form" ).serialize(), window.location.reload());
+					$.post("${request.resource_url(context, 'sorted')}", $( "#sortable-form" ).serialize()) //, window.location.reload());
 				}
 			});
 		});
