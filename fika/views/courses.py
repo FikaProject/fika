@@ -22,6 +22,7 @@ from fika.views.course_pagination import render_course_pagination
 from fika.views.fika_base_view import FikaBaseView
 from fika.models.interfaces import IAssessment
 from fika import _
+from fika.models.user import FikaUser
 
 
 @view_defaults(permission = security.PERM_VIEW)
@@ -52,7 +53,8 @@ class CourseView(FikaBaseView):
         #FIXME: Only show enrolled users belonging to current organisation
         response['enrolled_users'] = [] 
         for user in self.root['users'].values():
-            if self.context.uid in user.__courses__:
+            user = FikaUser(user)
+            if self.context.uid in user.courses:
                 response['enrolled_users'].append(user)
 
         return response
@@ -62,6 +64,8 @@ class CourseView(FikaBaseView):
         response = {}
         response['can_create_course'] = False;
         if self.request.has_permission(security.PERM_EDIT, self.context):
+            import logging
+            logging.warning(self.request.has_permission(security.PERM_EDIT, self.context))
             response['can_create_course'] = True;
         response['courses'] = courses = []
         for course in self.context.values():
