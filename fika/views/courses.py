@@ -63,9 +63,7 @@ class CourseView(FikaBaseView):
     def courses(self):
         response = {}
         response['can_create_course'] = False;
-        if self.request.has_permission(security.PERM_EDIT, self.context):
-            import logging
-            logging.warning(self.request.has_permission(security.PERM_EDIT, self.context))
+        if self.request.has_permission('Add Course', self.context):
             response['can_create_course'] = True;
         response['courses'] = courses = []
         for course in self.context.values():
