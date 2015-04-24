@@ -1,5 +1,9 @@
 from pyramid.i18n import TranslationStringFactory
 
+from arche.security import (PERM_VIEW,
+                            PERM_EDIT,
+                            PERM_DELETE)
+
 _ = FikaTSF = TranslationStringFactory('fika')
 PERM_SHOW_CONTROLS = 'perm:Show controls'
 
@@ -26,9 +30,11 @@ def includeme(config):
     for factory in factories.values():
         if hasattr(factory, 'add_permission'):
             add_perms.append(factory.add_permission)
-    #acl_reg.default.add(ROLE_ADMIN, add_perms)
     acl_reg['public'].add(ROLE_ADMIN, add_perms)
     
     acl_reg['public'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
+    acl_reg['private'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
     acl_reg['User'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
     
+    acl_reg['public'].add(ROLE_EDITOR, ['Add Course'])
+    acl_reg['private'].add(ROLE_EDITOR, ['Add CourseModule', 'Add Text', 'Add Assessment', 'Add ImageSlideshow', 'Add Image', 'Add File'])
