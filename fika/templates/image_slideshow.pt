@@ -42,12 +42,10 @@
 			</span>
 		</form>
 	<div class="col-sm-3">
-		<a tal:condition="request.has_permission('perm:Edit', context)" href="${request.resource_url(context, 'add', query = {'content_type': 'Image'})}">
-			<button type="button" class="btn btn-default btn-add">
-				<span class=" text-muted">
-					<span class="glyphicon glyphicon-plus"></span> <span i18n:translate="">Add new image</span>
-				</span>
-			</button> 
+		<a tal:condition="request.has_permission('perm:Edit', context)" href="${request.resource_url(context, 'add', query = {'content_type': 'Image'})}" class="btn btn-default btn-add">
+			<span class=" text-muted">
+				<span class="glyphicon glyphicon-plus"></span> <span i18n:translate="">Add new image</span>
+			</span> 
 		</a>
 	</div>
 	<script tal:condition="request.has_permission('perm:Edit', context)">
