@@ -98,7 +98,7 @@ msgstr "Mina kurser"
 
 #: fika/templates/home.pt:25 fika/templates/my_courses.pt:19
 msgid "Currently enrolled"
-msgstr "Inskrivna"
+msgstr "Inskriven"
 
 #: fika/templates/home.pt:51
 msgid "Completed"
@@ -122,7 +122,7 @@ msgstr "Skriv in dig"
 
 #: fika/templates/course.pt:25
 msgid "Enrolled"
-msgstr "Inskrivna"
+msgstr "Inskriven"
 
 #: fika/templates/course.pt:77
 msgid "Add new module"
