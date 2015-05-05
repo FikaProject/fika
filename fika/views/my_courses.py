@@ -30,11 +30,15 @@ class MyCoursesView(ContentView):
         response = {'contents': [x for x in self.context.values() if getattr(x, 'listing_visible', False)]}
         response['course_percentage'] = {}
         response['completed_courses'] = ()
+        response['enrolled_courses'] = []
         user = self.root['users'].get(self.request.authenticated_userid, None)
         if user:
             response['fikaProfile'] = IFikaUser(user)
             for uid in response['fikaProfile'].courses:
                 course = self.resolve_uid(uid)
+                if course is None or not self.request.has_permission(security.PERM_VIEW, course):
+                    continue
+                response['enrolled_courses'].append(uid)
                 completed_modules = 0
                 for course_module in course.values():
                     if(course_module.uid in response['fikaProfile'].completed_course_modules):

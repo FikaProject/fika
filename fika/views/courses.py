@@ -67,7 +67,7 @@ class CourseView(FikaBaseView):
             response['can_create_course'] = True;
         response['courses'] = courses = []
         for course in self.context.values():
-            if not self.request.has_permission(security.PERM_VIEW, course):
+            if course is None or not self.request.has_permission(security.PERM_VIEW, course):
                 continue
             courses.append(course)
         response['get_first_unfinished_page'] = self._get_first_unfinished_page
@@ -77,6 +77,8 @@ class CourseView(FikaBaseView):
             response['fikaProfile'] = IFikaUser(user)
             for uid in response['fikaProfile'].courses:
                 course = self.resolve_uid(uid)
+                if course is None or not self.request.has_permission(security.PERM_VIEW, course):
+                    continue
                 completed_modules = 0
                 for course_module in course.values():
                     if(course_module.uid in response['fikaProfile'].completed_course_modules):

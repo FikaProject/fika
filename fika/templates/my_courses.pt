@@ -18,7 +18,7 @@
 	        	
 				<h3 i18n:translate="">Currently enrolled</h3>
 				
-				<tal:iterate repeat="courseuid fikaProfile.courses">
+				<tal:iterate repeat="courseuid enrolled_courses">
 					<tal:completed condition="course_percentage[courseuid] < 100">
 						<div class="row">
 							<div class="col-md-12">
@@ -48,7 +48,7 @@
 					</tal:completed>
 				</tal:iterate>
 				
-				<tal:iterate repeat="courseuid fikaProfile.courses">
+				<tal:iterate repeat="courseuid enrolled_courses">
 					<tal:completed condition="course_percentage[courseuid] >= 100">
 						<div class="row">
 							<div class="col-md-12">
@@ -77,7 +77,7 @@
 						</div>
 					</tal:completed>
 				</tal:iterate>
-				<tal:empty condition="len(fikaProfile.courses) == 0">
+				<tal:empty condition="len(enrolled_courses) == 0">
 					<div class="row">
 						<div class="col-md-12 text-muted">
 							<span i18n:translate="">You have not enrolled in any courses yet.</span>
