@@ -131,7 +131,7 @@ class CourseView(FikaBaseView):
         feedback = self.request.POST.get('feedback')
         from_email = self.request.POST.get('from')
         user = self.resolve_uid(user_uid)
-        success = send_email('Feedback on your answers in course '+self.context.title, user.email, feedback, sender=from_email, plaintext=feedback, send_immediately=True)
+        success = send_email(self.request, 'Feedback on your answers in course '+self.context.title, user.email, feedback, sender=from_email, plaintext=feedback, send_immediately=True)
         if success != None:
             self.flash_messages.add(_(u"Email with feedback send to "+user.title+"."), type="success")
         else:
@@ -210,7 +210,7 @@ class AssignCourseForm(BaseForm):
                     email_html = '<h4>Hello '+user.first_name+' '+user.last_name+ \
                                 ',</h4><p>You have been assigned to the course \"'+self.context.title+ \
                                 '\" by '+self.profile.first_name + ' ' + self.profile.last_name+'. You will now see it in the \'My Courses\' list when you log in to '+self.root.title+'.'
-                    send_email('You have been assigned a course', user.email, email_html, send_immediately=True)
+                    send_email(self.request, 'You have been assigned a course', user.email, email_html, send_immediately=True)
                     nr_of_users += 1
         plural = "s" if nr_of_users != 1 else ""
         self.flash_messages.add(_(u"Assigned course to "+str(nr_of_users)+" user"+plural+"."), type="success")
