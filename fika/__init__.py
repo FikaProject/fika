@@ -35,6 +35,7 @@ def includeme(config):
     acl_reg['public'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
     acl_reg['private'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
     acl_reg['User'].add(ROLE_EDITOR, PERM_SHOW_CONTROLS)
+    acl_reg['User'].add(ROLE_ADMIN, PERM_SHOW_CONTROLS)
     
     acl_reg['public'].add(ROLE_EDITOR, ['Add Course'])
     acl_reg['private'].add(ROLE_EDITOR, ['Add CourseModule', 'Add Text', 'Add Assessment', 'Add ImageSlideshow', 'Add Image', 'Add File'])
