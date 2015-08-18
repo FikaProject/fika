@@ -4,6 +4,10 @@ from arche.security import (PERM_VIEW,
                             PERM_EDIT,
                             PERM_DELETE)
 
+from arche import security
+from arche.views.auth import LoginForm
+from arche.interfaces import IRoot
+
 _ = FikaTSF = TranslationStringFactory('fika')
 PERM_SHOW_CONTROLS = 'perm:Show controls'
 
@@ -39,3 +43,10 @@ def includeme(config):
     
     acl_reg['public'].add(ROLE_EDITOR, ['Add Course'])
     acl_reg['private'].add(ROLE_EDITOR, ['Add CourseModule', 'Add Text', 'Add Assessment', 'Add ImageSlideshow', 'Add Image', 'Add File'])
+    
+    
+    config.add_view(LoginForm,
+                    context = IRoot,
+                    name = 'login',
+                    permission = security.NO_PERMISSION_REQUIRED,
+                    renderer = 'fika:templates/overrides/loginform.pt')

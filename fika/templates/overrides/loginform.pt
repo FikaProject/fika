@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  metal:use-macro="view.macro('arche:templates/master.pt', 'arche:templates/inline.pt')"
+  i18n:domain="fika">
+<div metal:fill-slot="content" class="row">
+	<div class="col-md-12">
+		<form tal:replace="structure form" />
+	</div>
+	<div class="col-md-12">
+		<p i18n:translate="">
+			CBRNE.nu är en utbildningsplattform tänkt att användas av yrkespersoner som kommer i kontakt med händelser med farliga ämnen. Företrädesvis personal inom sjukvård, polis, räddningstjänst, kustbevakning, försvarsmakt och tullverk men även anställda inom näringsliv och förvaltning som kan vara aktuella.
+		</p>
+		<p i18n:translate="">
+			Plattformen är tänkt att i huvudsak användas som komplement till andra utbildningsformer, såsom övningar och föreläsningar. Men det är också möjligt att använda delar av materialet fristående, exempelvis som repetitionsmaterial.
+		</p>
+		<p i18n:translate="">
+			Kurser tilldelas deltagarna av för ändamålet ansvarige kursledare men det finns möjlighet för den enskilde att på eget initiativ ta del av utbildningsmaterialet. För att ta del av materialet behöver du registreras som användare, tilldelas användarid med tillhörande lösenord. Detta kan du göra hos ansvarig med behörighet inom din egen organisation.
+		</p>
+		<p i18n:translate="">
+			Plattformen är tänkt att användas på mobiltelefoner men det är även möjligt att använda surfplatta eller dator. Materialet består av texter, bilder och filmer. Du kan tillgodogöra dig materialet i moduler där varje modul tar maximalt 10 minuter. När du registrerar en modul som avslutad minns systemet detta och du kan logga ut för att fortsätta på samma plats vid ett senare tillfälle. I samband med de olika modulerna ställs frågor om materialet. Återkoppling ges av din kursledare.
+		</p>
+		<p i18n:translate="">
+			Mycket nöje.
+		</p> 
+	</div>
+</div>
+</html>
