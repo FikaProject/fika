@@ -1,6 +1,11 @@
 .nav .profile-image {
     margin: -5px 0;
 }
+
+.fika-nav-search{
+	width:20em;
+}
+
 .description {
     font-weight: bold;
 }

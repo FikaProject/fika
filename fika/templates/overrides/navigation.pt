@@ -34,6 +34,20 @@
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-right">
+			<li>
+			<form action="${request.resource_url(view.root,'search')}" id="search" class="navbar-form" role="search" method="get" tal:condition="request.authenticated_userid">
+                <div class="input-group fika-nav-search" >
+                    <input name="query" type="text" class="form-control" placeholder="Search"
+                        i18n:attributes="placeholder" value="${request.GET.get('query', '')}"  />
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span>&nbsp;
+                        </button>
+                    </span>
+                </div>
+            </form>
+            </li>
+            
 			<li class="dropdown" tal:condition="request.has_permission('perm:Show controls', context)|False">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					${getattr(request.profile, 'title', 'Profile')}
@@ -54,21 +68,8 @@
 			<tal:annon condition="False|not request.authenticated_userid">
 				<li><a href="/register" i18n:translate="">Register</a></li>
 			</tal:annon>
-		</ul>
-		
-        <div class="nav navbar-nav navbar-right" tal:condition="request.authenticated_userid">
-            <form action="${request.resource_url(view.root,'search')}" id="search" class="navbar-form" role="search" method="get">
-                <div class="input-group">
-                    <input name="query" type="text" class="form-control" placeholder="Search"
-                        i18n:attributes="placeholder" value="${request.GET.get('query', '')}"/>
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default">
-                        <span class="glyphicon glyphicon-search"></span>&nbsp;
-                        </button>
-                    </span>
-                </div>
-            </form>
-        </div>
+			
+        </ul>
     </div><!--/.nav-collapse -->
   </div><!-- /.container-->
 </nav>
