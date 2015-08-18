@@ -43,10 +43,3 @@ def includeme(config):
     
     acl_reg['public'].add(ROLE_EDITOR, ['Add Course'])
     acl_reg['private'].add(ROLE_EDITOR, ['Add CourseModule', 'Add Text', 'Add Assessment', 'Add ImageSlideshow', 'Add Image', 'Add File'])
-    
-    
-    config.add_view(LoginForm,
-                    context = IRoot,
-                    name = 'login',
-                    permission = security.NO_PERMISSION_REQUIRED,
-                    renderer = 'fika:templates/overrides/loginform.pt')
