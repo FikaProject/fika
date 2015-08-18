@@ -10,20 +10,21 @@
 		<form tal:replace="structure form" />
 	</div>
 	<div class="col-md-12">
+		<h1 i18n:translate="">V&auml;lkommen till CBRNE.nu</h1>
 		<p i18n:translate="">
-			CBRNE.nu är en utbildningsplattform tänkt att användas av yrkespersoner som kommer i kontakt med händelser med farliga ämnen. Företrädesvis personal inom sjukvård, polis, räddningstjänst, kustbevakning, försvarsmakt och tullverk men även anställda inom näringsliv och förvaltning som kan vara aktuella.
+			CBRNE.nu &auml;r en utbildningsplattform t&auml;nkt att anv&auml;ndas av yrkespersoner som kommer i kontakt med h&auml;ndelser med farliga &auml;mnen. F&ouml;retr&auml;desvis personal inom sjukv&aring;rd, polis, r&auml;ddningstj&auml;nst, kustbevakning, f&ouml;rsvarsmakt och tullverk men &auml;ven anst&auml;llda inom n&auml;ringsliv och f&ouml;rvaltning som kan vara aktuella.
 		</p>
 		<p i18n:translate="">
-			Plattformen är tänkt att i huvudsak användas som komplement till andra utbildningsformer, såsom övningar och föreläsningar. Men det är också möjligt att använda delar av materialet fristående, exempelvis som repetitionsmaterial.
+			Plattformen &auml;r t&auml;nkt att i huvudsak anv&auml;ndas som komplement till andra utbildningsformer, s&aring;som &ouml;vningar och f&ouml;rel&auml;sningar. Men det &auml;r ocks&aring; m&ouml;jligt att anv&auml;nda delar av materialet frist&aring;ende, exempelvis som repetitionsmaterial.
 		</p>
 		<p i18n:translate="">
-			Kurser tilldelas deltagarna av för ändamålet ansvarige kursledare men det finns möjlighet för den enskilde att på eget initiativ ta del av utbildningsmaterialet. För att ta del av materialet behöver du registreras som användare, tilldelas användarid med tillhörande lösenord. Detta kan du göra hos ansvarig med behörighet inom din egen organisation.
+			Kurser tilldelas deltagarna av f&ouml;r &auml;ndam&aring;let ansvarige kursledare men det finns m&ouml;jlighet f&ouml;r den enskilde att p&aring; eget initiativ ta del av utbildningsmaterialet. F&ouml;r att ta del av materialet beh&ouml;ver du registreras som anv&auml;ndare, tilldelas anv&auml;ndarid med tillh&ouml;rande l&ouml;senord. Detta kan du g&ouml;ra hos ansvarig med beh&ouml;righet inom din egen organisation.
 		</p>
 		<p i18n:translate="">
-			Plattformen är tänkt att användas på mobiltelefoner men det är även möjligt att använda surfplatta eller dator. Materialet består av texter, bilder och filmer. Du kan tillgodogöra dig materialet i moduler där varje modul tar maximalt 10 minuter. När du registrerar en modul som avslutad minns systemet detta och du kan logga ut för att fortsätta på samma plats vid ett senare tillfälle. I samband med de olika modulerna ställs frågor om materialet. Återkoppling ges av din kursledare.
+			Plattformen &auml;r t&auml;nkt att anv&auml;ndas p&aring; mobiltelefoner men det &auml;r &auml;ven m&ouml;jligt att anv&auml;nda surfplatta eller dator. Materialet best&aring;r av texter, bilder och filmer. Du kan tillgodog&ouml;ra dig materialet i moduler d&auml;r varje modul tar maximalt 10 minuter. N&auml;r du registrerar en modul som avslutad minns systemet detta och du kan logga ut f&ouml;r att forts&auml;tta p&aring; samma plats vid ett senare tillf&auml;lle. I samband med de olika modulerna st&auml;lls fr&aring;gor om materialet. &Aring;terkoppling ges av din kursledare.
 		</p>
 		<p i18n:translate="">
-			Mycket nöje.
+			Mycket n&ouml;je.
 		</p> 
 	</div>
 </div>
