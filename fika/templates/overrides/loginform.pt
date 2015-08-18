@@ -10,7 +10,7 @@
 		<form tal:replace="structure form" />
 	</div>
 	<div class="col-md-12">
-		<h1 i18n:translate="">V&auml;lkommen till CBRNE.nu</h1>
+		<h2 i18n:translate="">V&auml;lkommen till CBRNE.nu</h2>
 		<p i18n:translate="">
 			CBRNE.nu &auml;r en utbildningsplattform t&auml;nkt att anv&auml;ndas av yrkespersoner som kommer i kontakt med h&auml;ndelser med farliga &auml;mnen. F&ouml;retr&auml;desvis personal inom sjukv&aring;rd, polis, r&auml;ddningstj&auml;nst, kustbevakning, f&ouml;rsvarsmakt och tullverk men &auml;ven anst&auml;llda inom n&auml;ringsliv och f&ouml;rvaltning som kan vara aktuella.
 		</p>
