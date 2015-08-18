@@ -5,27 +5,31 @@
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   metal:use-macro="view.macro('arche:templates/master.pt', 'arche:templates/inline.pt')"
   i18n:domain="fika">
-<div metal:fill-slot="content" class="row">
-	<div class="col-md-12">
-		<form tal:replace="structure form" />
+<div metal:fill-slot="content">
+	<div class="row">
+		<div class="col-md-6">
+			<form tal:replace="structure form" />
+		</div>
 	</div>
-	<div class="col-md-12">
-		<h2 i18n:translate="">V&auml;lkommen till CBRNE.nu</h2>
-		<p i18n:translate="">
-			CBRNE.nu &auml;r en utbildningsplattform t&auml;nkt att anv&auml;ndas av yrkespersoner som kommer i kontakt med h&auml;ndelser med farliga &auml;mnen. F&ouml;retr&auml;desvis personal inom sjukv&aring;rd, polis, r&auml;ddningstj&auml;nst, kustbevakning, f&ouml;rsvarsmakt och tullverk men &auml;ven anst&auml;llda inom n&auml;ringsliv och f&ouml;rvaltning som kan vara aktuella.
-		</p>
-		<p i18n:translate="">
-			Plattformen &auml;r t&auml;nkt att i huvudsak anv&auml;ndas som komplement till andra utbildningsformer, s&aring;som &ouml;vningar och f&ouml;rel&auml;sningar. Men det &auml;r ocks&aring; m&ouml;jligt att anv&auml;nda delar av materialet frist&aring;ende, exempelvis som repetitionsmaterial.
-		</p>
-		<p i18n:translate="">
-			Kurser tilldelas deltagarna av f&ouml;r &auml;ndam&aring;let ansvarige kursledare men det finns m&ouml;jlighet f&ouml;r den enskilde att p&aring; eget initiativ ta del av utbildningsmaterialet. F&ouml;r att ta del av materialet beh&ouml;ver du registreras som anv&auml;ndare, tilldelas anv&auml;ndarid med tillh&ouml;rande l&ouml;senord. Detta kan du g&ouml;ra hos ansvarig med beh&ouml;righet inom din egen organisation.
-		</p>
-		<p i18n:translate="">
-			Plattformen &auml;r t&auml;nkt att anv&auml;ndas p&aring; mobiltelefoner men det &auml;r &auml;ven m&ouml;jligt att anv&auml;nda surfplatta eller dator. Materialet best&aring;r av texter, bilder och filmer. Du kan tillgodog&ouml;ra dig materialet i moduler d&auml;r varje modul tar maximalt 10 minuter. N&auml;r du registrerar en modul som avslutad minns systemet detta och du kan logga ut f&ouml;r att forts&auml;tta p&aring; samma plats vid ett senare tillf&auml;lle. I samband med de olika modulerna st&auml;lls fr&aring;gor om materialet. &Aring;terkoppling ges av din kursledare.
-		</p>
-		<p i18n:translate="">
-			Mycket n&ouml;je.
-		</p> 
+	<div class="row">
+		<div class="col-md-12">
+			<h2 i18n:translate="">V&auml;lkommen till CBRNE.nu</h2>
+			<p i18n:translate="">
+				CBRNE.nu &auml;r en utbildningsplattform t&auml;nkt att anv&auml;ndas av yrkespersoner som kommer i kontakt med h&auml;ndelser med farliga &auml;mnen. F&ouml;retr&auml;desvis personal inom sjukv&aring;rd, polis, r&auml;ddningstj&auml;nst, kustbevakning, f&ouml;rsvarsmakt och tullverk men &auml;ven anst&auml;llda inom n&auml;ringsliv och f&ouml;rvaltning som kan vara aktuella.
+			</p>
+			<p i18n:translate="">
+				Plattformen &auml;r t&auml;nkt att i huvudsak anv&auml;ndas som komplement till andra utbildningsformer, s&aring;som &ouml;vningar och f&ouml;rel&auml;sningar. Men det &auml;r ocks&aring; m&ouml;jligt att anv&auml;nda delar av materialet frist&aring;ende, exempelvis som repetitionsmaterial.
+			</p>
+			<p i18n:translate="">
+				Kurser tilldelas deltagarna av f&ouml;r &auml;ndam&aring;let ansvarige kursledare men det finns m&ouml;jlighet f&ouml;r den enskilde att p&aring; eget initiativ ta del av utbildningsmaterialet. F&ouml;r att ta del av materialet beh&ouml;ver du registreras som anv&auml;ndare, tilldelas anv&auml;ndarid med tillh&ouml;rande l&ouml;senord. Detta kan du g&ouml;ra hos ansvarig med beh&ouml;righet inom din egen organisation.
+			</p>
+			<p i18n:translate="">
+				Plattformen &auml;r t&auml;nkt att anv&auml;ndas p&aring; mobiltelefoner men det &auml;r &auml;ven m&ouml;jligt att anv&auml;nda surfplatta eller dator. Materialet best&aring;r av texter, bilder och filmer. Du kan tillgodog&ouml;ra dig materialet i moduler d&auml;r varje modul tar maximalt 10 minuter. N&auml;r du registrerar en modul som avslutad minns systemet detta och du kan logga ut f&ouml;r att forts&auml;tta p&aring; samma plats vid ett senare tillf&auml;lle. I samband med de olika modulerna st&auml;lls fr&aring;gor om materialet. &Aring;terkoppling ges av din kursledare.
+			</p>
+			<p i18n:translate="">
+				Mycket n&ouml;je.
+			</p> 
+		</div>
 	</div>
 </div>
 </html>
