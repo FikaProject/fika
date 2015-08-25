@@ -4,6 +4,7 @@ from arche.views.base import ContentView
 from arche import security
 from arche import _
 from fika.models.interfaces import IFikaUser
+from fika.models.interfaces import ICourse
 
 class MyCoursesView(ContentView):
     title = _('My Courses')
@@ -51,7 +52,7 @@ class MyCoursesView(ContentView):
                     response['completed_courses'] += (course.uid ,)
         else:
             return HTTPFound(location = self.request.resource_url(self.request.root, 'login'))
-        
+        response['enrolled_courses'] = sorted(response['enrolled_courses'], key=lambda uid: (ICourse) (self.resolve_uid(uid)).__name__)
         response['get_first_unfinished_page'] = _get_first_unfinished_page
         return response
     
