@@ -70,6 +70,7 @@ class CourseView(FikaBaseView):
             if course is None or not self.request.has_permission(security.PERM_VIEW, course):
                 continue
             courses.append(course)
+        response['courses'] = sorted(response['courses'], key=lambda sorting_course: sorting_course.title.upper())
         response['get_first_unfinished_page'] = self._get_first_unfinished_page
         response['course_percentage'] = {}
         user = self.root['users'].get(self.request.authenticated_userid, None)
