@@ -52,7 +52,7 @@ class MyCoursesView(ContentView):
                     response['completed_courses'] += (course.uid ,)
         else:
             return HTTPFound(location = self.request.resource_url(self.request.root, 'login'))
-        response['enrolled_courses'] = sorted(response['enrolled_courses'], key=lambda uid: (ICourse) (self.resolve_uid(uid)).__name__)
+        response['enrolled_courses'] = sorted(response['enrolled_courses'], key=lambda uid: (ICourse) (self.resolve_uid(uid)).title.upper())
         response['get_first_unfinished_page'] = _get_first_unfinished_page
         return response
     
