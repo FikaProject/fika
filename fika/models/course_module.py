@@ -11,7 +11,6 @@ class CourseModule(FikaBaseFolder, DCMetadataMixin):
     type_title = _(u"Course module")
     type_name = u"CourseModule"
     add_permission = "Add %s" % type_name
-    is_permanent = True
 
 
 def includeme(config):
